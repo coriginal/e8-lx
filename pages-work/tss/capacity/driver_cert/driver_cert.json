@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "ShowCert":"./cert_component/cert"
+  },
+  "navigationBarTitleText": "司机认证"
+}

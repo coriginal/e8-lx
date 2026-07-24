@@ -1,0 +1,162 @@
+.content {
+  margin-bottom: 92rpx;
+}
+
+.top-bar {
+  background-color: white;
+}
+
+.title-big {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.opcity {
+  opacity: .8;
+}
+
+.bottom-btn {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 84rpx;
+  display: flex;
+  line-height: 84rpx;
+  box-shadow: var(--shadowSize) var(--blackShadow);
+}
+
+.agree {
+  background-color: var(--blue);
+  color: white;
+  font-weight: bold;
+  flex: 1;
+  text-align: center;
+  transition: all .3s;
+}
+
+.disagree {
+  background-color: #eb6b6c;
+  color: white;
+  font-weight: bold;
+  flex: 1;
+  text-align: center;
+  transition: all .3s;
+}
+
+.agree,
+.disagree {
+  border-radius: 0;
+  font-size: 15px;
+  line-height: 84rpx;
+}
+
+.choose-all {
+  width: 33.33333%;
+  text-align: center;
+  font-weight: bold;
+  background-color: #eee;
+}
+
+
+.checkbox {
+  width: 100%;
+}
+
+.translate {
+  transform: scale(1.1);
+}
+
+checkbox .wx-checkbox-input {
+  width: 32rpx;
+  height: 32rpx;
+  border-radius: 1000rpx;
+  border: 2rpx solid;
+}
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+  color: var(--blue);
+  border-color: var(--blue);
+}
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+  width: 60%;
+  height: 60%;
+  background: var(--blue);
+  border-radius: 100%;
+  content: '';
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+}
+
+
+.placeorder {
+  min-height: 64rpx;
+  line-height: 64rpx;
+  padding: 0 20rpx;
+  flex: 1;
+}
+
+.text-underline {
+  position: absolute;
+  bottom: 0;
+  min-width: 16.666%;
+  height: 6rpx;
+  left: 10px;
+  background-color: var(--grey);
+  color: var(--white);
+}
+
+.left-checkbox {
+  height:100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 84rpx;
+  text-align: center;
+}
+
+.label-flex {
+  display: flex;
+}
+
+.list-panel {
+  padding: 10rpx 20rpx;
+  background-color: white;
+}
+
+.list-content {
+  display: flex;
+  align-items: center;
+}
+
+.left-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.wux-col--span-2 {
+  width: 11% !important;
+}
+
+.wux-col--span-10 {
+  width: 89% !important;
+}
+
+.remark {
+  color: gray;
+  font-size: 24rpx;
+  line-height: 1.5;
+}
+
+.margin-top {
+  margin-top: 12rpx;
+}
+
+.remark-roles{
+  color: #444;
+  text-align: right;
+  font-size: 13px;
+}

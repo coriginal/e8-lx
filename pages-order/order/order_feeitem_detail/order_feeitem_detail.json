@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "sp-popup":"../cpt_order_sp_fee/index"
+  }
+}

@@ -1,0 +1,17 @@
+<view class="modal-mask" bindtap="hidePicker" catchtouchmove="move" wx:if="{{ show && !disabled}}"></view>
+<view class="custom-class" bindtap="showPicker"><slot></slot></view>
+<view wx:if="{{show && !disabled}}" class="picker">
+  <view class="picker-action">
+    <view style="color:#ccc" bindtap="hidePicker">取消</view>
+    <view class='search'>
+        <input type='text' placeholder='输入搜索内容' confirm-type='search' value="{{inputValue}}" bindconfirm='query'></input>
+    </view>
+    <view data-action="change" bindtap="hidePicker">确认</view>
+  </view>
+  <picker-view class="popview" indicator-style="height: 40px;" value="{{[usesearch ? showvalue : value]}}" bindchange="bindChange"
+  bindpickstart="bindpickstart" bindpickend="bindpickend">
+    <picker-view-column class="{{ className }} {{ hidden && 'hidden'}}">
+      <view wx:for="{{ usesearch ? showrange : range }}" style="line-height: 40px" wx:key="name">{{item.name}}</view>
+    </picker-view-column>
+  </picker-view>
+</view>

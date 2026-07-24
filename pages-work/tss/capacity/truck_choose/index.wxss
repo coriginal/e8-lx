@@ -1,0 +1,104 @@
+.bar {
+  background-color: white;
+  width: 100%;
+  box-shadow: 0 1rpx 6rpx rgba(0, 0, 0, 0.1);
+  padding: 20rpx;
+  height: 100rpx;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+}
+.search{
+  flex:1;
+}
+.search-form {
+  background: #f5f5f5;
+  line-height: 64rpx;
+  height: 64rpx;
+  font-size: 24rpx;
+  color: #666;
+  display: flex;
+  align-items: center;
+  border-radius: 10rpx;
+}
+
+.search-form view {
+  margin: 0 15rpx;
+}
+
+.search-form input {
+  flex: 1;
+  padding-right: 20rpx;
+  font-size: 26rpx;
+}
+
+.add-btn {
+  white-space: nowrap;
+  margin-left: 16rpx;
+  padding: 10rpx 20rpx;
+  background: #3c9cff;
+  color: #fff;
+  border-radius: 8rpx;
+  font-size: 26rpx;
+  line-height: 1.4;
+}
+
+.empty-tip {
+  text-align: center;
+  padding: 60rpx 32rpx;
+  color: #999;
+  font-size: 28rpx;
+}
+
+.driver-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 20rpx;
+  border-bottom: 2rpx solid #f5f5f5;
+  background: #fff;
+}
+
+.driver-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.driver-line {
+  font-size: 26rpx;
+  color: #333;
+  line-height: 44rpx;
+}
+
+.driver-line .label {
+  color: #999;
+}
+
+.driver-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+  margin-left: 16rpx;
+  flex-shrink: 0;
+}
+
+.action-btn {
+  padding: 8rpx 20rpx;
+  border-radius: 6rpx;
+  font-size: 24rpx;
+  text-align: center;
+  min-width: 80rpx;
+}
+
+.edit-btn {
+  background: #ecf5ff;
+  color: #3c9cff;
+}
+
+.delete-btn {
+  background: #fef0f0;
+  color: #f56c6c;
+}
+
+.action-btn:active {
+  opacity: 0.7;
+}

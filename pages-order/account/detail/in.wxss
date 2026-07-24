@@ -1,0 +1,2 @@
+/* pages-order/account/detail/in.wxss */
+@import '../account_home/index.wxss'

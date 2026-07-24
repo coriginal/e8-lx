@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "animation-group": "../animation-group/index",
+    "backdrop": "../backdrop/index",
+    "date-picker":"../date-picker/index"
+  }
+}

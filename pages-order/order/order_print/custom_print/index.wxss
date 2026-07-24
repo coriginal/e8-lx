@@ -1,0 +1,272 @@
+/* pages-order/order/order_print/custom_print/index.wxss */
+Page{
+    padding-bottom: 250rpx;
+}
+.select_size {
+    height: 80vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.select_size .size_box {
+    margin: 30rpx;
+    display: flex;
+    flex-direction: row;
+}
+
+.select_size .size_box input {
+    width: 100rpx;
+    background: white;
+    margin: 0 20rpx;
+}
+
+.select_size .button {
+    margin: 20rpx;
+}
+
+.box {
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+}
+.box view,.box text{
+    position:absolute;
+    top: 0;
+}
+.edit_box {
+    display: flex;
+    padding-top: 80rpx;
+    padding-left: 80rpx;
+}
+
+.bottom_bar {
+    position: fixed;
+    width: 100%;
+    height: 120rpx;
+    background-color: white;
+    border-top: 2rpx solid whitesmoke;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    bottom: 0;
+    box-sizing: border-box;
+}
+
+.tools_bar {
+    height: 84rpx;
+    width: 70%;
+    background-color: whitesmoke;
+    padding: 10rpx 0;
+    overflow: auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.tools_bar>view {
+    margin: 0 10rpx;
+}
+
+.save,
+.del {
+    flex: 1;
+    margin: 10rpx;
+}
+
+.ruler {
+    width: 100%;
+}
+
+.top_ruler {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 80rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-left: 80rpx;
+}
+.ruler>view:nth-child(1){
+    height: 80rpx;
+    width: 100%;
+    background-color: rgb(248, 248, 231);
+    position: fixed;
+    top: 0;
+}
+.ruler>view:nth-child(2){
+    position: absolute;
+    height: 100%;
+    width: 80rpx;
+    background-color: rgb(248, 248, 231);
+    top: 80rpx;
+}
+.top_ruler>view {
+    height: 40%;
+    width: 3rpx;
+    background-color: gray;
+    position: relative;
+}
+.top_ruler text{
+    position: absolute;
+    top: -28rpx;
+    left: -6rpx;
+    font-size: 24rpx;
+}
+.ruler_mid {
+    height: 60% !important;
+}
+
+.ruler_long {
+    height: 70% !important;
+}
+.ruler_mid_r {
+    width: 60% !important;
+}
+
+.ruler_long_r {
+    width: 70% !important;
+}
+.bottom_ruler{
+    padding: 0;
+    margin: 0;
+    box-sizing: content-box;
+    left: 0;
+    top:80rpx;
+    width: 80rpx;
+    background: rgb(248, 248, 231);
+    border-bottom: 2rpx solid whitesmoke;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.btn_box button,.btn_box view{
+    margin: 0 10rpx;
+}
+.bottom_ruler>view {
+    width: 40%;
+    height: 3rpx;
+    background-color: gray;
+    position: relative;
+}
+.bottom_ruler text{
+    position: absolute;
+    top: -16rpx;
+    left: -16rpx;
+    font-size: 24rpx;
+}
+.pc_box1{
+    height: 500rpx;
+}
+.mask{
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left:0;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    z-index: 100;
+}
+.mask .design_box{
+    background: white;
+    box-shadow: 0rpx 0rpx 10rpx gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    min-height: 500rpx;
+    padding: 40rpx 50rpx;
+    position: fixed;
+}
+form{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+}
+.design_item{
+    width:350rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 10rpx;
+}
+.design_item input{
+    background-color: whitesmoke;
+    margin: 0 20rpx;
+    width: 100rpx;
+}
+.selector{
+    height: 80rpx;
+    background-color: white;
+    width: 100%;
+    position:fixed;
+    z-index: 99;
+    bottom: 120rpx;
+    border-bottom: 3rpx dotted gray;
+   display: flex;
+    flex-direction: row;
+    overflow: auto;
+    align-items: center;
+}
+.selector>view{
+    margin: 0 10rpx;
+}
+.load{
+    position: fixed;
+    right: 0rpx;
+    bottom: 200rpx;
+}
+.loadOrder{
+   background: white; 
+   box-shadow: 0 0 10rpx gray;
+   padding: 20rpx;
+   width: 80%;
+   height: 300rpx;
+   display: flex;
+   justify-content: space-around;
+   flex-direction: column;
+}
+.loadOrder input{
+    width: 100%;
+    background: whitesmoke;
+}
+.bind_box{
+    width: 100%;
+    height: 500rpx;
+    background-color: white;
+    padding: 20rpx;
+    overflow: auto;
+}
+.bind_box .title{
+    font-size: 30rpx;
+    text-align: center;
+}
+.field{
+    display: inline-block;
+    min-height: 50rpx;
+    line-height: 50rpx;
+    padding: 0 20rpx;
+    border-radius: 25rpx;
+    margin: 10rpx;
+}
+.load_mb_box{
+    width: 80%;
+    height: 600rpx;
+    box-shadow: 0 0 10rpx gray;
+    background-color: white;
+    padding: 20rpx;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.load_mb_box .title{
+    font-size: 35rpx;
+}

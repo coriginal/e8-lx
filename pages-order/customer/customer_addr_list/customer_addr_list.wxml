@@ -1,0 +1,134 @@
+<!-- <view class='search'>
+  <search value="{{ search }}" bindediting="searching" bindclear="clear" placeholder='请输入姓名或地址名称搜索'></search>
+</view> -->
+
+<!-- <view class="bar">
+  <view class='search'>
+    <view class='search-form'>
+      <input bindconfirm="searchCode" bindinput="bindKeyInput" placeholder="关键词过滤（姓名、电话）" type="text" />
+      <icon size='36' type='i-search' bindtap="searchCode" />
+    </view>
+  </view>
+</view> -->
+<van-search shape="round" custom-class="new-search" bind:change="bindKeyInput" value="{{searchCode}}" placeholder="搜索姓名/电话/地址" />
+<van-tabs id="tabs" color="#3c9cff" sticky="{{true}}" offset-top="54" active="{{ tabActive }}" bind:change="tabChange">
+  <van-tab title="寄件地址" name="send">
+    <view class='addr_list fade' wx:if='{{list.length}}'>
+      <view class='customer_panel' wx:for="{{list}}" wx:key>
+        <view class='skeleton' catchtap="EditOrChooseAddr" data-type="choose" data-item="{{item}}">
+          <view style="display:flex;flex-direction:row;width:100%;justify-content: space-between;">
+            <view class="content-addr">
+              <view class="name t-fw">{{item.company}}</view>
+              <view class="name {{item.company?'t-f24':'t-fw'}}">{{item.name}} {{item.phone}}</view>
+              <view class="addr t-f24 text-gray {{item.site?'padding-bottom':''}}">{{fn.contact([item.province,item.city,item.district,item.town,item.street_no],'')}}</view>
+              <view wx:if="{{item.site}}">
+                <van-tag plain color='#3c9cff'>{{item.site}}</van-tag>
+              </view>
+            </view>
+            <view class='icon'>
+              <icon color='grey' size='28' type='i-right'></icon>
+            </view>
+          </view>
+
+
+          <view class="content-menu">
+            <view class="content-menu-left">
+              <button class="btn-trans edit t-f24" data-type="edit" catchtap="EditOrChooseAddr" data-item="{{item}}">
+                <icon color='gray' size='26' type='i-edit' />编辑
+              </button>
+              <button class="btn-trans delete t-f24" catchtap="deleteAddr" id="{{item.id}}">
+                <icon color='gray' size='26' type='i-delete' />删除
+              </button>
+            </view>
+            <view>
+              <button class="btn-trans t-f24 no-margin " catchtap="showMoreMenu" data-item="{{item}}" data-index="{{index}}"> 更多操作 </button>
+            </view>
+          </view>
+        </view>
+
+        <view class="default-tag">
+          <tag wx:if="{{item.if_default}}" color='red'>默认</tag>
+        </view>
+      </view>
+    </view>
+    <view class='flex-1 fade' wx:if="{{show && list.length==0}}">
+      <icon size='120' type="i-addressbook" />
+      <text class='text-black text-bold text-xl  margin-top'>没有可选择的收寄地址</text>
+      <text class='text-grey margin text-sm'>可以去新增一些常用的收寄地址</text>
+    </view>
+    <view class='bottom-btn fade'>
+      <van-button color="#3c9cff" round type="primary" block="{{true}}" wx:if="{{showAddAddress}}" bind:click='createNewAddr'>新增寄件地址</van-button>
+    </view>
+  </van-tab>
+  <van-tab title="收件地址" name="receive">
+    <view class='addr_list fade' wx:if='{{list.length}}'>
+      <view class='customer_panel' wx:for="{{list}}" wx:key>
+        <view class='skeleton' catchtap="EditOrChooseAddr" data-type="choose" data-item="{{item}}">
+          <view style="display:flex;flex-direction:row;width:100%;justify-content: space-between;">
+            <view class="content-addr">
+              <view class="name t-fw">{{item.company}}</view>
+              <view class="name {{item.company?'t-f24':'t-fw'}}">{{item.name}} {{item.phone}}</view>
+              <view class="addr t-f24 text-gray {{item.site?'padding-bottom':''}}">{{fn.contact([item.province,item.city,item.district,item.town,item.street_no],'')}}</view>
+              <view wx:if="{{item.site}}">
+                <van-tag plain color='#3c9cff'>{{item.site}}</van-tag>
+              </view>
+            </view>
+            <view class='icon'>
+              <icon color='grey' size='28' type='i-right'></icon>
+            </view>
+          </view>
+
+
+          <view class="content-menu">
+            <view class="content-menu-left">
+              <button class="btn-trans edit t-f24" data-type="edit" catchtap="EditOrChooseAddr" data-item="{{item}}">
+                <icon color='gray' size='26' type='i-edit' />编辑
+              </button>
+              <button class="btn-trans delete t-f24" catchtap="deleteAddr" id="{{item.id}}">
+                <icon color='gray' size='26' type='i-delete' />删除
+              </button>
+            </view>
+            <view>
+              <button class="btn-trans t-f24 no-margin " catchtap="showMoreMenu" data-item="{{item}}" data-index="{{index}}"> 更多操作 </button>
+            </view>
+          </view>
+        </view>
+        <view class="default-tag">
+          <tag wx:if="{{item.if_default}}" color='red'>默认</tag>
+        </view>
+      </view>
+    </view>
+    <view class='flex-1 fade' wx:if="{{show && list.length==0}}">
+      <icon size='120' type="i-addressbook" />
+      <text class='text-black text-bold text-xl  margin-top'>没有可选择的收寄地址</text>
+      <text class='text-grey margin text-sm'>可以去新增一些常用的收寄地址</text>
+    </view>
+    <view class='bottom-btn fade'>
+      <van-button color="#3c9cff" round type="primary" block="{{true}}" wx:if="{{showAddAddress}}" bind:click='createNewAddr'>新增收件地址</van-button>
+    </view>
+  </van-tab>
+</van-tabs>
+
+
+<popup position="bottom" visible="{{ visible }}" bind:close="closeMoreMenu">
+  <view class="more-menu">
+    <view class="round" hover-class="hover-round" wx:for="{{moreMenu}}" wx:key catchtap="clickMoreMenu" data-code="{{item.code}}" data-index="{{index}}">
+      <view class="flex-icon">
+        <icon size='48' color="#5a6b92" type="i-copy" />
+      </view>
+      <view class="t-f24">{{item.title}}</view>
+    </view>
+  </view>
+  <view style="padding-bottom: env(safe-area-inset-bottom);" class="padding cancel" catchtap="closeMoreMenu">取消</view>
+</popup>
+
+<wxs module="fn">
+  module.exports = {
+    contact: function (array, j) {
+      var x = array.filter(function (n) {
+        return n
+      })
+      return x.join(j)
+    }
+  }
+</wxs>

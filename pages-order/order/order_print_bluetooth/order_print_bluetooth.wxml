@@ -1,0 +1,15 @@
+<view class="my-system-options">
+  <view class="my-system-menu" wx:for="{{printList}}" wx:key id="{{index}}" bindtap="connectDevice">
+    <view class="left-view">
+      <icon size='30' type='i-{{item.icon}}' />{{item.name}}
+    </view>
+    <view class="right-view">
+      <icon size='32' color="gray" type='i-roundadd opcity' />
+      <view class="my-system-notice">点击添加</view>
+    </view>
+  </view>
+</view>
+
+<view class='bottom-btn fade' wx:if="{{printList.length}}">
+  <button  class='btn bg-blue m-p' catchtap='researchBlueTooth'>重新搜索</button>
+</view>

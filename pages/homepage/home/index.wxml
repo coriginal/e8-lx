@@ -1,0 +1,51 @@
+<view class="box fade">
+    <!-- <image style="position: absolute; top: 0;width: 100vw;z-index: -9;" src="https://tongnet-file.oss-cn-hangzhou.aliyuncs.com/wx/bg.png"></image> -->
+    <!-- #0081ff rgb(148, 193, 245)-->
+    <!-- 展满满 102 8 116 -->
+    <!-- 128 64 32 16 8 4 2 1 -->
+    <!-- 01100110 00001000 01110100 -->
+    <!-- 660874 -->
+    <!-- <div style="background: linear-gradient(#660874, #fff);width: 100vw;height: 50vh;position: absolute;top:0;z-index: -99;"></div> -->
+    <!--  -->
+    <view style="top: {{titleTop}}px;" class="{{title=='E8物流'?'title':'custom_title'}}">{{title}}</view>
+    <view style="margin-top: {{top}}px;width: 100%;">
+        <!-- <navigator url="/pages-order/order/attach_upload_scan/index">tiao</navigator> -->
+        <swiper indicator-dots circular autoplay interval="5000" indicator-color="#8799a3" indicator-active-color="#5c96ec" bindchange="cardSwiper">
+            <swiper-item wx:for="{{swiperList}}" catchtap='swiperItemTap' id="{{item.code}}" data-code="{{item.name}}" wx:key>
+                <image show-menu-by-longpress lazy-load src="{{item.url}}"></image>
+            </swiper-item>
+        </swiper>
+        <view class="btn_box">
+            <view class="button-box" wx:if="{{!user.isTest && menuList1.length}}">
+                <view wx:for="{{menuList1}}" bindtap='goList' id='{{item.url}}' wx:key="menuList" bindlongpress="showExplain" data-code="{{item.code}}">
+                    <view style="white-space: nowrap;">{{item.name}}</view>
+                    <icon wx:if="{{index!=0&& item.name!='比价下单'}}" size="{{index==1?'78':'45'}}" type='i-{{item.icon}}'></icon>
+                    <iconfont wx:if="{{index!=0&&item.name=='比价下单'}}" size="50" name="bijia"></iconfont>
+                    <image class="cloud" wx:if="{{index==0}}" src="../../../images/duoyun.png"></image>
+                    <image class="cloud2" wx:if="{{index==0}}" src="../../../images/duoyun.png"></image>
+                    <image wx:if="{{index==0}}" src="../../../images/zhifeiji-3.png"></image>
+                </view>
+            </view>
+        </view>
+        <view class="row-button" wx:if="{{menuList2.length}}">
+            <view wx:for="{{menuList2}}" hover-class='default' wx:key='grid' bindtap="goList" wx:if="{{item.app?app_name==item.app:true}}" id="{{item.url}}">
+                <!-- <icon color="gray" size="45" type='i-{{item.icon}}'></icon> -->
+                <iconfont size="40" name="{{item.icon}}"></iconfont>
+                <view>{{item.name}}</view>
+            </view>
+        </view>
+        <!-- <view class="other-box" wx:if="{{showHotProduct}}">
+            <view wx:for="{{productList}}" bindtap='swiperItemTap' wx:key="product" style='background-image:url({{item.url}})' id='{{item.title}}' class="item_list">
+                <view class="item-title"> {{item.title}} </view>
+                <view class="item-name"> {{item.name}} </view>
+            </view>
+        </view>
+        <view class="divider">
+            <view class="divider-content">
+                <view>本小程序由杭州卜数科技有限公司提供技术支持</view>
+                <view>网页端请登录{{app_host}}</view>
+            </view>
+            <view class="divider-line"></view>
+        </view> -->
+    </view>
+</view>

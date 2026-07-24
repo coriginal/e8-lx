@@ -1,0 +1,41 @@
+/* pages-work/tss/capacity/repair_task/index.wxss */
+@import "../repair_wait/index.wxss";
+@import "../repair_detail/index.wxss";
+.footer view {
+    display: inline-block;
+    width: 150rpx;
+    height: 45rpx;
+    border-radius: 10rpx;
+    text-align: center;
+    line-height: 45rpx;
+}
+
+.cxkfooter {
+    width: 100%;
+    height: 70rpx;
+    display: flex;
+    align-items: center;
+    border-top: 1rpx dashed gray;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.cxkfooter view {
+    display: inline-block;
+    width: 150rpx;
+    height: 45rpx;
+    border-radius: 10rpx;
+    text-align: center;
+    line-height: 45rpx;
+    margin: 5rpx;
+}
+
+.cxkfooter view:first-child {
+    position: absolute;
+    left: -20rpx;
+}
+.container{
+    width: 100%;
+    padding: 5rpx 20rpx;
+    background: whitesmoke;
+}

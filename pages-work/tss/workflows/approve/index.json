@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "field": "../../../components/field/index",
+    "tag": "../../../components/tag/index",
+    "cell": "../../../components/cell/index",
+    "attach": "../../../components/attach/index"
+  }
+}

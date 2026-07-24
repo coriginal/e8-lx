@@ -1,0 +1,376 @@
+<take-phone bind:close="closePhone" phoneList="{{phoneList}}" />
+
+<view class="detail-page fade" wx:if="{{order}}">
+    <row wx:if="{{order.status=='已取消'}}">
+        <col span="12" class="solid-bottom">
+        <view class="placeorder">
+            <view class="placeorder-flex t-center">
+                <text class="t-fw text-red">当前订单已取消</text>
+            </view>
+        </view>
+        </col>
+    </row>
+
+    <row wx:if="{{order.cancel_reason}}">
+        <col span="12" class="solid-bottom">
+        <view class="placeorder">
+            <view class="placeorder-flex">
+                <text class="opcity">取消原因：</text>
+                <view class="flex-1 t-right">{{order.cancel_reason||''}} </view>
+            </view>
+        </view>
+        </col>
+    </row>
+
+    <view class="top-ocode" wx:if="{{showOthers}}">
+        <view class="receive-panel flex-1">
+            <text class="">目的地：</text>
+            <view class="receive_city">{{order.receive_city||''}}</view>
+        </view>
+        <view wx:if="{{order.qrcode}}" class="qrcode">
+            <image src="{{order.qrcode}}" show-menu-by-longpress mode="widthFix"></image>
+        </view>
+    </view>
+
+    <row>
+        <col span="12" class="solid-bottom">
+        <view class="placeorder">
+            <view class="placeorder-flex">
+                <text class="opcity">订单号：</text>
+                <view class="flex-1 t-right t-fw">{{order.code||''}} </view>
+                <icon wux-class="i-copy" type="i-copy" size="28" data-code="{{order.code}}" bindtap="copyCode"></icon>
+            </view>
+        </view>
+        </col>
+    </row>
+
+    <row wx:if="{{!user.isCustomer}}">
+        <col span="12" class="solid-bottom">
+        <view class="placeorder">
+            <view class="placeorder-flex">
+                <text class="text-blue send-site">{{order.send_site||'无'}}</text>
+                <text class="icon-right"> - </text>
+                <view class="text-red receive-site">{{order.receive_site||'无'}} </view>
+                <view wx:if="{{hasCargoImages}}" class="flex-1 t-right t-fw text-blue" bindtap="previewCargoImage">
+                    查看附件图片
+                </view>
+            </view>
+
+        </view>
+        </col>
+    </row>
+
+    <row wx:if="{{showCode && order.ccode}}">
+        <col span="12" class="solid-bottom">
+        <view class="placeorder">
+            <view class="placeorder-flex">
+                <text class="opcity">客户单号：</text>
+                <view class="flex-1 t-right">{{order.ccode||''}} </view>
+                <icon wux-class="i-copy" type="i-copy" size="28" data-code="{{order.ccode}}" bindtap="copyCode"></icon>
+            </view>
+        </view>
+        </col>
+    </row>
+
+
+    <view class="content-addr">
+        <view class="_flex" wx:if="{{showSend}}">
+            <view class="_title _send">寄</view>
+            <view class="man-msg flex-1">
+                <view class="person-msg">
+                    <text class="t-fw">{{order.send_man||''}}</text>
+                    <text class="t-margin-left">{{order.send_phone||''}}</text>
+                    <icon wx:if="{{order.send_phone}}" type="i-dianhua" color="var(--red)" size="30" data-phone="{{order.send_phone}}" bindtap="makePhone"></icon>
+                    <icon type="i-copy" data-item="{{(order.send_man||'') +' '+ (order.send_phone||'') + ' '+ fn.addrPrint(order,'send') }}" bindtap="copyAddr" size="32"></icon>
+                </view>
+                <view class="addr">
+                    <text>{{fn.addrPrint(order,'send')}}</text>
+                    <slot name='map'></slot>
+                </view>
+            </view>
+        </view>
+        <view class="_flex" wx:if="{{showReceive}}">
+            <view class="_title bg-blue">收</view>
+            <view class="man-msg flex-1">
+                <view class="person-msg">
+                    <text class="t-fw">{{order.receive_man||''}} </text>
+                    <text class="t-margin-left">{{order.receive_phone||''}}</text>
+                    <icon wx:if="{{order.receive_phone}}" type="i-dianhua" color="var(--red)" size="30" data-phone="{{order.receive_phone}}" bindtap="makePhone"></icon>
+                    <icon type="i-copy" data-item="{{(order.receive_man||'') +' '+ (order.receive_phone||'') + ' '+ fn.addrPrint(order,'receive') }}" bindtap="copyAddr" size="32"></icon>
+                </view>
+                <view class="addr">
+                    <text>{{fn.addrPrint(order,'receive')}}</text>
+                    <slot name='map'></slot>
+                    <slot name='map_receive'></slot>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <row>
+        <col span="12" class="solid-bottom">
+        <view class="placeorder">
+            <view class="placeorder-flex">
+                <text class="opcity">增值服务：</text>
+                <view class="flex-1 t-right add-fee">
+                    <text wx:if="{{order.if_visit}}">上门取件</text>
+                    <text>{{order.entry_type||''}}</text>
+                    <text>{{order.insurance_type||''}}</text>
+                    <text class="text-bb" bindtap="showRecord">{{order.rcode_type||''}}</text>
+                </view>
+            </view>
+        </view>
+        </col>
+    </row>
+
+    <row wx:if="{{order.if_visit}}">
+        <col span="12" class="solid-bottom">
+        <view class="placeorder">
+            <view class="placeorder-flex">
+                <text class="opcity">预约取件时间：</text>
+                <view class="flex-1 t-right">{{order.scheduled_pick_time||''}} </view>
+            </view>
+        </view>
+        </col>
+    </row>
+    <row wx:if="{{showArrivePay}}">
+        <col span="12" class="solid-bottom">
+        <view class="placeorder">
+            <view class="placeorder-flex">
+                <text class="opcity">到付金额：</text>
+                <view class="flex-1 t-right text-red">{{order.arrive_pay||''}} </view>
+                <view bind:tap="startPay" style="margin-left: 12px;" class="text-blue">点击收款>></view>
+            </view>
+        </view>
+        </col>
+    </row>
+    <van-action-sheet title="请选择收款方式" show="{{ show }}" actions="{{ actions }}" bind:close="onClose" bind:select="onSelect" />
+    <row wx:if="{{order.trans_mode != '零担' && showOthers}}">
+        <col span="12" class="solid-bottom">
+        <view class="placeorder">
+            <view class="placeorder-flex">
+                <text class="opcity">业务类型：</text>
+                <view class="flex-1 t-right">{{order.trans_mode||''}} </view>
+            </view>
+        </view>
+        </col>
+    </row>
+
+    <row wx:if="{{order.trans_mode == '整车' && showOthers}}">
+        <col span="6">
+        <view class="placeorder">
+            <view class="placeorder-flex">
+                <text class="opcity">车型：</text>
+                <view class="flex-1 t-right">{{order.truck_type||''}} </view>
+            </view>
+        </view>
+        </col>
+        <col span="6">
+        <view class="placeorder">
+            <view class="placeorder-flex">
+                <text class="opcity">托盘数量：</text>
+                <view class="flex-1 t-right">{{order.pallet_num||''}} </view>
+            </view>
+        </view>
+        </col>
+    </row>
+
+    <row wx:if="{{order.trans_mode == '整车' && showOthers}}">
+        <col span="6">
+        <view class="placeorder">
+            <view class="placeorder-flex">
+                <text class="opcity">装车时间：</text>
+                <view class="flex-1 t-right">{{order.expect_arrive||''}} </view>
+            </view>
+        </view>
+        </col>
+        <col span="6">
+        <view class="placeorder">
+            <view class="placeorder-flex">
+                <text class="opcity">卸车时间：</text>
+                <view class="flex-1 t-right">{{order.expect_depart||''}} </view>
+            </view>
+        </view>
+        </col>
+    </row>
+
+
+    <row>
+        <col span="6" wx:if="{{showOthers && order.cod}}">
+        <view class="placeorder">
+            <view class="placeorder-flex cod">
+                <text class="t-fw">代收货款：</text>
+                <view class="flex-1 t-right text-red t-fw">¥ {{order.cod}}</view>
+            </view>
+        </view>
+        </col>
+        <col span="6" wx:if="{{showOthers && order.arrive_pay}}">
+        <view class="placeorder">
+            <view class="placeorder-flex cod">
+                <text class="t-fw">到付款：</text>
+                <view class="flex-1 t-right text-red t-fw">¥ {{order.arrive_pay}}</view>
+            </view>
+        </view>
+        </col>
+    </row>
+
+    <row>
+        <col span="6">
+        <view class="placeorder">
+            <view class="placeorder-flex">
+                <text class="opcity">件数</text>
+                <view class="flex-1 t-right">{{order.amount||''}} 件</view>
+            </view>
+        </view>
+        </col>
+        <col span="6">
+        <view class="placeorder">
+            <view class="placeorder-flex">
+                <text class="opcity">包装：</text>
+                <view class="flex-1 t-right">{{order.pack||''}}</view>
+            </view>
+        </view>
+        </col>
+    </row>
+
+    <row>
+        <col span="6">
+        <view class="placeorder">
+            <view class="placeorder-flex">
+                <text class="opcity">录单体积：</text>
+                <view class="flex-1 t-right">{{order.volume||''}} m³</view>
+            </view>
+        </view>
+        </col>
+        <col span="6">
+        <view class="placeorder">
+            <view class="placeorder-flex">
+                <text class="opcity">录单重量：</text>
+                <view class="flex-1 t-right">{{order.weight||''}} {{weight_unit}}</view>
+            </view>
+        </view>
+        </col>
+    </row>
+
+    <row>
+        <col span="6" class="solid-bottom">
+        <view class="placeorder">
+            <view class="placeorder-flex">
+                <text class="opcity">货物名称：</text>
+                <view class="flex-1 t-right">{{order.cargo||''}}</view>
+            </view>
+        </view>
+        </col>
+        <col span="6" class="solid-bottom">
+        <view class="placeorder">
+            <view class="placeorder-flex">
+                <text class="opcity">结算方式：</text>
+                <view class="flex-1 t-right">{{order.settle_type||''}}</view>
+            </view>
+        </view>
+        </col>
+    </row>
+
+    <row>
+        <col span="6" class="solid-bottom">
+        <view class="placeorder">
+            <view class="placeorder-flex">
+                <text class="opcity">派送方式：</text>
+                <view class="flex-1 t-right">{{order.service_mode||''}}</view>
+            </view>
+        </view>
+        </col>
+        <col span="6" class="solid-bottom">
+        <view class="placeorder">
+            <view class="placeorder-flex">
+                <text class="opcity">保价额：</text>
+                <view class="flex-1 t-right">{{order.insurance_limit||''}}</view>
+            </view>
+        </view>
+        </col>
+    </row>
+    <!-- 自定义字段 -->
+    <row wx:for="{{recordList}}" wx:for-item="items">
+        <col span="{{items.length>1 ? '6' : '12'}}" class="solid-bottom" wx:for="{{items}}">
+        <view class="placeorder">
+            <view class="placeorder-flex">
+                <text class="opcity">{{item.label}}：</text>
+                <view class="flex-1 t-right">{{order[item.code] || ''}}</view>
+            </view>
+        </view>
+        </col>
+    </row>
+    <!--  -->
+    <row wx:if="{{showOthers}}">
+        <col span="12" class="solid-bottom">
+        <view class="placeorder">
+            <view class="placeorder-flex">
+                <text class="opcity">费用合计（CNY）：</text>
+                <view wx:if="{{order.income_fee}}" class="flex-1 t-right text-red t-fw">¥ {{order.income_fee||''}}</view>
+            </view>
+        </view>
+        </col>
+    </row>
+
+    <row>
+        <col span="12">
+        <view class="placeorder">
+            <view class="placeorder-flex">
+                <text class="opcity">备注：</text>
+                <view class="flex-1 t-right">{{order.remark||''}} </view>
+            </view>
+        </view>
+        </col>
+    </row>
+
+    <row wx:if="{{showOthers}}">
+        <col span="12">
+        <view class="placeorder">
+            <view class="placeorder-flex">
+                <text class="opcity">业务员：</text>
+                <view class="flex-1 t-right">{{order.clerk_name||''}} </view>
+            </view>
+        </view>
+        </col>
+    </row>
+
+    <row>
+        <col span="12" class="solid-bottom">
+        <view class="placeorder">
+            <view class="placeorder-flex">
+                <text class="opcity">录单时间：</text>
+                <view class="flex-1 t-right">{{order.order_date||''}} </view>
+            </view>
+        </view>
+        </col>
+    </row>
+
+
+
+</view>
+
+<view class="bottom-btn" wx:if="{{showBottomBtn}}">
+    <button class="bg-yellow" bindtap="cancelOrder">取消发货</button>
+    <button wx:if="{{!hideDelBtn}}" class="bg-red " bindtap="deleteOrder">删除订单</button>
+    <button wx:if="{{canEditOrder}}" class="bg-blue " bindtap="changeOrder">修改订单</button>
+</view>
+
+<wxs module="fn">
+    module.exports = {
+        addrPrint: function (order, type) {
+            if (type == 'send') {
+                var addr = [order.send_province, order.send_city, order.send_district, order.send_town,
+                order.send_street_no].filter(function (i) {
+                    return i
+                }).join('');
+            }
+            if (type == 'receive') {
+                var addr = [order.receive_province, order.receive_city, order.receive_district, order.receive_town,
+                order.receive_street_no].filter(function (i) {
+                    return i
+                }).join('');
+            }
+            return addr
+        }
+    };
+</wxs>

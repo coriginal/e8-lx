@@ -1,0 +1,39 @@
+.margin-top {
+  margin-top: 15rpx;
+}
+
+.text-label {
+  margin-top: 8px;
+  font-size: 13px;
+  color: gray;
+}
+
+.text-label .text-red {
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.grid-card{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    column-gap: 8px;
+    row-gap: 8px;
+    padding: 8px;
+}
+
+.grid-card-item{
+    height: calc(28vw - 24px);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.grid-card-item .left{
+    font-size: 18px;
+}
+
+.grid-card-item .right{
+    font-size: 26px;
+}

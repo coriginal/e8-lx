@@ -1,0 +1,60 @@
+<view class="account-content">
+  <view class="bg-account shadow-blur">
+    <view class="t-f36">我的余额</view>
+    <view class="t-f48 t-fw">{{balance}}</view>
+    <view class="free-content">
+      <view class="flex-b">
+        <text class="op-7">赠送金额：</text>
+        <text>¥{{balance2}}</text>
+      </view>
+      <view class="flex-b">
+        <text class="op-7">本金：</text>
+        <text>¥{{balance1}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="my-system-options">
+    <view class="my-system-menu" wx:for="{{_options}}" wx:key bindtap="goFlow" id="{{item.type}}">
+      <view class="left-view">
+        <icon size='30' type='i-{{item.icon}}' />{{item.name}}
+      </view>
+      <view class="right-view">
+        <view class="my-system-notice">{{item.notice}}</view>
+        <icon size='30' color="gray" type='i-right' />
+      </view>
+    </view>
+  </view>
+
+  <view class="redpacket-view" hover-class="translate" bindtap="goRedPacket">
+    <image class="redpacket-img" mode="widthFix" src="{{redpacket}}"></image>
+  </view>
+  <!-- <view class="share-content">
+    <image class="" mode="widthFix" src="../../../images/bg-top.png">
+      <view class="share-panel">
+        <view class="share-title">好产品分享给朋友</view>
+        <view class="share-computer">
+          <view class="flex-1 t-fw t-f40 x-1">25 %</view>
+          <view>X</view>
+          <view class="flex-1 t-fw t-f40 x-2">300</view>
+          <view>=</view>
+          <view class="flex-1 t-fw t-f40 x-3">32.45</view>
+        </view>
+        <view class="share-text">
+          <text class="t-fw">您已成功邀请<text class="text-red"> 20 </text>人，累计获得<text class="text-red"> 800元 </text></text>
+        </view>
+        <view class="share-text">
+          <text class="t-fw">请到账户余额中查询</text>
+        </view>
+        <view class="share-rule">
+        
+        </view>
+      </view>
+    </image>
+  </view> -->
+</view>
+<view style="height: 1px;"></view>
+
+<view class='bottom-btn '>
+  <!-- <button class='btn bg-gradul-red m-p'>分享返现</button> -->
+  <button class='btn bg-gradul-red m-p' bindtap="goTopUp">充值</button>
+</view>

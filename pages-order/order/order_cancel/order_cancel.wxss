@@ -1,0 +1,116 @@
+
+.my-system-options {
+  background-color: white;
+  box-shadow: 0 -1rpx 6rpx rgba(0, 0, 0, 0.1);
+  font-size: 26rpx;
+}
+
+.my-system-menu {
+  height: 84rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30rpx;
+}
+
+.left-view {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.left-view view {
+  margin-right: 10rpx;
+}
+
+.right-view {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  color: #9e9c9c;
+}
+
+
+.bottom-btn {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  padding: 30rpx 0;
+  background-color: white;
+  z-index: 999;
+}
+.m-p {
+  flex:1;
+  margin: 0 20rpx;
+  padding: 20rpx 32rpx;
+  border-radius: 6rpx;
+  height: 84rpx;
+  font-weight: 500;
+}
+
+
+
+.radio{
+  margin: 0 12px;
+  transform: scale(0.8);
+}
+radio{
+  position: relative;
+}
+
+radio .wx-radio-input {
+	margin: 0;
+	width: 24px;
+	height: 24px;
+}
+
+radio .wx-radio-input::before,
+radio.radio::before {
+	display: none;
+}
+
+radio.radio[checked]::after {
+	content: "";
+	background-color: transparent;
+	display: block;
+	position: absolute;
+	width: 8px;
+	height: 8px;
+	z-index: 999;
+	top: 0rpx;
+	left: 0rpx;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+	border-radius: 200rpx;
+	border: 8px solid var(--white) !important;
+}
+
+radio::before {
+	font-family: "i";
+	content: "\e645";
+	position: absolute;
+	color: var(--white) !important;
+	top: 50%;
+	margin-top: -8px;
+	right: 5px;
+	font-size: 32rpx;
+	line-height: 16px;
+	pointer-events: none;
+	transform: scale(1, 1);
+	transition: all 0.3s ease-in-out 0s;
+	z-index: 9;
+}
+
+radio.red[checked] .wx-radio-input {
+	background-color: var(--red) !important;
+	color: var(--white) !important;
+}
+
+.nothing{
+  text-align: center;
+  line-height: 280px;
+  color: gray;
+}

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "ShowCert":"../driver_cert/cert_component/cert"
+  },
+  "navigationBarTitleText": "车辆上传"
+}

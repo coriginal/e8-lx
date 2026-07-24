@@ -1,0 +1,261 @@
+/* pages/homepage/home/index.wxss */
+/* 在线链接服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
+@font-face {
+    font-family: "阿里妈妈刀隶体 Regular";
+    font-weight: 400;
+    src: url("//at.alicdn.com/wf/webfont/uJk2oVQPRUJI/8GOe9CcCSk1p.woff2") format("woff2"),
+        url("//at.alicdn.com/wf/webfont/uJk2oVQPRUJI/5pIzGH8o8vgE.woff") format("woff");
+    font-display: swap;
+}
+
+/* 在线链接服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
+@font-face {
+    font-family: "阿里妈妈方圆体 VF Regular";
+    src: url("//at.alicdn.com/wf/webfont/uJk2oVQPRUJI/h5pWndLldjgI.woff2") format("woff2"),
+        url("//at.alicdn.com/wf/webfont/uJk2oVQPRUJI/s5S7QH5mtaJm.woff") format("woff");
+    font-display: swap;
+}
+
+Page {
+    background-color: #F5F6FA;
+}
+
+.box {
+ 
+}
+
+.box .top_bg {
+    height: 400rpx;
+    width: 100%;
+    background: linear-gradient(#0081ff, #fff);
+    position: absolute;
+    overflow: hidden;
+    z-index: -1;
+    top: 0;
+    opacity: .5;
+}
+
+.box .top_bg .top_bg_circle {
+    height: 600rpx;
+    width: 600rpx;
+    position: absolute;
+    right: -200rpx;
+    top: -100rpx;
+    border-radius: 300rpx;
+    background: radial-gradient(#0081ff, #1cbbb4 80%);
+    opacity: .7;
+}
+
+swiper {
+    text-align: center;
+    height: 250rpx;
+}
+
+swiper image {
+    height: 250rpx;
+    width: 90%;
+    border-radius: 20rpx;
+}
+
+.title {
+    color: black;
+    position: absolute;
+    font-size: 45rpx;
+    font-family: "阿里妈妈刀隶体 Regular";
+    left: 5%;
+}
+.custom_title{
+    color: #F53B36;
+    position: absolute;
+    font-size: 38rpx;
+    left: 5%;
+}
+
+.btn_box {
+    width: 90%;
+    margin: 40rpx auto;
+}
+
+.button-box {
+    height: 270rpx;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas: 'a a b b'
+        'a a c d';
+    gap: 15rpx;
+}
+
+.button-box>view {
+    width: 100%;
+    height: 100%;
+    border-radius: 20rpx;
+    padding: 20rpx;
+    color: white;
+}
+
+.button-box>view:nth-child(1),
+.button-box>view:nth-child(4) {
+    background: linear-gradient(135deg, #0081ff, rgb(148, 193, 245));
+}
+
+.button-box>view:nth-child(1),
+.button-box>view:nth-child(2) {
+    font-weight: bold;
+    font-size: large;
+}
+
+.button-box>view:nth-child(1) {
+    grid-area: a;
+    position: relative;
+}
+
+.button-box>view:nth-child(1) image {
+    width: 160rpx;
+    height: 160rpx;
+    position: absolute;
+    right: 20rpx;
+    bottom: 10rpx;
+}
+
+.button-box>view:nth-child(1) .cloud {
+    width: 50rpx;
+    height: 50rpx;
+    left: 120rpx;
+    top: 90rpx;
+    opacity: .2;
+}
+
+.button-box>view:nth-child(1) .cloud2 {
+    width: 50rpx;
+    height: 50rpx;
+    top: 30rpx;
+    right: 20rpx;
+    opacity: .3;
+}
+
+.button-box>view:nth-child(3) {
+    background: linear-gradient(135deg, #39b54a, rgb(166, 231, 169))
+}
+
+.button-box>view:nth-child(2) {
+    background: linear-gradient(135deg, #39b54a, rgb(166, 231, 169))
+}
+
+.button-box>view:nth-child(2) {
+    grid-area: b;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.button-box>view:nth-child(3) {
+    grid-area: c;
+}
+
+.button-box>view:nth-child(4) {
+    grid-area: d;
+}
+
+.button-box>view:nth-child(3),
+.button-box>view:nth-child(4) {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.row-button {
+    width: 90%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(auto, 1fr);
+    box-shadow: 0 10rpx 40rpx rgba(0,0,0,.04);
+    gap: 10rpx;
+    background-color: #FFFFFF;
+    padding: 20rpx 0;
+    border-radius: 20rpx;
+}
+
+.row-button>view {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 120rpx;
+    color: gray;
+}
+
+.row-button>view>view:nth-child(2) {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.other-box {
+    display: flex;
+    flex-direction: row;
+    height: 500rpx;
+    width: 94%;
+    margin: 40rpx auto;
+}
+
+.other-box {
+    height: 180rpx;
+}
+
+.item_list {
+    width: 100%;
+    height: 180rpx;
+    margin: 0 10rpx;
+    display: inline-block;
+    background-color: #ddf0fe;
+    border-radius: 12rpx;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    z-index: 1;
+    color: var(--white);
+    border: none;
+}
+
+.item-title {
+    padding: 20rpx 20rpx 5rpx 20rpx;
+    font-weight: 500;
+    font-size: 30rpx;
+}
+
+.item-name {
+    padding: 0 20rpx;
+    font-size: 25rpx;
+}
+
+.divider {
+    text-align: center;
+    font-size: 20rpx;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray);
+    height: 36px;
+    margin: 10rpx 10rpx;
+}
+
+.divider-line {
+    position: absolute;
+    left: 1%;
+    width: 94%;
+    height: 2rpx;
+    background-color: #e9eaec;
+    top: 50%;
+    margin: 0 2%;
+}
+
+.divider-content {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    padding: 0 10px;
+}

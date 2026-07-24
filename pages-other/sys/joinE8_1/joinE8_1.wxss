@@ -1,0 +1,121 @@
+.top {
+  display: flex;
+  align-items: center;
+  background-color: white;
+}
+
+.top .icon {
+  height: 100rpx;
+  width: 100rpx;
+  margin: 20rpx;
+}
+
+.line-height {
+  line-height: 48rpx;
+}
+
+.msg {
+  margin: 20rpx;
+  border-radius: 10rpx;
+  background-color: white;
+  box-shadow: 0 1rpx 6rpx rgba(0, 0, 0, 0.1);
+  padding: 0 30rpx;
+}
+
+.bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 96rpx;
+  padding: 30rpx 0;
+}
+
+.solid {
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.1);
+}
+
+.bar input {
+  flex: 1;
+  font-size: 28rpx;
+  text-align: right;
+  padding: 0 20rpx;
+}
+
+.pclass {
+  font-size: 28rpx;
+  opacity: 0.7;
+}
+
+.bar .title {
+  padding-right: 30rpx;
+}
+
+.i-right {
+  opacity: 0.7;
+}
+
+.tip-box {
+  padding-top: 20rpx;
+  font-size: 24rpx;
+}
+
+.margin-lr {
+  margin: 0 8rpx;
+  color: var(--red);
+}
+
+.tip-title {
+  color: #999;
+  padding: 20rpx 30rpx;
+  display: flex;
+  align-items: center;
+}
+
+.tip-item {
+  color: #888;
+  padding: 0 30rpx;
+  line-height: 50rpx;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.bottom-btn {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  padding: 20rpx;
+  display: flex;
+  background-color: white;
+}
+
+.payfor {
+  padding: 0 20rpx;
+  display: flex;
+  align-items: center;
+  letter-spacing: 6rpx;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.bottom-btn .btn {
+  height: 84rpx;
+  width: 33.33333%;
+}
+
+.text-big {
+  font-size: 40rpx;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+}
+
+.checkbox {
+  transform: scale(0.8);
+}

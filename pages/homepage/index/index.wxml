@@ -1,0 +1,57 @@
+<topbar hidden="{{code=='home'||code=='my'}}" title="{{name}}" showPop ifDot="{{ifDot}}" />
+<!-- hidden="{{code=='home'||code=='my'}}" -->
+<!-- <view class='page' style="height:calc(100vh - {{menuRect.bottom + menuRect.top - 20}}px - {{tabbarList.length && code!='home'?'92rpx':'0rpx'}});overflow:scroll;"> -->
+<view style="padding-bottom: calc(100rpx + env(safe-area-inset-bottom));">
+    <home tabbarList="{{tabbarList}}" user="{{user}}" class='home' wx:if="{{code=='home'}}" swiperList="{{swiperList}}"></home>
+    <work wx:if="{{code=='work'}}"></work>
+    <order wx:if="{{code=='order'}}"></order>
+    <query-order wx:if="{{code=='router'}}"></query-order>
+    <table wx:if="{{code=='table'}}" tableList="{{table_list}}"></table>
+    <partner wx:if="{{code=='partner'}}"></partner>
+    <my wx:if="{{code=='my'}}"></my>
+    <oc eff_oc_count="{{eff_oc_count}}" wx:if="{{code=='oc'}}"></oc>
+</view>
+<!-- <view class='content startup' wx:if="{{loading}}">
+    <view>
+        <view class='text-center top-title' style='height:{{height*2}}px'>
+            <image class='e8-png' mode='widthFix' src='{{TitleImgUrl}}'></image>
+        </view>
+        <swiper class='swiper-box swiper-1' circular autoplay style='top:{{height*1.5}}px;height:calc(100vh - {{height}}px );'>
+            <swiper-item wx:for="{{ImgList}}" wx:key>
+                <image mode='widthFix' class='homepage-image' src='{{item}}'></image>
+            </swiper-item>
+        </swiper>
+    </view>
+    <view class='bottom-text'>杭州卜数科技有限公司提供技术支持</view>
+</view> -->
+<!-- <view class="startup" style="padding-top:{{height}}px;">
+    <image style="width: 150rpx;height: 150rpx;" mode='widthFix' src='{{TitleImgUrl}}'></image>
+    <image style="margin-top: calc({{height}} + 75rpx)px;" mode='widthFix' class='homepage-image' src='{{bgImg}}'></image>
+</view> -->
+<tabbar theme='positive' controlled position='bottom' current="{{_index}}" bindchange='onChange' wx:if="{{tabbarList.length}}">
+    <tabbar-item wx:for="{{tabbarList}}" id="{{item.code}}" title="{{item.name}}" wx:key>
+        <badge dot="{{item.name == '运营中心' && showDot}}" slot="icon-on">
+            <icon color='#333' type="i-{{fn.icon(item.icon)[0]}}" />
+        </badge>
+        <badge dot="{{item.name == '运营中心' && showDot}}" slot="icon-off">
+            <icon color='#5c96ec' type="i-{{fn.icon(item.icon)[1]}}" />
+        </badge>
+    </tabbar-item>
+</tabbar>
+
+<toptips id="wux-toptips" />
+
+
+<canvasdrawer painting="{{painting}}" class="canvasdrawer" bind:getImage="eventGetImage" />
+
+<landscap visible="{{ visible }}" bind:close="onClosePop">
+    <image catchtap="goRedpacketPage" class="landscap" src="{{imgUrl}}" />
+</landscap>
+
+<wxs module="fn">
+    module.exports = {
+        icon: function (value) {
+            return value.split('|')
+        }
+    }
+</wxs>

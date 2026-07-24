@@ -1,0 +1,16 @@
+/* components/take-phone/take-phone.wxss */
+
+.p-20 {
+  padding: 20rpx;
+}
+
+.m-20 {
+  margin: 20rpx;
+}
+
+.default{
+  background-color: #f7f7f7;
+}
+.text-bold{
+  font-weight: bold;
+}

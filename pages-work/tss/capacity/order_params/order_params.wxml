@@ -1,0 +1,60 @@
+<form bindsubmit="formSubmit">
+  <cell-group title="日期选择">
+    <cell bind:click="showDate" id="_from" title="起始日期" is-link extra="{{ date_from }}" />
+    <cell bind:click="showDate" id="_to" title="截止日期" is-link extra="{{ date_to }}" />
+    <cell bind:click="" title="是否推送">
+      <view slot="footer">
+        <switch bindchange="switchChange" class='switch blue  switch-pick'  checked="{{filterSwitch}}"></switch>
+      </view>
+    </cell>
+  </cell-group>
+
+  <cell-group title="状态">
+    <cell bind:click="showSatusChoose" title="当前状态" is-link extra="{{ _status.name }}" />
+  </cell-group>
+
+  <cell-group title="客户">
+    <cell bind:click="showCustomerChoose" title="选择客户" is-link extra="{{ customer.name }}" />
+  </cell-group>
+
+  <cell-group title="仓库选择">
+    <cell bind:click="showWareHouseChoose" title="出发仓选择" is-link extra="{{ ware_house.name }}" />
+  </cell-group>
+
+  <cell-group title="业务类型">
+    <cell bind:click="showTransMode" title="业务类型" is-link extra="{{ trans_mode.name }}" />
+  </cell-group>
+</form>
+
+<date-picker visible="{{ show_date_from }}" controlled mode="date" value="{{ picker_date_from }}" lang="zh_CN" id="_from" data-mode="date" bind:confirm="onConfirm" bind:visibleChange="onVisibleChange" />
+
+<date-picker visible="{{ show_date_to }}" controlled mode="date" value="{{ picker_date_to }}" lang="zh_CN" id="_to" data-mode="date" bind:confirm="onConfirm" bind:visibleChange="onVisibleChange" />
+
+<popup title="状态选择" visible="{{ show_status }}" bind:close="onClosePopup">
+  <view class="popup-view">
+    <block wx:for="{{all_status_list}}" wx:key>
+      <cell hover-class="default" bind:click="popupClick" data-code="{{item.code}}" data-name="{{item.name }}" title="{{item.name}}"></cell>
+    </block>
+  </view>
+</popup>
+
+<popup title="业务类型选择" visible="{{ show_trans_mode }}" bind:close="onClosePopup">
+  <view class="popup-view">
+    <block wx:for="{{all_trans_mode}}" wx:key>
+      <cell hover-class="default" bind:click="transPopupClick" data-id="{{item.id}}" data-name="{{item.name}}" title="{{item.name}}"></cell>
+    </block>
+  </view>
+</popup>
+
+<popup title="仓库选择" visible="{{ show_ware_house }}" bind:close="onClosePopup">
+  <view class="popup-view">
+    <block wx:for="{{all_ware_house}}" wx:key>
+      <cell hover-class="default" bind:click="wareHousePopupClick" data-id="{{item.id}}" data-name="{{item.name}}" title="{{item.name}}"></cell>
+    </block>
+  </view>
+</popup>
+
+<view class="btn-view">
+  <button bindtap="resetBack" class=" btn bg-red">重置条件</button>
+  <button bindtap="goBackList" class=" btn bg-blue">确定</button>
+</view>

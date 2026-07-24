@@ -1,0 +1,52 @@
+<view class="oc fade">
+    <view wx:if="{{showCountData}}" class="grid-card">
+        <view bind:tap="toList" data-type="unUploadOrder" class="grid-card-item bg-orange">
+            <view class="left">
+                待上传
+            </view>
+            <view class="right">
+                {{someData.unUploadOrder || 0}}
+            </view>
+        </view>
+        <view bind:tap="toList" data-type="uploadOrder" class="grid-card-item bg-blue">
+            <view class="left">
+                已上传
+            </view>
+            <view class="right">
+                {{someData.uploadOrder || 0}}
+            </view>
+        </view>
+        <view class="grid-card-item bg-green">
+            <view class="left">
+                待开单
+            </view>
+            <view class="right">
+                {{someData.unBilling || 0}}
+            </view>
+        </view>
+        <view class="grid-card-item bg-yellow">
+            <view class="left">
+                已开单
+            </view>
+            <view class="right">
+                {{someData.billing || 0}}
+            </view>
+        </view>
+    </view>
+    <view class="card1" wx:for="{{oc}}" wx:key="">
+        <card title="{{item.name}}" Icon="titles" Icolor="var(--blue)">
+            <view slot="body">
+                <grids>
+                    <grid wx:for="{{item.children}}" hover-class='default' wx:key='grid' bind:click="goList" id="{{item.url}}" thumb="{{item.img}}" data-description="{{item.description}}" data-listid="{{item.id}}">
+                        <!-- <icon wx:if="{{item.icon}}" slot="header" size='56' color='{{item.code}}' type='i-{{item.icon}}'></icon> -->
+                        <iconfont slot="header" class="image" size="40" name="{{item.icon}}"></iconfont>
+                        <view class="text-label">
+                            <text>{{item.name}}</text>
+                            <text wx:if="{{eff_oc_count && item.name == '接单'}}" class="text-red">({{eff_oc_count}})</text>
+                        </view>
+                    </grid>
+                </grids>
+            </view>
+        </card>
+    </view>
+</view>

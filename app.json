@@ -1,0 +1,269 @@
+{
+    "pages": [
+        "pages/login/login",
+        "pages/homepage/index/index",
+        "pages/redirect/redirect",
+        "pages/web/web",
+        "Cpts/order_query_route/order_query_route",
+        "pages/redirect-work/index",
+        "pages/homepage/home_gzh/index",
+        "pages/homepage/options/index",
+        "pages/homepage/my/index",
+        "pages/login/web/index",
+        "pages/homepage/home/index",
+        "pages/homepage/clockin/index",
+        "pages/pay/index",
+        "pages/today-order/index"
+    ],
+    "subpackages": [
+        {
+            "root": "pages-order",
+            "name": "order",
+            "pages": [
+                "order/order/order",
+                "order/order-oc/order-oc",
+                "order/order_query_route/order_query_route",
+                "order/order_big/order_big",
+                "order/order_list/order_list",
+                "order/order_cargo/order_cargo",
+                "order/order_cargo_computed/order_cargo_computed",
+                "order/order_transmode/order_transmode",
+                "order/order_cargo_tms/order_cargo_tms",
+                "order/order_fee/order_fee",
+                "order/order_scan/order_scan",
+                "order/order_detail/order_detail",
+                "order/order_print/order_print",
+                "order/order_print/print_platform/print_platform",
+                "order/order_print_bluetooth/order_print_bluetooth",
+                "order/order_ccwork/order_ccwork",
+                "order/order_routes/order_routes",
+                "order/order_success/order_success",
+                "order/order_cancel/order_cancel",
+                "order/order_warehouse/order_warehouse",
+                "order/order_send_message/order_send_message",
+                "order/order_feeinfo_total/order_feeinfo_total",
+                "order/task_feeinfo_total/task_feeinfo_total",
+                "order/order_feeitem_detail/order_feeitem_detail",
+                "order/order_create_new_fee/order_create_new_fee",
+                "order/scan_supply/scan_supply",
+                "order/order_receive/order_receive",
+                "order/order_receive_scan/order_receive_scan",
+                "order/order_quote/order_quote",
+                "order/order_quote1/order_quote1",
+                "order/order_quote2/order_quote2",
+                "order/order_quote3/order_quote3",
+                "order/order_car_location_map/order_car_location_map",
+                "order/order_scan_accept/order_scan_accept",
+                "customer/customer_list/customer_list",
+                "customer/customer_addr_list/customer_addr_list",
+                "customer/customer_addr_edit/customer_addr_edit",
+                "customer/customer_create/customer_create",
+                "customer/customer_detail/customer_detail",
+                "customer/customer_choose/customer_choose",
+                "order/order_preorder/order_preorder",
+                "order/order_scan_print/order_print",
+                "order/order_print/custom_print/index",
+                "order/order_price_parity/index",
+                "order/order_price_parity_old/index",
+                "order/scan_up_platform/index",
+                "order/bind_spot_examination/index",
+                "account/account_home/index",
+                "account/detail/in",
+                "order/order_scan_print_log/index",
+                "order/request_funds/index",
+                "order/customer_batch_order/index",
+                "order/attach_upload_scan/index",
+                "order/platform_order_list/index"
+            ],
+            "plugins": {
+                "WechatSI": {
+                    "version": "0.3.4",
+                    "provider": "wx069ba97219f66d99"
+                },
+                "chooseLocation": {
+                    "version": "1.0.5",
+                    "provider": "wx76a9a06e5b4e693e"
+                }
+            }
+        },
+        {
+            "root": "pages-work",
+            "name": "wuling",
+            "pages": [
+                "tss/reports/index",
+                "tss/reports/report/index",
+                "tss/records/index",
+                "tss/records/add/index",
+                "tss/records/record/index",
+                "tss/workflows/approve/index",
+                "tss/workflows/transfer/index",
+                "tss/workflows/translist/index",
+                "tss/workflows/workflow/index",
+                "tss/capacity/capacity_task/index",
+                "tss/capacity/capacity_detail/index",
+                "tss/capacity/capacity_order/index",
+                "tss/capacity/report_abnormal/index",
+                "tss/modal/index",
+                "tss/capacity/capacity_arrange/capacity_arrange",
+                "tss/capacity/capacity_pick/capacity_pick",
+                "tss/capacity/capacity_location/index",
+                "tss/capacity/phone_location/index",
+                "tss/capacity/driver_loc/index",
+                "tss/capacity/capacity_location_detail/index",
+                "tss/capacity/truck_choose/index",
+                "tss/capacity/driver_form/index",
+                "tss/capacity/order_push/order_push",
+                "tss/capacity/order_params/order_params",
+                "tss/capacity/capacity_sort/index",
+                "tss/capacity/capacity_task_yunying/capacity_task_yunying",
+                "tss/scan/distribution_scan/distribution_scan",
+                "tss/scan/work_order/work_order",
+                "tss/capacity/grab_task/grab_task",
+                "tss/capacity/grab_task_list/grab_task_list",
+                "tss/capacity/driver_cert/driver_cert",
+                "tss/capacity/car_cert/car_cert",
+                "tss/line/line_task/line_task",
+                "tss/line/line_task_detail/line_task_detail",
+                "tss/scan/storage_check/storage_check",
+                "tss/scan/task_info/task_info",
+                "tss/capacity/repair_task/index",
+                "tss/capacity/repair_wait/index",
+                "tss/capacity/repair_detail/index",
+                "tss/capacity/repair_compelete/index",
+                "tss/scan/beputinstorage_scan/index",
+                "tss/capacity/truck_task/index",
+                "tss/capacity/add_truck_task/index",
+                "tss/capacity/truck_task_customer/index",
+                "tss/capacity/truck_task_fee/index",
+                "tss/capacity/truck_task_detail/index",
+                "tss/capacity/scheduling_assignment/index",
+                "tss/capacity/scheduling_task_detail/index",
+                "tss/capacity/line_edit/index",
+                "tss/my_account/index"
+            ]
+        },
+        {
+            "root": "pages-other",
+            "name": "other",
+            "pages": [
+                "sys/settings/settings",
+                "sys/learning/learning",
+                "sys/qrcode/qrcode",
+                "sys/admin/admin",
+                "sys/customize/customize",
+                "sys/customize_sub/customize_sub",
+                "sys/joinE8_1/joinE8_1",
+                "sys/account/account",
+                "sys/topup/topup",
+                "sys/renew/renew",
+                "sys/cost_flow/cost_flow",
+                "sys/person_info/person_info",
+                "sys/quickin/quickin",
+                "sys/code_get_p1/code_get_p1",
+                "sys/code_get_p2/code_get_p2",
+                "sys/router_connect_1/router_connect_1",
+                "sys/router_connect_2/router_connect_2",
+                "sys/invite_downstream/invite_downstream",
+                "sys/auditing/auditing",
+                "sys/auditing_order/auditing_order",
+                "sys/auditing_task/auditing_task",
+                "sys/auditing_fee_detail/auditing_fee_detail",
+                "sys/message/message",
+                "sys/scan_share/scan_share",
+                "sys/redpacket/redpacket",
+                "sys/redpacket/redpacket_detail/redpacket_detail",
+                "sys/redpacket/redpacket_create/redpacket_create",
+                "sys/redpacket/redpacket_list/redpacket_list"
+            ]
+        },
+        {
+            "root": "pages-charts",
+            "name": "chenxk",
+            "pages": [
+                "driver-chart/driver-chart",
+                "revenue-chart/index",
+                "customer-chart/index"
+            ]
+        }
+    ],
+    "preloadRule": {
+        "pages/login/login": {
+            "network": "all",
+            "packages": [
+                "order",
+                "wuling",
+                "other"
+            ]
+        },
+        "pages/redirect/redirect": {
+            "network": "all",
+            "packages": [
+                "order",
+                "wuling",
+                "other"
+            ]
+        }
+    },
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTextStyle": "black"
+    },
+    "requiredBackgroundModes": [
+        "location",
+        "audio"
+    ],
+    "permission": {
+        "scope.userLocation": {
+            "desc": "你的位置信息仅用于E8地址定位和选择"
+        }
+    },
+    "usingComponents": {
+        "icon": "/components/icon/index",
+        "card": "/components/card/index",
+        "grid": "/components/grid/index",
+        "grids": "/components/grids/index",
+        "noticebar": "/components/noticebar/index",
+        "topbar": "/components/topbar/index",
+        "badge": "/components/badge/index",
+        "tabbar": "/components/tabbar/index",
+        "tabbar-item": "/components/tabbar-item/index",
+        "row": "/components/row/index",
+        "col": "/components/col/index",
+        "cell": "/components/cell/index",
+        "cell-group": "/components/cell-group/index",
+        "tag": "/components/tag/index",
+        "tabs": "/components/tabs/index",
+        "tab": "/components/tab/index",
+        "toptips": "/components/toptips/index",
+        "timeline": "/components/timeline/timeline",
+        "filterbar": "/components/filterbar/index",
+        "search-bar": "/components/searchbar/index",
+        "canvasdrawer": "/components/canvasdrawer/canvasdrawer",
+        "cascader": "/components/cascader/index",
+        "input-number": "/components/input-number/index",
+        "popup": "/components/popup/index",
+        "landscap": "/components/landscap/index",
+        "dialog": "/components/dialog/index",
+        "sticky": "/components/sticky/index",
+        "sticky-item": "/components/sticky-item/index",
+        "order": "/Cpts/order/order",
+        "query-order": "/Cpts/order_query_route/order_query_route",
+        "wux-index": "/components/index/index",
+        "wux-index-item": "/components/index-item/index",
+        "date-picker": "/components/date-picker/index",
+        "drawer": "/components/drawer/drwaer",
+        "segmented": "/components/segmented-control/index",
+        "fab-button": "/components/fab-button/index",
+        "iconfont": "/iconfont/iconfont"
+    },
+    "debug": false,
+    "navigateToMiniProgramAppIdList": [
+        "wx5255074da90a4dca"
+    ],
+    "sitemapLocation": "sitemap.json",
+    "requiredPrivateInfos": [
+        "chooseLocation",
+        "getLocation"
+    ]
+}

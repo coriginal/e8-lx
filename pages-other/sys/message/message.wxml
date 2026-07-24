@@ -1,0 +1,16 @@
+<view class="options-panel">
+	<view class="fade msg-panel shadow-blur" bindtap="goDetailPage" data-item="{{item}}" wx:for="{{message.children}}" wx:key>
+		<view class="content solid-bottom">
+			<!-- <text class="content-text">{{item.content}}</text> -->
+				<rich-text>{{item.content}}</rich-text>
+		</view>
+		<view class="foot">
+			<text class="foot-text">{{item.sendTime}}</text>
+			<text class="foot-text margin-lr">来自 【{{item.sender}}】</text>
+		</view>
+	</view>
+</view>
+
+<view class="bottom-btn">
+	<button class="btn bg-blue" bindtap="readAllMessage">全部已读</button>
+</view>

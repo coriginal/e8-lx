@@ -1,0 +1,46 @@
+<view class="{{ud_noborder ? 'ud-noborder' : ''}} zan-cell {{ud_call || (ud_picker && !disabled) ? 'zan-cell1' : ''}} zan-field {{ error ? 'zan-field--error' : '' }} {{ mode === 'wrapped' ? 'zan-field--wrapped' : '' }} custom-class">
+  <view
+    wx:if="{{ title }}"
+    class="zan-cell__hd zan-field__title {{ud_required ? 'ud_required' : ''}} {{ud_show ? 'ud_show '+  ud_show  : ''}} {{disabled && !ud_show ? 'ud_disabled' : ''}}">
+    {{ title }}
+  </view>
+  <textarea
+    wx:if="{{ type === 'textarea' }}"
+    auto-height
+    disabled="{{ disabled }}"
+    focus="{{ focus }}"
+    value="{{ value }}"
+    placeholder="{{ disabled ? '' : placeholder }}"
+    maxlength="{{ disabled ? '1000' : maxlength }}"
+    class="zan-field__input zan-cell__bd {{ right ? 'zan-field__input--right' : '' }}"
+    placeholder-class="zan-field__placeholder {{ ud_phred=='true' ? 'ud_phred' : ''}}"
+    bindinput="handleFieldChange"
+    bindfocus="handleFieldFocus"
+    bindblur="handleFieldBlur"
+    show-confirm-bar="{{ud_confirmbar}}"
+  ></textarea>
+      <!--placeholder="{{ disabled ? '' : placeholder }}"-->
+  <input
+    wx:else
+    type="{{ inputType || 'text' }}"
+    disabled="{{ disabled }}"
+    focus="{{ focus }}"
+    value="{{ value }}"
+    placeholder="{{ disabled ? '' : placeholder }}"
+    maxlength="{{ maxlength }}"
+    class="zan-field__input zan-cell__bd {{ right ? 'zan-field__input--right' : '' }}"
+    placeholder-class="zan-field__placeholder {{ ud_phred=='true' ? 'ud_phred' : ''}}"
+    bindinput="handleFieldChange"
+    bindfocus="handleFieldFocus"
+    bindblur="handleFieldBlur"
+  />
+  <picker wx:if="{{ud_picker && ud_picker != 'searchpicker' && !disabled}}" range="{{ ud_range }}" range-key="{{ud_key || 'name'}}" bindchange="pickerChange"><view class="choose"><text>{{ud_choose_text || '选择'}}</text></view>
+  </picker>
+  <searchpicker wx:if="{{ud_picker == 'searchpicker' && !disabled}}" range="{{ ud_range }}" bindchange="pickerChange" >
+    <view class="choose">
+      <text>{{ud_choose_text || '选择'}}</text>
+    </view>
+  </searchpicker>
+  <image wx:if="{{ud_call}}" catchtap="call" class="phone_pic" src='../../../images/phone_gray.png'></image>
+  <slot></slot>
+</view>

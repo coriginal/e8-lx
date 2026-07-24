@@ -1,0 +1,177 @@
+.addr {
+  box-shadow: 0 1rpx 6rpx rgba(0, 0, 0, 0.1);
+}
+
+.bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 84rpx;
+  padding: 20rpx;
+  color: #444;
+  display: -webkit-flex;
+  -webkit-justify-content: space-between;
+  -webkit-align-items: center;
+}
+
+.bg-white {
+  background-color: var(--white);
+}
+
+.blue-img {
+  height: auto;
+  width: 44rpx;
+}
+
+.print-msg {
+  height: 100%;
+}
+
+.print-img {
+  height: 100rpx;
+  width: 100rpx;
+  padding: 10rpx;
+  background-color: rgb(223, 243, 253, 0.5);
+  border-radius: 5000rpx;
+}
+
+.bluetooth {
+  margin: 20rpx;
+  padding: 16rpx;
+  background-color: var(--white);
+  border-radius: 6rpx;
+  display: flex;
+  align-items: center;
+  display: -webkit-flex;
+  -webkit-align-items: center;
+}
+
+.no-bluetooth {
+  margin: 20rpx;
+  padding: 16rpx;
+  background-color: var(--white);
+  border-radius: 10rpx;
+  text-align: center;
+}
+
+.no-bluetooth image {
+  width: 33.33%;
+  height: auto;
+  opacity: 0.7;
+}
+
+.flex-1 {
+  flex: 1;
+  margin: 0 2%;
+}
+
+.bluetooth-title {
+  font-weight: bold;
+  padding-bottom: 0;
+  padding-top: 0;
+  line-height: 84rpx;
+}
+
+.bar input {
+  flex: 1;
+  font-size: 26rpx;
+  opacity: 0.8;
+}
+
+.pclass {
+  font-size: 26rpx;
+}
+
+.bottom-btn {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  padding: 20rpx 0;
+  background-color: white;
+  z-index: 999;
+  display: -webkit-flex;
+}
+
+.text-red {
+  color: var(--red);
+}
+
+.bottom-btn button {
+  flex: 1;
+  height: 84rpx;
+}
+
+.m-p {
+  margin: 0 20rpx;
+  padding: 20rpx 32rpx;
+  border-radius: 6rpx;
+  font-weight: 500;
+}
+
+.margin-right {
+  margin-right: 15rpx;
+}
+
+.margin {
+  margin: 20rpx 0;
+  line-height: 56px;
+}
+
+.bg-opc {
+  opacity: 0.8;
+}
+
+.bluetooth-notice {
+  font-weight: 400;
+  opacity: 0.55;
+}
+
+.tip-box {
+  padding-top: 20rpx;
+  font-size: 24rpx;
+  margin-bottom: 124rpx;
+}
+
+.margin-lr {
+  margin: 0 8rpx;
+  color: var(--blue);
+}
+
+.tip-title {
+  color: #999;
+  padding: 20rpx 30rpx;
+  display: flex;
+  align-items: center;
+  display: -webkit-flex;
+  -webkit-align-items: center;
+}
+
+.tip-item {
+  color: #888;
+  padding: 0 30rpx;
+  line-height: 50rpx;
+}
+
+.scan {
+  padding: 0 10rpx;
+}
+
+.btn-setting {
+  zoom: 0.7;
+}
+
+.underline.text-blue {
+  text-decoration: underline;
+}
+
+.slider {
+  margin: 30rpx 0;
+}
+
+.slider-btn {
+  margin: 20rpx 0 10rpx;
+}
+.lh-74{
+  line-height: 74rpx;
+}

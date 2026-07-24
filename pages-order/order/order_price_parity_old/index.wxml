@@ -1,0 +1,161 @@
+<view id="box" class="box">
+    <view wx:if="{{!isCustomer}}" class="text-gray customer_choose_box {{customerInfo && 'has_customer_info'}}" bindtap="toChooseCustomer">
+        -- {{customerInfo.name || '点击此处选择客户'}} --
+    </view>
+    <view class="addr_box">
+        <view class="send_box">
+            <image mode='widthFix' src='../../../images/send.png'> </image>
+            <view class="info">
+                <view bindtap="goEditAddr" id="send">
+                    <view>{{form.send_man|| '新建寄件人信息'}} {{form.send_phone||''}}</view>
+                    <view>{{(form.send_province+form.send_city+form.send_district+form.send_town+form.send_street_no)||'可智能粘贴至寄件人'}}</view>
+                </view>
+                <view bindtap="goChooseAddr" id="send">地址簿</view>
+            </view>
+        </view>
+        <view class="receive_box">
+            <image mode='widthFix' src='../../../images/receive.png'> </image>
+            <view class="info">
+                <view bindtap="goEditAddr" id="receive">
+                    <view>{{form.receive_man|| '新建收件人信息'}} {{form.receive_phone}}</view>
+                    <view>{{(form.receive_province+form.receive_city+form.receive_district+form.receive_town+form.receive_street_no)||'可智能粘贴至收件人'}}</view>
+                </view>
+                <view bindtap="goChooseAddr" id="receive">地址簿</view>
+            </view>
+        </view>
+        <view class="addr_bottom">
+            <!-- <view class="copy_content bg-blue">浙江省杭州市钱塘区下沙路浙江省杭州市钱塘区下沙路浙江省杭州市钱塘区下沙路浙江省</view> -->
+            <view></view>
+            <view bindtap="pasteAddress">
+                <icon color='#5c96ec' type='i-formfill' size='32' />
+                <view style="margin-left: 20rpx;color:#333">智能粘贴</view>
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{!isCustomer}}" class="detail_info_box" >
+        <view>
+            <view>显示加收</view>
+            <view class="text-gray right_box">
+                <van-checkbox value="{{ checked }}" bind:change="checkboxOnChange"></van-checkbox>
+            </view>
+        </view>
+    </view>
+    <view class="detail_info_box">
+        <view class="code_box">
+            <input value="{{form.code}}" bindinput="inputCode" type="text" placeholder="请填写单号（至少4位）可不填" />
+            <icon bindtap="scanCode" type="i-scan" size="36"></icon>
+        </view>
+        <view class="noname_box">
+            <view>
+                <view>上门取件</view>
+                <switch style="transform: scale(0.8);" bindchange="switchChange" class='blue' name='if_visit' checked="{{form.if_visit}}"></switch>
+            </view>
+            <view>
+                <view bindtap="showChooseSettleType">{{form.settle_type}}</view>
+                <icon size="24" type="i-unfold " />
+                <view hidden="{{hideChooseSettleType}}" class="fly_box">
+                    <view wx:key="{{item}}" id="{{item}}" bindtap="chooseSettleType" wx:for="{{settleTypeList}}">{{item}}</view>
+                </view>
+            </view>
+            <view>
+                <view bindtap="showChooseServiceMode">{{form.service_mode}}</view>
+                <icon size="24" type="i-unfold" />
+                <view hidden="{{hideChooseServiceMode}}" class="fly_box">
+                    <view wx:key="{{item}}" id="{{item}}" bindtap="chooseServer" wx:for="{{serviceModeList}}">{{item}}</view>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{form.settle_type == '到付' }}">
+            <view>{{form.settle_type}}金额</view>
+            <view class="text-right text-gray right_box">
+                <input type="digit" bindblur="checkAndGetPrice" value="{{settleMoney}}" bindinput="settleMoneyInput" placeholder="点此输入到付金额" />
+            </view>
+        </view>
+
+        <view wx:for="{{form.subOrders}}">
+            <view>货物信息{{form.subOrders.length>1?' '+(index+1):''}}</view>
+            <view class="text-gray right_box">
+                <view class="overflow" bindtap="goCargoInfo" data-index="{{index}}">{{item.message||'点击填写货物信息'}}</view>
+                <icon bindtap="{{index>0?'delCargoItem':'addCargoItem'}}" class="text-blue" type="i-{{index>0?'delete':'roundadd'}}" size='32' data-index="{{index}}" />
+            </view>
+        </view>
+        <view>
+            <view>预约取件时间</view>
+            <view class="text-gray right_box" bindtap="getPickTimes">
+                {{form.scheduled_pick_time||'选择时间'}}
+                <icon class="text-blue" type="i-right" size='32' />
+            </view>
+        </view>
+        <view>
+            <view>
+                增值服务
+            </view>
+            <view bindtap="goFeeInfo" class="text-gray right_box">
+                <view class="overflow">
+                    {{fee._fees||'更多'}}
+                </view>
+                <icon class="text-blue" type="i-right" size='32' />
+            </view>
+        </view>
+        <view>
+            <view>
+                其他
+            </view>
+            <view class="text-gray right_box" bindtap="goOtherInfo">
+                <view class="overflow">
+                    {{curRecords ||'点击填写其他信息'}}
+                </view>
+                <icon class="text-blue" type="i-right" size='32' />
+            </view>
+        </view>
+        <!-- pages-order/order/order_transmode/order_transmode -->
+        <view wx:if="{{needHll}}">
+            <view>
+                车型
+            </view>
+            <view class="text-gray right_box" bindtap="chooseTruckType">
+                <view class="overflow">
+                    {{form.truck_type ||'点击选择车型'}}
+                </view>
+                <icon class="text-blue" type="i-right" size='32' />
+            </view>
+        </view>
+        <view>
+            <view>
+                备注
+            </view>
+            <view class="text-gray right_box">
+                <input bindinput="remarkInput" type="text" placeholder="点击此处可填写备注" />
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{!onlyLowest && platFormPriceList.length}}" class="price_box">
+        <view data-index="{{index}}" data-platform="{{item}}" bindtap="choosePlatForm" wx:if="{{item.search_status}}" wx:for="{{platFormPriceList}}">
+            <view class="price_top {{currentSelectPlatForm.index==index?'text-bold bg-blue':'bg-gray'}}">
+                <!-- {{isCustomer || showCustomName?item.platform_name:item.platform_real_name}} -->
+                {{item.platform_name}}
+            </view>
+            <view class="{{currentSelectPlatForm.index==index?'text-red text-bold':'text-orange'}} price">
+                ¥ {{item.cost}}
+            </view>
+        </view>
+    </view>
+</view>
+<view class="bottom_bar">
+    <view class="bar_left bg-black">
+        <view>预估价格：<span class="price_title">{{currentSelectPlatForm['cost'] || '--'}}</span> ¥</view>
+    </view>
+    <view class="bar_right" bindtap="save">
+        下单
+    </view>
+</view>
+<pick-time showPickTime="{{showPickTime}}" bind:change="changePickTime" />
+<page-container show="{{showOther}}" position="center">
+    <view class="otherContainer" wx:for="{{recordsList}}">
+        <view>{{item.label}}:</view>
+        <input data-label="{{item.label}}" id="{{item.code}}" bindinput="recordInput" class="t-left t-f24" name='{{item.code}}' value='{{form.recordsList["udf"+(index+1)]}}' />
+    </view>
+    <view class="btn bg-blue page-bottom" bindtap="setRecords">
+        确定
+    </view>
+</page-container>

@@ -1,0 +1,11 @@
+<view class="cu-bar  search">
+  <view class='search-form '>
+    <icon type="i-search" size='28' />
+    <input type="text" adjust-position="{{false}}" placeholder="{{'请输入'+label}}" bindinput='bindKeyInput' name="{{labelName}}"  confirm-type="search" bindconfirm='searchCode' value='{{inputValue}}' />
+    <icon size='28' wx:if='{{!inputValue}}' type="i-scan" bindtap="scanIconTapped"/>
+    <icon size='28' wx:else type="i-roundclosefill" bindtap="cleanInput" />
+  </view>
+  <view class='action' wx:if="{{showLabel}}">
+    <view>{{label}}</view>
+  </view>
+</view>

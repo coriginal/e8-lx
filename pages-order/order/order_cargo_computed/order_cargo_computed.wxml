@@ -1,0 +1,51 @@
+<view class="container">
+  <view class="header">
+    <view class="header-total">{{total}} m³</view>
+    <view>总计体积</view>
+  </view>
+
+  <view class="content">
+    <form bindsubmit="onSubmit">
+      <view class="content-list">
+        <block wx:for="{{list}}">
+          <view class="list-item flex">
+            <view class="flex">
+              <view class="round" bindtap="cutNumber" id="{{index}}">
+                <image class="img" mode="widthFix" src="./static/cut.png"></image>
+              </view>
+              <input type="number" bindinput="inputCount" id="{{index}}" class="v-input flex-1 margin-lr"
+                name="{{'count'}}" value="{{item.count}}" />
+              <view class="round" bindtap="addNumber" id="{{index}}">
+                <image class="img" mode="widthFix" src="./static/add.png"></image>
+              </view>
+            </view>
+            <view class="flex margin-left">
+              <input type="digit" class="v-input" id="{{index}}" name="{{'v1'}}" placeholder="长(cm)" />
+              <text class="margin-lr ">✕</text>
+              <input type="digit" class="v-input" id="{{index}}" name="{{'v2'}}" placeholder="宽(cm)" />
+              <text class="margin-lr">✕</text>
+              <input type="digit" class="v-input" id="{{index}}" name="{{'v3'}}" placeholder="高(cm)" />
+            </view>
+          </view>
+        </block>
+        <!-- <view class="add-on" bindtap="addOn">
+          <icon type="i-roundadd" size="38" color="gray" />
+        </view> -->
+      </view>
+      <view class="content-btn">
+        <button class="btn margin-lr" form-type="reset">取消</button>
+        <button class="btn bg-blue margin-lr" form-type="submit">确定</button>
+      </view>
+      <view class="content-footer">
+        <block wx:for="{{textList}}">
+          <view class="flex padding-lr">
+            <view class="text-item flex-1"  id="{{index}}" bindtap="goBack">{{index + 1}}、{{item.text}}</view>
+            <view bindtap="deleteText" id="{{index}}" class="delete-icon padding-lr">
+              <icon type="i-roundclose" size="34" color="var(--red)" />
+            </view>
+          </view>
+        </block>
+      </view>
+    </form>
+  </view>
+</view>

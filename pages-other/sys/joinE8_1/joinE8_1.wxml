@@ -1,0 +1,94 @@
+<dialog id="wux-dialog" />
+
+<view class="top">
+  <image class='icon' src="{{iconUrl}}" />
+  <view class='line-height'>
+    <view class='t-f32 text-black'>填写认证信息</view>
+    <view class='t-f24 text-gray margin-top-sm'>登记相关信息作为系统登陆标签</view>
+  </view>
+</view>
+
+<view class="msg">
+  <view class="bar solid-bottom">
+    <view class='title'>公司名称</view>
+    <input placeholder-class='pclass' placeholder="请输入公司名称" id="company_name" bindinput="inputValue"></input>
+  </view>
+  <view class="bar solid-bottom">
+    <view class='title'>联系电话</view>
+    <input disabled type='number' value="{{form.phone}}" id="phone" bindinput="inputValue"></input>
+  </view>
+  <view class="bar solid-bottom" bindtap="onOpen">
+    <view class='title'>公司所在地</view>
+    <input disabled name='region' value='{{fn.contact(form.region)}}' id="region" bindinput="inputValue"></input>
+    <icon type="i-right " color="grey" size="30"></icon>
+  </view>
+</view>
+
+
+<view class="oc fade">
+  <view class=" card1" wx:for="{{oc}}" wx:key>
+    <card title="{{item.name}}" Icon="titles" Icolor="var(--orange)">
+      <view slot="body">
+        <grids>
+          <grid wx:for="{{item.children}}" hover-class='default' wx:key='grid' bind:click="goList" id="{{item.url}}" thumb="{{item.img}}" label="{{item.name}}">
+            <icon wx:if="{{item.icon}}" slot="header" size='56' color='{{}}' type='i-{{item.icon}}'></icon>
+          </grid>
+        </grids>
+      </view>
+    </card>
+  </view>
+</view>
+
+
+
+
+<view class="tip-box">
+  <view class="tip-title">
+    <icon type="i-warn margin-lr" size="32"></icon>温馨提醒：</view>
+  <view class='tip-item'>1. 支付成功后，即获得登陆账户权限，并重新进入小程序。</view>
+  <view class='tip-item'>2. 跳转登陆后，您将会看到登陆名有"
+    <text class='text-red underline'>$域管理员</text>"的角色，此时表示成功认证为承运商。 </view>
+  <view class='tip-item'>3. 电脑端登陆名及账号均为提交时的手机号码（电脑端登陆地址：
+    <text class='underline text-red'> https://efafa.vip</text> ) 如遇到问题可联系电话:17354729380，微信同号。</view>
+</view>
+
+<cascader visible="{{ visible }}" controlled value="{{ value_addr }}" title="地址选择" options="{{ cantonInfo }}" bind:close="onClose" bind:change="onChange" />
+
+
+<!-- <view class="bg-trans flex">
+  <checkbox color="var(--blue)" class=' orange zoom checkbox' value="1" checked='{{agree}}'></checkbox>
+  <view class='text-df xieyi margin-left-xs'>我已阅读并同意
+    <text class='text-red' bindtap='getAgreement'>《注册协议》</text>
+  </view>
+</view> -->
+<view class="bottom-btn">
+  <view class="flex-1">
+    <checkbox-group bindchange="checkboxChange">
+      <view class="bg-trans flex">
+        <checkbox color="var(--blue)" class='checkbox' value="true" ></checkbox>
+        <view class='text-df xieyi margin-left-xs'>我已阅读并同意
+          <text class='text-red' bindtap='getAgreement'>《注册协议》</text>
+        </view>
+      </view>
+    </checkbox-group>
+    <view class=" payfor">认证金额：
+      <text class="text-red text-big">{{priceInfo.money_cal||' - '}}元</text>
+    </view>
+  </view>
+
+  <button class="btn bg-red " bindtap="payFor">确认支付</button>
+</view>
+
+
+
+<wxs module="fn">
+  var contact = function(value) {
+    if (value) {
+      var con = value.filter(function(n) {
+        return n
+      }).join(' ')
+      return con
+    }
+  };
+  module.exports.contact = contact;
+</wxs>

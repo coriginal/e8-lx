@@ -1,0 +1,15 @@
+<view class="container">
+    <view class="box_title">{{boxTitle}}</view>
+    <view class="main_box">
+        <view wx:if="{{title}}" class="title">{{title.title}}<span class="title_num">{{title.value}}</span><span class="title_unit">{{title.unit}}</span></view>
+        <view class="data_box">
+            <view class="data_box2" wx:for="{{list}}">
+                <view class="data_title">{{item.title}}</view>
+                <view>
+                    <span class="data_num">{{item.value}}</span>
+                    <span class="data_unit">{{item.unit}}</span>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

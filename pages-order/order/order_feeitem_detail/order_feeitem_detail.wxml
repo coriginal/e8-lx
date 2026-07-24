@@ -1,0 +1,74 @@
+<dialog id="wux-dialog">
+	<view wx:if="{{type == 'cost'}}" bindtap="chooseLcName" hover-class="default" class="dialog-view {{settle_account_name?'text-blue':''}}" slot="add-content">
+		{{settle_account_name?settle_account_name:'点击选择往来方'}}
+	</view>
+</dialog>
+<view class="feeinfo-content">
+	<row>
+		<col span="12" class="">
+		<view class="placeorder">
+			<view class="placeorder-flex">
+				<text class="opcity title-big">{{title}}</text>
+				<text class="text-underline"></text>
+			</view>
+		</view>
+		</col>
+	</row>
+
+	<col span="12" wx:for="{{list}}" wx:key>
+	<view class="placeorder padding solid-bottom">
+		<view class="placeorder-flex " bindtap="queryFeeItemDetail" data-item="{{item}}" data-idx="{{index}}">
+			<text class="opcity t-fw">{{item.fee_name}}</text>
+			<block wx:if="{{taskId}}">
+				<text class="fee-status {{item.status == '通过'?'text-green':''}}">({{item.status}})</text>
+			</block>
+			<block wx:else>
+				<text class="fee-status {{item.status == '通过'?'text-green':''}}">({{item.status}})</text>
+			</block>
+			<view class="flex-1 t-right ">
+				<text class="t-value">{{fn.toFiexd(item.fee)}}</text>
+			</view>
+			<view hover-class="default" wx:if="{{item.edit}}" bindtap="updateFees" class="t-right t-color update-btn" data-idx="{{index}}" data-item="{{item}}">修改</view>
+			
+			<view wx:if="{{taskId && item.fk!='tms_sp_task_fee' && item.status == '通过'}}" hover-class="translate" catchtap="doTaskSpFees" class="t-right sp-btn" data-flow-id="{{item.id}}" data-idx="{{index}}" data-fee="{{item.fee}}" data-id="{{item.fee_id}}">报销</view>
+
+			<view wx:if="{{orderId && item.fk!='tms_sp_order_fee' && item.status == '通过' && type =='cost'}}" hover-class="translate" catchtap="doOrderSpFees" class="t-right sp-btn" data-flow-id="{{item.id}}" data-idx="{{index}}" data-id="{{item.fee_id}}" data-fee="{{item.fee}}">报销</view>
+		</view>
+		<view class="settle_account" wx:if="{{item.remark||item.settle_account_name}}">
+			{{item.settle_account_name||''}} {{item.remark||''}}
+		</view>
+	</view>
+	</col>
+
+	<row>
+		<col span="12">
+		<view class="placeorder margin-top solid-bottom">
+			<view class="placeorder-flex">
+				<text class="opcity fee-total">合计（CNY）：</text>
+				<view class="flex-1 t-right t-fw">¥ {{fn.toFiexd(total)||''}}</view>
+			</view>
+		</view>
+		</col>
+	</row>
+</view>
+
+<sp-popup submit_money="{{submit_money}}" bind:change="changePopShow" wx:if="{{show_pop}}" param="{{param}}"></sp-popup>
+
+<view class='bottom-btn' wx:if="{{type == 'cost'}}">
+	<!-- <button bindtap="doSpFee" id="否" class='btn bg-red m-p'>报销</button> -->
+	<button bindtap="doSpFee" id="是" class='btn bg-blue m-p'>新增并报销</button>
+</view>
+
+
+<wxs module="fn">
+	module.exports = {
+		toFiexd: function(value) {
+			if (typeof value == 'number') {
+				return value && value.toFixed(2)
+			} else {
+				return value
+			}
+
+		}
+	}
+</wxs>

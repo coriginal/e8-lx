@@ -1,0 +1,16 @@
+<view class="content">
+	<view class="title">请选择您需要打印的平台</view>
+	<row>
+		<block wx:for="{{platform}}" wx:key="platform">
+			<col span="4">
+			<view class=" platform-panel {{choosed == index?'choosed':''}}" bindtap="chooseItem" data-item="{{item}}" id="{{index}}">{{item.name}}</view>
+			</col>
+		</block>
+	</row>
+</view>
+
+<view class='bottom-btn '>
+	<button bindtap="goPrint" class='btn bg-blue m-p'>打印</button>
+	<!-- <button  class='btn bg-blue m-p'>确定</button> -->
+    <!-- <button bindtap="testPrint" class="btn bg-blue m-p">测试打印</button> -->
+</view>

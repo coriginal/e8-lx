@@ -1,0 +1,36 @@
+.box{
+  display: flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  justify-content: flex-start;
+  align-items:flex-start;
+  align-content: flex-start;
+  background-color: #fff;
+}
+.cell{
+  display:flex;
+  width:33.3%;
+  box-sizing:border-box;
+  flex-direction: row;
+  flex-wrap:wrap;
+  justify-content:space-around;
+  align-items:center;
+  align-content:space-around;
+  border-bottom:2rpx solid #eee;
+  border-right:2rpx solid #eee;
+}
+.right{
+  border-right:0;
+}
+image{
+  margin-left:40px;
+  margin-right:40px;
+  top:10px;
+  position: relative;
+}
+
+.text{
+  font-size:15px;
+  position: relative;
+  top:-10px;
+} 

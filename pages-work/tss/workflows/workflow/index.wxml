@@ -1,0 +1,95 @@
+<nav-bar title="{{title}}" />
+<view wx:if="{{ typeSelectedId !== 'apply' }}">
+    <monthnav bindnavchange="monthChange" />
+</view>
+
+<view wx:if="{{ typeSelectedId == 'approval' }}">
+    <tab list="{{ statusList }}" selected-id="{{ statusSelectedId}}" bindtabchange="tabChange" data-type="statusSelectedId" />
+</view>
+
+<view class="wrap tableview {{hideIconTab ? 'hideicontab' : ''}}" wx:if="{{ typeSelectedId == 'apply'}}" data-type="apply">
+    <form wx:if="{{showpage}}" bindsubmit="submit">
+        <view class="formview">
+            <view wx:for="{{ define }}" class="line" wx:key="item.code">
+                <view wx:if="{{!item.wfeditable && item.type=='file'}}" class="header">{{item.label}}</view>
+                <attach wx:if="{{!item.wfeditable && item.type=='file'}}" list="{{form[item.code]}}" recordId="{{ recordid }}" itemId="{{ itemid }}" hidedel="{{disabled}}" hideadd="{{disabled}}" data-col="{{item.code}}" bindaddattach="addattach" binddelattach="delattach" />
+                <picker wx:elif="{{ item.type == 'date' && item.type!='hidden' && !item.wfeditable}}" class="picker" mode="date" bindchange="pickerChange" data-field="{{ item.code }}" data-type="date" disabled="{{ item.readonly }}">
+                    <text class="pickerlabel {{ item.nullable ? 'required' : ''}} {{item.readonly ? 'disabled' : ''}}">{{ item.label }}</text>
+                    <text class="value">{{ form[item.code] || ''}}</text>
+                </picker>
+                <view wx:elif="{{ item.type == 'datetime' && !item.wfeditable}}" class='datetimeview'>
+                    <text class="pickerlabel {{(item.nullable) ? 'required' : ''}} {{item.readonly ? 'disabled' : ''}}">{{ item.label }}</text>
+                    <view class='datetime value'>
+                        <datetime data-field="{{ item.code }}" data-type="date" bindconfirm="pickerChange" text="{{ form[item.code] }}" disabled="{{item.readonly ? true : false}}" not-use="{{ item.notuse ? (item.notuse == 'minutes' ? ['minutes','seconds'] : ['seconds']) : ''}}" />
+                    </view>
+                </view>
+                <field wx:elif="{{ !item.options && item.type!='hidden' && !item.qhq && !item.wfeditable }}" title="{{ item.label }}" name="{{ item.code }}" custom-class="fieldClass" value="{{ form[item.code] }}" inputType="{{ item.type == 'int' ? 'number' : (item.type == 'number' ? 'digit' : 'text') }}" type="{{ (item.height && !showModal) ? 'textarea' : 'input' }}" placeholder="{{ item.placeholder || item.errorMsg}}" disabled="{{ item.readonly }}" ud_confirmbar="{{false}}" ud_required="{{ item.nullable ? true : false }}" bindblur="fieldChange" data-field="{{item.code}}" ud_call="{{item.call}}">{{ item.unit }}</field>
+
+                <field wx:elif="{{ item.options && item.choose && (item.choose == 'just_write' || item.choose == 'write_search') && item.type!='hidden' && !item.qhq && !item.wfeditable}}" title="{{ item.label }}" name="{{ item.code }}" custom-class="fieldClass" value="{{ form[item.code] }}" inputType="{{ item.type == 'int' ? 'number' : (item.type == 'number' ? 'digit' : 'text') }}" type="{{ (item.height && !showModal) ? 'textarea' : 'input' }}" placeholder="{{ item.placeholder || item.errorMsg }}" disabled="{{ item.readonly }}" ud_confirmbar="{{false}}" ud_required="{{ item.nullable ? true : false }}" bindblur="fieldChange" data-field="{{item.code}}" ud_call="{{item.call}}" ud_picker="{{item.choose == 'write_search' ? 'searchpicker' : item.choose}}" ud_choose_text="{{item.choose_text}}" ud_range="{{item.options}}" bindpchange="pickerChange" data-index="{{ index }}" data-getnext="{{ item.onchange }}">{{ item.unit }}</field>
+                <searchpicker wx:elif="{{ item.choose && item.type!='hidden' && !item.qhq  && !item.wfeditable && item.pickertype != 'cell'}}" custom-class="picker" range="{{ item.options }}" range-key="name" bindchange="pickerChange" data-field="{{ item.code }}" data-index="{{ index }}" disabled="{{ item.readonly }}" data-getnext="{{ item.onchange }}">
+                    <text class="pickerlabel {{(item.nullable) ? 'required' : ''}} {{item.readonly ? 'disabled' : ''}}">{{ item.label }}</text>
+                    <text class="value">{{ form[item.code] || ''}}</text>
+                </searchpicker>
+                <picker wx:elif="{{ item.type!='hidden' && !item.qhq  && !item.wfeditable && item.pickertype != 'cell'}}" class="picker" range="{{ item.options }}" range-key="name" bindchange="pickerChange" data-field="{{ item.code }}" data-index="{{ index }}" disabled="{{ item.readonly }}" data-getnext="{{ item.onchange }}">
+                    <text class="pickerlabel {{(item.nullable) ? 'required' : ''}} {{item.readonly ? 'disabled' : ''}}">{{ item.label }}</text>
+                    <text class="value">{{ form[item.code] || ''}}</text>
+                </picker>
+                <cell wx:elif="{{ item.type!='hidden' && !item.qhq  && !item.wfeditable}}" custom-class="cellClass" title="{{item.label}}" value="{{  form[item.code] || ''}}" bindtap="chooseSezi" data-field="{{item.code}}" data-list="{{item.options}}" data-getnext="{{ item.onchange }}" ud_required="{{ item.nullable ? true : false }}" is-link></cell>
+            </view>
+            <view class="header">附件</view>
+            <attach list="{{attachURLs}}" recordId="{{ recordid }}" itemId="{{ itemid }}" bindaddattach="addattach" />
+            <!-- <view class="header required">审批人</view> 
+       <addperson list="{{ approverList }}" type="appr" hidden="{{ hidden }}" bindaddperson="addperson" arrow="true" binddelperson="delperson"/> 
+       <view class="header">抄送人</view> 
+       <addperson list="{{ copytoList }}" type="copyto" bindaddperson="addperson" binddelperson="delperson"/>  -->
+            <view class="footer"></view>
+        </view>
+        <view class="btn_view">
+            <button wx:if="{{!hideIconTab}}" class="draft-btn" type="primary" formType="submit" data-draft="true">暂存草稿</button>
+            <button class="submit-btn {{hideIconTab ? '' : 'two_btn'}}" type="primary" style="background-color:{{color}}" formType="submit">{{form.id ? '修改并提交' : '提交'}}</button>
+        </view>
+    </form>
+</view>
+
+<view class="tableview" wx:if="{{ typeSelectedId !== 'apply' }}">
+    <view class="searchBar">
+        <input placeholder="输入 编码/单号/申请人 其中之一进行搜索" value="{{searchContent}}" bindinput="getSearchContent"/>
+        <button type="primary" bindtap="search">搜索</button>
+    </view>
+    <view class="nodata" wx:if="{{records.length==0}}">{{ records.length > 0 ? '' : '暂无数据' }}</view>
+    <block wx:for="{{ records }}" wx:key="{{ id }}">
+        <view class="cell" data-index="{{ index }}" catchtap="didSelectRow">
+            <view class="field" wx:if="{{ typeSelectedId == 'approval' }}">
+                <text class="label">申请人 </text>
+                <text class="value">{{ item.wfapplier }}</text>
+            </view>
+            <view class="field">
+                <text class="label">申请日期 </text>
+                <text class="value">{{ item.createtime }}</text>
+            </view>
+            <view wx:for="{{define}}" wx:key="name" wx:for-item="items">
+                <view class="gl field" wx:if="{{ items.show }}">
+                    <text class="label">{{ items.label }} </text>
+                    <text class="value">{{ item[items.code] ? item[items.code]+(items.unit ? items.unit : '') : '无' }}</text>
+                </view>
+            </view>
+            <tag type="{{ item.wfstatus == '待审批' ? 'warn' : item.wfstatus == '已驳回' ?'danger' : item.wfstatus == '已撤销' ? '' : 'primary'}}" class="status">{{ item.wfstatus || '草稿'
+                }}</tag>
+            <view class="accessory">
+                <image src="../../../../images/icon-arrow-right.png"></image>
+            </view>
+        </view>
+    </block>
+</view>
+
+<icontab wx:if="{{ !hideIconTab }}" list="{{ typeList }}" selected-id="{{ typeSelectedId }}" bindtabchange="tabChange" data-type="typeSelectedId" />
+
+<!--隐藏区域  -->
+<view class='maskLayer' wx:if="{{showModal}}" bindtap='hideModal'></view>
+<view class='choose' wx:if="{{showModal}}" animation='{{animationData}}'>
+    <view class="box">
+        <view class="truck_cell" wx:for="{{cellList}}" wx:key="">
+            <view bindtap="clickCell" data-field="{{cell_field}}" data-value="{{item.name}}" class="cell_item {{cell_select_value == item.name ? 'select_item' : ''}}" data-name="{{item.name}}">{{item.name}}</view>
+        </view>
+    </view>
+</view>

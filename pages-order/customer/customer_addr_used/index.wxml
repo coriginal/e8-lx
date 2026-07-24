@@ -1,0 +1,23 @@
+<view>
+	<view class="title">常用地址</view>
+	<scroll-view bindscrolltolower="loadMore" scroll-y wx:if="{{addrList.length > 0}}">
+		<view bindtap="chooseAddr" data-item="{{item}}" class="addr-used-content" wx:for="{{addrList}}" wx:key>
+			<row>
+				<col span="12">
+				<text class="f-tw"> {{(item.name||'') + ' ' + (item.phone||'')}}</text>
+				</col>
+			</row>
+			<row>
+				<col span="12">
+				<text class="text-addr">{{item.province||''}}{{item.city||''}}{{item.district||''}}</text>
+				</col>
+			</row>
+			<row>
+				<col span="12">
+				<text class="text-addr">{{item.town||''}}{{item.street_no||''}}</text>
+				</col>
+			</row>
+		</view>
+        <view style="text-align: center;" hidden="{{!nomore}}">没有更多了</view>
+	</scroll-view>
+</view>

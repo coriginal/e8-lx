@@ -1,0 +1,5 @@
+<view class="monthNavigation" bindtap='monthChange' style="background-color:{{color}}">  
+    <view class="{{item.select == monthSelect ? 'active' : ''}} month" wx:for="{{monthList}}" wx:for-item="item" wx:key="{{index}}" id="{{item.value}}" data-select="{{item.select}}">
+    {{item.text}}
+    </view>
+  </view>

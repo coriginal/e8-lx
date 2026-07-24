@@ -1,0 +1,144 @@
+button{
+  background-color:#eee;
+  position:fixed;
+  width:100px;
+  top:66px;
+  height:30px;
+  line-height:30px;
+  margin:10px;
+  padding:0;
+}
+.history{
+  position:fixed;
+  top:76px;
+  right:10px;
+  font-size:14px;
+  padding:2px;
+  border:1px solid rgb(24, 21, 21);
+  border-radius: 3px;
+}
+.loc{
+  margin:150rpx 20rpx 0 20rpx;
+  line-height: 50rpx;
+  text-align: center;
+  font-size:40rpx;
+}
+.remark{
+  margin-top:100rpx;
+  text-align:center;
+  font-size:14px;
+}
+.today_info{
+  position:absolute;
+  width:100%;
+  text-align: center;
+  top:380rpx;
+}
+.clock_circle{
+  position:absolute;
+  left:225rpx;
+  top:450rpx;
+  width:300rpx;
+  height:300rpx;
+  border:15rpx solid #224b9b;
+  border-radius: 50%;
+}
+
+.circle_content{
+  text-align: center;
+  font-size:50rpx;
+}
+.check{
+  margin-top:80rpx;
+}
+.show_point{
+  visibility:visible;
+}
+.hide_point{
+  visibility:hidden;
+}
+.refresh{
+  margin-top:5rpx;
+  margin-left:20rpx;
+  width:40rpx;
+  height:40rpx;
+}
+.modal-mask {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  opacity: 0.5;
+  overflow: hidden;
+  z-index: 9000;
+  color: #fff;
+}
+
+.modal-dialog {
+  width: 86vw;
+  position: fixed;
+  top: 5vh;
+  height:35vh;
+  left: 7vw;
+  z-index: 9999;
+  background: #f9f9f9;
+  border-radius: 36rpx;
+}
+
+.modal-content {
+  height:24vh;
+  padding: 20rpx;
+}
+
+.modal-input {
+  display: flex;
+  background: #fff;
+  border: 2rpx solid #ddd;
+  border-radius: 4rpx;
+  font-size: 28rpx;
+}
+
+.modal-footer {
+  display: flex;
+  flex-direction: row;
+  height:7vh;
+  border-top: 1px solid #dedede;
+  font-size: 34rpx;
+  line-height: 7vh;
+}
+
+.btn-cancel {
+  width: 50%;
+  color: #666;
+  text-align: center;
+  border-right: 1px solid #dedede;
+}
+
+.btn-confirm {
+  width: 50%;
+  color: #ec5300;
+  text-align: center;
+}
+.hidemodal{
+  visibility:hidden;
+}
+.showmodal{
+  visibility:visible;
+}
+textarea {
+  width:90%;
+  height:24vh;
+  margin-left:5%;
+}
+.hasremark{
+  border:1px solid #ccc;
+  width:90%;
+  border-radius: 5px;
+  margin:0 5%;
+  padding:5px 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

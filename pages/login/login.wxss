@@ -1,0 +1,121 @@
+.content {
+  background: white;
+  height: 100vh;
+  width: 100%;
+}
+
+page {
+  background-color: white;
+}
+
+swiper {
+  position: fixed;
+  width: calc(100vw - 60rpx);
+  text-align: center;
+  margin: 0 30rpx;
+}
+
+.top-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-box .wx-swiper-dots.wx-swiper-dots-horizontal {
+  margin-bottom: 2rpx;
+}
+
+.swiper-box .wx-swiper-dot {
+  width: 40rpx;
+  display: inline-flex;
+  height: 10rpx;
+  margin-left: 10rpx;
+  justify-content: space-between;
+  border-radius: 8rpx !important;
+}
+
+.swiper-box .wx-swiper-dot::before {
+  content: '';
+  flex-grow: 1;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 8rpx !important;
+}
+
+.swiper-box .wx-swiper-dot-active::before {
+  background: rgb(70, 150, 241);
+}
+
+.homepage {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.homepage-image {
+  height: auto;
+  width: 100%;
+}
+
+.text-center {
+  padding-top: 20px;
+  position: fixed;
+  width: 100%;
+}
+
+.e8-png {
+  height: 33px;
+  width: 220px;
+}
+
+.group {
+  position: fixed;
+  bottom: 3%;
+  width: 100%;
+  height: 130px;
+}
+
+.btn-group>button {
+  flex: 1;
+  margin: 20rpx 20px;
+}
+
+.bottom-text {
+  font-size: 20rpx;
+  color: #aaa;
+  text-align: center;
+  position: absolute;
+  left: calc(50% - 160rpx);
+  bottom: 3%;
+}
+
+.btn {
+  height: 84rpx;
+}
+
+.loading {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  align-items: center;
+}
+
+.loading image {
+  zoom: 0.7;
+}
+
+.login-test{
+  text-align: center;
+  font-size: 13px;
+}
+.checkbox_box view{
+    display: inline-block;
+    color: var(--blue) !important;
+}
+.checkbox_box{
+    margin-left: 20px;
+    font-size: 25rpx;
+}

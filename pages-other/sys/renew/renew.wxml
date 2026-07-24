@@ -1,0 +1,31 @@
+<view class="account-content">
+  <view class="f24">在线续费</view>
+  <checkbox-group bindchange="checkboxChange">
+    <view class="bg-account shadow-blur" wx:for="{{account_list}}">
+      <view class="date">{{item.ownerId}}</view>
+      <view class="t-f36">{{item.name}}</view>
+      <view class="free-content">
+        <view class="flex-b">
+          <text class="date">开始时间：{{item.startDate}}</text>
+        </view>
+        <view class="flex-b">
+          <text class="date">到期时间：{{item.endDate}}</text>
+        </view>
+        <checkbox disabled="{{item.disabled}}" value="{{item.id}}"></checkbox>
+      </view>
+    </view>
+  </checkbox-group>
+  <view class="pay" hidden="{{isHidden}}">
+    <view class="wx">续费时长</view>
+    <view style="margin-right: 20rpx;">
+      <picker value="{{month_num}}" bindchange="monthChange" mode="selector" range="{{month_list}}">
+      {{month_list[month_index]}}个月
+      </picker>
+    </view>
+  </view>
+</view>
+
+<view style="height: 1px;"></view>
+<view class='bottom-btn '>
+  <button disabled="{{btn_isDisabled}}" class='btn bg-gradul-red m-p' bindtap="confirmTopUp">{{total_price}}</button>
+</view>

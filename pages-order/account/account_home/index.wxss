@@ -1,0 +1,35 @@
+/* pages-order/account/account_home/index.wxss */
+.list{
+    margin:20rpx;
+}
+.list-box{
+    background-color: white;
+    border-radius: 10rpx;
+    margin-bottom: 20rpx;
+}
+._content{
+    padding: 20rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40rpx;
+}
+.footer{
+    justify-content: flex-end;
+    align-items: center;
+    border-top: 2rpx solid whitesmoke;
+    padding: 20rpx;
+}
+.top{
+    padding: 20rpx;
+    border-bottom: 2rpx solid whitesmoke;
+}
+.yue{
+    margin-bottom: 20rpx;
+    font-size: 30rpx;
+}
+.lsmx{
+    color: var(--blue);
+    text-decoration: underline;
+}

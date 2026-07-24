@@ -1,0 +1,180 @@
+<!-- pages-work/tss/capacity/scheduling_assignment/index.wxml -->
+<view class="page {{activeTab === 0 ? 'page-with-actions' : ''}}">
+    <!-- 顶部 tab 和当前 tab 的筛选入口。 -->
+    <view class="page-header">
+        <van-tabs active="{{activeTab}}" color="#1677ff" bind:change="onTabChange">
+            <van-tab title="待指派订单" />
+            <van-tab title="提货任务" />
+        </van-tabs>
+        <view class="filter-trigger" bindtap="openFilter">
+            <van-icon name="filter-o" size="18px" />
+            <text>筛选</text>
+        </view>
+    </view>
+
+    <!-- 待指派订单列表。 -->
+    <view wx:if="{{activeTab === 0}}" class="list-wrap">
+        <van-checkbox-group value="{{selectedOrderIds}}" bind:change="onOrderSelectionChange">
+            <view
+                wx:for="{{orderList}}"
+                wx:key="id"
+                class="order-card"
+                data-id="{{item.order_id}}"
+                data-code="{{item.order_code}}"
+                bindtap="goOrderDetail"
+            >
+                <view class="card-head">
+                    <view class="card-head-main">
+                        <view class="code-line">
+                            <text class="order-code">{{item.order_code || item.code || '-'}}</text>
+                            <van-tag type="primary" plain>{{item.status || '已接单'}}</van-tag>
+                        </view>
+                        <text class="muted">子单：{{item.code || '-'}} · {{item.order_date || item.createtime || '-'}}</text>
+                    </view>
+                    <view class="checkbox-hit" catchtap="noop">
+                        <van-checkbox name="{{item._selectId}}" shape="square" />
+                    </view>
+                </view>
+
+                <view class="route-line">
+                    <view class="route-point route-point-send">发</view>
+                    <view class="route-content">
+                        <text class="route-city">{{item.send_city || item.send_site || '未填写'}}</text>
+                        <text class="route-address">{{item._sendAddr || item.send_street_no || '-'}}</text>
+                    </view>
+                </view>
+                <view class="route-line">
+                    <view class="route-point route-point-receive">收</view>
+                    <view class="route-content">
+                        <text class="route-city">{{item.receive_city || item.receive_site || '未填写'}}</text>
+                        <text class="route-address">{{item._receiveAddr || item.receive_street_no || '-'}}</text>
+                    </view>
+                </view>
+
+                <view class="card-meta">
+                    <view class="meta-item">
+                        <text class="meta-label">客户</text>
+                        <text class="meta-value ellipsis">{{item.customer_name || '-'}}</text>
+                    </view>
+                    <view class="meta-item meta-item-wide">
+                        <text class="meta-label">货物</text>
+                        <text class="meta-value ellipsis">{{item.cargo || '-'}} · {{item.amount || 0}}件 · {{item.weight || 0}}kg · {{item.volume || 0}}m³</text>
+                    </view>
+                </view>
+            </view>
+        </van-checkbox-group>
+
+        <van-empty wx:if="{{!orderLoading && !orderList.length}}" description="暂无待指派订单" />
+        <view wx:if="{{orderLoading}}" class="load-state"><van-loading size="20px">加载中...</van-loading></view>
+    </view>
+
+    <!-- 全部司机的提货任务列表。 -->
+    <view wx:else class="list-wrap">
+        <view
+            wx:for="{{taskList}}"
+            wx:key="id"
+            class="task-card"
+            data-id="{{item.id}}"
+            data-code="{{item.code}}"
+            bindtap="goTaskDetail"
+        >
+            <view class="driver-row">
+                <view class="driver-avatar"><van-icon name="manager-o" size="24px" /></view>
+                <view class="driver-main">
+                    <view class="driver-name-row">
+                        <text class="driver-name">{{item.driver || '未指派司机'}}</text>
+                        <van-tag type="primary" plain>{{item.status || '-'}}</van-tag>
+                    </view>
+                    <text class="driver-phone">{{item.phone || '未填写电话'}}</text>
+                </view>
+                <van-icon name="arrow" color="#969799" />
+            </view>
+
+            <view class="task-number">
+                <text>{{item.code || '-'}}</text>
+                <text class="task-type">提货任务</text>
+            </view>
+            <view class="task-grid">
+                <view class="task-info">
+                    <text class="meta-label">车牌</text>
+                    <text class="task-info-value">{{item.plate_num || '-'}}</text>
+                </view>
+                <view class="task-info">
+                    <text class="meta-label">车型</text>
+                    <text class="task-info-value">{{item.truck_type || '-'}}</text>
+                </view>
+                <view class="task-info">
+                    <text class="meta-label">订单数</text>
+                    <text class="task-info-value">{{item.suborder_total || item.num || 0}}单</text>
+                </view>
+            </view>
+            <view class="task-footer">
+                <text>{{item.task_date || item.createtime || '-'}}</text>
+                <text wx:if="{{item.real_depart_time}}">出发：{{item.real_depart_time}}</text>
+            </view>
+        </view>
+
+        <van-empty wx:if="{{!taskLoading && !taskList.length}}" description="暂无提货任务" />
+        <view wx:if="{{taskLoading}}" class="load-state"><van-loading size="20px">加载中...</van-loading></view>
+        <view wx:if="{{taskFinished && taskList.length}}" class="load-state load-finished">没有更多了</view>
+    </view>
+
+    <!-- 待指派订单批量操作栏。 -->
+    <view wx:if="{{activeTab === 0}}" class="batch-bar">
+        <view class="select-all" bindtap="toggleSelectAll">
+            <van-icon name="passed" color="{{selectedOrderIds.length === orderList.length && orderList.length ? '#1677ff' : '#969799'}}" size="20px" />
+            <text>{{selectedOrderIds.length === orderList.length && orderList.length ? '取消全选' : '全选'}}</text>
+            <text class="selected-count">已选 {{selectedOrderIds.length}}</text>
+        </view>
+        <van-button size="small" plain type="primary" bindtap="assignExistingTask">调度到已有任务</van-button>
+        <van-button size="small" type="primary" bindtap="assignNewTask">委派司机新任务</van-button>
+    </view>
+
+    <!-- 两个 tab 共用容器，但显示并保存各自独立的筛选条件。 -->
+    <van-popup
+        show="{{filterVisible}}"
+        position="right"
+        custom-style="width: 82%; height: 100%;"
+        closeable
+        bind:close="closeFilter"
+    >
+        <view class="filter-panel">
+            <view class="filter-title">{{activeTab === 0 ? '订单筛选' : '任务筛选'}}</view>
+
+            <block wx:if="{{activeTab === 0}}">
+                <view class="filter-label">订单日期</view>
+                <picker mode="date" value="{{orderFilterDraft.order_date_from}}" data-field="order_date_from" bindchange="onOrderDateChange">
+                    <van-cell title="开始日期" value="{{orderFilterDraft.order_date_from || '请选择'}}" is-link />
+                </picker>
+                <picker mode="date" value="{{orderFilterDraft.order_date_to}}" data-field="order_date_to" bindchange="onOrderDateChange">
+                    <van-cell title="结束日期" value="{{orderFilterDraft.order_date_to || '请选择'}}" is-link />
+                </picker>
+            </block>
+
+            <block wx:else>
+                <view class="filter-label">任务日期</view>
+                <picker mode="date" value="{{taskFilterDraft.date1}}" data-field="date1" bindchange="onTaskDateChange">
+                    <van-cell title="开始日期" value="{{taskFilterDraft.date1 || '请选择'}}" is-link />
+                </picker>
+                <picker mode="date" value="{{taskFilterDraft.date2}}" data-field="date2" bindchange="onTaskDateChange">
+                    <van-cell title="结束日期" value="{{taskFilterDraft.date2 || '请选择'}}" is-link />
+                </picker>
+                <view class="filter-label filter-label-status">任务状态</view>
+                <van-checkbox-group value="{{taskFilterDraft.statuses}}" bind:change="onTaskStatusChange">
+                    <view class="status-options">
+                        <van-checkbox name="待接单" shape="square">待接单</van-checkbox>
+                        <van-checkbox name="已接单" shape="square">已接单</van-checkbox>
+                        <van-checkbox name="已出发" shape="square">已出发</van-checkbox>
+                        <van-checkbox name="已到达" shape="square">已到达</van-checkbox>
+                        <van-checkbox name="已完成" shape="square">已完成</van-checkbox>
+                    </view>
+                </van-checkbox-group>
+            </block>
+
+            <view class="filter-actions">
+                <van-button block plain bindtap="resetFilter">重置</van-button>
+                <van-button block type="primary" bindtap="applyFilter">确定</van-button>
+            </view>
+        </view>
+    </van-popup>
+</view>

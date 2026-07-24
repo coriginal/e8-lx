@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "detail": "../../../Cpts/order_detail/order_detail",
+    "cc-work": "../order_ccwork/order_ccwork",
+    "fee-info": "../order_feeinfo_total/order_feeinfo_total",
+    "car-location":"../order_car_location/index"
+  }
+}

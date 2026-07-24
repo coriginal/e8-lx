@@ -1,0 +1,87 @@
+.scroll-box {
+  /* overflow: hidden; */
+  padding: 0 20rpx 20rpx;
+  white-space: nowrap;
+  height: calc(100vh - 188rpx);
+  overflow: hidden;
+}
+
+.bill-model {
+  width: auto;
+  overflow: hidden;
+  height: 100%;
+}
+
+.header {
+  background-color: white;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.item_list {
+  height: 240rpx;
+  margin: 20rpx 0;
+  border-radius: 6rpx;
+  border: none;
+  background-color: white;
+}
+
+
+.next-step {
+  height: 84rpx;
+  width: 100%;
+}
+
+.model-content {
+  margin-bottom: 144rpx;
+}
+
+.btn-view {
+  padding: 30rpx;
+  background-color: white;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.card-model {
+  margin: 20rpx;
+}
+
+.card-model-content {
+  padding: 20rpx 20rpx 0;
+  font-size: 13px;
+}
+
+.card-footer {
+  padding: 20rpx 0;
+}
+
+.t-fw.text-red.t-f32::after {
+  content: '元';
+  color: #444;
+  font-size: 13px;
+  margin: 0 8rpx;
+  opacity: .7;
+
+}
+
+.nothing {
+  width: 100%;
+  color: gray;
+  text-align: center;
+  line-height: 36px;
+}
+
+.popup-view {
+  line-height: 48rpx;
+  text-align: left;
+}
+
+.margin-lr {
+  margin: 0 10rpx;
+}

@@ -1,0 +1,97 @@
+<nav-bar title="{{title}}"/>
+<view class="wrap">
+  <view class="tableview">
+    <view class="title">{{type == 'approval' ? form.applier : '我'}}的{{ title }}
+      <tag plain type="{{ wfstatus == '待审批' ? 'warn' : wfstatus == '已驳回' ?'danger' : wfstatus == '已撤销' ? '' : 'primary'}}" >{{ wfstatus }}</tag>
+    </view>
+    <view wx:for="{{ define }}" wx:key="item.code" class="line"> 
+      <field wx:if="{{(item.type=='file' && !item.wfeditable) || (item.wfeditable && ((type == 'approval' && mystatus!='wait') || (type == 'submit' && wfstatus!='待审批' && wfstatus!='已撤销')))}}" title="{{item.label}}" custom-class="fieldClass" value="{{ form[item.code].length ? '' : '无' }}" disabled="true" ud_show="{{ ud_show }}" ud_noborder="true"></field>
+      <view wx:if="{{(item.type=='file' && !item.wfeditable) || (item.wfeditable && ((type == 'approval' && mystatus!='wait') || (type == 'submit' && wfstatus!='待审批' && wfstatus!='已撤销')))}}" class="attach"><attach list="{{form[item.code]}}" notopmargin="true" hidedel="true" hideadd="true"/></view>
+      <field wx:elif="{{ (item.type != 'hidden' && !item.wfeditable) || (item.wfeditable && ((type == 'approval' && mystatus!='wait') || (type == 'submit' && wfstatus!='待审批' && wfstatus!='已撤销')))}}" custom-class="{{index == 0 ? '' : 'fieldClass'}}" ud_noborder="{{index == 0 ? true : false}}" type="{{ item.height ? 'textarea' : 'input' }}" title="{{ item.label }}" name="{{ item.code }}" value="{{ form[item.code] ? form[item.code]+(item.unit ? item.unit : '') : '无' }}" ud_confirmbar="{{false}}" disabled="true" ud_show="{{ ud_show }}"></field>
+    </view>
+    <field title="附件" custom-class="fieldClass" value="{{ attachURLs.length ? '' : '无' }}" disabled="true" ud_show="{{ ud_show }}" ud_noborder="true"></field>
+    <view class="attach"><attach list="{{attachURLs}}" notopmargin="true" hidedel="true" hideadd="true"/></view>
+  </view>
+  <view class="footer"></view>
+  <view wx:if="{{form.wf_msgs.length}}">
+    <field ud_noborder="true" title="流程提醒" disabled="true" ud_show="{{ ud_show }}"></field>
+    <view wx:for="{{ form.wf_msgs }}" wx:key="item" class="node back">
+      <cell title="{{ item.sender }}" label="{{item.content}}" value="{{ item.sendTime }}"></cell>
+    </view>
+    <view class="footer"></view>
+  </view>
+  <field ud_noborder="true" title="审批流程" disabled="true" ud_show="{{ ud_show }}"><button class="notice" type="primary" style="background-color:{{color}}" bindtap="openMsgDlg" data-key="showmodal">添加信息</button><button wx:if="{{need_alert}}" class="send_msg" type="primary"  style="background-color:{{color}}" bindtap="openMsgDlg" data-key="showalertmodal">发送提醒</button></field>
+    <view wx:for="{{ form.wf_logs }}" wx:key="item" class="node {{ item.processResult =='未审批' ? '' : (item.processResult =='已驳回' ? 'back' : 'pass' )}}">
+    <view class="line {{ index == 0 ? 'head' : '' }} {{ (index == form.wf_logs.length-1) ? 'tail' : '' }}"> 
+      <cell title="{{ item.processor }} · {{ item.processResult }}" label="{{ item.processOpinion }}" value="{{ item.processTime }}"></cell>
+      <button wx:if="{{ type == 'submit' && item.is_urge }}" class="urge" type="primary"  style="background-color:{{color}}" data-processorCode="{{item.processorCode}}" bindtap="urge_sp">催批</button>
+    </view> 
+  </view>
+  <view wx:if="{{ form.cc_list }}" class="copyto">抄送人：{{ form.cc_list}}</view>
+  <view wx:if="{{ type == 'approval' && mystatus == 'wait' }}" class="footer"></view>
+  <form bindsubmit="submit">
+    <view wx:for="{{ define }}" wx:key="item.code">
+        <view wx:if="{{type == 'approval' && mystatus == 'wait' && item.wfeditable && item.type=='file'}}" class="header">{{item.label}}</view> 
+        <attach wx:if="{{type == 'approval' && mystatus == 'wait' && item.wfeditable && item.type=='file'}}" list="{{form[item.code]}}" recordId="{{ recordid }}" itemId="{{ id }}" hidedel="true" hideadd="{{disabled}}" data-col="{{item.code}}" bindaddattach="addattach"/> 
+      <view wx:elif="{{ type == 'approval' && mystatus == 'wait' && item.wfeditable }}">
+        <picker wx:if="{{ item.type == 'date'}}" mode="date" bindchange="pickerChange" data-field="{{ item.code }}" data-type="date"> 
+          <text class="pickerlabel {{ item.nullable ? 'required' : ''}}">{{ item.label }}</text>
+          <text class="value">{{  form[item.code] || ''}}</text>
+        </picker>
+        <view wx:elif="{{ item.type == 'datetime'}}" class='datetimeview'>
+          <text class="pickerlabel {{(item.nullable) ? 'required' : ''}}">{{ item.label }}</text>
+          <view class='datetime value'>
+            <datetime data-field="{{ item.code }}" data-type="date" bindconfirm="pickerChange" text="{{ form[item.code] }}" not-use="{{ item.notuse ? (item.notuse == 'minutes' ? ['minutes','seconds'] : ['seconds']) : ''}}"/>
+          </view>
+        </view>
+        <field wx:elif="{{ !item.options }}" title="{{ item.label }}" custom-class="fieldClass" name="{{ item.code }}" value="{{ form[item.code] }}" inputType="{{ item.type == 'int' ? 'number' : (item.type == 'number' ? 'digit' : 'text') }}" type="{{ item.height ? 'textarea' : 'input' }}" ud_confirmbar="{{false}}" placeholder="{{ item.placeholder || item.errorMsg}}" disabled="{{ item.readonly }}" ud_required="{{ item.nullable ? 'required' : '' }}">{{ item.unit }}</field>
+        <picker wx:else  range="{{ item.options }}" range-key="name" bindchange="pickerChange" data-field="{{ item.code }}" data-index="{{ index }}" disabled="{{ item.readonly }}" data-getnext="{{ item.onchange }}"> 
+          <text class="pickerlabel {{(item.nullable) ? 'required' : ''}}">{{ item.label }}</text>
+          <text class="value">{{ form[item.code] || ''}}</text>
+        </picker>
+      </view>
+    </view>
+    <field wx:if="{{ (type == 'approval' && mystatus == 'wait') || (type == 'submit' && (wfstatus == '待审批' || wfstatus == '已驳回')) }}" title="{{type == 'approval' ? '审批意见' : (wfstatus == '待审批' ? '撤销理由' : '补充信息')}}" type="textarea" ud_confirmbar="{{false}}" ud_phred='{{ ud_phred }}' placeholder="请输入" name="opinion" value="{{ form.opinion }}"></field>
+    <view wx:if="{{ type == 'approval' && mystatus == 'wait' }}" class="actions">
+      <button class="refuse" style="color:{{color}}" data-status="驳回" form-type="submit">↩︎驳回</button>
+      <button type="primary"  style="background-color:{{color}}" data-status="通过" form-type="submit">✓通过</button> 
+      <button type="refuse" data-status="转审" form-type="submit">↳
+转审</button>
+    </view>
+
+    <view wx:if="{{ type == 'submit' && (wfstatus == '待审批' || wfstatus == '自动通过') }}" class="actions">
+      <button wx:if="{{wfstatus != '自动通过'}}" class="refuse" style="{{color}}" data-status="撤回" form-type="submit">↩︎撤回</button>
+      <button type="primary" data-status="修改" form-type="submit">✎修改</button> 
+    </view>
+    <view wx:if="{{ type == 'submit' && wfstatus == '已驳回' }}" class="actions">
+      <button type="primary"  style="background-color:{{color}}" data-status="重新提交" form-type="submit">重新提交</button> 
+      <button wx:if="{{wfstatus != '自动通过'}}" class="refuse" style="{{color}}" data-status="撤回" form-type="submit">↩︎撤回</button>
+    </view>
+  </form>
+</view>
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="move" wx:if="{{ showmodal || showalertmodal }}"></view>
+<view class="modal-dialog {{ showmodal ? 'showmodal' : 'hidemodal' }}">
+  <view class="modal-title">添加信息</view>
+  <view class="modal-content">
+    <field wx:if="{{showmodal}}" title="内容" name="name" value="{{}}" placeholder="请输入添加内容" ud_required="true" bind:change="fieldChange"></field>
+  </view>
+  <view class="modal-footer">
+    <view class="btn-cancel" bindtap="cancel" data-key="showmodal">取消</view>
+    <view class="btn-confirm" bindtap="confirm" data-status="confirm">添加</view>
+  </view>
+</view>
+
+<view class="modal-dialog {{ showalertmodal ? 'showmodal' : 'hidemodal' }}">
+  <view class="modal-title">提醒</view>
+  <view class="modal-content">
+    <view class="box">
+      <view class="people_cell" wx:for="{{ wf_logs }}" wx:key="item">
+        <view catchtap="clickCell" data-phone="{{item.processorCode}}" class="cell_item {{item.selected ? 'select_item' : ''}}"> {{ item.processor }} </view>
+      </view>
+    </view>
+  </view>
+  <view class="modal-footer">
+    <view class="btn-cancel" bindtap="cancel" data-key="showalertmodal">取消</view>
+    <view class="btn-confirm" bindtap="sendAlertMsg" >发送</view>
+  </view>
+</view>

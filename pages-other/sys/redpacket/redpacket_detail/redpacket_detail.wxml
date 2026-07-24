@@ -1,0 +1,22 @@
+<block wx:for="{{data}}" wx:key="{{index}}">
+	<view class="content">
+		<row>
+			<col span="6">
+			<text>领取人：</text>
+			<text>{{item.creator || ''}}</text>
+			</col>
+			<col span="12">
+			<text>领取时间：</text>
+			<text>{{item.createTime ||''}}</text>
+			</col>
+			<col span="12">
+			<text>使用时间：</text>
+			<text>{{item.use_time?item.use_time:'暂未使用'}}</text>
+			</col>
+		</row>
+	</view>
+</block>
+<view style="height:1px;margin-bottom:136rpx;"></view>
+<view class="bottom-btn" wx:if="{{data[0].status == 1}}">
+	<button bindtap="closeRedpacket" class="btn bg-red m-p">终止当前优惠券</button>
+</view>

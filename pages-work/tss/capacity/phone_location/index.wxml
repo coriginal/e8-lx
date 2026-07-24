@@ -1,0 +1,1 @@
+<button wx:if="{{show_setting}}" open-type="openSetting" bindopensetting="callback">设置</button>

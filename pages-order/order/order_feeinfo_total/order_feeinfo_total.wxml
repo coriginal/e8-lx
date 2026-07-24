@@ -1,0 +1,138 @@
+<dialog id="wux-dialog">
+	<view wx:if="{{type != 'income' && showLcChoose}}" bindtap="chooseLcName" hover-class="default" class="dialog-view {{item.settle_account_name?'text-blue':''}}" slot="add-content">
+		{{item.settle_account_name?item.settle_account_name:'点击选择往来方'}}
+	</view>
+</dialog>
+<view class="feeinfo-content">
+	<!-- <row wx:if="{{billModelList}}">
+		<col span="12" class="">
+		<view class="placeorder">
+			<view class="placeorder-flex">
+				<text class="opcity title-big">报价模型</text>
+				<text class="text-red t-f26">（ 选中后将计算费用 ）</text>
+				<text class="text-underline"></text>
+			</view>
+		</view>
+		</col>
+	</row>
+
+	<col span="4" class="fade" wx:if="{{billModelList}}" wx:for="{{billModelList}}" wx:key>
+	<view bindtap="chooseBillModel" id="{{index}}"  class="placeorder padding t-center {{chooseId == index?'choosed':''}} bill-model">
+		{{item.name}}
+	</view>
+	</col> -->
+
+	<block wx:if="{{!taskId}}">
+		<row wx:if="{{!user.isCustomer}}">
+			<col span="12" class="">
+			<view class="placeorder">
+				<view class="placeorder-flex">
+					<text class="opcity title-big">收入项</text>
+					<text class="text-underline"></text>
+				</view>
+			</view>
+			</col>
+		</row>
+
+		<col span="6" wx:for="{{income_list}}" wx:key>
+		<view class="placeorder padding">
+			<view hover-class="default" class="placeorder-flex solid-bottom" bindtap="queryFeeItemDetail" data-type="income" data-item="{{item}}" data-idx="{{index}}">
+				<text class="opcity t-fw">{{item.subject_name}}</text>
+				<view class="flex-1 t-right {{item.value_type?'t-value':'t-color'}} t-f26">{{item.value||'点击填写'}}</view>
+				<!-- <view wx:if="{{orderId}}" hover-class="default" bindtap="queryFeeItemDetail" class="t-right detail-btn" data-idx="{{index}}" data-item="{{item}}">查看</view> -->
+			</view>
+		</view>
+		</col>
+
+		<col span="6" wx:if="{{orderId && !user.isCustomer}}">
+		<view class="placeorder padding">
+			<view hover-class="default" class="placeorder-flex " bindtap="createFee" id="income">
+				<view class="solid-bottom add-fee">
+					<icon size="32" type="i-roundadd"></icon>
+					<text>添加费用项</text>
+				</view>
+			</view>
+		</view>
+		</col>
+
+		<row>
+			<col span="12">
+			<view class="placeorder margin-top solid-bottom">
+				<view class="placeorder-flex">
+					<block wx:if="{{!user.isCustomer}}">
+						<text class="opcity fee-total">收入合计（CNY）：</text>
+					</block>
+					<block wx:else>
+						<text class="opcity fee-total">费用合计（CNY）：</text>
+					</block>
+					<view class="flex-1 t-right t-fw">¥ {{total_income||''}}</view>
+				</view>
+			</view>
+			</col>
+		</row>
+	</block>
+
+	<row wx:if="{{!user.isCustomer}}">
+		<col span="12" class="">
+		<view class="placeorder margin-top">
+			<view class="placeorder-flex">
+				<text class="opcity title-big">成本项</text>
+				<text class="text-underline"></text>
+			</view>
+		</view>
+		</col>
+	</row>
+
+	<col wx:if="{{!user.isCustomer}}" span="6" wx:for="{{cost_list}}" wx:key="{{item.id}}">
+	<view class="placeorder padding">
+		<view hover-class="default" class="placeorder-flex solid-bottom placeorder-after" catchtap="queryFeeItemDetail" data-type="cost" data-item="{{item}}" data-idx="{{index}}">
+			<text class="opcity t-fw {{taskId && item.permission!=2?'col-disabled':''}}"  >{{item.subject_name}}</text>
+			<view class="flex-1 t-right  {{item.value_type?'t-value':'t-color'}} t-f26 {{taskId && item.permission!=2?'col-disabled':''}}">
+				{{fn.toFiexd(item.value)||'点击填写'}}
+			</view>
+			<!-- <view wx:if="{{orderId||taskId}}" hover-class="translate" catchtap="doSpFees" class="t-right sp-btn" id="{{item.subject_id}}">报销</view> -->
+		</view>
+	</view>
+	</col>
+
+	<col span="6" wx:if="{{(orderId||taskId) && !user.isCustomer}}">
+	<view class="placeorder padding">
+		<view hover-class="default" class="placeorder-flex " bindtap="createFee" id="cost">
+			<view class="solid-bottom add-fee">
+				<icon size="32" type="i-roundadd"></icon>
+				<text>添加费用项</text>
+			</view>
+		</view>
+	</view>
+	</col>
+
+	<row wx:if="{{!user.isCustomer}}">
+		<col span="12">
+		<view class="placeorder margin-top solid-bottom">
+			<view class="placeorder-flex ">
+				<text class="opcity fee-total">成本合计（CNY）：</text>
+				<view class="flex-1 t-right t-fw">¥ {{fn.toFiexd(total_cost||'')}}</view>
+			</view>
+		</view>
+		</col>
+	</row>
+</view>
+
+<view class='bottom-btn' wx:if="{{pageFrom=='order'}}">
+	<button bindtap="confirmOrder" class='btn bg-blue m-p'>{{isEdit?'保存修改':'确定录单'}}</button>
+</view>
+
+<sp-popup bind:change="changePopShow" wx:if="{{show_pop}}" param="{{param}}"></sp-popup>
+
+<wxs module="fn">
+	module.exports = {
+		toFiexd: function(value) {
+			if (typeof value == 'number') {
+				return value && value.toFixed(2)
+			} else {
+				return value
+			}
+
+		}
+	}
+</wxs>

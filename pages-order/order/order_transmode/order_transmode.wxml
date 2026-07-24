@@ -1,0 +1,37 @@
+<view class="fade">
+	<view class="fade-content">
+		<view wx:for="{{list}}" wx:for-item="list_item" wx:for-index="list_index" wx:key>
+
+			<view class="input-panel" wx:if="{{ _from!='quote'}}">
+				<view wx:if="{{list_item.title}}" class='title'>{{list_item.title}}</view>
+				<input disabled placeholder-class="t-f20" placeholder="{{list_item.placeholder}}" name="{{list_index}}" value="{{list[value]}}"></input>
+			</view>
+
+			<view class="flex" wx:if="{{list_item.children}}">
+				<block wx:for="{{list_item.children}}" wx:key>
+					<view data-list-item="{{list_index}}" data-item="{{item}}" bindtap="chooseFeeItem" class="fade flex-1 border {{item.checked?'checked':''}}">{{item.name}}</view>
+				</block>
+			</view>
+
+			<view class="flex" wx:else>
+				<!-- <view class="flex-panel" wx:if="{{list_index == 'pallet_num' && _from!='quote'}}">
+					<input-number longpress controlled value="{{list_item.value}}" min="{{ 0 }}" max="{{ 100 }}" slot="footer" color="dark" bind:change="onChange" />
+				</view> -->
+
+				<view wx:if="{{list_index == 'arrive_depart' && _from!='quote'}}">
+					<view class="flex-panel">
+						<input class="time-input" bindinput="inputTime" id="0" value="{{list_item.value.expect_arrive}}" placeholder="装车时间"></input>
+						<input class="time-input" bindinput="inputTime" id="1" value="{{list_item.value.expect_depart}}" placeholder="卸车时间"></input>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view style="height:1px"></view>
+
+	<view class='bottom-btn'>
+		<button bindtap="formSubmit" class='btn bg-blue m-p'>确定</button>
+	</view>
+</view>
+
+<!-- <date-picker visible="{{ date_picker }}" controlled mode="datetime" value="{{ time }}" lang="zh_CN" data-index="1" data-mode="datetime" bind:confirm="onConfirm" bind:visibleChange="onVisibleChange" /> -->

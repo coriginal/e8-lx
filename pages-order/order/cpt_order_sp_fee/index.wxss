@@ -1,0 +1,35 @@
+.claim-fee {
+  color: var(--orange);
+}
+
+.pop-view {
+  height: 84rpx;
+  display: flex;
+  align-items: center;
+}
+
+.image-view {
+  display: flex;
+  align-items: center;
+  border-radius: 6rpx;
+  background-color: #eee;
+  justify-content: center;
+  height: 64px;
+  width: 64px;
+  margin-bottom: 20rpx;
+  font-size: 12px;
+}
+
+.image-url .pop-image {
+  width: 64px !important;
+  height: 64px !important;
+}
+
+.bg-blue.confirm-btn {
+  width: 100%;
+  height: 84rpx;
+}
+
+.flex-1 {
+  flex: 1;
+}

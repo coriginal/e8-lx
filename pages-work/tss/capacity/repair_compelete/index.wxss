@@ -1,0 +1,6 @@
+/* pages-work/tss/capacity/repair_compelete/index.wxss */
+@import "../repair_wait/index.wxss";
+.footer view:nth-child(1){
+    width: 150rpx;
+    right: 40rpx;
+}

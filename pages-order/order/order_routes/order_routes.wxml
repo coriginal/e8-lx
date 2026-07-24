@@ -1,0 +1,149 @@
+<dialog id="wux-dialog" />
+
+<!-- <view class="order-info" wx:if="{{rcode_type}}" bindtap="checkRecode">
+	<text class="text-bb">查看回单</text>
+</view> -->
+
+<tabs controlled theme="positive" current="{{ tab_current }}" bindchange="onChangeTabs">
+    <tab key="{{item.code}}" wx:for="{{tabs}}" wx:key>
+        <badge count="{{item.count}}">{{item.title}}</badge>
+    </tab>
+</tabs>
+
+<swiper class="swiper-content" bindchange="swiperChange" current='{{current}}' circular>
+    <swiper-item>
+        <view class="top-content">
+            <view class="cc" wx:if="{{logistic_company[1]}}">
+                <text>走货平台：</text>
+                <text>{{logistic_company[1]}}</text>
+            </view>
+            <view class="cc solid-bottom" wx:if="{{logistic_company[0]}}">
+                <text>承运单号：</text>
+                <text>{{logistic_company[0]}}</text>
+                <icon id="{{logistic_company[0]}}" type="i-form" size="36" bindtap="copyTcode"></icon>
+            </view>
+            <view style="width:100%;display: flex;flex-wrap: nowrap;justify-content: center;align-items: center;">
+                <view style="flex:1" class="cc solid-bottom flex-center" wx:if="{{hasSignCode}}" bindtap="checkSigncode" hover-class="default">
+                    <text class="text-bb t-fw">签收照片：</text>
+                    <icon type="i-pic" size="40"></icon>
+                </view>
+                <view style="flex:1" class="cc solid-bottom flex-center" wx:if="{{rcode_type}}" bindtap="checkRecode" hover-class="default">
+                    <text class="text-bb t-fw">回单照片：</text>
+                    <icon type="i-pic" size="40"></icon>
+                </view>
+            </view>
+            <view style="width:100%;display: flex;flex-wrap: nowrap;justify-content: center;align-items: center;">
+                <view style="flex:1" class="cc flex-center solid-bottom" wx:if="{{!!receipt_express}}">
+                    <text class="text-bb t-fw">快递平台：{{receipt_express}}</text>
+                </view>
+                <view style="flex:1" class="cc flex-center solid-bottom" wx:if="{{!!receipt_express_no}}">
+                    <text class="text-bb t-fw">快递号：{{receipt_express_no}}</text>
+                </view>
+            </view>
+        </view>
+
+        <view class="cc-work fade" wx:if="{{workList.length}}">
+            <block wx:for="{{workList}}" wx:key>
+                <timeline date="{{item.scan_date}}">
+                    <view class="timeline-slot">
+                        <view class="flex-1">
+                            <text wx:if="{{showOperator}}">操作人：{{userList[item.creator] || ''}} - {{item.creator || item.operator || '--'}}\r\n</text>
+                            
+                            <text class="{{index==0?'text-red text-bold':''}}">{{item.description||''}}</text>
+                        </view>
+                        <icon bindtap="delRoute" id="{{item.id}}" wx:if="{{ifEdit}}" type="i-roundclosefill" color="var(--red)" size="32"></icon>
+                    </view>
+                </timeline>
+            </block>
+        </view>
+
+        <view wx:else class="nothing">
+            暂无轨迹
+        </view>
+
+        <view style="height:1px"></view>
+        <view class='bottom-btn fade' wx:if="{{canIEdit}}">
+            <!-- <view class='bottom-btn' wx:if="{{_App.user.isCustomer&&!_App.user.isCustomer}}"> -->
+            <button wx:if="{{ifEdit}}" class="btn bg-green m-p flex-1" bindtap="createRouter">新增</button>
+            <button class='btn bg-blue m-p flex-2' bindtap="editRouter">{{ifEdit?'取消':'运输行程登记'}}</button>
+        </view>
+    </swiper-item>
+    <!-- 子单轨迹 -->
+    <swiper-item wx:if="{{!hideSubOrderRoute}}">
+        <view class="sub_tab_box">
+            <view bindtap="subChange" data-index="{{index}}" class="item {{index==sub_current && 'active'}}" wx:for="{{subList}}">
+                {{item.code}}
+            </view>
+        </view>
+        <view class="cc-work fade" wx:if="{{subList[sub_current].paths.length}}">
+            <block wx:for="{{subList[sub_current].paths}}" wx:key>
+                <timeline date="{{item.scan_date}}">
+                    <view class="timeline-slot">
+                        <view class="flex-1">
+                            <text class="{{index==0?'text-red text-bold':''}}">{{item.description||''}}</text>
+                        </view>
+                        <icon bindtap="delRoute" id="{{item.id}}" wx:if="{{ifEdit}}" type="i-roundclosefill" color="var(--red)" size="32"></icon>
+                    </view>
+                </timeline>
+            </block>
+        </view>
+        <view wx:else class="cc-work nothing">
+            暂无轨迹
+        </view>
+    </swiper-item>
+    <swiper-item>
+        <cc-work orderId="{{order_id}}" />
+    </swiper-item>
+    <swiper-item>
+        <car-location bind:verifyAndReceiptData="accpetVerifyAndReceiptData" wx:if="{{getCarlocation}}" orderId="{{order_id}}" />
+    </swiper-item>
+</swiper>
+
+<popup visible="{{ visible }}" bind:close="onClose">
+    <view class="title">自定义轨迹</view>
+    <view class="date-choose solid-bottom" bindtap="clickTap">
+        <view>选择日期时间 </view>
+        <view class="value">{{datetime?datetime:'请选择'}}</view>
+        <icon type="i-right" size="32"></icon>
+    </view>
+    <view class="router-pop-auto {{click_auto_route_id==1?'choose-auto shadow-blur':''}}" bindtap="chooseRouteAuto" id="1">从 <input class="auto-route-input" value="{{route_district_location}}" bindinput="popRouteInput" id="1"></input> 出发
+        | <view class="pop-choose {{click_auto_route_id==1?'text-blue':''}}">
+            <icon color="{{click_auto_route_id==1?'var(--blue)':''}}" type="i-radioboxfill" size="34"></icon> 选择
+        </view>
+    </view>
+    <view class="router-pop-auto {{click_auto_route_id==2?'choose-auto shadow-blur':''}}" bindtap="chooseRouteAuto" id="2">到达<input class="auto-route-input" value="{{route_district_location}}" bindinput="popRouteInput" id="2"></input>
+        | <view class="pop-choose {{click_auto_route_id==2?'text-blue':''}}">
+            <icon color="{{click_auto_route_id==2?'var(--blue)':''}}" type="i-radioboxfill" size="34"></icon> 选择
+        </view>
+    </view>
+
+    <view class="more-textarea">
+        <view bindtap="showMoreTextarea">{{more_textarea?'- 隐藏':'+ 更多'}}</view>
+        <view bindtap="uploadPicture">拍照上传</view>
+    </view>
+    <view wx:if="{{more_textarea}}" class="textarea-panel">
+        <textarea bindinput="inputTextarea" disabled="{{date_picker}}" class="textarea" placeholder="签收规则：如果该单已做签收，请在轨迹填写中写明自定义签收文字内容，然后点击按钮【确认签收】。否则将默认为‘签收’" value="{{inputTextarea}}" bindfocus="focusTextarea">
+    </textarea>
+        <view class="pop-locationfill" bindtap="doLocation">
+            <icon type="i-locationfill" size="34"></icon>
+            <text>重新定位</text>
+        </view>
+    </view>
+    <view class="popup-flex">
+        <button class="btn bg-green flex-1" bindtap="confirmSign">签收</button>
+        <button class="btn bg-red flex-2" bindtap="confirmRouter">确定</button>
+    </view>
+</popup>
+
+<popup visible="{{ showPicUpload }}" bind:close="onClosePicUpload">
+    <block wx:if="{{uploadList.length>0}}">
+        <view class="btn-group">
+            <button wx:for="{{uploadList}}" wx:key="{{index}}" class="btn bg-blue flex-1" bindtap="doUploadPicture" data-item="{{item}}">{{item.title}}</button>
+        </view>
+    </block>
+    <block wx:else>
+        <view class="t-center text-gray">暂无可上传选项</view>
+    </block>
+</popup>
+
+<date-picker visible="{{ date_picker }}" controlled mode="datetime" value="{{ time }}" lang="zh_CN" data-index="1" data-mode="datetime" bind:confirm="onConfirm" bind:visibleChange="onVisibleChange" />

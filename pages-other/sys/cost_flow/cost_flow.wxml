@@ -1,0 +1,26 @@
+<view class="panel" wx:if="{{type == 'topup_flow'}}">
+  <view class="content solid-bottom" wx:for="{{buylist}}" wx:key>
+    <view class="c1">
+      <text class="title">{{item.product}}</text>
+      <text class="value">{{item.money_cal}}</text>
+    </view>
+    <view class="c2">
+      <text>{{item.order_no}}</text>
+      <text>{{item.pay_date}}</text>
+
+    </view>
+  </view>
+</view>
+
+<view class="panel" wx:else>
+  <view class="content solid-bottom" wx:for="{{feelist}}" wx:key>
+    <view class="c1">
+      <text class="title">{{item.type}}</text>
+      <text class="text-{{item.money<0?'green':'red'}} value">{{item.money||0}}</text>
+    </view>
+    <view class="c2">
+      <text>{{item.remark||''}} {{item.payment?"("+item.payment+")":''}}</text>
+      <text>{{item.pay_time}}</text>
+    </view>
+  </view>
+</view>

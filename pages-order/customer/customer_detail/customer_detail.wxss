@@ -1,0 +1,29 @@
+@import '../customer_create/customer_create.wxss';
+
+.qty {
+  height: 280rpx;
+  margin-bottom: 20rpx;
+  background-color: white;
+}
+
+.bar {
+  min-height: 84rpx;
+}
+
+.edit-customer {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+.edit-customer view {
+  padding: 0 15rpx;
+}
+
+.text-blue {
+  color: var(--blue);
+}
+
+.text-red {
+  color: var(--red);
+}

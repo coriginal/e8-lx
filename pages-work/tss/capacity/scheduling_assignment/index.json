@@ -1,0 +1,18 @@
+{
+    "navigationBarTitleText": "提货调度",
+    "enablePullDownRefresh": true,
+    "backgroundColor": "#f5f7fa",
+    "usingComponents": {
+        "van-button": "@vant/weapp/button/index",
+        "van-cell": "@vant/weapp/cell/index",
+        "van-checkbox": "@vant/weapp/checkbox/index",
+        "van-checkbox-group": "@vant/weapp/checkbox-group/index",
+        "van-empty": "@vant/weapp/empty/index",
+        "van-icon": "@vant/weapp/icon/index",
+        "van-loading": "@vant/weapp/loading/index",
+        "van-popup": "@vant/weapp/popup/index",
+        "van-tab": "@vant/weapp/tab/index",
+        "van-tabs": "@vant/weapp/tabs/index",
+        "van-tag": "@vant/weapp/tag/index"
+    }
+}

@@ -1,0 +1,84 @@
+.box{
+    padding: 10px 10px calc(10px + env(safe-area-inset-bottom));
+    .card{
+        width: 100%;
+        background-color: white;
+        border-radius: 10px;
+        min-height: 100px;
+        margin-bottom: 10px;
+        padding: 15px 10px 10px;
+        .btn-box{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            .right-btn{
+                display: flex;
+                flex-direction: row;
+            }
+            button:active{
+                opacity: .5;
+            }
+            button{
+                height: 30px;
+                font-size: 14px;
+                line-height: 30px;
+                border-radius: 15px;
+                background-color: var(--blue);
+                color: white;
+                margin: 0 5px 0 0;
+            }
+        }
+        .status-box{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            margin: 20px 0 0;
+            .status{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                .title{
+                    font-size: 17px;
+                    font-size: 600;
+                }
+                .status-name{
+                    color: #606266;
+                }
+            }
+        }
+        .info-box{
+            padding: 10px 0;
+            .info-item{
+                margin-top: 8px;
+                font-size: 13px;
+                .title{
+                    color: #909399;
+                }
+            }
+        }
+        .top{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            .left{
+                display: flex;
+                flex-direction: row;
+                .task-code{
+                    font-size: 13px;
+                    color: #303133;
+                }
+                .copy-btn{
+                    margin-left: 10px;
+                    height: 20px;
+                    font-size: 10px;
+                    line-height: 18px;
+                    color: #767a82;
+                    width: 50px;
+                    border-radius: 10px;
+                    background-color: white;
+                    border:1px solid #c4c6c9;
+                }
+            }
+        }
+    }
+}

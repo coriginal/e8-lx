@@ -1,0 +1,5 @@
+<popup title="请选择要拨打的电话" visible="{{show}}" bind:close="onClose">
+    <view wx:for="{{popPhone}}" wx:key>
+        <view catch:tap="handleMakePhone" id="{{item}}" hover-class="default" hover-stay-time="200" class="p-20 m-20 text-bold">{{item}}</view>
+    </view>
+</popup>

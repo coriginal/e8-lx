@@ -1,0 +1,44 @@
+<view class="bar">
+  <view class='search'>
+    <view class='search-form'>
+      <icon size='36' type='i-search' />
+      <input bindconfirm="searchCode" bindinput="bindKeyInput" placeholder="输入关键词搜索" type="text" />
+    </view>
+  </view>
+  <view wx:if="{{type == 'driver'}}" class="add-btn" bind:tap="addDriver">新增司机</view>
+  <view wx:if="{{type == 'line'}}" class="add-btn" bind:tap="addLine">新增线路</view>
+</view>
+
+<view wx:if="{{type == 'driver' && filterData.length == 0}}" class="empty-tip">暂无司机数据，点击上方"新增司机"添加</view>
+
+<cell-group>
+  <block wx:for="{{filterData}}" wx:key>
+    <cell wx:if="{{type == 'truck_type'}}" title="{{(item.driver||'') + '-' + (item.phone||'')}}" bind:click="backToPage" is-link label="{{item.truck_type||''}}" data-id="{{item.id}}" extra="{{(item.type||'') + '-' + (item.status||'')}}"></cell>
+    <view wx:elif="{{type == 'driver'}}" class="driver-item">
+      <view class="driver-info" data-id="{{item.id}}" bind:tap="backToPage">
+        <view class="driver-line"><text class="label">车牌：</text>{{item.plate_num || '-'}}</view>
+        <view class="driver-line"><text class="label">司机：</text>{{item.driver || '-'}}　{{item.phone || '-'}}</view>
+        <view class="driver-line"><text class="label">车型：</text>{{item.truck_type || '-'}}　<text class="label">状态：</text>{{item.status || '-'}}</view>
+      </view>
+      <view class="driver-actions">
+        <view class="action-btn edit-btn" data-id="{{item.id}}" bind:tap="editDriver">编辑</view>
+        <view class="action-btn delete-btn" data-id="{{item.id}}" data-driver="{{item.driver}}" bind:tap="deleteDriver">删除</view>
+      </view>
+    </view>
+
+    <cell wx:elif="{{type == 'logistic'}}" title="{{item||''}}" bind:click="backToPage" data-id="{{item}}" is-link></cell>
+
+    <!-- <cell wx:elif="{{type == 'line'}}" title="{{item.name||''}}" bind:click="backToPage" data-id="{{item.id}}"> -->
+    <view wx:elif="{{type == 'line'}}" class="driver-item">
+      <view class="driver-info" data-id="{{item.id}}" bind:tap="backToPage">
+        <view class="driver-line">{{item.name|| '-'}}</view>
+      </view>
+      <view class="driver-actions" style="display:flex;flex-direction: row;" slot="footer">
+        <view class="action-btn edit-btn" data-line="{{item}}" bind:tap="editLine">编辑</view>
+        <!-- <view class="action-btn delete-btn" data-id="{{item.id}}" data-driver="{{item.driver}}" bind:tap="deleteDriver">删除</view> -->
+      </view>
+    </view>
+
+    <!-- </cell> -->
+  </block>
+</cell-group>

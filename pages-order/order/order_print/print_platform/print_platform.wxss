@@ -1,0 +1,42 @@
+.platform-panel {
+  margin: 15rpx;
+  padding: 20rpx;
+  overflow: hidden;
+  border-radius: 10rpx;
+  border: 1px solid #eee;
+  text-align: center;
+}
+
+.content {
+  background-color: white;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 36rpx;
+  padding: 15rpx;
+}
+
+.choosed {
+  background-color: #5c96ec;
+  color: white;
+}
+
+.bottom-btn {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  padding: 30rpx 0;
+  background-color: white;
+  z-index: 999;
+}
+
+.m-p {
+  margin: 0 20rpx;
+  padding: 20rpx 32rpx;
+  border-radius: 6rpx;
+  height: 84rpx;
+  font-weight: 500;
+  flex: 1;
+}

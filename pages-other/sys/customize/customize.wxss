@@ -1,0 +1,18 @@
+radio .wx-radio-input {
+   border: none;
+}
+
+radio .wx-radio-input.wx-radio-input-checked::before {
+    width: 40rpx;
+    height: 40rpx;
+    border-radius: 50%;     /* 圆角 */
+    line-height: 40rpx;
+    text-align: center;
+    font-size: 30rpx;       /* 勾大小 */
+    color: var(--green);			/* 白色勾  */
+    transform: translate(-50%, -50%) scale(1);
+}
+radio .wx-radio-input.wx-radio-input-checked{
+   border: none;
+   background: transparent; 
+}

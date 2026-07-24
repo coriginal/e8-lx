@@ -1,0 +1,133 @@
+<form bindsubmit="submit">
+
+	<view class="content fade" wx:if="{{income_list||cost_list}}">
+		<row wx:if="{{!taskId}}" wx:if="{{income_list.length > 0}}">
+			<col span="12" class="">
+			<view class="placeorder top-bar">
+				<view class="placeorder-flex">
+					<text class="opcity title-big">收入项</text>
+					<text class="text-underline"></text>
+				</view>
+			</view>
+			</col>
+		</row>
+		<checkbox-group name="checkbox">
+			<block wx:if="{{!taskId}}" wx:for="{{income_list}}" wx:if="{{income_list.length > 0}}">
+				<view class="list-panel solid-bottom">
+					<row>
+						<col span="12" class="">
+						<view class="list-content">
+							<view class="left-checkbox" wx:if="{{item.approveable}}">
+								<checkbox value="{{item.id}}" checked="{{item.checked}}" class="checkbox"></checkbox>
+							</view>
+							<view class="placeorder ">
+								<view class="left-label">
+									<text class="t-fw">{{item.fee_name}} - {{item.old_fee?item.old_fee+' >> ' + item.new_fee:item.new_fee}} 元</text>
+									<text class="text-{{fn.color(item.status)}}">{{item.status}}</text>
+								</view>
+								<view class="remark" wx:if="{{item.settle_account_name}}">
+									<text>往来方：{{item.settle_account_name}} </text>
+								</view>
+								<view class="remark" wx:if="{{item.remark}}">
+									<text>备注：{{item.remark}} </text>
+								</view>
+								<view class="remark  remark-roles" wx:for="{{item.roles}}">
+									<text class="{{item.if_current_note && 't-fw text-red'}}">{{item.role}} </text>
+								</view>
+							</view>
+						</view>
+						</col>
+					</row>
+				</view>
+			</block>
+
+			<row wx:if="{{cost_list.length > 0}}">
+				<col span="12" class="">
+				<view class="placeorder top-bar margin-top">
+					<view class="placeorder-flex">
+						<text class="opcity title-big">成本项</text>
+						<text class="text-underline"></text>
+					</view>
+				</view>
+				</col>
+			</row>
+
+			<block wx:for="{{cost_list}}" wx:if="{{cost_list.length > 0}}">
+				<view class="list-panel solid-bottom">
+					<row>
+						<col span="12" class="">
+						<view class="list-content">
+							<view class="left-checkbox" wx:if="{{item.approveable}}">
+								<checkbox value="{{item.id}}" checked="{{item.checked}}" class="checkbox"></checkbox>
+							</view>
+							<view class="placeorder ">
+								<view class="left-label">
+									<text class="t-fw">{{item.fee_name}} - {{item.old_fee?item.old_fee+' >> ' + item.new_fee:item.new_fee}} 元</text>
+									<text class="text-{{fn.color(item.status)}}">{{item.status}}</text>
+								</view>
+								<view class="remark" wx:if="{{item.settle_account_name}}">
+									<text>往来方：{{item.settle_account_name}} </text>
+								</view>
+								<view class="remark" wx:if="{{item.remark}}">
+									<text>备注：{{item.remark}} </text>
+								</view>
+								<view class="remark" wx:if="{{item.createTime}}">
+									<text>发起时间：{{item.createTime}} </text>
+								</view>
+								<!-- <view class="remark  remark-roles" wx:if="{{item.roles}}">
+									<text>{{item.roles}} </text>
+								</view> -->
+								<view class="remark  remark-roles">
+									<block wx:for="{{item.roles}}" wx:for-item="r" wx:for-index="idx">
+										<text  class="{{r.if_current_note && 't-fw text-red'}}">{{r.role}} </text>
+										<text wx:if="{{idx < item.roles.length - 1}}"> -> </text>
+									</block>
+								</view>
+							</view>
+						</view>
+						</col>
+					</row>
+				</view>
+			</block>
+		</checkbox-group>
+
+		<view style="height:2px" />
+
+		<view class="bottom-btn shadow">
+			<view class="choose-all">
+				<checkbox-group bindchange="checkAllBox">
+					<checkbox class="checkbox" value="chooseAll">
+						全选
+					</checkbox>
+				</checkbox-group>
+			</view>
+			<button form-type="submit" id="agree" class="agree" hover-class="translate">
+				同意
+			</button>
+			<button form-type="submit" id="disagree" class="disagree" hover-class="translate">
+				驳回
+			</button>
+		</view>
+	</view>
+
+</form>
+
+
+
+<wxs module="fn">
+	module.exports = {
+		color: function(value) {
+			switch (value) {
+				case '待审批':
+					return 'orange';
+					break;
+				case '通过':
+					return 'green';
+					break;
+				case '驳回':
+					return 'red';
+					break;
+			}
+		}
+	}
+</wxs>

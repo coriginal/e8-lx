@@ -1,0 +1,188 @@
+
+.margin-top {
+  margin-top: 20rpx;
+}
+
+.sub-panel {
+  padding: 20rpx;
+  background-color: white;
+  box-shadow: 0 1rpx 6rpx rgba(0, 0, 0, 0.1);
+  margin: 10rpx;
+  border-radius: 10rpx;
+}
+
+.sub-code {
+  height: 84rpx;
+  display: flex;
+  align-items: center;
+  margin: 10rpx;
+}
+
+.sub-code input {
+  background-color: #eee;
+  border-radius: 6rpx;
+  height: 84rpx;
+}
+
+.sub-icon-padding {
+  padding: 0 15rpx;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.sub-input {
+  text-align: center;
+  flex: 1;
+  padding: 15rpx 0;
+  height: 100%;
+  line-height: 84rpx;
+}
+
+.sub-flex {
+  display: flex;
+}
+
+.sub-flex>view {
+  margin: 10rpx;
+  display: flex;
+  height: 84rpx;
+  background-color: rgba(238, 238, 238, 0.603);
+  border-radius: 6rpx;
+  flex: 1;
+}
+
+.sub-unit {
+  line-height: 84rpx;
+  padding: 0 20rpx;
+}
+
+.bottom-btn {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  padding: 30rpx 0;
+  background-color: white;
+  z-index: 999;
+}
+
+.bottom-btn button {
+  height: 84rpx;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.text-blue {
+  background-color: transparent;
+  border: 1px solid var(--blue);
+}
+
+.add-sub {
+  text-align: center;
+  margin-bottom: 144rpx;
+  margin-top: 30rpx;
+  padding: 20rpx;
+}
+
+.add-sub .btn {
+  background-color: transparent;
+  padding: 20rpx;
+  margin: 0;
+  width: 40%;
+  border: 1px solid var(--blue);
+  border-radius: 6rpx;
+  color: var(--blue);
+}
+
+.add-sub image {
+  height: auto;
+  width: 64rpx;
+}
+
+.m-p {
+  margin: 0 20rpx;
+  padding: 20rpx 32rpx;
+  border-radius: 6rpx;
+  height: 84rpx;
+  font-weight: 500;
+}
+
+.suborder {
+  margin-bottom: 156rpx!important;
+}
+
+.text-left{
+  text-align: left;
+}
+
+._blue{
+  color: blue;
+  font-weight: bold;
+}
+
+.input_grids {
+    display: flex;
+    align-items: center;
+}
+
+.input_grids_list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.input_grids_list button {
+    height: 60rpx;
+    line-height: 60rpx;
+    font-size: 30rpx;
+    background-color: var(--blue);
+    color: white;
+}
+.input_grids_list input {
+    width: 50px;
+    border: 1rpx solid #eee;
+    margin: 0 5rpx;
+    min-height: 64rpx;
+}
+.table {
+    margin-top: 5px;
+    width: 100%;
+    border: 1rpx solid gainsboro;
+}
+
+.table .table-title {
+    font-weight: bold;
+}
+
+.table .table-item,
+.table .table-title {
+    display: flex;
+}
+
+.table .table-title view,
+.table .table-item view {
+    width: 20%;
+    text-align: center;
+    background-color: whitesmoke;
+    height: 70rpx;
+    line-height: 70rpx;
+}
+
+.table .table-title view:nth-child(2n),
+.table .table-item view:nth-child(2n) {
+    border-left: 1rpx solid gainsboro;
+    border-right: 1rpx solid gainsboro;
+}
+.table .table-item:nth-child(2n){
+    border-top: 1rpx solid gainsboro;
+    border-bottom: 1rpx solid gainsboro;
+}
+.table .table-item:last-child{
+    border-bottom: none;
+}
+.text-center {
+    text-align: center;
+}

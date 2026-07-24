@@ -1,0 +1,10 @@
+<nav-bar title="转审人员名单"/>
+<view class='search'>
+		<view class='search-form'>
+			<icon size='36' type='i-search' />
+			<input bindconfirm="searchCode" bindinput="bindKeyInput" placeholder="按姓名搜索" type="text" />
+		</view>
+	</view>
+<view wx:for="{{peopleList}}" wx:key="item" bindtap="selectpeople" data-type="{{ type }}">
+  <field name="relation" custom-class="fieldClass" data-name="{{ item.username }}" data-value="{{ item.usercode }}" value="{{ item.username+' '+ item.usercode }}" disabled="true" ></field>
+</view>

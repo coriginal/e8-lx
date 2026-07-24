@@ -1,0 +1,308 @@
+<wxs module="utils">
+    function includes(str, str1) {
+        if (str.length) {
+            return str.indexOf(str1) !== -1
+        }
+        return false
+    }
+    module.exports.includes = includes;
+</wxs>
+<view class="fade">
+    <form bindsubmit="formSubmit">
+        <row>
+            <col span="12" class="">
+            <view class="placeorder">
+                <view class="placeorder-flex">
+                    <text class="title-big">增值服务</text>
+                    <text class="text-underline"></text>
+                </view>
+            </view>
+            </col>
+        </row>
+
+        <!-- <row>
+			<col span="12">
+			<view hover-class="default" class="import-address solid-bottom">
+				<text class="text-orange t-f24">收费标准</text>
+				<icon type="i-right" size="30" color="gray"></icon>
+			</view>
+			</col>
+		</row> -->
+
+        <row>
+            <col span="12">
+            <view class="placeorder">
+                <view class="placeorder-flex solid-bottom">
+                    <text class="t-fw fee-total flex-1">是否回单</text>
+                    <switch bindchange="switchChange" id="if_rcode" class="blue switch" name="if_rcode"></switch>
+                </view>
+            </view>
+            </col>
+        </row>
+        <row wx:if="{{if_rcode}}">
+            <col span="12">
+            <view class="placeorder fade">
+                <view class="placeorder-flex solid-bottom">
+                    <radio-group bindchange="chooseRcode" class="radio-group-view" name="rcode_type">
+                        <view class="switch-padding">
+                            <text> 纸质回单 </text>
+                            <radio color="var(--blue)" checked value="纸质回单"> </radio>
+                        </view>
+                        <view class="switch-padding">
+                            <text> 电子回单 </text>
+                            <radio color="var(--blue)" value="电子回单"> </radio>
+                        </view>
+                    </radio-group>
+                </view>
+            </view>
+            </col>
+        </row>
+        <row wx:if="{{if_rcode && needAddress && _options.needAddress}}">
+            <col span="12">
+            <view class="placeorder">
+                <view class="placeorder-flex solid-bottom">
+                    <text class="t-fw fee-total flex-1">回单收件人</text>
+                    <input value="{{rcode_man}}" name="rcode_man" style="height: 84rpx;text-align: right;padding-right: 30rpx;" class="placeorder-input" placeholder-class="opcity8" placeholder="请输入收件人姓名"></input>
+                    <text bind:tap="openReceiptManBook" style="margin-right: 30rpx;" class="text-blue">地址簿</text>
+                </view>
+            </view>
+            </col>
+        </row>
+        <row wx:if="{{if_rcode && needAddress && _options.needAddress}}">
+            <col span="12">
+            <view class="placeorder">
+                <view class="placeorder-flex solid-bottom">
+                    <text class="t-fw fee-total flex-1">收件人手机号</text>
+                    <input value="{{rcode_phone}}" name="rcode_phone" style="height: 84rpx;text-align: right;padding-right: 30rpx;" class="placeorder-input" placeholder-class="opcity8" placeholder="请输入手机号"></input>
+                </view>
+            </view>
+            </col>
+        </row>
+        <row wx:if="{{if_rcode && needAddress && _options.needAddress}}">
+            <col span="12">
+            <view class="placeorder">
+                <view class="placeorder-flex solid-bottom">
+                    <text class="t-fw fee-total flex-1">回单邮寄地址</text>
+                    <text bind:tap="open" style="padding: 0 30rpx;">{{receipt_address.info || fn.contact(receipt_address.addr)}}</text>
+                </view>
+            </view>
+            </col>
+        </row>
+        <row wx:if="{{if_rcode && needAddress && _options.needAddress}}">
+            <col span="12">
+            <view class="placeorder">
+                <view class="placeorder-flex solid-bottom">
+                    <text class="t-fw fee-total flex-1"></text>
+                    <input value="{{rcode_street_no}}" name="rcode_street_no" style="height: 84rpx;text-align: right;padding-right: 30rpx;" class="placeorder-input" placeholder-class="opcity8" placeholder="请输入详细地址"></input>
+                </view>
+            </view>
+            </col>
+        </row>
+        <row wx:if="{{_options.if_up}}">
+            <col span="12">
+            <view class="placeorder">
+                <view class="placeorder-flex solid-bottom">
+                    <text class="t-fw fee-total flex-1">是否上楼</text>
+                    <switch bindchange="switchChange" id="if_up" class="blue switch" name="if_up"></switch>
+                </view>
+            </view>
+            </col>
+        </row>
+
+        <row wx:if="{{if_up}}">
+            <col span="12">
+            <view class="placeorder fade">
+                <view class="placeorder-flex solid-bottom">
+                    <radio-group class="radio-group-view" name="upstairs_type">
+                        <view class="switch-padding">
+                            <text> 普通上楼 </text>
+                            <radio color="var(--blue)" checked value="普通上楼"> </radio>
+                        </view>
+                        <view class="switch-padding">
+                            <text> 大件上楼 </text>
+                            <radio color="var(--blue)" value="大件上楼"> </radio>
+                        </view>
+                    </radio-group>
+                </view>
+            </view>
+            </col>
+        </row>
+
+        <row wx:if="{{_options.if_warehouse}}">
+            <col span="12">
+            <view class="placeorder">
+                <view class="placeorder-flex solid-bottom">
+                    <text class="t-fw fee-total flex-1">送货进仓</text>
+                    <switch class="blue switch" bindchange="switchChange" id="if_warehouse" name="if_warehouse"></switch>
+                </view>
+            </view>
+            </col>
+        </row>
+
+        <row wx:if="{{if_warehouse}}">
+            <col span="12">
+            <view class="placeorder fade">
+                <view class="placeorder-flex solid-bottom">
+                    <radio-group class="radio-group-view" name="entry_type">
+                        <view class="switch-padding">
+                            <text> 海运进仓 </text>
+                            <radio color="var(--blue)" value="海运进仓"> </radio>
+                        </view>
+                        <view class="switch-padding">
+                            <text> 空运进仓 </text>
+                            <radio color="var(--blue)" value="空运进仓"> </radio>
+                        </view>
+                        <view class="switch-padding">
+                            <text> 保税进仓 </text>
+                            <radio color="var(--blue)" value="保税进仓"> </radio>
+                        </view>
+                    </radio-group>
+                </view>
+            </view>
+            </col>
+        </row>
+
+        <!-- <row>
+		<col span="12">
+		<view class="placeorder">
+			<view class="placeorder-flex solid-bottom">
+				<text class="t-fw fee-total">保险货值(元)：</text>
+				<input name="" class="placeorder-input" placeholder-class="opcity8" placeholder="货值" value=""></input>
+			</view>
+		</view>
+		</col>
+	</row> -->
+
+        <row>
+            <col span="12">
+            <view class="placeorder">
+                <view class="placeorder-flex solid-bottom">
+                    <text class="t-fw fee-total">代收{{_options.title}}款(元)：</text>
+                    <input name="cod" class="placeorder-input" type="digit" placeholder-class="opcity8" placeholder="请输入金额"></input>
+                </view>
+            </view>
+            </col>
+        </row>
+
+        <row wx:if="{{orderInfo.red_packet.id}}">
+            <col span="12">
+            <view class="placeorder">
+                <view class="placeorder-flex solid-bottom">
+                    <text class="t-fw fee-total">运费减免：</text>
+                    <text class="text-red t-fw">- {{orderInfo.red_packet.redPacket.money}} 元</text>
+                </view>
+            </view>
+            </col>
+        </row>
+
+        <row wx:if="{{_options.settle_type}}">
+            <col span="12" class="">
+            <view class="placeorder margin-top">
+                <view class="placeorder-flex">
+                    <text class="title-big">支付方式</text>
+                    <text class="text-underline"></text>
+                </view>
+            </view>
+            </col>
+        </row>
+
+        <radio-group wx:if="{{_options.settle_type}}" name="settle_type">
+            <row>
+                <col span="4">
+                <view class="placeorder">
+                    <view class="placeorder-flex ">
+                        <text class="t-fw fee-total ">到付</text>
+                        <radio color="var(--blue)" class="flex-1 text-radio" value="到付"></radio>
+                    </view>
+                </view>
+                </col>
+                <col span="4">
+                <view class="placeorder">
+                    <view class="placeorder-flex ">
+                        <text class="t-fw fee-total ">现付</text>
+                        <radio color="var(--blue)" class="flex-1 text-radio" value="现付">
+                        </radio>
+                    </view>
+                </view>
+                </col>
+                <col span="4">
+                <view class="placeorder">
+                    <view class="placeorder-flex">
+                        <text class="t-fw fee-total">月结</text>
+                        <radio color="var(--blue)" class="flex-1 text-radio" value="月结"></radio>
+                    </view>
+                </view>
+                </col>
+            </row>
+        </radio-group>
+
+        <row wx:if="{{_options.trans_mode}}">
+            <col span="12" class="">
+            <view class="placeorder margin-top">
+                <view class="placeorder-flex">
+                    <text class="title-big">业务类型</text>
+                    <text class="text-underline"></text>
+                </view>
+            </view>
+            </col>
+        </row>
+
+
+        <view class="bg-white" wx:if="{{_options.trans_mode}}">
+            <row>
+                <col wx:for="{{transModeList}}" span="3" class="">
+                <view class="col-transmode pack {{choosedId == index?'choosed-transmode':''}}" bindtap="chooseTransMode" data-id="{{item.id}}" id="{{index}}">{{item.name}}</view>
+                </col>
+            </row>
+        </view>
+
+        <row>
+            <col span="12">
+            <view class="placeorder margin-top">
+                <view class="placeorder-flex solid-bottom">
+                    <text class="t-fw fee-total">备注：</text>
+                    <input name="remark" class="placeorder-input" placeholder-class="opcity8" placeholder="备注"></input>
+                </view>
+            </view>
+            </col>
+        </row>
+
+        <view class="btn-view">
+            <button form-type="submit" class="btn bg-blue next-step">确定录单</button>
+        </view>
+    </form>
+    <cascader visible="{{ visible }}" controlled value="{{ value_addr }}" title="地址选择" options="{{ cantonInfo }}" bind:close="onClose" bind:change="onChange" />
+    <page-container z-index="1000" show="{{pcShow}}">
+        <view class="flex flex-center" style="height: 120rpx;padding: 20rpx 20rpx;">
+            <input bindinput="filterReceiptManList" placeholder="支持姓名、手机号、省市区进行过滤" style="padding: 0 30rpx;flex: 1;height: 80rpx;border: 1px solid whitesmoke;border-radius: 40rpx;" />
+        </view>
+        <view wx:if="{{receiptManListFilter.length === 0}}" class="flex flex-center" style="font-size: 40rpx;color: gray;height: 50vh;padding-top: 50rpx;box-sizing: border-box;">
+            暂无数据
+        </view>
+        <view wx:else class="cu-list menu margin-top-xl margin-bottom-xl shadow-lg radius" style="height: 50vh;width: 100%;overflow: auto;">
+            <view data-info="{{item}}" bind:tap="selectReceiptMan" wx:for="{{receiptManListFilter}}" class="cu-item arrow" style="padding-left: 10rpx;">
+                <view class="flex" style="flex-direction: column;padding: 20rpx;">
+                    <view style="font-size: 30rpx;font-weight: bold;"><text wx:for-item="man" wx:for="{{item.man}}" style="color:{{utils.includes(receiptManKeywords,man)?'#0081ff':'#333'}}">{{man}}</text>{{' '}}<text wx:for="{{item.phone}}" style="color:{{utils.includes(receiptManKeywords,phone)?'#0081ff':'#333'}}" wx:for-item="phone">{{phone}}</text></view>
+                    <view style="margin:5rpx 0;color:gray;"><text wx:for-item="province" wx:for="{{item.province}}" style="color:{{utils.includes(receiptManKeywords,province)?'#0081ff':'gray'}}">{{province}}</text>-<text wx:for-item="city" wx:for="{{item.city}}" style="color:{{utils.includes(receiptManKeywords,city)?'#0081ff':'gray'}}">{{city}}</text>-<text wx:for-item="district" wx:for="{{item.district}}" style="color:{{utils.includes(receiptManKeywords,district)?'#0081ff':'gray'}}">{{district}}</text></view>
+                    <view style="color:gray;">{{item.street_no}}</view>
+                </view>
+            </view>
+        </view>
+    </page-container>
+</view>
+
+<wxs module="fn">
+    module.exports = {
+        contact: function (value) {
+            if (value)
+                return value.join(' ')
+        },
+        deal: function (obj) {
+            if (obj)
+                return {
+                    'send': obj.send,
+                    'receive': obj.receive
+                }
+        }
+    }
+</wxs>

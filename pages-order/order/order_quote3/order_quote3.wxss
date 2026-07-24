@@ -1,0 +1,43 @@
+@import '../order_quote2/order_quote2.wxss';
+
+.switch::after {
+  content: '是';
+}
+
+.switch::before {
+  content: '否';
+}
+
+.text-right {
+  text-align: right;
+}
+
+.switch-padding {
+  padding: 0 16rpx;
+}
+
+.radio-group-view {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.text-radio {
+  text-align: left;
+  padding: 0 20rpx;
+}
+
+.col-transmode {
+  text-align: center;
+  border: 1px solid#eee;
+}
+
+.bg-white {
+  background-color: white;
+}
+
+.choosed-transmode {
+  background-color: #5c96ec;
+  border-color: #5c96ec;
+  color: white;
+}

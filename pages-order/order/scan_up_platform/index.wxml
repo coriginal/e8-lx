@@ -1,0 +1,43 @@
+<view class="search_bar">
+    <input bindconfirm="getOrder" placeholder="请输入主单号/子单号/箱货码" />
+    <icon color="#5c96ec" type="i-scan" size="50" bindtap="scanCode"></icon>
+</view>
+<view class="order_info_box" hidden="{{!currentOrderInfo}}">
+    <view class="title">订单信息</view>
+    <view class="addr" wx:for="{{info_type}}">
+        <image mode='widthFix' src='../../../images/{{item}}.png'> </image>
+        <view class="addr_box">
+            <view>{{currentOrderInfo[item+'_man']}} {{currentOrderInfo[item+'_phone']}}</view>
+            <view>{{currentOrderInfo[item+'_addr']}}</view>
+        </view>
+    </view>
+    <view class="awv_box">
+        <view>件数：{{currentOrderInfo.amount}}</view>
+        <view>重量：{{currentOrderInfo.weight}}</view>
+        <view>体积：{{currentOrderInfo.volume}}</view>
+    </view>
+    <view class="awv_box">
+        <view>
+            货物：{{currentOrderInfo.cargo}}
+        </view>
+        <view>
+            保价额：{{currentOrderInfo.insurance_limit}}
+        </view>
+    </view>
+</view>
+<view class="form_box">
+    <radio-group bindchange="choosePlatform">
+        <view class="box {{item.id==currentPriceId&&'box_checked'}}" wx:for="{{platFormPriceList}}" wx:key="{{item.id}}">
+            <view class="item_content">
+                <view class="text-blue">{{item.platform_name}}</view>
+                <view class="text-red">{{item.cost}} ¥</view>
+            </view>
+            <radio checked="{{item.id==currentPriceId}}" value="{{item.id}}"></radio>
+        </view>
+    </radio-group>
+</view>
+<view class="bottom_box">
+    <view class="bottom_bar">
+        <view bindtap="save" class="btn bg-blue button">上传平台</view>
+    </view>
+</view>

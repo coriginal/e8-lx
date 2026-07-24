@@ -1,0 +1,57 @@
+<view class="list">
+	<block wx:for="{{list[tab_current].data.rows}}">
+		<view class="panel shadow" >
+			<view class="head solid-bottom">
+				<view class="code flex-1">
+					<icon type="i-copy" size="36"></icon>
+					<text class="margin-text" hover-class="default" catchtap="copyOrder" id="{{item.code}}">{{item.code}}</text>
+					<text class="margin-text text-orange display-block">【 {{item.type}}{{item.area?('-'+item.area):''}} 】</text>
+				</view>
+				<view class="detail  t-right">
+					<view class="text-red" wx:if="{{item.my_quote > 0}}">【已报价】</view>
+					<view>
+						已报价：<text class="t-fw text-red">{{item.quote_num}} 人</text>
+					</view>
+				</view>
+			</view>
+			<view class='content' catchtap="goDetailApprove" id="{{item.id}}" >
+				<view class="cargo-info">
+					<text class="text-gray ">货物： </text>
+					<text class="t-f36"> {{item.weight_total||''}}kg {{item.vokume_total||''}}方 {{item.amount_total||''}}件</text>
+				</view>
+				<view class="slot-view">
+					<view>
+						<text class="text-gray">装载</text>
+						<text class="t-fw"> {{item.suborder_total}} </text>
+						<text class="text-gray">票</text>
+					</view>
+					<view>
+						<text class="text-gray ">计划出发时间： </text>
+						<text> {{item.plan_depart_time||''}}</text>
+					</view>
+					<view wx:if="{{item.line_name}}">
+						<text class="text-gray ">线路：</text>
+						<text class="text-orange t-fw"> {{item.line_name||''}}</text>
+					</view>
+					<view wx:if="{{item.remark}}">
+						{{item.remark||''}}
+					</view>
+				</view>
+			</view>
+			<view class="share">
+				<button catchtap="" id="{{item.id}}" open-type="share" class="btn bg-blue">转发</button>
+			</view>
+		</view>
+	</block>
+</view>
+
+
+<wxs module="fn">
+	module.exports = {
+		round: function(value) {
+			if (typeof value == 'number') {
+				return Math.round(value)
+			}
+		}
+	}
+</wxs>

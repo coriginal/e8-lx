@@ -1,0 +1,21 @@
+<!--pages-order/account/detail/in.wxml-->
+<view>
+    <view class="list">
+        <view class="list-box" wx:for="{{history}}" wx:key>
+            <view class="flex justify-between top">
+                <view>{{item.updatetime}}</view>
+                <view></view>
+            </view>
+            <view class="_content">
+                <view>
+                    <view class="yue">余额：{{item.toqty}}</view>
+                    <view class="zzh">操作人：{{item.oper}}</view>
+                </view>
+            </view>
+            <view class="footer flex">
+                <view class="text-green" style="margin-right: 20rpx;">流入：{{item.inqty||'0.00'}}</view>
+                <view class="text-red">流出：{{item.outqty || '0.00'}}</view>
+            </view> 
+        </view>
+    </view>
+</view>

@@ -1,0 +1,21 @@
+.top {
+  background-color: white;
+  padding: 20rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.top view {
+  margin: 0 10rpx;
+  border: 1px solid var(--blue);
+  padding: 5rpx 15rpx;
+}
+
+.sort-action {
+  padding: 10rpx 16rpx;
+}
+
+.btn-wrap {
+  margin: 60rpx 32rpx;
+}

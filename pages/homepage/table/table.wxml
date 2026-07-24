@@ -1,0 +1,16 @@
+<card title="报表" Icon="titles" Icolor="var(--red)">
+  <view slot="body">
+    <grids>
+      <!-- 
+      <grid hover-class='default'  bind:click="goWeb" label="监控面板">
+       <icon  slot="header" size='56'  type='i-form'></icon>
+      </grid> -->
+
+      <grid wx:for="{{tableList}}" hover-class='default' wx:key='grid' bind:click="goList" id="{{item.id}}" data-code="{{item.code}}" data-coldefs="{{item.colDefs}}" data-url="{{item.wxurl}}" label="{{item.name}}">
+        <!-- <icon wx:if="{{item.wxicon}}" slot="header" size='56' type='{{item.wxicon}}'></icon> -->
+        <iconfont slot="header" size="40" name="{{item.wxicon}}"></iconfont>
+      </grid>
+
+    </grids>
+  </view>
+</card>

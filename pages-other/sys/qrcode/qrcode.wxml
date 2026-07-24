@@ -1,0 +1,70 @@
+<view class='top t-bar'>
+	<view class='title'>
+		<text>模板选择</text>
+		<text />
+  </view>
+  <view wx:if="{{!isTest}}" class="right-btn">
+    <button class="btn blue-light" bindtap="uploadImage">自定义背景</button>
+  </view>
+</view>
+
+<view class="tower-swiper" bindtouchmove="towerMove" bindtouchstart="towerStart" bindtouchend="towerEnd">
+  <view class="tower-item " wx:for="{{swiperList}}" wx:key style="--index:{{item.zIndex}};--left:{{item.mLeft}}">
+    <view class="swiper-item">
+      <view class="swiper-item" style="background-image:url({{item.url}});">
+    </view>
+    </view>
+  </view>
+</view>
+
+<view  class='mask' wx:if="{{shareImage&&show}}" catchtap='closeSave'>
+  <view  catchtap=' ' class="text-center">
+    <image show-menu-by-longpress class='fade' src="{{shareImage}}" style="height:auto;border-radius:6rpx;z-index:99999;zoom:0.85;" mode='widthFix' catchtap='' />
+      <button class="fade" class=' btn-group btn bg-click' catchtap='eventSave'>
+        <icon size='22' type='i-share' />长按图片可保存或转发
+      </button>
+  </view>
+</view>
+
+<view class='top t-bar'>
+  <view class='title'>
+    <text>宣传信息</text>
+		<text />
+  </view>
+   <view  class="right-btn">
+    <button class="btn blue-light" bindtap="getMyCard">电子名片</button>
+  </view>
+</view>
+
+<view class='addr'>
+  <view class="bar solid-bottom" wx:for='{{tableList}}' wx:key>
+    <view class='title'>{{item.title}}</view>
+    <input placeholder-class='pclass' placeholder="{{item.defaultInput}}" id='{{item.code}}' value='{{item.value}}' bindinput="inputValue"></input>
+  </view>
+  <view class='flex'>
+    <button class='btn bg-blue' bindtap="eventDraw">绘制</button>
+  </view>
+</view>
+
+<canvasdrawer painting="{{painting}}" class="canvasdrawer" bind:getImage="eventGetImage" />
+
+<popup title="选择绘制的页面" visible="{{ showPop }}" bind:close="onClosePopup">
+  <view class="popup-view" >
+    <row>
+      <col span="{{isFin?6:12}}" wx:for="{{urls}}">
+        <view 
+        bindtap="chooseUrlItem" 
+        data-item="{{item}}" 
+        class="url-panel" 
+        >
+        {{item.title}}
+        </view>
+      </col>
+    </row>
+  </view>
+</popup>
+
+
+<!-- <view class="content">
+
+</view> -->

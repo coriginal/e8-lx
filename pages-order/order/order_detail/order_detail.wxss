@@ -1,0 +1,62 @@
+@import '../order_list/order_list.wxss';
+
+swiper {
+  height: calc(100vh - 64rpx);
+  width: 100%;
+}
+
+.item {
+  height: 100%;
+  overflow: scroll;
+  /* padding: 10rpx; */
+  -webkit-overflow-scrolling: touch;
+}
+.foot{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 10rpx;
+  background-color: white;
+}
+.foot .btn{
+  height: 84rpx;
+  flex: 1;
+  border-radius: 6rpx;
+  margin: 0 10rpx;
+}
+.line{
+  color: var(--blue);
+}
+.choose::before{
+  border-color: var(--blue)
+}
+
+.cc-work {
+  padding: 10rpx;
+  background-color: white;
+  height: 100%;
+  margin-bottom: 154rpx;
+}
+
+.timeline-slot {
+  padding: 10rpx 0 0 30rpx;
+  line-height: 1.6;
+  font-size: 26rpx;
+  color: rgb(102, 99, 99);
+  display: flex;
+  align-items: center;
+}
+
+
+.nothing {
+  height: 100vh;
+  text-align: center;
+}
+
+.nothing text {
+  line-height: 80vh;
+}
+
+.text-bold {
+  font-weight: bold;
+}

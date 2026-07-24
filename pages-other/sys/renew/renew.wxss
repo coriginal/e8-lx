@@ -1,0 +1,62 @@
+@import '../account/account.wxss';
+
+page {
+  background-color: white;
+}
+
+.f24 {
+  font-size: 24px;
+  padding: 0 30rpx;
+  font-weight: bold;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 30rpx;
+}
+
+.money-list {
+  padding: 15rpx 20rpx;
+  border: 1px solid#eee;
+  border-radius: 6rpx;
+  width: calc(100% / 3 - 40rpx);
+  margin: 20rpx;
+  text-align: center;
+  line-height: 66rpx;
+  /* transition: all .5s; */
+  font-size: 18px;
+}
+
+.mini {
+  font-size: 15px;
+}
+
+.click {
+  border-color: transparent;
+  background: linear-gradient(45deg, #ed5d45, #f19687);
+  color: white;
+}
+
+.pay {
+  display: flex;
+  align-items: center;
+  margin: 20rpx 30rpx 30rpx;
+  border-bottom: 1px solid#eee;
+  padding-bottom: 30rpx;
+  font-size: 40rpx;
+}
+
+.wx {
+  flex: 1;
+  padding: 0 20rpx;
+}
+
+.date{
+  font-size: medium;
+}
+checkbox{
+  position: absolute;
+  right: 10rpx;
+  bottom: 20rpx;
+}

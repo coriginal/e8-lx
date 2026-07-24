@@ -1,0 +1,113 @@
+<dialog id="wux-dialog" />
+
+<location></location>
+<view style="padding-right: 12px;align-items: center;background: white;display:flex;flex-direction: row;">
+    <van-search bind:change="searchChange" bind:search="search" style="flex: 1;" value="{{ taskCodeKeywords }}" placeholder="请输入任务单号" />
+    <view bind:tap="openFilter" bind:tap="openFilter">筛选</view>
+</view>
+<view class="task-content">
+    <view wx:if="{{taskList.length}}" class='panel ' catchtap="goDetail" wx:for="{{taskList}}" wx:for-item="task" data-id="{{task.id}}" data-type="{{task.type}}" data-status="{{task.status}}" data-task_code="{{task.code}}" wx:key=''>
+        <image wx:if="{{task.assign_type =='bid'}}" src="../../../../images/qiang.png" class="background-qiang"></image>
+        <view class="head">
+            <view class="left_head">
+                <tag color='{{typeObj[task.type].color}}'>{{typeObj[task.type].name}}</tag>
+                <view class=" t-fw text-truck-type">{{task[typeObj[task.type].head_name] || task.code }}</view>
+                <view wx:if="{{task.status == '已到达'}}" class="status likeicon">{{task.status}}
+                </view>
+            </view>
+            <view class="order-code text-gray"> {{task.code}}</view>
+        </view>
+
+        <view class="task-row" wx:for='{{tableObj[task.type]}}' wx:for-index='key' wx:key>
+            <text wx:if="{{task[key]}}">
+                <text class="text-gray table_title">{{item}}</text>
+                <text class="table_content">{{task[key]}}</text>
+            </text>
+        </view>
+        <view class="task-row ">
+            <text class="text-gray table_title">货物：</text>
+            <text class="table_content">{{task.cargoInfo}}</text>
+        </view>
+        <view wx:if="{{task.send_site}}" class="task-row ">
+            <text class="text-gray table_title">始发地：</text>
+            <text class="table_content">{{task.send_site}}</text>
+        </view>
+        <view wx:if="{{task.receive_site}}" class="task-row ">
+            <text class="text-gray table_title">目的地：</text>
+            <text class="table_content">{{task.receive_site}}</text>
+        </view>
+        <view class="task-row ">
+            <text class="text-gray table_title">车辆：</text>
+            <text class="table_content">{{task.carInfo || ''}}</text>
+        </view>
+
+        <view class="task-row ">
+            <text class="text-gray table_title">创建时间：</text>
+            <text class="table_content">{{task.short_createtime || ''}}</text>
+            <icon type="i-right" size="40" color="green" class="icon-right"></icon>
+        </view>
+
+        <view class="task-row">
+            <tag wx:if="{{task.if_load}}" color="blue">需装</tag>
+            <tag wx:if="{{task.if_unload}}" color="green">需卸</tag>
+        </view>
+        <view wx:if="{{task.remark}}" class="task-row ">
+            <text class="text-gray ">备注：</text>
+            <text class="table_content"> {{task.remark}}</text>
+        </view>
+        <view wx:if="{{if_op}}" class="foot_menu">
+            <view class="likeicon" wx:if="{{task.status!='已到达'}}" data-index="{{index}}" catchtap="update">修改</view>
+            <button id="{{task.id}}" wx:if="{{sub_orders.length&&task.status!='已到达'}}" catchtap="doTask" data-code="{{task.code}}" class="btn bg-blue">调度</button>
+        </view>
+        <!-- <view wx:if="{{!if_op && (task.type == '中转' || task.type == '整车')}}" class="view-btn">
+      <button data-task_id="{{task.id}}" catchtap="truckDepart" class="btn depart bg-green" hidden="{{task.status != '已接单'}}" data-status="{{task.status}}">确认出发</button>
+      <button data-task_id="{{task.id}}" catchtap="truckArrive" class="btn depart bg-blue" hidden="{{task.status == '已接单' || task.status == '已到达'}}" data-status="{{task.status}}">运输完成</button>
+    </view> -->
+    </view>
+    <view wx:if="{{taskList.length==0}}" class="nothing">暂无运输单</view>
+</view>
+
+<van-popup position="right" show="{{ filterPopupShow }}" bind:close="onClose" custom-style="width:80vw;height:100vh;">
+    <van-cell title-width="40px" title="日期" value="{{ form.create_from }} - {{form.create_to}}" bind:click="openCalendar" />
+    <van-cell bind:click="onClickShow" title-width="40px" title="类型" value="{{form.type || '点击选择任务单类型'}}" />
+    <van-field data-field="send_site" value="{{ form.send_site }}" placeholder="请输入始发地" label="始发地" border="{{ false }}" bind:change="onChange" />
+    <van-field value="{{ form.receive_site }}" placeholder="请输入目的地" data-field="receive_site" label="目的地" border="{{ false }}" bind:change="onChange" />
+    <view style="padding: 12px;display: flex;flex-direction: row;">
+        <van-button style="flex:1;margin-right: 6px;" block bind:click="resetFilter">重置</van-button>
+        <van-button style="flex:1;margin-left: 6px;" block bind:click="confirmFilter" type="info">筛选</van-button>
+    </view>
+</van-popup>
+<van-calendar min-date="{{minDate}}" type="range" color="#3c9cff" show="{{ calendarShow }}" bind:close="calendarClose" bind:confirm="onCalendarConfirm" />
+<van-popup position="bottom" bind:close="onClickHide" show="{{typeShow}}">
+    <van-picker show-toolbar bind:confirm="typeConfirm" columns="{{typeColumns}}"></van-picker>
+</van-popup>
+<popup visible="{{ show_route_batch_edit }}" closable maskClosable="{{false}}" bind:close="onCloseRoute">
+    <view class="pop-title">运输行程批量更新</view>
+    <view class="pop-date-choose solid-bottom" bindtap="clickTap">
+        <view>选择日期时间 </view>
+        <view class="value">{{datetime?datetime:'请选择'}}</view>
+        <icon type="i-right" size="32"></icon>
+    </view>
+    <view class="router-pop-auto {{click_auto_route_id==1?'choose-auto shadow-blur':''}}" bindtap="chooseRouteAuto" id="1">从 <input class="auto-route-input" value="{{route_district_location}}" bindinput="popRouteInput" id="1"></input> 出发
+        | <view class="pop-choose {{click_auto_route_id==1?'text-blue':''}}">
+            <icon color="{{click_auto_route_id==1?'var(--blue)':''}}" type="i-radioboxfill" size="34"></icon> 选择
+        </view>
+    </view>
+    <view class="router-pop-auto {{click_auto_route_id==2?'choose-auto shadow-blur':''}}" bindtap="chooseRouteAuto" id="2">到达<input class="auto-route-input" value="{{route_district_location}}" bindinput="popRouteInput" id="2"></input>
+        | <view class="pop-choose {{click_auto_route_id==2?'text-blue':''}}">
+            <icon color="{{click_auto_route_id==2?'var(--blue)':''}}" type="i-radioboxfill" size="34"></icon> 选择
+        </view>
+    </view>
+    <view bindtap="showMoreTextarea" class="more-textarea">{{more_textarea?'- 隐藏':'+ 更多'}}</view>
+    <view wx:if="{{more_textarea}}" class="pop-textarea-panel">
+        <textarea bindinput="inputTextarea" disabled="{{date_picker}}" class="pop-textarea" placeholder="运输行程填写" bindfocus="focusTextarea">
+    </textarea>
+    </view>
+    <view class="popup-flex">
+        <button class="btn bg-red flex-2" bindtap="confirmRouter">确定</button>
+    </view>
+</popup>
+
+<!-- <modal title="获取位置需要您授权" show="{{showPerModal}}" height='auto' hideConfirm>
+  <button open-type="openSetting" bindopensetting="settingCallback" class="_setting">点此打开授权</button>
+</modal> -->

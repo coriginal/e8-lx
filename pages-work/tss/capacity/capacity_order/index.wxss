@@ -1,0 +1,218 @@
+.page_view {
+  padding: 0 20rpx;
+  /* font-size: 38rpx; */
+  margin-bottom: 108rpx;
+  background-color: white;
+}
+
+.title {
+  color: var(--grey);
+}
+
+.op_line {
+  display: flex;
+  justify-content: space-between;
+  padding: 20rpx 0;
+  display: -webkit-flex;
+  -webkit-justify-content: space-between;
+}
+
+.op_btn {
+  border: 1rpx solid var(--blue);
+  background-color: var(--blue);
+  color: var(--white);
+  padding: 5rpx 15rpx;
+  font-size: 36rpx;
+}
+
+.abnormal_btn {
+  border-color: var(--orange);
+  background-color: var(--orange);
+  margin-right: 0;
+}
+
+.ordercode {
+  border-bottom: 1rpx solid var(--gray);
+  line-height: 80rpx;
+}
+
+.cargo {
+  padding-right: 20rpx;
+}
+
+.flex_view {
+  display: flex;
+  padding: 10rpx 0;
+  display: -webkit-flex;
+}
+
+.addr_info {
+  border-bottom: 1rpx solid var(--gray);
+}
+
+.addr_pic, .man_pic {
+  width: 55rpx;
+  height: 55rpx;
+}
+
+.addr_pic {
+  margin: 10rpx 20rpx 10rpx 0;
+}
+
+.man_pic {
+  margin: 0 20rpx 0 0;
+}
+
+.phone {
+  color: var(--blue);
+}
+
+.done_btn {
+  color: var(--white);
+  background-color: var(--blue);
+  text-align: center;
+  line-height: 100rpx;
+  width: 100%;
+  height: 84rpx;
+  margin: 0 10rpx;
+}
+
+.done_btn_left {
+  width: 50%;
+  background-color: var(--blue);
+}
+
+.done_btn_right {
+  width: 50%;
+  left: 50%;
+}
+
+.confirm_btn {
+  background-color: var(--blue);
+  color: var(--white);
+  width: 80%;
+  margin-left: 10%;
+  margin-bottom: 20rpx;
+  line-height: 80rpx;
+  height: 80rpx;
+  font-size: 16px;
+}
+
+.pick_dlg {
+  display: flex;
+  flex-wrap: wrap;
+  line-height: 60rpx;
+  margin: 10rpx;
+  display: -webkit-flex;
+}
+.attach_title{
+  margin-left: 13px;
+}
+.remark_dlg{
+  border-bottom: 1px solid #5a6681;
+  width: 95%;
+  margin: 10px 10px 5px 10px;
+  height: 33px;
+  font-size: 16px;
+  color: red;
+}
+
+.ipt {
+  border: 1rpx solid var(--grey);
+  width: 150rpx;
+  padding: 5rpx;
+  text-align: center;
+  border-radius: 10rpx;
+  height: 60rpx;
+  margin: 0 10rpx;
+}
+.cargo{
+  width:350rpx!important;
+}
+
+.label {
+  padding: 0 10rpx;
+}
+
+.line_info {
+  display: flex;
+  justify-content: space-evenly;
+  display: -webkit-flex;
+  -webkit-justify-content: space-evenly;
+}
+
+.nav {
+  display: inline-block;
+  margin-left: 10rpx;
+  border: 1rpx solid var(--blue);
+  padding: 0 15rpx;
+  color: white;
+  background-color: var(--blue);
+  border-radius: 10rpx;
+}
+
+.status {
+  float: right;
+}
+
+.map-tag {
+  border: 1px solid;
+  background-color: transparent;
+  color: var(--blue);
+}
+
+.inline-block {
+  display: inline-block;
+  margin-left: 16rpx;
+}
+
+.abnormal {
+  padding: 15rpx;
+}
+
+.abnormal_detail {
+  position: relative;
+  padding-right: 80rpx;
+}
+
+.abnormal image {
+  width: 100rpx;
+  height: 80rpx;
+  position: absolute;
+  right: -20rpx;
+  top: 0;
+}
+
+.text-more {
+  color: #5a6681;
+  padding: 15rpx;
+}
+
+.text-abnormal {
+  padding: 15rpx;
+}
+
+.text-abnormal .abnormal_btn {
+  color: var(--red);
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+.view-more {
+  display: flex;
+  justify-content: space-between;
+  display: -webkit-flex;
+  -webkit-justify-content: space-between;
+}
+
+.btn-padding {
+  padding: 20rpx;
+  background-color: white;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  display: -webkit-flex;
+}

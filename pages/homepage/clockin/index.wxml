@@ -1,0 +1,12 @@
+<view class="box">
+    <view class="card">
+        <view class="location">
+            <view>{{currentLocation || '获取定位中...'}}</view>
+            <view>{{lngLat}}</view>
+        </view>
+        <view bind:tap="clockIn" class="clock-circle">
+            <view>考勤打卡</view>
+            <view>{{currentTime || '--'}}</view>
+        </view>
+    </view>
+</view>

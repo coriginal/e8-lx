@@ -1,0 +1,41 @@
+<!-- <noticebar icon="warn">
+  <view class="text-center">请填写真实有效的身份信息</view>
+</noticebar> -->
+<form bindsubmit="saveForm">
+  <view class="margin-top my-system-options">
+    <view class="my-system-menu {{index==_options2.length-1?'':'solid-bottom'}}" wx:for="{{list1}}" wx:key>
+      <view class="left-view">
+        {{item.title}}
+      </view>
+      <view class="right-view" wx:if="{{item.code == 'username'}}">
+        <input disabled="{{item.disabled}}" class="my-system-notice" name="username" value="{{form.username}}"></input>
+        <!-- <icon size='30' color="gray" type='i-right' /> -->
+      </view>
+       <view bindtap="{{item.disabled?'':'chooseSex'}}" class="right-view" wx:if="{{item.code == 'sex'}}">
+        <view class="my-system-notice">{{form.sex||''}}</view>
+      </view>
+    </view>
+  </view>
+
+
+  <view class="margin-top my-system-options">
+    <view class="my-system-menu {{index==_options2.length-1?'':'solid-bottom'}}" wx:for="{{list2}}" wx:key bindtap="doClick">
+      <view class="left-view">
+        {{item.title}}
+      </view>
+      <view class="right-view" wx:if="{{item.code == 'email'}}">
+        <input disabled="{{item.disabled}}"  class="my-system-notice" name="email" value="{{form.email||''}}"></input>
+      </view>
+      <view class="right-view" wx:if="{{item.code == 'telephone'}}">
+        <input disabled="{{item.disabled}}" class="my-system-notice" name="telephone" value="{{form.telephone}}"></input>
+      </view>
+      <view class="right-view" wx:if="{{item.code == 'roles'}}">
+        <view class="my-system-notice">{{form.roles}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- <view class="logout">
+    <button  form-type="submit"  class="bg-white text-red text-center">保存</button>
+  </view> -->
+</form>

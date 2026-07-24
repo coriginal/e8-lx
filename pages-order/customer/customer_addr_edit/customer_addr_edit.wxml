@@ -1,0 +1,116 @@
+<wxs module="fn">
+    var contact = function (value) {
+        if (value) {
+            var con = value.filter(function (n) {
+                return n
+            }).join(' ')
+            return con
+        }
+    };
+    var myIncludes = function (str, target) {
+        return str.indexOf(target) != -1 ? true : false
+    }
+    module.exports.contact = contact;
+    module.exports.myIncludes = myIncludes;
+</wxs>
+<view class="fade">
+    <form bindsubmit='formSubmit' bindreset="formClear" report-submit='true'>
+        <view class='addr '>
+            <view class="bar solid-bottom" wx:if="{{type!='send'}}">
+                <view class='title'>收件公司</view>
+                <input placeholder="收件公司（选填）" name='company' value='{{form.company}}'></input>
+            </view>
+            <view wx:if="{{companyName}}"  class="bar solid-bottom" style="position: relative;">
+                <view style="display: flex;flex-direction: row;align-items: center;">
+                    <view class='title'>寄件公司</view>
+                    <input disabled value='{{companyName}}'></input>
+                </view>
+            </view>
+            <view class="bar solid-bottom" style="position: relative;">
+
+                <view style="display: flex;flex-direction: row;align-items: center;">
+                    <view class='title'>{{type == 'send'?'寄件人':'收件人'}}</view>
+                    <input bindinput="search" placeholder="{{type == 'send'?'寄件人姓名（必填）':'收件人姓名（必填）'}}" name='name' value='{{form.name}}'></input>
+                </view>
+                <view class="list-box" wx:if="{{searchList.length && showSearchList}}">
+                    <scroll-view bindscrolltolower="loadMore" class="list" scroll-y>
+                        <view data-detail="{{item}}" bind:tap="selectCustomer" class="search-list" wx:for="{{searchList}}">
+                            <view class="name-phone">
+                                <text class="{{fn.myIncludes(keywords,child)?'text-blue':''}}" wx:for-item="child" wx:for="{{item.name}}">{{child}}</text>
+                                {{item.phone}}
+                            </view>
+                            <view v-if="{{item.company}}" class="company">{{item.company}}</view>
+                            <view class="address">{{item.province}}{{item.city}}{{item.district}}{{item.street_no}}</view>
+                        </view>
+                    </scroll-view>
+                    <view bind:tap="closeSearchList" class="close-button">关闭</view>
+                </view>
+            </view>
+
+
+            <view class="bar solid-bottom">
+                <view class='title'>手机号码</view>
+                <input placeholder="请输入11位手机号码（必填）" name='phone' value='{{form.phone}}'></input>
+                <tag color="orange">+ 86</tag>
+            </view>
+
+            <view class="bar">
+                <view class='title'>地区信息</view>
+                <input placeholder="省　市　区" value="{{fn.contact(form.region)}}" bindtap="onOpen" disabled>
+                </input>
+                <tag color="orange" bind:click="getUserSetting" hoverClass='default'>
+                    <icon size='32' type='i-locationfill' />
+                </tag>
+            </view>
+
+            <view class="bar">
+                <view class='title'>详细地址</view>
+                <input placeholder="请输入详细地址" name='addr_detail' value='{{form.addr_detail}}'></input>
+            </view>
+        </view>
+
+        <view class="panel-textarea ">
+            <view class='content-menu'>
+                <button class='btn' id="{{item.code}}" wx:key wx:for="{{contentMenu}}" bindtap="menuClick">
+                    <icon color='#5c96ec' type='{{item.icon}}' size='32' />{{item.title}}
+                </button>
+            </view>
+            <view class='textarea ' wx:if="{{!visible&&!voicePop}}">
+                <view class="margin-bottom">
+                    <textarea placeholder-class="placeholder" type="text" value="{{inputAddr}}" bindinput="addrFinished" placeholder="{{textarea}}">
+                    </textarea>
+                </view>
+                <view class='absolute-ai'>
+                    <button class="btn green-light" bindtap="aiAddressParse">AI解析</button>
+                </view>
+                <view class='absolute'>
+                    <button class="btn green-light" bindtap="addrInput">智能识别</button>
+                </view>
+            </view>
+            <view class="addr_used">
+                <customer-addr-used bind:change="getAddrUsed" type="{{type}}" customerId="{{customer_id}}" />
+            </view>
+        </view>
+        <view style="height:1px;"></view>
+
+        <view class='bottom-btn '>
+            <button form-type="reset" class='btn bg-red m-p'>清除</button>
+            <button form-type="submit" class='btn bg-blue m-p'>确定</button>
+        </view>
+    </form>
+</view>
+
+
+<cascader isLeaf="{{isLeaf}}" visible="{{ visible }}" controlled value="{{ value_addr }}" title="地址选择" options="{{ cantonInfo }}" bind:close="onClose" bind:change="onChange" />
+
+
+<popup position="bottom" visible="{{ voicePop }}">
+    <cell-group>
+        <cell hover-class="none">
+            <icon type="i-loading2 i-spin" size="36" />正在录音中...
+        </cell>
+        <cell hover-class="none">
+            <button class="btn bg-red cell-btn" bindtap="onClosePop">结束录制</button>
+        </cell>
+    </cell-group>
+</popup>

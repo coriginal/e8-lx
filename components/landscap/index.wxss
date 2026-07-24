@@ -1,0 +1,26 @@
+.wux-landscape__popup {
+  background-color: transparent!important
+}
+.wux-landscape__popup-body {
+  padding: 0!important
+}
+.wux-landscape__inner {
+  padding: 30rpx;
+  font-size: 30rpx;
+  line-height: 1.5;
+  color: #666
+}
+.wux-landscape__inner > image {
+  width: 100%;
+  max-width: 100%
+}
+.wux-landscape__close {
+  position: relative;
+  display: inline-block;
+  margin-top: 10rpx
+}
+.wux-landscape__close-x {
+  display: inline-block;
+  width: 48rpx;
+  height: 48rpx;
+}

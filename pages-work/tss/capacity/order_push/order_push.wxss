@@ -1,0 +1,23 @@
+@import '../capacity_arrange/capacity_arrange.wxss';
+
+.block {
+  display: block;
+}
+
+.t-f26 {
+  font-size: 26rpx !important;
+}
+
+.query-tag {
+  color: var(--red);
+}
+
+.flex-2{
+  flex: 2!important;
+}
+
+.choose-all-order{
+ background-color: transparent!important;
+ border: 1px solid var(--blue);
+ color: var(--blue);
+}

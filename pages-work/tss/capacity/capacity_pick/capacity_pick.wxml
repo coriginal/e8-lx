@@ -1,0 +1,94 @@
+<view class="top" wx:if="{{mode=='normal'}}">
+    <text>包含</text>
+    <view>{{weight}}kg</view>
+    <view>{{amount}}件</view>
+    <view>{{volume}}方</view>
+    <text>{{list.length}}票</text>
+</view>
+
+<van-cell-group>
+    <van-field
+        label="司机"
+        value="{{form.driver}}"
+        placeholder="请输入司机"
+        bind:change="onFieldChange"
+        data-field="driver"
+        use-button-slot
+    >
+        <van-icon slot="button" name="arrow-down" bind:click="getDriver" />
+    </van-field>
+    <van-field
+        label="司机电话"
+        value="{{form.phone}}"
+        placeholder="请输入司机电话"
+        bind:change="onFieldChange"
+        data-field="phone"
+        use-button-slot
+    >
+        <van-icon slot="button" name="arrow-down" bind:click="getDriverPhone" />
+    </van-field>
+    <van-field
+        label="备注"
+        value="{{form.remark}}"
+        placeholder="请输入备注"
+        bind:change="onFieldChange"
+        data-field="remark"
+    />
+</van-cell-group>
+ 
+<van-cell-group>
+    <van-field
+        label="车牌"
+        value="{{form.plate_num}}"
+        placeholder="请输入车牌"
+        bind:change="onFieldChange"
+        data-field="plate_num"
+        use-button-slot
+    >
+        <van-icon slot="button" name="arrow-down" bind:click="getPlateNum" />
+    </van-field>
+    <van-field
+        label="车型"
+        value="{{form.truck_type}}"
+        placeholder="请输入车型"
+        bind:change="onFieldChange"
+        data-field="truck_type"
+    />
+    <van-field
+        label="承运商"
+        value="{{form.lc}}"
+        placeholder="请输入承运商"
+        bind:change="onFieldChange"
+        data-field="lc"
+        use-button-slot
+    >
+        <van-icon slot="button" name="arrow-down" bind:click="getLogistic" />
+    </van-field>
+    <van-cell
+        title="类型"
+        value="{{form.type || '请选择类型'}}"
+        is-link="{{mode=='normal' && !noChangeType}}"
+        bind:click="getType"
+    />
+    <van-field wx:if="{{!user.isEff && !needSite}}"
+        label="区域"
+        value="{{form.area}}"
+        placeholder="请输入区域"
+        bind:change="onFieldChange"
+        data-field="area"
+    />
+    <van-cell wx:if="{{needSite}}"
+        title="线路"
+        value="{{form.line_name || '请选择线路'}}"
+        is-link
+        bind:click="getRoutes"
+    />
+    <view wx:if="{{needSite}}" class="sort-action">
+        <van-button type="default" size="small" bind:click="fixSort">排序</van-button>
+    </view>
+</van-cell-group>
+ 
+<view class="btn-wrap">
+    <van-button wx:if="{{mode=='normal'}}" type="info" round block bind:click="submitForm">{{taskid ? '确认修改' : '确定新增'}}</van-button>
+    <van-button wx:if="{{mode=='scan'}}" type="info" round block bind:click="submitForm">确定选择</van-button>
+</view>

@@ -1,0 +1,103 @@
+@import '../order_quote/order_quote.wxss';
+
+.placeorder {
+  background-color: white;
+}
+
+.placeorder {
+  min-height: 84rpx;
+  line-height: 84rpx;
+  padding: 0 20rpx;
+}
+
+.placeorder view {
+  font-size: 28rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.placeorder-flex {
+  display: flex;
+  align-items: center;
+  display: -webkit-flex;
+  -webkit-align-items: center;
+  position: relative;
+}
+
+.placeorder-flex.t-center {
+  justify-content: center;
+}
+
+.title-big {
+  font-weight: bold;
+  font-size: 18px;
+  color: #444;
+}
+
+.text-underline {
+  position: absolute;
+  bottom: 0;
+  min-width: 16.666%;
+  height: 6rpx;
+  left: 0;
+  background-color: var(--grey);
+  color: var(--white);
+}
+
+.content {
+  background-color: transparent;
+  padding: 0;
+  margin-bottom: 20rpx;
+}
+
+.addr {
+  background-color: white;
+  /* margin: 15rpx 0; */
+}
+
+.margin-top {
+  margin-top: 20rpx;
+}
+
+
+.placeorder-input {
+  flex: 1;
+  padding: 0 20rpx;
+}
+
+.opcity8 {
+  opacity: .7;
+}
+
+.import-address {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64rpx;
+  padding: 0 20rpx;
+}
+
+.text-padding{
+  padding: 0 10rpx;
+}
+.pack{
+  margin: 12rpx;
+  padding: 15rpx 10rpx;
+  border-radius: 10rpx;
+}
+
+.btn-view {
+  padding: 30rpx;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  z-index: 999;
+}
+.margin-bottom-fade{
+  margin-bottom: 152rpx;
+}

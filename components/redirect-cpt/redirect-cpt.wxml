@@ -1,0 +1,12 @@
+<popup visible="{{ show }}" title="请选择所属公司" maskClosable="{{false}}" bind:close="onClose">
+	<scroll-view class="scroll-view"  scroll-y>
+		<!-- <row wx:for="{{domain_group_list}}" wx:key>
+			<col span="12" > -->
+		<view wx:for="{{domain_group_list}}" wx:key bindtap="chooseDomain" id="{{index}}" class="{{choosedIdx === index && 'choosed'}}  solid-bottom padding-20">{{item.name}}</view>
+		<!-- </col>
+		</row> -->
+	</scroll-view>
+	<view class="btn-group">
+		<button class="btn bg-blue" bindtap="confirmChoose">确定</button>
+	</view>
+</popup>

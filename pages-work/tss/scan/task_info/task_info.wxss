@@ -1,0 +1,59 @@
+.part-title{
+  font-size: 16px;
+  padding: 8px 10px;
+  color: #fff;
+}
+.blue{
+  background: var(--blue);
+}
+.green{
+  background: var(--green);
+}
+.task_card{
+  background: #fff;
+  margin-bottom: 5px;
+  padding: 8px 10px;
+}
+.row{
+  display: flex;justify-content: space-between;
+}
+.first{
+  padding:3px 0 7px 0;border-bottom: 1px solid #f1f3f5;
+}
+.tosacn{
+  background: var(--red);
+  padding: 2px 8px;
+  color: #fff;
+  border-radius: 2px;  
+}
+.second{
+  padding: 8px 0px;
+}
+.truck{
+  border: 1px solid palevioletred;
+  background:pink;
+  padding: 1px 4px;
+  font-size:12px;
+}
+.footer{
+  background: #fff;
+  padding: 8px 10px;text-align: center;
+  border-top: 1px solid #f1f3f5;
+}
+.bottom-btn{
+  margin: 0 7%;
+  width: 86%;font-size: 16px;
+  color: #fff;
+  line-height: 70rpx;
+}
+.site{
+  text-align: center;border: 1px solid;
+  font-size: 15px;
+  padding: 5px 8px;
+  margin: 5px 8px;
+  height: fit-content;
+}
+.modal-cancel{
+    height: 500rpx;
+    overflow: auto;
+}

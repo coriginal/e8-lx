@@ -1,0 +1,45 @@
+<view class="wrap">
+<form bindsubmit="formSubmit">
+
+  <view class="top" >
+    <view class="station">
+      <icon type="i-locationfill" color="#5c96ec" size="40"></icon>
+      <input name="station" placeholder="本站" class="stop" bindinput="getValue" data-name="station" value="{{select.station}}"></input>
+    </view>
+    <view class="total">共<b> {{ scanList.length||0 }}</b> 单</view>
+  </view>
+
+  <view class="scan">
+    <input name="handcode" placeholder="输入或扫描单号" confirm-type="done" bindconfirm="handAdd" value="{{handcode}}"></input>
+    <icon color="#5c96ec" type="i-scan" size="50" style="margin:5px 0 0 10px;" bindtap="scanCode" ></icon>
+  </view>
+
+  <view class="scan_list">
+    <view class="detail" wx:for="{{scanList}}" wx:key='' >
+      <view class="one"> 
+        <view class="code"><text>单号：</text><input name="code" class="codenum" value="{{item.scan_code}}" ></input> </view>
+        <icon type="i-delete" size="32" color="grey" bindtap="deleteCode" id="{{index}}"></icon>
+      </view>
+      <view class="two"> 
+        <view class="input"><input name="amount" placeholder="件数" value="{{item.amount}}" bindchange="getValue" data-name="amount" data-index="{{index}}" type="digit"></input><text>件</text></view>
+        <view class="input"><input name="weight" placeholder="重量" value="{{item.weight}}" bindchange="getValue" data-name="weight" data-index="{{index}}" type="digit"></input><text>kg</text></view>
+        <view class="input"><input name="volume" placeholder="体积" value="{{item.volume}}" bindchange="getValue" data-name="volume" data-index="{{index}}" type="digit"></input><text>方</text></view>
+        <view class="input"><input name="longer" placeholder="长" value="{{item.longer}}" bindchange="getValue" data-name="longer" data-index="{{index}}" type="digit"></input><text>cm</text></view>
+        <view class="input"><input name="width" placeholder="宽" value="{{item.width}}" bindchange="getValue" data-name="width" data-index="{{index}}" type="digit"></input><text>cm</text></view>
+        <view class="input"><input name="height" placeholder="高" value="{{item.height}}" bindchange="getValue" data-name="height" data-index="{{index}}" type="digit"></input><text>cm</text></view>
+      </view>
+    </view>
+  </view>
+
+  <view class="scan_choose" bindtap="scanCode">
+    <image src="../../../../images/icon-scan.png"></image>
+  </view>
+
+  <view class='bottom'>
+    <!-- <view class="opicon"><icon type="i-roundadd" color="#5c96ec"></icon></view> -->
+    <button class="bottom-btn" type='primary' formType='submit' style="background:#5c96ec;"> 保 存 </button>
+    <!-- <view class="opicon"><icon type="i-list" color="#5c96ec"></icon></view> -->
+  </view>
+
+</form>
+</view>

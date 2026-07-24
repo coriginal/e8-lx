@@ -1,0 +1,69 @@
+<dialog id="wux-dialog" />
+
+<tabs controlled theme="positive" current="{{ tab_current }}" bindchange="onChangeTabs">
+	<tab key="{{item.code}}" wx:for="{{tabs}}" wx:key>
+		<badge count="{{item.count}}">{{item.title}}</badge>
+	</tab>
+</tabs>
+
+
+<view class="task-content">
+	<view wx:if="{{taskList.length}}" class='panel ' catchtap="goDetail" wx:for="{{taskList}}" wx:for-item="task"
+		data-id="{{task.id}}" data-type="{{task.type}}" data-status="{{task.status}}" wx:key=''>
+		<image src="../../../../images/qiang.png" wx:if="{{task.assign_type =='bid'}}" class="background-qiang"></image>
+		<view class='head'>
+			<view class="left_head">
+				<tag wx:if="{{task.status != '待接单'}}" color='{{typeObj[task.type].color}}'>{{typeObj[task.type].name}}</tag>
+				<view class=" t-fw text-truck-type">{{task[typeObj[task.type].head_name] || task.code }}</view>
+				<view wx:if="{{task.status == '已到达'}}" class="status likeicon">{{task.status}}</view>
+				<view class="status likeicon">{{task.status}}</view>
+			</view>
+			<view class="order-code text-gray"> {{task.code}}</view>
+		</view>
+
+		<view class="task-row" wx:for='{{tableObj[task.type]}}' wx:for-index='key' wx:key>
+			<text wx:if="{{task[key]}}">
+				<text class="text-gray table_title">{{item}}</text>
+				<text class="table_content">{{task[key]}}</text>
+			</text>
+		</view>
+		<view class="task-row ">
+			<text class="text-gray table_title">货物：</text>
+			<text class="table_content">{{task.cargoInfo}}</text>
+		</view>
+
+		<view class="task-row ">
+			<text class="text-gray table_title">车辆：</text>
+			<text class="table_content">{{task.carInfo || ''}}</text>
+		</view>
+
+		<view class="task-row ">
+			<text class="text-gray table_title">创建时间：</text>
+			<text class="table_content">{{task.createtime || ''}}</text>
+		</view>
+
+		<view class="task-row">
+			<tag wx:if="{{task.if_load}}" color="blue">需装</tag>
+			<tag wx:if="{{task.if_unload}}" color="green">需卸</tag>
+		</view>
+		<view wx:if="{{task.remark}}" class="task-row ">
+			<text class="text-gray ">备注：</text>
+			<text class="table_content"> {{task.remark}}</text>
+		</view>
+		<!-- <view wx:if="{{if_op}}" class="foot_menu"> -->
+		<!-- <view class="likeicon" wx:if="{{task.status!='已到达'}}" data-index="{{index}}" catchtap="update">修改</view> -->
+		<!-- <button id="{{task.id}}" wx:if="{{sub_orders.length&&task.status!='已到达'}}" catchtap="doTask" data-code="{{task.code}}" class="btn bg-blue">调度</button> -->
+		<!-- </view> -->
+
+		<view class="message-again">
+			<button id="{{task.id}}" wx:if="{{sub_orders.length&&task.status!='已到达'}}" catchtap="doTask"
+				data-code="{{task.code}}" class="btn bg-blue">调度</button>
+			<block wx:if="{{from_page !== 'menu'}}">
+				<button class="btn bg-blue" data-id="{{task.id}}" data-code="{{task.code}}" catchtap="sendMessageAgain"
+					wx:if="{{task.assign_type !='bid'}}">再次通知</button>
+				<button class="btn bg-blue" data-item="{{task}}" catchtap="taskFeeConfirm">费用提报</button>
+			</block>
+		</view>
+	</view>
+	<view wx:if="{{taskList.length==0}}" class="nothing">暂无运输单</view>
+</view>

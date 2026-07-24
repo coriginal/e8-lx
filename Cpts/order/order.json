@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "pick-time":"../../components/choose-pick-time",
+    "watermark": "../../components/Watermark"
+  }
+}

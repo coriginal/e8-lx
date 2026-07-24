@@ -1,0 +1,87 @@
+<!--pages-work/tss/capacity/truck_task/index.wxml-->
+<van-search bind:search="onSearch" value="{{ value }}" placeholder="请输入运输单号" />
+<view class="box">
+    <view class="card" data-code="{{item.taskCode}}" bind:tap="toDetail" wx:for="{{list}}" wx:key="{{index}}">
+        <view class="top">
+            <view class="left">
+                <text class="task-code">运输单号：{{item.taskCode}}</text>
+                <!-- <button class="copy-btn">复制</button> -->
+            </view>
+            <text class="right"></text>
+        </view>
+        <view class="status-box">
+            <view class="status">
+                <text class="title">业务状态</text>
+                <text class="status-name">{{item.taskStatusName}}</text>
+            </view>
+            <view class="status">
+                <text class="title">财务状态</text>
+                <text class="status-name">{{item.taskBillStatusName}}</text>
+            </view>
+        </view>
+        <view class="info-box">
+            <view class="info-item">
+                <text class="title">落货日期：</text>
+                <text class="info">{{item.taskDate}}</text>
+            </view>
+            <view class="info-item">
+                <text class="title">客户：</text>
+                <text class="info">{{item.customerName}}</text>
+            </view>
+            <view wx:if="{{item.plateNum}}" class="info-item">
+                <text class="title">车牌号：</text>
+                <text class="info">{{item.plateNum}}</text>
+            </view>
+            <view wx:if="{{item.trailerNum}}" class="info-item">
+                <text class="title">车挂号：</text>
+                <text class="info">{{item.trailerNum}}</text>
+            </view>
+            <view wx:if="{{item.driverInfo}}" class="info-item">
+                <text class="title">司机：</text>
+                <text class="info">{{item.driverInfo}}</text>
+            </view>
+            <view wx:if="{{item.taskFeeIncome118}}" class="info-item">
+                <text class="title">收入-卸货费：</text>
+                <text class="info">{{item.taskFeeIncome118}}</text>
+            </view>
+            <view wx:if="{{item.taskOrderFee}}" class="info-item">
+                <text class="title">订单总收入：</text>
+                <text class="info">{{item.taskOrderFee}}</text>
+            </view>
+            <view wx:if="{{item.remark}}" class="info-item">
+                <text class="title">备注：</text>
+                <text class="info">{{item.remark}}</text>
+            </view>
+            <view wx:if="{{item.planArriveTime}}" class="info-item">
+                <text class="title">计划到达：</text>
+                <text class="info">{{item.planArriveTime}}</text>
+            </view>
+            <view wx:if="{{item.realArriveTime}}" class="info-item">
+                <text class="title">实际到达：</text>
+                <text class="info">{{item.realArriveTime}}</text>
+            </view>
+            <view wx:if="{{item.loadWeight}}" class="info-item">
+                <text class="title">装车重量：</text>
+                <text class="info">{{item.loadWeight}}</text>
+            </view>
+            <view wx:if="{{item.unloadWeight}}" class="info-item">
+                <text class="title">卸车重量：</text>
+                <text class="info">{{item.unloadWeight}}</text>
+            </view>
+            <view wx:if="{{item.createTime}}" class="info-item">
+                <text class="title">创建时间：</text>
+                <text class="info">{{item.createTime}}</text>
+            </view>
+        </view>
+        <view class="btn-box">
+            <view>
+                <button catch:tap="supplementOrder" data-truckTaskCode="{{item.taskCode}}">运单补录</button>
+            </view>
+            <view class="right-btn">
+                <button data-code="{{item.taskCode}}" catch:tap="editOrder" wx:if="{{item.taskStatus === 10 || item.taskStatus === 30}}">修改</button>
+                <button catch:tap="truckArrive" data-taskCode="{{item.taskCode}}" wx:if="{{item.taskStatus === 10}}">到车</button>
+                <button catch:tap="truckComplete" data-taskCode="{{item.taskCode}}" wx:if="{{item.taskStatus === 30}}">报竣</button>
+            </view>
+        </view>
+    </view>
+</view>

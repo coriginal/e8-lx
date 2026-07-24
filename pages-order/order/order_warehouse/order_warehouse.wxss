@@ -1,0 +1,29 @@
+.popup-view {
+  height: 60vh;
+  overflow: scroll;
+}
+
+.btn-view {
+  margin: 60rpx 10rpx;
+  display: flex;
+}
+
+.btn-view .btn {
+  flex: 1;
+  height: 84rpx;
+  margin: 0 20rpx;
+  justify-content: space-around
+}
+
+.wux-cell__ft{
+  width: 80%!important;
+}
+
+.flex-group{
+  display:flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.flex-group view{
+  padding: 0 20rpx;
+}

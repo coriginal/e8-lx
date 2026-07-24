@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "abnormal": "../report_abnormal/index",
+    "modal": "../../modal/index",
+    "attach": "../../../components/attach/index",
+    "detail": "../../../../Cpts/order_detail/order_detail"
+  },
+  "navigationBarTitleText": "订单核验"
+}

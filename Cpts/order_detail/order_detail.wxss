@@ -1,0 +1,183 @@
+.man-msg {
+    /* margin: 20rpx 0; */
+    padding: 20rpx;
+    /* border-radius: 6rpx; */
+    border-left: 1px solid#eee;
+    min-height: 120rpx;
+}
+
+.man-msg>view:first-child {
+    font-size: 32rpx;
+}
+
+.man-msg .addr {
+    font-size: 24rpx;
+    margin-top: 12rpx;
+    opacity: 0.8;
+}
+
+.detail-page {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 120rpx;
+    position: relative;
+    background-color: white;
+    border-radius: 10rpx;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+.top-ocode {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    display: -webkit-flex;
+}
+
+.qrcode {
+    padding: 20rpx;
+    display: flex;
+    display: -webkit-flex;
+
+}
+
+.qrcode image {
+    width: 148rpx;
+    height: auto;
+}
+
+.receive-panel {
+    padding: 0 20rpx;
+    border-right: 1px solid#eee;
+}
+
+._flex {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid#eee;
+    display: -webkit-flex;
+}
+
+._title {
+    width: 40rpx;
+    height: 40rpx;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    -webkit-justify-content: center;
+    align-items: center;
+    -webkit-align-items: center;
+    border-radius: 5000rpx;
+    font-size: 24rpx;
+    margin: 0 20rpx;
+}
+
+._send {
+    background-color: #444;
+    color: white;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.border-lr {
+    border-left: 1px solid#eee;
+    border-right: 1px solid#eee;
+}
+
+.receive_city {
+    font-weight: bold;
+    font-size: 60rpx;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.placeorder {
+    height: 64rpx;
+    line-height: 64rpx;
+    padding: 0 20rpx;
+}
+
+.placeorder view {
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.placeorder-flex {
+    display: flex;
+    align-items: center;
+    display: -webkit-flex;
+    -webkit-align-items: center;
+}
+
+.solid-bottom>view {
+    border-bottom: 1px solid#eee;
+}
+
+.person-msg view {
+    margin-left: 8rpx !important;
+}
+
+.i-copy {
+    padding-left: 20rpx;
+}
+
+.t-margin-left {
+    margin-left: 15rpx;
+    font-size: 30rpx;
+}
+
+.placeorder-flex.t-center {
+    justify-content: center;
+}
+
+.send-site,
+.receive-site {
+    font-size: 16px !important;
+    line-height: 20px;
+}
+
+.icon-right {
+    margin: 0 10rpx;
+}
+
+.placeorder-site {
+    line-height: 64rpx;
+}
+
+.text-bb {
+    color: #5a6b92;
+}
+
+.add-fee text {
+    margin-left: 10rpx;
+}
+
+.bottom-btn {
+    width: 100vw;
+    height: 120rpx;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid whitesmoke;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background-color: white;
+}
+
+.bottom-btn button {
+    flex: 1;
+    margin: 0 10rpx;
+    font-size: 30rpx;
+    text-align: center;
+}
+
+.margin-right {
+    margin-right: 40px;
+}

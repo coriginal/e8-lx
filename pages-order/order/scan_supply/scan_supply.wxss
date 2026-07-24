@@ -1,0 +1,34 @@
+.nothing {
+  color: gray;
+  margin: 188px 0 20px 0;
+  text-align: center;
+}
+
+.scanAgain {
+  text-align: center;
+  color: var(--blue);
+}
+
+.bottom-btn {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  padding: 30rpx 0;
+  background-color: white;
+  z-index: 999;
+}
+
+.m-p {
+  margin: 0 20rpx;
+  padding: 20rpx 32rpx;
+  border-radius: 6rpx;
+  height: 84rpx;
+  font-weight: 500;
+}
+.flex-1{
+  flex: 1;
+}
+.order-detail{
+  margin-bottom: 154rpx;
+}

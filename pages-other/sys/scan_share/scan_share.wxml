@@ -1,0 +1,30 @@
+<view class='top t-bar'>
+	<view class='title'>
+		<text>邀请二维码</text>
+		<text />
+  </view>
+</view>
+
+<view class="tower-swiper" bindtouchmove="towerMove" bindtouchstart="towerStart" bindtouchend="towerEnd">
+  <view class="tower-item " wx:for="{{swiperList}}" wx:key style="--index:{{item.zIndex}};--left:{{item.mLeft}}">
+    <view class="swiper-item">
+      <view class="swiper-item" style="background-image:url({{item.url}});">
+    </view>
+    </view>
+  </view>
+</view>
+
+<view  class='mask' wx:if="{{shareImage&&show}}" catchtap='closeSave'>
+  <view  catchtap=' ' class="text-center">
+    <image show-menu-by-longpress class='fade' src="{{shareImage}}" style="height:auto;border-radius:6rpx;z-index:99999;zoom:0.85;" mode='widthFix' catchtap='' />
+      <button class="fade" class=' btn-group btn bg-click' catchtap='eventSave'>
+        <icon size='22' type='i-share' />长按图片可保存或转发
+      </button>
+  </view>
+</view>
+
+<canvasdrawer painting="{{painting}}" class="canvasdrawer" bind:getImage="eventGetImage" />
+
+<!-- <view class="content">
+
+</view> -->

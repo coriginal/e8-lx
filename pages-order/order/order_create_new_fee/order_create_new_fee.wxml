@@ -1,0 +1,23 @@
+<view class="feeinfo-content">
+	<view wx:if="{{list.length == 0}}" class="nothing-more fade">
+		暂无更多科目
+	</view>
+	<view wx:else class="fade">
+		<row>
+			<col span="4" wx:for="{{list}}" wx:key wx:if="{{item.permission == 2}}">
+			<view class="placeorder">
+				<view hover-class="default" class="placeorder-flex" bindtap="chooseItem" data-item="{{item}}">
+					<text class="opcity ">{{item.subject_name||''}}</text>
+				</view>
+			</view>
+			</col>
+		</row>
+	</view>
+</view>
+<dialog id="wux-dialog">
+	<view wx:if="{{type == 'cost'}}" bindtap="chooseLcName" hover-class="default" class="dialog-view {{settle_account_name?'text-blue':''}}" slot="add-content">
+		{{settle_account_name?settle_account_name:'选择往来方'}}
+	</view>
+</dialog>
+
+<sp-popup bind:change="changePopShow" submit_money="{{submit_money}}" wx:if="{{show_pop}}" param="{{param}}"></sp-popup>

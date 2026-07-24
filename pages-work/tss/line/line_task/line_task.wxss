@@ -1,0 +1,64 @@
+.top{
+  display: flex;
+}
+.list{
+  background:#fff;
+  border-top: 5px solid #f1f3f5;
+  padding: 12px 14px 8px 14px;
+  font-size: 15px;
+}
+.title{
+  border-bottom: 1px solid #f1f3f5;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+.status{
+  color: orange;
+}
+.line{
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0px;
+}
+.line_{
+  font-weight: bold;
+}
+.truck{
+  border: 1px solid palevioletred;
+  background:pink;
+  padding: 1px 4px;
+  font-size:12px;
+}
+.detail{
+  font-size: 12px;
+  color: grey;
+}
+.time{
+  padding: 8px 0px 10px;
+  border-bottom: 1px solid #f1f3f5;
+}
+.opbtn{
+  display: flex;justify-content: space-between;
+  padding: 10px 0px 0px 0px;font-size: 14px;
+}
+.opbtn view{
+  border: 1px solid;
+  padding: 4px 15px;
+  color:#5c96ec;
+  border-radius: 15px;
+  margin-right: 4px;
+}
+.filter{
+  width: 34%;
+  background: #fff;
+  height: 44px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+}
+.filter>view{
+  flex: 1;
+}

@@ -1,0 +1,7 @@
+{
+    "usingComponents": {
+        "van-datetime-picker":"@vant/weapp/datetime-picker/index",
+        "van-popup": "@vant/weapp/popup/index"
+    },
+    "navigationBarTitleText": "运输单"
+}

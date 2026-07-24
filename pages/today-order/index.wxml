@@ -1,0 +1,52 @@
+<view class="margin-bottom" wx:if="{{list.length}}">
+    <block wx:for="{{list}}" wx:key wx:for-item="item">
+        <view class="content">
+            <view class="content-top solid-bottom flex align-center">
+                <view class="flex-1">
+                    <view class="status start-end">
+                        <view class="value">
+                            <text class="text-blue">{{item.send_site||item.send_city||item.send_district||'无'}}</text>
+                            <text> - </text>
+                            <text class="text-red">{{item.receive_site||item.receive_city||item.receive_district||'无'}} </text>
+                        </view>
+                    </view>
+                    <text class="order-code text-gray" selectable>订单号：{{item.order_code||item.code}}--<text style="color:#000;">{{item.createtime}}</text></text>
+                    <text class="order-code text-gray" wx:if="{{item.tcode}}" selectable>运单号：{{item.tcode}}</text>
+                    <text class="order-code text-red" selectable wx:if="{{item.real_lc_name}}">
+                        下游承运商：{{item.real_lc_name}}{{item.next_lc_status? ('-' + item.next_lc_status) : ""}}
+                    </text>
+                </view>
+            </view>
+            <view class="content-middle solid-bottom" data-order-code="{{item.order_code}}" data-order-id="{{item.order_id}}" catchtap="goOrderInfo">
+                <view class="flex align-center" wx:for="{{['send','receive']}}" wx:for-item="addr" wx:if="{{item[addr+'_addr']}}" wx:key>
+                    <image mode="widthFix" class="images" src="/images/{{addr}}.png"></image>
+                    <view class="flex-1 solid-left">{{item[addr+'_addr']}}</view>
+                </view>
+                <view class="notices" wx:if="{{item.scheduled_delivery_time}}">
+                    <text class="deliver-time">预约送货时间：</text>
+                    <text class="time">{{item.scheduled_delivery_time}}</text>
+                </view>
+            </view>
+            <view class="content-foot flex align-center">
+                <view class="status">
+                    <view class="title">客户</view>
+                    <view class="value">{{item.customer_name||''}}</view>
+                    <view wx:if="{{item.ccode}}" class="value text-grey">{{item.ccode||''}}</view>
+                </view>
+                <view class="status solid-left solid-right">
+                    <view class="title">货物信息</view>
+                    <view class="value">
+                        <text wx:if="{{item.amount>0}}">{{item.amount}}件 </text>
+                        <text wx:if="{{item.weight>0}}">{{item.weight}}{{weight_unit}} </text>
+                        <text wx:if="{{item.volume>0}}">{{item.volume}}m³ </text>
+                    </view>
+                </view>
+                <view class="status" bindtap="goRouteInfo" data-domain="{{item.domain}}" data-code="{{item.code}}" data-id="{{item.id}}">
+                    <view class="text-orange value">{{item.status||''}}</view>
+                    <view class="text-blue value">【查看轨迹】</view>
+                </view>
+            </view>
+        </view>
+    </block>
+</view>
+<van-empty wx:else description="今日暂无订单" />

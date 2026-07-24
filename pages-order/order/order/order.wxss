@@ -1,0 +1,25 @@
+.i-loading2{
+  margin-right: 10rpx;
+}
+
+.checkbox .wx-checkbox-input {
+  width: 23rpx;
+  height: 23rpx;
+  /* border-radius: 1000rpx; */
+  border: 2rpx solid #444;
+}
+
+.checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+  color: var(--red);
+  border-color: var(--red);
+}
+
+.checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+  width: 50%;
+  height: 50%;
+  background: var(--red);
+  border-radius: 2rpx;
+  content: '';
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+}

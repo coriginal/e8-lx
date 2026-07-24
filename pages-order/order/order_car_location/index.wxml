@@ -1,0 +1,17 @@
+	<block wx:if="{{task.length > 0}}">
+		<view class="p-10">
+			<block wx:for="{{task}}" wx:key="task" wx:for-item="task" wx:for-index="index">
+				<view class="title">{{task.title}}</view>
+				<block wx:for="{{task.child}}">
+					<view class="task-line p-lr-20">线路/区域：{{item.line_name||''}}</view>
+					<view class="task-line p-lr-20">承运商：{{item.lc_name1||''}}</view>
+					<view class="task-line p-lr-20">司机：{{item.driver||''}}</view>
+					<view class="task-line p-lr-20 text-blue" data-info="{{item}}" bindtap="goCarLocation">车牌：{{item.plate_num||''}}</view>
+					<view class="task-line p-lr-20 solid-bottom">车型：{{item.truck_type||''}}</view>
+				</block>
+			</block>
+		</view>
+	</block>
+	<block wx:else>
+		<view class="t-center nothing">暂无车辆信息</view>
+	</block>

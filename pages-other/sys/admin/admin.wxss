@@ -1,0 +1,58 @@
+.my-system-options {
+  background-color: white;
+  box-shadow: 0 0 4rpx rgba(0, 0, 0, 0.1);
+  font-size: 26rpx;
+}
+
+.my-system-menu {
+  height: 84rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30rpx;
+}
+
+.left-view {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.left-view view {
+  margin-right: 10rpx;
+}
+
+.right-view {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  color: #9e9c9c;
+}
+
+.logout {
+  margin: 30rpx;
+  display: flex;
+}
+
+.flex-sub1 {
+  flex: 1;
+  height: 84rpx;
+}
+
+.my-system-notice {
+  margin-right: 20rpx;
+  letter-spacing: 2rpx;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.margin-top {
+  margin-top: 20rpx;
+}
+
+.landscap {
+  border-radius: 10rpx;
+}

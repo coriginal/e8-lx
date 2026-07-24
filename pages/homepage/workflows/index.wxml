@@ -1,0 +1,15 @@
+<view class='box fade'>
+    <view class="cell {{ (index+1) % 3 ===0 ? 'right' : ''}}" wx:for="{{ tableList }}" style="height:{{ cellHeight }}" catchtap='openWorkflow' data-recordid="{{ item.id}}" data-wfingCount="{{ item.wfingCount }}" wx:key="{{item.id}}" data-wxurl="{{ item.wxurl }}">
+        <view>
+            <view class="badge" wx:if="{{ item.wfingCount}}">
+                <badge count="{{item.wfingCount}}"></badge>
+            </view>
+            <iconfont class="image" size="{{imageHeight}}" name="{{item.wxicon}}"></iconfont>
+            <!-- <image class='image' wx:if="{{ item.wxicon }}" src="{{ app_host + item.wxicon }}" style="height:{{imageHeight}};width:{{imageHeight}}">
+            </image> -->
+        </view>
+        <view class='text'>
+            <text>{{item.name}}</text>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,26 @@
+/* components/Watermark/index.wxss */
+.watermark {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: flex;
+  flex-wrap: wrap;
+  opacity: .08;
+  z-index: 9999;
+}
+.row {
+  display: flex;
+}
+
+.row.even {
+  margin-left: 120rpx;
+}
+.watermark text{
+  width: 200rpx;
+  height: 120rpx;
+  color: #000;
+  font-size: 28rpx;
+}
+.watermark image {
+  height: 50rpx;
+}

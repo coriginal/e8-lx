@@ -1,0 +1,8 @@
+{
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "location": "../phone_location/index",
+    "modal": "../../modal/index",
+    "attach": "../../../components/attach/index"
+  }
+}

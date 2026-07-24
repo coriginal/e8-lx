@@ -1,0 +1,39 @@
+page{
+  background-color: white;
+}
+
+
+.share {
+  color: var(--blue);
+}
+
+.getkey {
+  color: var(--red);
+}
+
+.bottom-btn {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  padding: 30rpx 0;
+  background-color: white;
+  z-index: 999;
+}
+
+.m-p {
+  margin: 0 20rpx;
+  padding: 20rpx 32rpx;
+  border-radius: 6rpx;
+  height: 84rpx;
+  font-weight: 500;
+  flex: 1;
+}
+
+.margin-bottom {
+  margin-bottom: 156rpx;
+}
+
+.landscap{
+  height: 375px!important;
+}

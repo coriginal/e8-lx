@@ -1,0 +1,35 @@
+<view class="_timeline">
+  <view class="cu-timeline flex" >
+    <view class="cu-time">
+      <view class="time-date">{{fn.deal(date,0)}}</view>
+      <view class="time-times">{{fn.deal(date,1)}}</view>
+    </view>
+    <view class="cu-item ">
+      <view class="content">
+        <view class="cu-capsule radius" wx:if="{{title}}">
+          <icon type='{{icon}}' size="32"></icon>
+          <text class="margin-left-sm text-bold {{titleclass}}">{{title}}</text>
+        </view>
+        <slot></slot>
+        <!-- <view wx:for="{{list}}">
+          <text>{{item.title}}</text>
+          <text>{{item.content}}</text>
+        </view> -->
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<wxs module="fn">
+  module.exports = {
+    deal: function(time,index) {
+      var array = time.split(' ')
+      if(index == 0){
+        var date = array[0].split('-').slice(1,3).join('-')
+        return date
+      }
+      return array[index]
+    }
+  }
+</wxs>

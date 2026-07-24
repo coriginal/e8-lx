@@ -1,0 +1,48 @@
+<nav-bar title="{{title}}"/>
+<view wx:if="{{ reportParam || total}}" class="queryparam" >
+    <button size="mini" wx:if="{{ reportParam }}" type="primary" bindtap="showQueryDlg">重新查询</button>
+    <view class='total'>{{total}}</view>
+</view>
+
+<view class="container">
+    <view class="table" style="width:{{table_width}}px;">
+        <view class="tr">
+            <view class="th" style="width:{{item.width}}px" wx:for="{{ report_title }}" wx:key="item">
+                <view>{{ item.name }}</view>
+            </view>
+        </view>
+        <view class="tr" wx:for="{{ records }}"  wx:key="con" wx:for-item="con">
+            <view class="td" style="width:{{item.width}}px" wx:for="{{ report_title }}" wx:key="item">
+                <view>{{con[item.name] || ''}}</view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="move" wx:if="{{ showmodal }}"></view>
+<view class="modal-dialog {{ showmodal ? 'showmodal' : 'hidemodal' }}">
+  <view class="modal-title">查询条件</view>
+  <view class="modal-content">
+    <view wx:for="{{ configuration }}" wx:key="item.code" class="line">  
+        <picker wx:if="{{ item.type == 'date' }}" mode="date" bindchange="pickerChange" data-field="{{ item.code }}" data-type="date"> 
+          <text class="pickerlabel {{ item.nullable ? 'required' : ''}}">{{ item.label }}</text>
+          <text class="value">{{  form[item.code] || ''}}</text>
+        </picker>
+        <view wx:elif="{{ item.type == 'datetime' }}" class='datetimeview'>
+          <text class="pickerlabel {{(item.nullable) ? 'required' : ''}}">{{ item.label }}</text>
+          <view class='datetime value'>    
+            <datetime data-field="{{ item.code }}" data-type="date" bindconfirm="pickerChange" text="{{ form[item.code] }}" not-use="{{ item.notuse ? (item.notuse == 'minutes' ? ['minutes','seconds'] : ['seconds']) : ''}}"/>
+          </view>
+        </view>
+        <field wx:elif="{{ !item.options }}" custom-class="fieldClass" title="{{ item.label }}" name="{{ item.code }}" value="{{ form[item.code] }}" inputType="{{ item.type == 'int' ? 'number' : (item.type == 'number' ? 'digit' : 'text') }}" type="{{ item.height ? 'textarea' : 'input' }}" placeholder="{{ item.placeholder || item.errorMsg}}" ud_required="{{ item.nullable ? true : false }}" bind:change="fieldChange" data-code="{{ item.code }}">{{ item.unit }}</field>
+        <picker wx:elif="{{ item.options }}"  range="{{ item.options }}" range-key="name" bindchange="pickerChange" data-field="{{ item.code }}" data-index="{{ index }}" data-getnext="{{ item.onchange }}"> 
+          <text class="pickerlabel {{(item.nullable) ? 'required' : ''}}">{{ item.label }}</text>
+          <text class="value">{{ form[item.code] || ''}}</text>
+        </picker> 
+    </view>
+  </view>
+  <view class="modal-footer">
+    <view class="btn-cancel" bindtap="cancel" data-status="cancel">取消</view>
+    <view class="btn-confirm" bindtap="confirm" data-status="confirm">查询</view>
+  </view>
+</view>

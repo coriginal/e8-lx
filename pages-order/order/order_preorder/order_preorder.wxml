@@ -1,0 +1,38 @@
+<view class="wrap">
+<form bindsubmit="formSubmit">
+
+  <view class="top" >
+    <view class="station">
+      <icon type="i-people" color="#5c96ec" size="40" bindtap="openCustomerList"></icon>
+      <input name="customer" placeholder="客户" class="stop" data-name="customer" value="{{select.customer}}" disabled="true" bindtap="openCustomerList"></input>
+    </view>
+    <view class="total">共<b> {{ scanList.length||0 }}</b> 单</view>
+  </view>
+
+  <view class="scan">
+    <input name="handcode" placeholder="输入或批量复制单号（空格隔开）" confirm-type="done" bindconfirm="handAdd" value="{{handcode}}" maxlength="-1"></input>
+    <icon color="#5c96ec" type="i-scan" size="50" style="margin:5px 0 0 10px;" bindtap="scanCode" ></icon>
+  </view>
+
+  <view class="scan_list">
+    <view class="detail" wx:for="{{scanList}}" wx:key='' >
+      <view class="one"> 
+        <view class="code"><text>单号：</text><input name="code" class="codenum" value="{{item.scan_code}}" ></input> </view>
+        <icon type="i-delete" size="32" color="grey" bindtap="deleteCode" id="{{index}}"></icon>
+      </view>
+      <view class="two"> 
+        <view class="input"><input name="remark" placeholder="备注" value="{{item.remark}}" bindchange="getValue" data-name="remark" data-index="{{index}}" ></input></view>
+      </view>
+    </view>
+  </view>
+
+  <view class='bottom'>
+    <!-- <view class="checkbox"><checkbox checked="{{ifFrezen}}" bindchange="checkboxChange" />批量冻结</view> -->
+    <checkbox-group bindchange="checkboxChange" class="checkbox">
+      <checkbox checked="{{ifFrezen}}" />批量冻结
+    </checkbox-group>
+    <button class="bottom-btn" type='primary' formType='submit' style="background:#5c96ec;"> 保 存 </button>
+  </view>
+
+</form>
+</view>

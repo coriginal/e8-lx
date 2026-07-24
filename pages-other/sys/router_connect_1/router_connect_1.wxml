@@ -1,0 +1,43 @@
+<view class="view-right" wx:if="{{type == 'own_logistic'}}">
+    <!-- <button class="btn bg-blue" bindtap="chooseWareHouse">{{ware_house_id?'出发仓：'+ware_house_name:'选择出发仓库'}}</button> -->
+    <view></view>
+    <button class="btn bg-blue" bindtap="goTipPlatform">邀请下游伙伴</button>
+</view>
+<wux-index wx:if="{{!nothing_data && platform}}" height="100vh" bind:change="onChange">
+    <view class="bar">
+        <view class='search-form'>
+            <icon size='36' type='i-search' />
+            <input value="{{searchContent}}" bindinput="bindKeyInput" placeholder="请输入关键词搜索平台" type="text" />
+        </view>
+    </view>
+    <view hidden="{{searchContent}}">
+        <wux-index-item wx:for="{{ alphabet }}" wx:key="" name="{{ item.initial }}">
+            <!-- <view class="demo-item" id="{{item.cells}}" bindtap="choosePlatform">{{ item.cells }}</view> -->
+            <view bindtap="choosePlatform" class="demo-item" id="{{cell}}" wx:for="{{ item.cells }}" wx:for-item="cell" wx:key="">{{ cell }}</view>
+        </wux-index-item>
+    </view>
+    <view hidden="{{!searchContent}}" bindtap="choosePlatform" class="demo-item" id="{{item.name}}" wx:for="{{ filterData }}" wx:key="">{{ item.name }}</view>
+</wux-index>
+<view wx:if="{{nothing_data }}" class="nothing-data">
+    <view>暂无下游平台</view>
+    <button class="btn bg-blue" bindtap="goTipPlatform">前往去邀请</button>
+</view>
+<!-- <view class="bottom-btn" wx:if="{{type == 'own_logistic'}}">
+    <button class="btn" bindtap="shareQrcode">邀请下游</button>
+</view> -->
+
+<dialog id="wux-dialog" />
+
+<popup title="选择发件仓" visible="{{ show_ware_house }}" bind:close="onClosePopup">
+    <view class="popup-view">
+        <block wx:for="{{warehouselist}}" wx:key>
+            <!-- <cell hover-class="default" bind:click="popupClick" data-name="{{item.name}}" data-id="{{item.id}}" title="{{item.name}}"></cell> -->
+            <view class="view-rows" bindtap="popupClick" data-name="{{item.name}}" data-id="{{item.id}}">
+                {{item.name}}
+            </view>
+        </block>
+    </view>
+    <view class="padding-top20">
+        <button class="btn bg-green new-warehouse" bindtap="createWareHouse">新增仓库</button>
+    </view>
+</popup>

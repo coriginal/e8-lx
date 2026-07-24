@@ -1,0 +1,20 @@
+ <block wx:if="{{!showNothing}}">
+ 	<view class="order-detail">
+ 		<detail order="{{order}}" />
+ 	</view>
+ 	<view style="height:1px"></view>
+ 	<view class="bottom-btn">
+ 		<button class="bg-red btn m-p" bindtap="doScanOrder">扫描下一个</button>
+ 		<button class="bg-blue btn m-p flex-1" bindtap="takePhoto">拍照上传</button>
+ 	</view>
+ </block>
+ <block wx:else>
+ 	<view class="nothing">
+ 		没有找到当前
+ 		<text class="text-red">{{searchValue}}</text>
+ 		所对应的订单
+ 	</view>
+ 	<view bindtap="doScanOrder" class="doScanOrder">
+ 		重新扫码
+ 	</view>
+ </block>

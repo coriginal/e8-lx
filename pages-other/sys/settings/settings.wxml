@@ -1,0 +1,19 @@
+<!-- 查看系统角色 -->
+<view class="my-system-options margin-top" wx:if="{{menu_list.length}}">
+  <view class="my-system-menu {{index==menu_list.length-1?'':'solid-bottom'}}" wx:for="{{menu_list}}" wx:key bindtap="clickSettingMenu" id="{{item.code}}"  wx:if="{{item.show}}">
+    <view class="left-view ">
+        <view><icon size='30' type='i-{{item.icon}}' />{{item.name}}</view>
+        <view class="my-system-notice">{{item.notice}}</view>
+    </view>
+    <view class="right-view" wx:if="{{item.type}}">
+      <icon size='30' color="gray" type="{{item.type}}" />
+    </view>
+  </view>
+</view>
+
+<!-- 注销登陆 -->
+<!-- <view class="logout">
+  <view bindtap="logOut" class="text-red text-center">注销登录</view>
+</view> -->
+
+<dialog id="wux-dialog" />

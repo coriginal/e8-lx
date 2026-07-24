@@ -1,0 +1,10 @@
+<view class="watermark">
+  <block wx:for="{{4}}" wx:key="row">
+    <view class="row {{index % 2 ? 'even' : ''}}">
+      <block wx:for="{{3}}" wx:key="col">
+        <text wx:if="{{type == 'text'}}">{{text}}</text>
+        <image mode="heightFix" wx:else src="{{imgUrl}}"></image>
+      </block>
+    </view>
+  </block>
+</view>

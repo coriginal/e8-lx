@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "我的收件",
+  "usingComponents": {
+    "receive":"../../../Cpts/order_receive"
+  }
+}

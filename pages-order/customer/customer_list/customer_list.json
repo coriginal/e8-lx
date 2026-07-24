@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "swiper-action":"../../../components/swiper-action/index",
+    "swiper-action-group": "../../../components/swiper-action-group/index"
+  }
+}

@@ -1,0 +1,106 @@
+ <movable-area class="movable-area">
+ 	<movable-view class="movable-view" x="{{x}}" y="{{y}}" direction="all" bindtouchend="touchEnd">
+ 		<button class="btn movable-btn" catchtap="showQueryParams">
+ 			<icon type="i-search"></icon>
+ 		</button>
+ 	</movable-view>
+ </movable-area>
+
+ <backdrop id="wux-backdrop" bind:click="onClosed" />
+
+ <animation-group wux-class="slider-pop-view" in="{{ showParams }}" enter="{{ example.enter }}" exit="{{ example.exit }}" class-names="{{ example.classNames }}" bind:click="onClick" bind:enter="onEnter" bind:entering="onEntering" bind:entered="onEntered" bind:exit="onExit" bind:exiting="onExiting" bind:exited="onExited" unmountOnExit="{{false}}">
+ 	<scroll-view scroll-y class="animation-scroll">
+ 		<block wx:for="{{params}}" wx:for-index="idx" wx:for-item="field">
+
+ 			<block wx:if="{{idx === 'date'}}">
+ 				<view class="fab-title t-fw">日期</view>
+ 				<row>
+ 					<col span="6" wx:for="{{field}}">
+ 					<input disabled placeholder-class="default-input" class="fab-input" placeholder="{{item.title}}" value="{{item.value}}" catchtap="panelClick" data-type="{{idx}}" id="{{item.code}}"></input>
+ 					</col>
+ 				</row>
+ 			</block>
+
+ 			<block wx:if="{{idx === 'customer'}}">
+ 				<view class="fab-title fab-flex">
+ 					<view class="fab-flex-1 t-fw">客户信息</view>
+ 					<view hover-class="translate" class="fab-flex-1  fab-choose-cus t-right t-f26" catchtap="showCusChoose">选择客户</view>
+ 				</view>
+ 				<row>
+ 					<col span="6" wx:for="{{field}}">
+ 					<input class="fab-input" placeholder-class="default-input" placeholder="{{item.title}}" value="{{item.value}}" catchtap="panelClick" data-type="{{idx}}" id="{{item.code}}"></input>
+ 					</col>
+ 				</row>
+ 			</block>
+
+ 			<block wx:if="{{idx === 'order'}}">
+ 				<block wx:for="{{field}}">
+ 					<view class="fab-title t-fw">{{item.title}}</view>
+ 					<row>
+ 						<col span="6">
+ 						<input class="fab-input" placeholder-class="default-input" placeholder="{{item.title}}" value="{{item.value}}" catchtap="panelClick" data-type="{{idx}}" id="{{item.code}}"></input>
+ 						</col>
+ 					</row>
+ 				</block>
+ 			</block>
+
+ 			<block wx:if="{{idx === 'status'}}">
+ 				<view class="fab-title t-fw">状态</view>
+ 				<row>
+ 					<col span="4" wx:for="{{field}}">
+ 					<view class="fab-input {{item.checked?'panel-choosed':''}}" data-type="{{idx}}" id="{{item.code}}" catchtap="panelClick">{{item.title}}</view>
+ 					</col>
+ 				</row>
+ 			</block>
+
+ 			<block wx:if="{{idx === 'send_addr'}}">
+ 				<view class="fab-title t-fw">寄件地址</view>
+ 				<view class="fab-input-flex">
+ 					<input wx:for="{{field}}" class="fab-input" placeholder="{{item.title}}" placeholder-class="default-input" value="{{item.value}}" catchtap="panelClick" data-type="{{idx}}" id="{{item.code}}"></input>
+ 				</view>
+ 			</block>
+
+ 			<block wx:if="{{idx === 'send_addr'}}">
+ 				<view class="fab-title t-fw">收件地址</view>
+ 				<view class="fab-input-flex">
+ 					<input wx:for="{{field}}" class="fab-input" placeholder="{{item.title}}" placeholder-class="default-input" value="{{item.value}}" catchtap="panelClick" data-type="{{idx}}" id="{{item.code}}"></input>
+ 				</view>
+ 			</block>
+
+ 		</block>
+ 	</scroll-view>
+
+ 	<view class="btn-group animation-btn">
+ 		<button class="btn bg-ered fab-flex-1" catchtap="btnReset">重置</button>
+ 		<button class="btn bg-blue fab-flex-3" catchtap="btnConfirm">确定</button>
+ 	</view>
+
+ 	<date-picker visible="{{ showDateChoose }}" controlled mode="date"  lang="zh_CN" value="{{ time }}" data-mode="date" bind:confirm="onConfirmDatePicker" bind:cancel="onCancelDatePicker" />
+
+ </animation-group>
+
+
+
+
+
+ <wxs module="fn">
+ 	module.exports = {
+ 		fieldReg: function(idx, array) {
+ 			var a = getRegExp(array.join('|'), "g");
+ 			var data = a.test(idx)
+ 			console.log(data)
+ 			return data
+ 		},
+
+ 		secretPhone: function(str, beginLen, endLen) {
+ 			if (str) {
+ 				var reg = getRegExp("[\s\S]", "g");
+ 				var len = str.length;
+ 				var firstStr = str.slice(0, beginLen);
+ 				var lastStr = str.slice(endLen);
+ 				var middleStr = str.substring(beginLen, len - Math.abs(endLen)).replace(reg, '*');
+ 				return firstStr + middleStr + lastStr;;
+ 			}
+ 		}
+ 	}
+ </wxs>

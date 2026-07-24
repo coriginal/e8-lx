@@ -1,0 +1,87 @@
+<view class="page_view">
+  <detail showArrivePay="{{needOnlinePay && task_type=='派送' && order.settle_type=='到付'}}" showSend="{{task_type != '派送' || order.tag == '直送'}}" showReceive="{{task_type != '提货' || order.tag == '直送'}}" showOthers="{{false}}" order="{{order}}" showCode>
+    <view class="inline-block" slot="map">
+      <tag bind:click="goMap" data-type="{{task_type != '派送' ? 'send' : 'receive'}}" wux-class="map-tag">
+        <icon size="28" type="i-locationfill"></icon>
+        <text>导航</text>
+      </tag> 
+    </view>
+  </detail>
+
+  <!-- <view class="line_info">
+    <view wx:for='{{flexObj[task_type]}}' wx:for-index="key">
+      <text wx:if="{{order[key]}}">{{order[key]}}{{item}}</text>
+    </view>
+  </view> -->
+  <!-- <view>
+    <block wx:for='{{flexTagObj[task_type]}}' wx:for-index="key">
+      <tag wx:if="{{order[key] && (order[key] == item.value || !item.value)}}" color="{{item.color}}">{{item.title}}{{order[key]}}</tag>
+    </block>
+  </view> -->
+  <view class="solid-bottom text-right">
+    <view class="flex view-more">
+      <block wx:for='{{order.status_code < typeObj[task_type].status_code ? typeObj[task_type].top_btn : typeObj[task_type].other_top_btn}}' wx:for-index="key">
+        <abnormal class="text-abnormal" wx:if="{{key == '异常提报'}}" type="order" task_id="{{task_id}}" order_id="{{order.id}}" task_type="{{task_type}}" bindreport="reportAbnormal"></abnormal>
+        <view wx:else class="{{item.class}}" bindtap="{{item.bindtap}}">{{key||''}}</view>
+      </block>
+    </view>
+  </view>
+  <view wx:if="{{abnormal_list.length > 0}}" class="abnormal">
+    <text class="text-red">已上报异常：</text>
+    <view class="t-f28 abnormal_detail" wx:for='{{abnormal_list}}'>
+      {{item.content}} {{item.addr || ''}}
+      <block wx:for="{{item.attachs}}" wx:key="{{id}}" wx:for-index="attach_index" wx:for-item="attach">
+        <image src="{{app.app_host}}{{attach.downloadUrl}}" data-recordindex="{{index}}" data-index="{{attach_index}}" data-urls="{{item.attachs}}" catchtap="previewAttach"></image>
+      </block>
+    </view>
+  </view>
+</view>
+
+<!-- <detail showOthers="{{false}}" order = "{{order}}" /> -->
+
+<!-- 底部按钮 -->
+<view class="btn-padding">
+  <button wx:for='{{order.status_code < typeObj[task_type].status_code ? typeObj[task_type].bottom_btn : ""}}' wx:for-index="key" class="btn {{item.class}} " bindtap="{{item.bindtap}}">{{key}}</button>
+</view>
+
+
+<modal show="{{show_pick}}" title="货物信息核对">
+  <form bindsubmit="confirm_pick">
+    <view class="pick_dlg">
+      <view class="pick_dlg">
+        <!-- <text class="label">件数：</text> -->
+        <input class="ipt" name="amount" type="number" value="{{order.amount}}" placeholder="件数"></input> 件
+      </view>
+      <view class="pick_dlg">
+        <!-- <text class="label">重量：</text> -->
+        <input class="ipt" name="weight" type="digit" value="{{order.weight}}" placeholder="重量"></input> kg
+      </view>
+      <view class="pick_dlg">
+        <!-- <text class="label">体积：</text> -->
+        <input class="ipt" name="volume" type="digit" value="{{order.volume}}" placeholder="体积"></input> 方
+        <text class="label">包装</text>
+        <input class="ipt" name="pack" value="{{order.pack}}"></input>
+      </view>
+      <view class="pick_dlg">
+        <text class="label">货名</text>
+        <input class="ipt cargo" name="cargo" value="{{order.cargo}}"></input>
+      </view>
+      <view style="width:100%">
+        <input class="remark_dlg" name="remark" placeholder="填写备注"></input>
+      </view>
+    </view>
+    <view class="attach_title">上传凭证</view>
+    <attach recordId="-4" bindaddattach="addProof" binddelattach="delattach" scrollx="true"/>
+    <view><button class="confirm_btn" form-type="submit">确认</button></view>
+  </form>
+</modal>
+
+<modal show="{{show_sign}}" title="确认派件完成?">
+  <view wx:if="{{order.rcode_type}}" class="attach_title">回单</view>
+  <attach wx:if="{{order.rcode_type}}" list="{{receipt_list}}" recordId="-19" bindaddattach="addreceipt" binddelattach="delattach"  scrollx="true"/>
+  <view class="attach_title">上传凭证</view>
+  <attach list="{{order.sign_list}}" recordId="-7" bindaddattach="addsign" binddelattach="delattach"  scrollx="true"/>
+
+  <button class="confirm_btn" bindtap="confirmSign">确认</button>
+
+</modal>

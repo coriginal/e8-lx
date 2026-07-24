@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "searchpicker": "../searchpicker/index"
+  }
+}

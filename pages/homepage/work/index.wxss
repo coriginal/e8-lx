@@ -1,0 +1,36 @@
+.work {
+  background-color: white;
+  --shadowBlue: rgba(92, 150, 236, 0.5);
+  --shadowOrange: rgb(243, 123, 29, 0.5);
+  --shadowYellow: rgba(251, 190, 8, 0.5);
+  --shadowRed: rgb(229, 77, 66, 0.5);
+}
+
+.image-view {
+  text-align: center;
+  padding: 30rpx 0;
+}
+
+.image-view .image {
+  width: 66.6666%
+}
+
+.content {
+  padding: 0 20rpx;
+}
+
+.panel-view {
+  text-align: center;
+  height: 104rpx;
+  margin: 20rpx;
+  /* border: 1px solid#eee; */
+  border-radius: 10rpx;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.margin-text {
+  margin: 0 10rpx;
+}

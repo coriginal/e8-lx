@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "detail": "../../../Cpts/order_detail/order_detail"
+  }
+}

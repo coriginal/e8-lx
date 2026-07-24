@@ -1,0 +1,56 @@
+<view>
+    <view style="height:40vh;position: relative;">
+        <van-empty wx:if="{{feeList.length===0}}" description="" />
+        <scroll-view class="scroll-box" scroll-y style="height:40vh;">
+            <van-cell-group>
+                <van-checkbox-group value="{{ result }}" bind:change="onChange">
+                    <van-cell value-class="fee" use-label-slot wx:for="{{feeList}}" wx:key="{{index}}" title="{{item.fee_name}}" value="{{item.fee}}元">
+                        <view class="right-icon" slot="right-icon">
+                            <van-checkbox disabled="{{!item.can_baoxiao}}" shape="square" name="{{index}}"></van-checkbox>
+                        </view>
+                        <view slot="label">
+                            <text>往来方：{{item.settle_account_name || '无'}}</text>
+                            <text> 外部来源：{{item.settle_account_name || '无'}}</text>
+                            <text> 状态：{{item.status}}</text>
+                            <text> 允许请款：{{item.can_baoxiao?'是':'否'}}</text>
+                            <text> 备注：{{item.remark || '无'}}</text>
+                        </view>
+                    </van-cell>
+                </van-checkbox-group>
+            </van-cell-group>
+        </scroll-view>
+        <view class="bottom-shadow"></view>
+    </view>
+    <van-cell-group custom-class="cell-group">
+        <van-field bind:change="fieldChange" data-field="fee" model:value="{{ form.fee }}" placeholder="请输入金额或从上方选择">
+            <view slot="label">
+                <text style="color: red;">*</text>已选金额
+            </view>
+        </van-field>
+        <van-field bind:change="fieldChange" data-field="remark" label="备注" model:value="{{ form.remark }}" placeholder="请输入备注" />
+        <van-cell value="{{form.account_name||'请选择承运商'}} " is-link bind:click="showPopup">
+            <view slot="title">
+                <text style="color: red;">*</text>承运商
+            </view>
+        </van-cell>
+        <van-field bind:change="fieldChange" data-field="receive_person" label="收款人" model:value="{{ form.receive_person }}" placeholder="请输入收款人" />
+        <van-field bind:change="fieldChange" data-field="receive_bank" label="开户行" model:value="{{ form.receive_bank }}" placeholder="请输入开户行" />
+        <van-field bind:change="fieldChange" data-field="receive_account" label="收款账户" model:value="{{ form.receive_account }}" placeholder="请输入收款账户" border="{{ false }}" />
+        <van-cell>
+            <view slot="title">
+                <van-uploader file-list="{{ fileList }}" bind:after-read="afterRead" multiple="{{true}}" />
+            </view>
+        </van-cell>
+    </van-cell-group>
+    <view style="padding: 12px;">
+        <van-button bind:click="submit" block>确定申请</van-button>
+    </view>
+    <van-popup position="bottom" show="{{ show }}" bind:close="onClose">
+        <van-search bind:change="searchChange" placeholder="请输入搜索关键词" />
+        <view style="background: white;height: 40vh;overflow: auto;">
+            <van-cell-group custom-class="account-list">
+                <van-cell bind:click="selectedAccount" data-name="{{item.name}}" data-id="{{item.id}}" wx:for="{{_settleAccountList}}" wx:key="{{index}}" title="{{item.name}}" is-link />
+            </van-cell-group>
+        </view>
+    </van-popup>
+</view>

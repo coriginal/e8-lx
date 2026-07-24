@@ -1,0 +1,87 @@
+.custom {
+  position: fixed;
+  top: 0;
+  z-index: 99999;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-bottom: 2rpx solid whitesmoke;
+  /* border-bottom: 2rpx solid #eee; */
+}
+
+.is-back {
+  width: 32px;
+}
+
+.bg-opc {
+  border: 2rpx solid#eee;
+  height: 32px;
+  width: 32px;
+}
+
+.notice {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  background-color: #55585f;
+}
+
+
+.notice-icon {
+  color: white;
+}
+
+.custom-content {
+  flex: 1;
+  margin: 0 119px 0 87px;
+  font-size: 32rpx;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.popover {
+  position: absolute;
+  right: 10px;
+  padding: 20rpx 32rpx;
+  background-color: rgba(51, 51, 51, 0.8);
+  color: #fff;
+  border-radius: 8rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.15);
+}
+
+.popover::before {
+  content: "";
+  position: absolute;
+  right: 57.25px;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 8px;
+  /* transform:translateX(-50%); */
+  top: -8px;
+  border-top-width: 0;
+  border-bottom-color: rgba(51, 51, 51, 0.8);
+}
+
+.custom-title {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.btn.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rpx;
+  overflow: visible;
+}
+
+.i-back{
+  font-size: 12px
+}

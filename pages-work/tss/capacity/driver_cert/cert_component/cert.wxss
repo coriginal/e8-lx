@@ -1,0 +1,55 @@
+.popup view {
+  padding: 0 !important;
+}
+
+.img {
+  width: 100%;
+  height: auto;
+}
+
+.notice {
+  position: relative;
+}
+
+.notice-text {
+  color: #444;
+  font-weight: bold;
+  line-height: 48px;
+}
+
+.btn-view .btn {
+  border-radius: 1000rpx;
+  margin: 20rpx auto;
+  width: 66.66%;
+  height: 84rpx;
+  line-height: 84rpx;
+  font-size: 14px;
+  color: white;
+}
+.bg-blue{
+  background-color: #5c96ec;
+}
+
+.bg-red{
+  background:linear-gradient(45deg, #ef825e, #ec4d46);
+}
+
+.btn-view {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.text-gray {
+  color: gray;
+  font-size: 13px;
+}
+
+.content text {
+  display: block;
+}
+
+.content {
+  margin: 0 30rpx 148rpx;
+}

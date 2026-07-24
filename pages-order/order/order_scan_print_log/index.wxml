@@ -1,0 +1,13 @@
+<view class="box">
+    <view class="table">
+        <view class="tr">
+            <view style="font-weight: {{index===0?'bold':'normal'}};" wx:for="{{subOrders}}" wx:key="{{item.id}}" class="th">{{item.code}}</view>
+        </view>
+        <view class="tr">
+            <view style="font-weight: {{index===0?'bold':'normal'}};" wx:for="{{subOrders}}" wx:key="{{item.id}}" class="th {{item.platformPrinted=='已打印' ?'text-green':index===0?'text-black':'text-red'}}">{{item.platformPrinted || '未打印'}}</view>
+        </view>
+        <view class="tr">
+            <view style="font-weight: {{index===0?'bold':'normal'}};" wx:for="{{subOrders}}" wx:key="{{item.id}}" class="th {{item.e8Printed=='已打印' ?'text-green':index===0?'text-black':'text-red'}}">{{item.e8Printed || '未打印'}}</view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,33 @@
+@import '../order_feeinfo_total/order_feeinfo_total.wxss';
+
+
+
+.placeorder {
+  height: 84rpx;
+}
+
+.placeorder view {
+  justify-content: space-around;
+  border-radius: 1000rpx;
+  margin: 30rpx 0;
+  height: 100%;
+  color: gray;
+  border: 1px solid#eee;
+}
+
+.feeinfo-content {
+  padding: 20rpx 0;
+}
+
+.nothing-more {
+  text-align: center;
+  height: 300px;
+  line-height: 300px;
+  color: gray;
+}
+.dialog-view{
+  position: relative;
+  margin-top: 20rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+}

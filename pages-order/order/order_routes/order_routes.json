@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "cc-work": "../order_ccwork/order_ccwork",
+    "car-location":"../order_car_location/index"
+  }
+}

@@ -1,0 +1,167 @@
+.bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100rpx;
+}
+
+.bar input {
+  flex: 1;
+  font-size: 28rpx;
+}
+
+.bar picker {
+  flex: 1;
+}
+
+.bar .title {
+  padding-right: 30rpx;
+  font-size: 26rpx;
+}
+
+
+.pclass {
+  font-size: 28rpx;
+}
+
+.t-bar {
+  background-color: white;
+  padding: 0 20rpx;
+  display: flex;
+  align-items: center;
+  height: 96rpx;
+  z-index: 999;
+}
+
+.title {
+  position: relative;
+}
+
+.title>text {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.t-bar text:last-child {
+  position: absolute;
+  bottom: -5rpx;
+  min-width: 50%;
+  height: 6rpx;
+  left: 0;
+  background-color: var(--grey);
+  color: var(--white);
+}
+
+.addr {
+  padding: 20rpx;
+  background-color: white;
+}
+
+.share-image {
+  width: 600rpx;
+  height: 888rpx;
+  margin: 0 75rpx;
+}
+
+.canvasdrawer {
+  border-radius: 6rpx;
+}
+
+.mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* padding: 30rpx; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.534);
+  z-index: 9;
+}
+
+.fade {
+  animation-duration: 0.8s;
+}
+
+.tower-swiper {
+  height: 504rpx;
+  position: relative;
+  max-width: 750rpx;
+  overflow: hidden;
+}
+
+.tower-swiper .tower-item {
+  position: absolute;
+  width: 300rpx;
+  height: 100%;
+  top: 60rpx;
+  bottom: 0;
+  left: 50%;
+  margin: auto;
+  transition: all 0.2s ease-in 0s;
+  opacity: 1;
+}
+
+.tower-swiper .tower-item.none {
+  opacity: 0;
+}
+
+.tower-swiper .tower-item .swiper-item {
+  width: 300rpx;
+  height: 444rpx;
+  border-radius: 6rpx;
+  overflow: hidden;
+  background-size: 100% 100%;
+}
+
+.tower-swiper .tower-item {
+  transform: scale(calc(0.5 + var(--index) / 5));
+  margin-left: calc(var(--left) * 120rpx - 150rpx);
+  z-index: var(--index);
+}
+
+.btn {
+  height: 84rpx;
+  margin-top: 30rpx;
+}
+
+.btn-group button view {
+  margin-right: 20rpx;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex .btn {
+  margin: 30rpx 10% 0;
+  flex: 1;
+}
+
+.bg-click {
+  background-color: rgba(0, 0, 0, 0.473);
+  color: white;
+}
+
+.right-btn {
+  flex: 1;
+  text-align: right;
+}
+
+.blue-light {
+  border: 1px solid var(--blue);
+  color: var(--blue);
+  margin-top: 0;
+  height: 64rpx;
+  font-size: 13px;
+}
+
+.url-panel {
+  line-height: 32px;
+  background-color: var(--blue);
+  margin: 10rpx;
+  color: white;
+  border-radius: 6rpx;
+}

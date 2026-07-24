@@ -1,0 +1,43 @@
+<view>
+  <view class="top">
+    <tab class="tab" list="{{ list }}" selected-id="{{ selectedId }}" bindtabchange="handleTabChange" style="width:70%"></tab>
+    <filterbar class="filter" items="{{ items }}" bind:change="onChange" bind:open="onOpen" bind:close="onClose" />  
+  </view>
+
+  <view class="body">
+    <view class="list" wx:for="{{ taskList }}" wx:key="">
+      <view bindtap="goDetail" data-item="{{item}}">
+        <view class="title">
+          <!-- <text class="code">T000384732（【中山华航物流】）</text> -->
+          <!-- <text class="status">已发车</text> -->
+          <text class="code">{{item.code + '（' + item.type + '）'}}</text>
+          <text class="status">{{item.status}}</text>
+        </view>
+
+        <view class="task_msg">
+          <view class="line">
+            <!-- <text class="line_">泸州-中山</text>
+            <text class="truck">粤T38762</text> -->
+            <text class="line_">{{item.line_name||item.area||''}}</text>
+            <text class="truck">{{item.plate_num||'-'}}</text>
+          </view>
+          <view class="detail">
+            <!-- <text>刘世杰（15868473261），合计运输费8000元</text>
+            <view class="time">2020-09-01 10:02 发车，装载10票/100件/16.34吨/20方</view> -->
+            <text>{{(item.driver||'') + '（' + (item.phone||'-') + '）， 合计运输费' + (item.cost_fee||'-') + '元' }}</text>
+            <view class="time">{{(item.real_arrive_time||item.real_depart_time||item.createtime) + item.status +  '，装载' + item.suborder_total + '票/' + item.amount_total + '件/' + item.weight_total + 'KG/' + item.volume_total + '方'}}</view>
+          </view>
+        </view>
+      </view>
+      <view class="opbtn">
+        <!-- <view>修改</view> -->
+        <!-- <view bindtap="toNotice" data-code="{{item.code}}">通知</view> -->
+        <text></text>
+        <view bindtap="taskFeeConfirm" data-item="{{item}}">成本登记</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="bottom">
+  </view>
+</view>

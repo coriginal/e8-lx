@@ -1,0 +1,87 @@
+<form bindsubmit='formSubmit' bindreset="formClear" report-submit='true'>
+    <view class='top t-bar' style="margin-top: 20rpx;">
+        <view class='title'>
+            <text>客户信息</text>
+            <text />
+        </view>
+    </view>
+
+    <view class='addr'>
+        <view class="bar solid-bottom" wx:for='{{list}}' wx:key>
+            <view class='title'>{{item.title}}</view>
+            <input placeholder-class='pclass' placeholder="{{item.defaultInput}}" name='{{item.code}}' focus="{{index==0?true:false}}" value='{{item.value}}'></input>
+            <tag wx:if="{{item.required}}" color="red">必填</tag>
+        </view>
+    </view>
+
+    <!-- <view class='other t-bar'>
+        <view class=' title'> <text>其他信息</text> <text /> </view>
+    </view> -->
+
+    <view class='other addr'>
+        <view class="bar solid-bottom" wx:for='{{otherList}}' wx:key>
+            <view class='title'>{{item.title}}</view>
+            <input placeholder-class='pclass' placeholder="{{item.defaultInput}}" name='{{item.code}}' value='{{item.value}}'></input>
+        </view>
+
+        <!-- 省市区 -->
+        <view class="bar solid-bottom" bindtap="onOpen">
+            <view class='title'>地区信息</view>
+            <input placeholder-class='pclass' placeholder="省　市　区　县" value="{{fn.contact(region)}}" name='region' disabled>
+            </input>
+        </view>
+        <!-- 详细地址 -->
+        <view class="bar">
+            <view class='title'>详细地址</view>
+            <input placeholder-class='pclass' placeholder="请输入详细地址" name='street_no' value='{{street_no}}'></input>
+        </view>
+    </view>
+
+    <view class='bottom-btn'>
+        <button form-type="reset" class='btn bg-red m-p'>清除</button>
+        <button form-type='submit' class='btn bg-blue m-p'>确定</button>
+    </view>
+</form>
+<view class="panel-textarea" style="margin-bottom: 0;">
+    <!-- <view class='content-menu'>
+        <button class='btn' id="{{item.code}}" wx:key wx:for="{{contentMenu}}" bindtap="menuClick">
+            <icon color='#5c96ec' type='{{item.icon}}' size='32' />{{item.title}}
+        </button>
+    </view> -->
+    <view style="padding:0 20rpx;color: gray;font-size: 28rpx;line-height: 55rpx;">
+        <view>
+            1.将客户信息粘贴至文本框；
+        </view>
+        <view>
+            2.点击智能识别即可快速填写客户信息；
+        </view>
+    </view>
+    <view class='textarea' wx:if="{{!visible&&!voicePop}}">
+        <view class="margin-bottom">
+            <textarea placeholder-class="placeholder" type="text" value="{{inputAddr}}" bindinput="addrFinished" placeholder="{{textarea}}">
+                    </textarea>
+        </view>
+        <view class='absolute-ai'>
+            <button class="btn green-light" bindtap="aiAddressParse">AI解析</button>
+        </view>
+        <view class='absolute'>
+            <button class="btn green-light" bindtap="addrInput">智能识别</button>
+        </view>
+    </view>
+    <!-- <view class="addr_used">
+            <customer-addr-used bind:change="getAddrUsed" type="{{type}}" customerId="{{customer_id}}" />
+        </view> -->
+</view>
+<wxs module="fn">
+    var contact = function (value) {
+        if (value) {
+            var con = value.filter(function (n) {
+                return n
+            }).join(' ')
+            return con
+        }
+    };
+    module.exports.contact = contact;
+</wxs>
+
+<cascader visible="{{ visible }}" controlled value="{{ value_addr }}" title="地址选择" options="{{ cantonInfo }}" bind:close="onClose" bind:change="onChange" />

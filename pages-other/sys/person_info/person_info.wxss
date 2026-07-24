@@ -1,0 +1,70 @@
+page {
+  background-color: whitel;
+}
+
+.text-center {
+  text-align: center;
+  margin-left: 15rpx;
+}
+
+.margin-top {
+  /* margin-top: 20rpx; */
+  margin: 20rpx 20rpx 0;
+  border-radius: 10rpx;
+}
+
+.my-system-options {
+  background-color: white;
+  box-shadow: 0 -1rpx 6rpx rgba(0, 0, 0, 0.1);
+  font-size: 26rpx;
+}
+
+.my-system-menu {
+  height: 84rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30rpx;
+}
+
+.left-view {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.left-view view {
+  margin-right: 10rpx;
+}
+
+.right-view {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  color: #9e9c9c;
+  text-align: right;
+  /* justify-content: flex-end; */
+  flex: 2;
+  overflow: scroll;
+  white-space: nowrap;
+}
+
+.logout {
+  margin: 30rpx 0;
+  /* height: 84rpx; *//* background-color: white; *//* line-height: 84rpx; */
+  text-align: center;
+  /* box-shadow: 0 -1rpx 6rpx rgba(0, 0, 0, 0.1); */
+}
+
+.my-system-notice {
+  text-align: right;
+  flex: 1;
+}
+
+.bg-white {
+  background-color: white;
+  height: 84rpx;
+  line-height: 84rpx;
+  font-size: 14px;
+}

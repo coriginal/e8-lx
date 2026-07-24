@@ -1,0 +1,41 @@
+<!-- <web-view src="{{src}}" ></web-view> -->
+
+<!-- <view class='options bg-white fade'>
+  <video bindplay='play' id="myVideo" src="{{ecodeList[clickId]}}" controls loop></video>
+  <view class='ops bg-white'>
+    <view class='video'>
+      <text class=' t-f24'>演示</text>
+    </view>
+    <view class='grid col-3 text-center '>
+      <block wx:for="{{videoList}}" wx:key>
+        <view bindtap='chooseVideo' class="text-{{index==clickId?'red':'gray'}}" id='{{index}}'>
+          <icon type="i-title" size="24" />{{item}}</view>
+      </block>
+    </view>
+  </view>
+</view> -->
+
+<view class="fade">
+  <sticky scrollTop="{{ scrollTop }}">
+    <sticky-item wx:for="{{list}}" wx:key>
+      <view slot="title">
+        <icon type="i-newshotfill text-red" size="32"></icon>
+        <text class="title">{{item.name}}</text>
+      </view>
+      <view class="content" slot="content">
+        <cell wx:for="{{item.children}}" wx:key title="{{item.name}}" is-link label="{{item.description}}" bind:click="goLearningWeb" id="{{item.code}}">
+          <view class="header-slot" slot="header">
+            <icon type="{{item.icon}} header-icon" size="32"></icon>
+          </view>
+          <view class="notice " slot="footer">
+            <tag color="red" wx:if="{{item.url}}">
+              <icon type="i-warn" color="yellows" size="20"></icon>
+              <text  class="notice-text t-f20">{{item.url}}</text>
+            </tag>
+          </view>
+        </cell>
+      </view>
+    </sticky-item>
+  </sticky>
+</view>
+

@@ -1,0 +1,29 @@
+.monthNavigation{  
+  display: flex;  
+  flex-direction: row;   
+  background-color: #224b9b;
+  padding:0 15rpx; 
+  position:relative;
+} 
+.month{
+   height:100rpx;
+   width: 100rpx;
+   border:1rpx dashed white;
+   border-radius:50%;
+   line-height: 100rpx;
+   text-align: center;
+   color: white;
+   margin: 30rpx 10rpx;
+} 
+.active{
+  border:2rpx solid white;
+}
+.active:after{
+  content: '';
+  border-width: 20rpx;
+  border-color:transparent  transparent  #fff transparent ;
+  border-style:solid dashed dashed dashed;    
+  bottom:0;
+  position:absolute;
+  margin-left:-58rpx;
+} 

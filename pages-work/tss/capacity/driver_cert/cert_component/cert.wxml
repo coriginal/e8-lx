@@ -1,0 +1,28 @@
+<popup wux-class="popup" visible="{{ showPop }}" bind:close="onClosePopup">
+	<image class="img" mode="widthFix" src="../img/{{isCerting?'p1':'p2'}}.png"></image>
+	<view class="notice">
+		<view class="content">
+			<text class="notice-text">{{fn.message(isCerting)}}</text>
+			<text class="text-gray">{{extra}}</text>
+		</view>
+		<view class="btn-view">
+			<button bindtap="onTap" class="btn {{isCerting?'bg-blue':'bg-red'}}">
+			{{isCerting?'确定':'重新填写'}}
+			</button>
+		</view>
+	</view>
+</popup>
+
+
+
+<wxs module="fn">
+	module.exports = {
+		message: function(certing) {
+			if(certing){
+				return '已提交成功，请等待审核！'
+			}else{
+				return '抱歉，当前审核未通过！'
+			}
+		}
+	}
+</wxs>

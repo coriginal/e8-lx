@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "pick":"/components/choose-cargo"
+  },
+  "pageOrientation": "auto"
+}

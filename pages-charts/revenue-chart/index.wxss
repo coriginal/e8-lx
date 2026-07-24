@@ -1,0 +1,28 @@
+/* pages-charts/revenue-chart/index.wxss */
+.container{
+    padding-top: 90rpx;
+}
+.title_box{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 80rpx;
+    border-bottom:  1px solid#284F7C;
+    display: flex;
+    flex-direction: row;
+    color: white;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: bold;
+}
+.title{
+    font-size: 45rpx;
+}
+.title_date{
+    font-size: 22rpx;
+    margin-left: 10rpx;
+    position: absolute;
+    right: 150rpx;
+    bottom: 12rpx;
+}

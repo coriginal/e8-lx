@@ -1,0 +1,20 @@
+ <view class="abnormal_btn udf_btn_class" catchtap="showAbnormal">
+  <icon type="i-warn" size="32"></icon>
+  <text>异常提报</text>
+ </view>
+ <modal show="{{show}}" title="异常提报">
+    <scroll-view scroll-y="true" style="max-height:350rpx;text-align: left;">
+      <radio-group class="radio-group" bindchange="radioChange" catchtap="forbidBubble">
+          <radio class="radio" color="var(--blue)" wx:for-items="{{list}}" wx:key="id" value="{{item.id}}" checked="{{item.checked}}">
+              <text class="list-text">{{item.text}}</text>
+              <tag wx:if="{{item.out_task}}" color="cyan">移出</tag>
+              <tag wx:if="{{item.cancel_order}}" color="red">取消</tag>
+              <view wx:if="{{item.text == '其他'}}" class="write_reason">
+                <input bindinput ="reasonInput" type="text" value="" placeholder="请输入异常原因"></input>
+              </view>      
+          </radio>
+      </radio-group>
+    </scroll-view>
+    <attach list="{{attachURLs}}" recordId="{{recordid || -10}}" bindaddattach="addattach" binddelattach="delattach" scrollx="true"/>
+    <button class="btn" bindtap="reportAbnormal">提交</button>
+ </modal>

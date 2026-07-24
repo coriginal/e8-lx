@@ -1,0 +1,64 @@
+/* pages-charts/components/rect-container/index.wxss */
+Page{
+    margin:0;
+    padding:0;
+    background: #081424;
+}
+.container{
+    width: 98%;
+    margin: 0 auto;
+    border: 1rpx solid #284F7C;
+    position: relative;
+    margin-top: 20rpx;
+    color: white;
+}
+.box_title{
+    position: absolute;
+    font-size: 24rpx;
+    margin-top: -16rpx;
+    margin-left: 30rpx;
+    background: #081424;
+}
+.main_box{
+    padding-top: 20rpx;
+}
+.title{
+    font-size: 50rpx;
+    font-weight: bold;
+    margin:0 30rpx;
+}
+.title_num{
+    font-size: 56rpx;
+    color: yellow;
+    margin:0 10rpx;
+}
+.title_unit{
+    font-size: 28rpx;
+    font-weight: normal;
+    color: white;
+}
+.data_box{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2,50%);
+    grid-row-gap:10rpx;
+    padding-bottom: 10rpx;
+}
+.data_box2{
+    display: flex;
+    align-items: center;
+}
+.data_title{
+    width: 38%;
+    font-size: 28rpx;
+    text-align: right;
+}
+.data_num{
+    font-size: 36rpx;
+    color: yellow;
+    margin: 0 10rpx;
+}
+.data_unit{
+    font-size: 18rpx;
+    color: white;
+}

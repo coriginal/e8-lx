@@ -1,0 +1,31 @@
+<view class="bg-account shadow-blur">
+    <view class="t-f36">可用余额</view>
+    <view class="t-f48 t-fw">{{canUseAmount}}</view>
+    <view class="free-content">
+        <view class="flex-b">
+            <text class="op-7">账户金额：</text>
+            <text>¥{{allAmount}}</text>
+        </view>
+        <view class="flex-b">
+            <text class="op-7">冻结金额：</text>
+            <text>¥{{frozenAmount}}</text>
+        </view>
+        <view class="flex-b">
+            <text class="op-7">预警金额：</text>
+            <text>¥{{limitAmount}}</text>
+        </view>
+    </view>
+</view>
+<van-empty wx:if="{{list.length===0}}" description="暂无数据" />
+<view style="padding: 12px;">
+    <van-cell-group>
+        <van-cell center wx:for="{{list}}" value="{{item.type==='cost'?'-'+item.money:'+'+item.money}}" label="{{item.bill_time}}">
+            <view wx:if="{{item.code}}" slot="title" bindtap="copyCode" id="{{item.code}}" >
+                <text>{{item.code}}</text>
+                <icon style="margin-left: 4px;" type="i-copy" size="28"></icon>
+            </view>
+            <view wx:if="{{item.type==='cost'}}" style="margin-right: 12px;width: 24px;height: 24px; background: red;border-radius: 12px;text-align: center;line-height: 24px;color: white;" slot="icon">支</view>
+            <view wx:else style="margin-right: 12px;width: 24px;height: 24px; background: black;border-radius: 12px;text-align: center;line-height: 24px;color: white;" slot="icon">收</view>
+        </van-cell>
+    </van-cell-group>
+</view>

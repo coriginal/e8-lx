@@ -1,0 +1,129 @@
+<block wx:if="{{showPage}}">
+	<view class='top'>
+		<search-bar showLabel="{{false}}" labelName="searchText" bind:change="searchCode" />
+	</view>
+
+	<scroll-view scroll-y class='list' scroll-top="{{page_scrollTop}}" enable-back-to-top bindscroll="pageScroll"
+		scroll-into-view="{{scrollInto}}" bindscrolltolower="onReachPageBottom">
+		<view class='panel fade' wx:for="{{orderList.rows}}" wx:for-item="order" wx:key id="{{'code' + order.id}}">
+			<view class='head'>
+				<view bindtap="copyCode" id="{{order.code}}" class="head-code"><text class="text-gray">订单号：</text>{{order.code}}
+					<icon type="i-copy" size="28"></icon>
+				</view>
+				<view class='t-right'>
+					<!-- <button class='btn detail elec' data-item="{{order}}" catchtap='showElcOrder'>电子面单</button> -->
+					<tag wx:if="{{order.status}}" color='{{statusColor[order.status]}}'>{{order.status}}</tag>
+				</view>
+			</view>
+			<view class='content' data-domain="{{order.domain}}" data-code="{{order.code}}" data-id="{{order.id}}"
+				bindtap="goOrderRoute">
+				<view class="tag-names" wx:if="{{!_App.user.isCustomer}}">
+					<view class="tags {{fn.dealTag(item.class)}}" wx:for="{{order.tag_names}}" wx:key="tags">
+						{{item.title}}
+					</view>
+				</view>
+				<view class="city">
+					<view class='content-left'>
+						<view class="t-f32">{{order.send_site||order.send_city||''}}</view>
+						<view class="text-center text-gray t-f24">{{order.send_man||''}}</view>
+					</view>
+					<view class='content-center'>
+						<view class="center-view ">
+							<image class="jiantou opcity" mode="widthFix" src="../../../images/jiantou.png"></image>
+						</view>
+					</view>
+					<view class='content-right'>
+						<view class="t-f32">{{order.receive_site||order.receive_city||''}}</view>
+						<view class="text-center text-gray t-f24">{{order.receive_man||''}}</view>
+					</view>
+				</view>
+				<view class="route">
+					<!-- <view>
+          <text class="text-gray opcity">运送中： </text>
+          <text>快件到达 【杭州下沙中转场】</text>
+        </view> -->
+					<view wx:if="{{order.ccode}}">
+						<text class="text-gray opcity">客户单号： </text>
+						<text> {{order.ccode}}</text>
+					</view>
+					<view>
+						<text class="text-gray opcity">录单时间： </text>
+						<text> {{order.order_date}}</text>
+					</view>
+					<view wx:if="{{ customerShowLc && !_App.user.isTest && order.lc_info.length>0}}">
+						<text class="text-orange opcity">{{order.lc_info}} </text>
+					</view>
+				</view>
+			</view>
+
+			<view class='foot'>
+				<button class='btn detail' data-id="{{order.id}}" data-code="{{order.code}}" data-idx="{{index}}"
+					catchtap='goOrderDetail'>订单详情</button>
+				<view class='btn-group'>
+					<!-- <button class='btn delete' id="{{order.id}}" catchtap='deleteOrder'>删除</button>
+        <button class='btn change' id="{{order.id}}" catchtap='editOrder'>修改</button> -->
+					<button class='btn text-gray' data-code="{{order.code}}" data-id="{{order.id}}" data-status="{{order.status}}"
+						data-idx="{{index}}" catchtap='moreMenu'>更多操作</button>
+				</view>
+			</view>
+		</view>
+	</scroll-view>
+</block>
+<canvasdrawer painting="{{painting}}" class="canvasdrawer" bind:getImage="eventGetImage" />
+
+<landscap visible="{{ visible }}" bind:close="onClosePop">
+	<image show-menu-by-longpress class="landscap" src="{{elecImgUrl}}" />
+</landscap>
+
+<popup position="bottom" visible="{{ popVisible }}" bind:close="closeMoreMenu">
+	<row wux-class="">
+		<col span="3" wx:for="{{realMoreMenu}}" wx:key>
+		<view class="round" catchtap="clickMoreMenu" hover-class="hover-round" data-code="{{item.code}}"
+			data-index="{{index}}">
+			<view class="flex-icon">
+				<icon size='48' color="{{item.color||'#5a6b92'}}" type="{{item.icon||'i-copy'}}" />
+			</view>
+			<view class="t-f24 " style="color:{{item.color||''}}">{{item.title}}</view>
+		</view>
+		</col>
+	</row>
+	<view class="padding cancel" catchtap="closeMoreMenu">取消</view>
+</popup>
+
+<receive show="{{showReceive}}" receiveItem="{{receiveItem}}" bind:success="successReceive"  bind:close="closeReceive" />
+
+<dialog id="wux-dialog" />
+
+
+<wxs module="fn">
+	module.exports = {
+		cargo: function (value) {
+			var a = getRegExp(",|，|\|", "g");
+			if (value) {
+				var array = value.split(a).filter(function (x) {
+					return x
+				})
+				return array
+			}
+		},
+		dealTag: function (code) {
+			switch (code + 0) {
+				case 1:
+					return 'task-tag-1';
+					break;
+				case 2:
+					return 'task-tag-2';
+					break;
+				case 3:
+					return 'task-tag-3';
+					break;
+				case 4:
+					return 'task-tag-4';
+					break;
+				case 5:
+					return 'task-tag-5';
+					break;
+			}
+		}
+	};
+</wxs>

@@ -1,0 +1,23 @@
+<view class="margin-bottom">
+  <cell-group title="如需增加大型物流公司，请联系我们" >
+    <cell hover-class="default"  bind:click="doSomething" data-id="{{item.id}}" data-idx="{{index}}" wx:for="{{list}}" wx:key title="{{item.name}}" label="密钥：{{item.idk||'无'}}">
+      <view slot="footer" class="{{ item.customer_idk?'ok':item.idk?'share':'getkey' }}">
+        {{ item.customer_idk?'已注册对接':item.idk?'通知朋友':'生成密钥' }}
+      </view>
+    </cell>
+  </cell-group>
+</view>
+
+<view style="height: 1px;"></view>
+
+<view class='bottom-btn '>
+  <button class='btn bg-blue m-p' bindtap="showPopup">新增</button>
+</view>
+
+<dialog id="wux-dialog" />
+
+<landscap visible="{{ landscap_visible }}"  bind:close="onClosePop">
+  <image show-menu-by-longpress class="landscap" src="{{src}}" />
+</landscap>
+
+<canvasdrawer painting="{{draw_painting}}" class="canvasdrawer" bind:getImage="eventGetImage" />

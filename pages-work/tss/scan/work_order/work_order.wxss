@@ -1,0 +1,66 @@
+page{
+  background: #fff;
+}
+.flex{
+  display: flex;
+}
+.top{
+  justify-content: space-around;
+}
+.task-list{
+  font-size: 32rpx;padding-top: 20rpx;color:#5c96ec;
+}
+.task-icon{
+  padding-top: 20rpx;
+}
+.font{
+  font-size: 44rpx;font-weight: bold;
+}
+
+.head{
+  justify-content: space-around;text-align: center;padding: 18rpx 0;
+  border-bottom: 1px solid #f1f3f5;
+}
+.body{
+  margin: 40rpx;padding: 10rpx;border: 1px solid;width: 90%;
+}
+.order{
+  display: flex;justify-content: space-between;
+}
+.order view{
+  padding: 10rpx;
+}
+.one{
+  width: 40%;
+}
+.three{
+  width: 30%;
+}
+.four{
+  width: 20%;
+}
+.title{font-weight: bold;}
+
+.footer{
+  padding: 0 20px;text-align: center;
+}
+image{
+  height: 110rpx;width: 110rpx;
+}
+
+.modal-cancel{
+  padding: 10px 10px 2px 15px;text-align: center;
+  display: flex; flex-wrap: wrap;
+}
+.abnormal{
+  padding: 5px 8px;margin: 3px;
+  text-align: center;border: 1px solid;
+}
+.backdefault{
+  text-align: center;
+  color: #5c96ec;
+}
+
+.taskSelect{
+  padding: 10px;border-bottom: 1px solid #f1f3f5;
+}

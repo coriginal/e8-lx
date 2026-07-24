@@ -1,0 +1,157 @@
+/* pages/homepage/my/index.wxss */
+.box {
+    height: 100%;
+}
+
+.bg {
+    width: 100vw;
+    height: 750rpx;
+    border-radius: 0 0 50rpx 50rpx;
+    position: absolute;
+    z-index: -1;
+}
+
+.avatar {
+    width: 150rpx;
+    height: 150rpx;
+    border-radius: 75rpx;
+    overflow: hidden;
+    border: 4rpx solid white;
+}
+
+.me_box {
+    color: #333;
+    width: 100%;
+    height: 200rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50rpx;
+}
+
+.avatar-msg {
+    text-align: left;
+    flex: 1;
+    padding-left: 20rpx;
+}
+
+.avatar-qrcode {
+    font-size: 34rpx;
+    font-weight: bold;
+}
+
+.big_box {
+    height: 200rpx;
+    width: 94%;
+    margin: 0 auto;
+    background: white;
+    box-shadow: 0 0 5rpx 1rpx rgb(180, 179, 179);
+    border-radius: 20rpx;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    left: 20px;
+    top: 221px;
+    width: 350px;
+    height: 97px;
+    opacity: 1;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.17);
+    box-shadow: 0px 2px 37px rgba(0, 0, 0, 0.09);
+    color: gray;
+}
+
+.my-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    /*矩形 1*/
+
+
+}
+
+.my-menu icon {
+    margin-bottom: 10rpx;
+}
+
+.options2 {
+    width: 94%;
+    background: white;
+    border-radius: 20rpx;
+    margin: 20rpx auto 0;
+    padding: 20rpx;
+    box-shadow: 0 0 10rpx gray;
+    /*矩形 2*/
+    opacity: 1;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px 8.5px 25.5px rgba(233, 239, 245, 1);
+}
+
+.options2 .title {
+    font-weight: bold;
+}
+
+.options2_box {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.options3 {
+    width: 94%;
+    margin: 20rpx auto 0;
+    border-radius: 20rpx;
+    opacity: 1;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px 8.5px 25.5px rgba(233, 239, 245, 1);
+}
+
+.my-system-menu {
+    height: 150rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.my-system-menu1 {
+    height: 84rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30rpx;
+}
+
+.left-view {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.left-view view {
+    margin-right: 10rpx;
+}
+
+.right-view {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    color: #9e9c9c;
+}
+
+.logout {
+    /*矩形 2*/
+    margin: 20rpx auto 0;
+    width: 94%;
+    height: 48px;
+    border-radius: 24px;
+    opacity: 1;
+    background: linear-gradient(168.4deg, rgba(122, 215, 255, 1) 0%, rgba(52, 123, 241, 1) 100%);
+    box-shadow: 0px 8.5px 25.5px rgba(233, 239, 245, 1);
+    text-align: center;
+    line-height: 48px;
+    font-size: 30rpx;
+    color: white;
+}

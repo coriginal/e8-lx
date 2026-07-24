@@ -1,0 +1,137 @@
+<tabs controlled theme="positive" current="{{ tab_current }}" bindchange="onChangeTabs">
+	<tab key="{{item.code}}" wx:for="{{tabs}}" wx:key>
+		<badge count="{{list[item.code].data.total}}">{{item.title}}</badge>
+	</tab>
+</tabs>
+<view class="choose-month">
+	<segmented current="{{ currentSeg }}" controlled bind:change="onChangeSeg" theme="positive" values="{{fn.months(months)}}">
+	</segmented>
+</view>
+<view class="list">
+	<checkbox-group bindchange="checkboxChange">
+		<block wx:for="{{list[tab_current].data.rows}}">
+			<view class="forgin-panel">
+				<view class="panel shadow">
+					<view class="head solid-bottom">
+						<view class="code flex-1" hover-class="default" catchtap="copyOrder" id="{{item.code}}">
+							<icon type="i-copy" size="36"></icon>
+							<text class="margin-text">{{item.code}}</text>
+						</view>
+						<view class="detail flex-1 t-right" hover-class="default" catchtap="goOrderDetail" data-id="{{item.id}}" data-code="{{item.code}}">
+							<text>订单详情</text>
+						</view>
+					</view>
+					<view class='content' id="{{item.id}}" data-code="{{item.code}}" bindtap="goDetailApprove">
+						<view class="city">
+							<view class='content-left'>
+								<view class="t-f32">{{item.send_site||item.send_city||''}}</view>
+								<view class="text-center text-gray t-f24">{{item.send_man||''}}</view>
+							</view>
+							<view class='content-center'>
+								<view class="center-view ">
+									<image class="jiantou opcity" mode="widthFix" src="../../../images/jiantou.png"></image>
+								</view>
+							</view>
+							<view class='content-right'>
+								<view class="t-f32">{{item.receive_site||item.receive_city||''}}</view>
+								<view class="text-center text-gray t-f24">{{item.receive_man||''}}</view>
+							</view>
+						</view>
+						<view class="slot-view">
+							<row>
+								<col span="6">
+								<view>
+									<text class="text-gray opcity">客户名称： </text>
+									<text> {{item.customer_name||''}}</text>
+								</view>
+								</col>
+								<col span="6">
+								<view>
+									<text class="text-gray opcity">计费模型： </text>
+									<text> {{item.income_bill_model_name||'无'}}</text>
+								</view>
+								</col>
+							</row>
+							<row>
+								<col span="6">
+								<view>
+									<text class="text-gray opcity">成本： </text>
+									<text class="t-fw {{item._cost != item._cost_approving?'text-red':''}}"> {{item._cost == item._cost_approving?fn.round(item._cost):fn.round(item._cost) + " --> " + fn.round(item._cost_approving)}}</text>
+								</view>
+								</col>
+								<col span="6">
+								<view>
+									<text class="text-gray opcity">收入： </text>
+									<text class="t-fw {{item._income != item._income_approving?'text-red':''}}"> {{item._income == item._income_approving?fn.round(item._income):fn.round(item._income) + " --> " + fn.round(item._income_approving)}}</text>
+								</view>
+								</col>
+							</row>
+							<view wx:if="{{item.lc_name}}">
+								<text class="text-gray opcity">承运商： </text>
+								<text> {{item.lc_name||''}}</text>
+							</view>
+							<view>
+								<text class="text-gray opcity">录单时间： </text>
+								<text> {{item.order_date}}</text>
+							</view>
+						</view>
+					</view>
+					<!-- <view class="foot">
+				<view>其他操作</view>
+			</view> -->
+				</view>
+				<view wx:if="{{tab_current === 'Approving_list' && ifChoosedAll}}" class="right-checkbox" bindtap="chooseItem" id="{{index}}">
+					<checkbox value="{{item.id}}" color="#5c96ec" checked="{{item.checked}}"></checkbox>
+				</view>
+			</view>
+		</block>
+	</checkbox-group>
+</view>
+
+<view style="height:1px;"></view>
+
+<view class="bottom-btn" wx:if="{{tab_current === 'Approving_list'}}">
+	<block wx:if="{{ifChoosedAll}}">
+		<button class="btn bg-red m-p" bindtap="chooseAll">{{isChoosedAll?'全选':'取消全选'}}</button>
+		<button class="btn bg-blue m-p" bindtap="doBatch">审批</button>
+	</block>
+	<block wx:else>
+		<button class="btn bg-blue m-p" bindtap="batchOptions">批量操作</button>
+	</block>
+</view>
+
+<drawer mode="right" visible="{{rightDrawer}}" bind:close="closeDrawer" data-mode="right">
+	<view class="d-container">
+		<view class="drawer-view">
+			当前已选中：{{choosedLength}}
+		</view>
+		<block>
+			<view class="income">收入</view>
+			<button class="btn bg-blue margin" id="income" bindtap="batchAgree">批量通过</button>
+			<button class="btn bg-red margin" id="income" bindtap="batchDisAgree">批量驳回</button>
+		</block>
+
+		<block>
+			<view class="cost">成本</view>
+			<button class="btn bg-blue margin" id="cost" bindtap="batchAgree">批量通过</button>
+			<button class="btn bg-red margin" id="cost" bindtap="batchDisAgree">批量驳回</button>
+		</block>
+	</view>
+</drawer>
+
+
+<wxs module="fn">
+	module.exports = {
+		round: function(value) {
+			if (typeof value == 'number') {
+				return Math.round(value)
+			}
+		},
+		months: function(months) {
+			months = months.map(function(item) {
+				return item + '月'
+			})
+			return months
+		}
+	}
+</wxs>

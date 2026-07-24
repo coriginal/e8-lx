@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "wux-icon": "../../../components/icon/index",
+    "wux-slider": "../../../components/slider/index"
+  },
+  "navigationBarTitleText": "扫码打印"
+}

@@ -1,0 +1,16 @@
+<view class="oc fade">
+  <view class="tip-title">
+    <icon type="i-new margin-lr" size="32"></icon>提示：此配置将在下一次登陆时生效。
+  </view>
+  <view class=" card1 {{index==0?'':'margin-top'}}" wx:for="{{list}}" wx:for-index="idx1" wx:key>
+    <card title="{{item.name}}" Icon="titles" Icolor="var(--red)">
+      <view slot="body">
+        <grids>
+          <grid wx:for="{{item.children}}" wx:for-index="idx2" wx:for-item="children" hover-class='default' wx:key='grid' bind:click="setMenus" data-idx1="{{idx1}}" data-idx2="{{idx2}}" label="{{children.name}}" wux-class="{{children.choose?'grid':'gray'}}">
+            <icon wx:if="{{children.icon}}" slot="header" size='56' color="{{children.choose?'black':'gray'}}" type='i-{{children.icon}}'></icon>
+          </grid>
+        </grids>
+      </view>
+    </card>
+  </view>
+</view>

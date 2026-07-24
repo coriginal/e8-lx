@@ -1,0 +1,49 @@
+<view class="container">
+    <view class="box" wx:for="{{dataList}}">
+            <view class="bar bg-green">
+                <view>{{item.service_order_no}}</view>
+                <view>{{item.service_order_status_name}}</view>
+            </view>
+            <view class="content">
+                <view>
+                    客户名称：{{item.customer_name}}
+                </view>
+                <view>
+                    客户电话：{{item.customer_phone||"未填写"}}
+                </view>
+                <view>
+                    服务地址：{{item.area||"未填写"}}
+                </view>
+                <view>
+                    服务类型：{{item.service_order_type_name}}
+                </view>
+                <view>
+                    问题描述：{{item.problem_desc || "无"}}
+                </view>
+                <view>
+                    备注：{{item.remark || "无"}}
+                </view>
+                <view>
+                    派单时间：{{item.dispatch_time || "无"}}
+                </view>
+            </view>
+            <view class="footer">
+            <!-- accept  refuse-->
+                <!-- <view class="bg-blue" data-order_no="{{item.service_order_no}}" data-operate="accept" bindtap="orderOperate">
+                    接单
+                </view>
+                <view class="bg-red" data-order_no="{{item.service_order_no}}" data-operate="reject" bindtap="orderOperate">
+                    拒单
+                </view> -->
+                <view data-phoneNumber="{{item.customer_phone}}" class="bg-green" bindtap="callCustomer" wx:if="{{item.customer_phone}}">
+                    联系客户
+                </view>
+                <view data-order_no="{{item.service_order_no}}" class="text-black" bindtap="goDetail">
+                    查看详情
+                </view>
+            </view>
+    </view>
+    <view class="isAll" wx:if="{{isAll}}">
+        暂无更多订单，<span class="text-blue" bindtap="goTop">点击返回顶部</span>
+    </view>
+</view>

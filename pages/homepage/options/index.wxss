@@ -1,0 +1,54 @@
+.msg-panel {
+  background-color: white;
+  margin: 20rpx 30rpx;
+  padding: 20rpx;
+  height: 248rpx;
+  border-radius: 10rpx;
+  box-shadow: 2rpx 4rpx 6rpx rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  border-bottom: 1rpx solid #eee;
+  height: 40%;
+  display: flex;
+  align-items: center;
+}
+
+.title-text {
+  font-weight: bolder;
+  padding: 0 20rpx;
+}
+
+.content {
+  height: 40%;
+  display: flex;
+  align-items: center;
+}
+
+.content-text {
+  color: gray;
+  font-size: 26rpx;
+  opacity: 0.8;
+}
+
+.foot {
+  height: 20%;
+}
+
+.foot-text {
+  color: grey;
+  font-size: 22rpx;
+  opacity: 0.5;
+}
+
+.nothing{
+  color: gray;
+  text-align: center;
+  line-height: 280px;
+}
+.no-read{
+  flex: 1;
+  text-align: right;
+  font-size: 13px;
+  color: gray;
+}

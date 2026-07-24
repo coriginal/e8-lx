@@ -1,0 +1,20 @@
+.p-10 {
+  padding: 10rpx;
+  background-color: white;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.p-lr-20 {
+  padding: 0 20rpx;
+}
+.text-blue{
+  color: var(--blue);
+}
+
+.task-line {
+  line-height: 48rpx;
+}

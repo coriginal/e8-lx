@@ -1,0 +1,21 @@
+.title {
+  color: gray;
+  font-weight: bold;
+}
+scroll-view{
+    height: 600rpx;
+}
+.addr-used-content {
+  background-color: white;
+  border-radius: 10rpx;
+  margin: 20rpx 0;
+  padding: 20rpx;
+}
+
+.f-tw {
+  font-weight: bold;
+}
+
+.text-addr {
+  font-size: 13px;
+}

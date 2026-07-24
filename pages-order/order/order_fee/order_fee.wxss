@@ -1,0 +1,56 @@
+@import '../order_cargo/order_cargo.wxss';
+
+.flex {
+  display: flex;
+  background-color: white;
+  flex-wrap: wrap;
+}
+
+.flex-1 {
+  height: 84rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15rpx;
+  color: gray;
+  width: calc((100vw - 90rpx) / 3)
+}
+
+.border {
+  border: 1px solid#eee;
+  border-radius: 5000rpx;
+}
+
+.input-border {
+  border: 1px solid#eee;
+  border-radius: 10rpx;
+  width: 66.6666%;
+  display: block!important
+}
+
+.input-panel .title {
+  font-weight: bold;
+}
+
+.checked {
+  border-color: #5c96ec;
+  background-color: #5c96ec;
+  color: white;
+  opacity: 0.9;
+}
+
+.cod-input {
+  text-align: center;
+  padding: 0 30rpx;
+}
+
+.input-panel {
+  min-height: 84rpx;
+}
+
+.content {
+  margin-bottom: 156rpx;
+}
+.markRequired{
+    color: red;
+}

@@ -1,0 +1,6 @@
+<view class="addpersoncell">
+  <view class="addperson {{ arrow ? 'arrow' : '' }} {{ (index == list.length-1 && hidden) ? 'noarrow' : ''}}" data-value="{{ item.value }}"  wx:for="{{ list }}">{{item.name}}
+    <image class="delete" src="../../../images/icon-delete.png" data-index="{{ index }}" catchtap="deleteBtnTapped"></image>
+  </view>
+  <view hidden="{{ hidden }}" class="addperson plus" bindtap='addperson' data-type='{{ type }}'>+</view>
+</view>

@@ -1,0 +1,24 @@
+<view class="box" wx:if="{{orderData.status}}">
+    <view wx:if="{{orderData.status == '待付款'}}" class="money-cal">
+        ¥ {{moneyCal}}
+    </view>
+    <view wx:if="{{orderData.status =='已付款'}}" class="pay-success">
+        支付完成！
+    </view>
+    <van-cell-group inset>
+        <van-cell title="产品名称" value="{{orderData.product}}" />
+        <van-cell title="单价" value="{{orderData.price+'元'}}" />
+        <van-cell title="续费时长" value="{{orderData.month_num+'个月'}}" />
+        <van-cell title="订单编号" value="{{orderData.order_no}}" />
+    </van-cell-group>
+    <view class="footer-button">
+        <van-button wx:if="{{orderData.status =='待付款'}}" bind:tap="payMoney" block type="info">立即支付</van-button>
+        <!-- 规避其他状态，所以此处不使用wx:else -->
+        <van-button wx:if="{{orderData.status =='已付款'}}" bind:tap="goHome" block type="info">返回首页</van-button>
+    </view>
+</view>
+<view wx:else  class="loading">
+    <van-loading type="spinner" color="#1989fa">
+        正在拉取订单数据
+    </van-loading>
+</view>

@@ -1,0 +1,47 @@
+.panel {
+  background-color: white;
+  padding: 20rpx;
+}
+
+.content {
+  padding: 20rpx;
+}
+
+.content .c1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content .c1 .title {
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.content .c1 .value {
+  color: var(--red);
+  font-size: 14px;
+}
+
+.content .c1 .value::after {
+  content: " 元";
+  font-size: 12px;
+}
+
+.content .c2 {
+  font-size: 12px;
+  opacity: 0.5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.text-bold{
+  font-weight: bold;
+}
+.text-green{
+  color: var(--green)!important;
+}
+.text-red{
+  color: var(--red)!important;
+}

@@ -1,0 +1,201 @@
+.bg-account {
+  /* width: 100%; */
+  margin: 0 20rpx;
+  height: 260rpx;
+  background-image: url('https://bd-image.oss-cn-hangzhou.aliyuncs.com/e8v3/wx_account/bg-account.png');
+  background-size: 100% 100%;
+  position: relative;
+  box-shadow: var(--shadowSize) var(--redShadow);
+  padding: 30rpx;
+  margin-top: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.free-content {
+  position: absolute;
+  right: 40rpx;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 30px;
+  font-size: 12px;
+}
+
+.flex-b {
+  display: flex;
+  justify-content: space-between;
+}
+
+.op-7 {
+  opacity: 0.7;
+}
+
+.bg-account view {
+  color: var(--white);
+}
+
+.t-f36 {
+  font-size: 28rpx;
+}
+
+.t-f48 {
+  font-size: 60rpx;
+}
+
+.my-system-options {
+  background-color: white;
+  padding: 0 30rpx;
+  font-size: 26rpx;
+  /* margin-top: 20rpx; */
+  margin: 20rpx 20rpx 0;
+  border-radius: 6rpx;
+}
+
+.my-system-menu {
+  height: 84rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1rpx solid #eee;
+}
+
+.left-view {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.left-view view {
+  margin-right: 10rpx;
+}
+
+.right-view {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  color: #9e9c9c;
+}
+
+.bottom-btn {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  padding: 30rpx 0;
+  background-color: white;
+  z-index: 999;
+}
+
+.m-p {
+  margin: 0 20rpx;
+  padding: 20rpx 32rpx;
+  border-radius: 6rpx;
+  height: 84rpx;
+  font-weight: 500;
+  flex: 1;
+}
+
+.bg-gradul-red {
+  color: white;
+  background: linear-gradient(45deg, #ed5d45, #f19687);
+}
+
+.bg-gradul-blue {
+  color: white;
+  background: linear-gradient(45deg, #5c95ec, #5c96ec83);
+}
+
+.share-content image {
+  width: 100%;
+  height: auto;
+  padding: 20rpx;
+  position: relative;
+}
+
+.account-content {
+  margin-bottom: 156rpx;
+}
+
+.share-panel {
+  position: absolute;
+  top: 0;
+  width: calc(100% - 40rpx);
+  height: 100%;
+  padding: 20rpx;
+}
+
+.share-title {
+  text-align: center;
+  color: var(--white);
+  line-height: 64rpx;
+  height: 64rpx;
+}
+
+.share-computer {
+  display: flex;
+  height: 120rpx;
+  line-height: 120rpx;
+}
+
+.flex-1 {
+  flex: 1;
+  text-align: center;
+  position: relative;
+}
+
+.t-f40 {
+  font-size: 40rpx;
+}
+
+.flex-1::after {
+  position: absolute;
+  width: 100%;
+  bottom: -40rpx;
+  text-align: center;
+  left: 0;
+  font-size: 20rpx;
+  color: var(--gray);
+}
+
+.x-1::after {
+  content: '比例';
+}
+
+.x-2::after {
+  content: '录单总量';
+}
+
+.x-3::after {
+  content: '你的账户奖励';
+}
+
+.share-text {
+  height: 64rpx;
+  line-height: 64rpx;
+  text-align: center;
+}
+
+.share-rule {
+  background-color: #fcedd4;
+  height: calc(100% - 192rpx - 140rpx);
+  border-radius: 24rpx;
+}
+
+.redpacket-img {
+  width: 100%;
+  height: auto;
+}
+
+.redpacket-view {
+  padding: 20rpx 0;
+  transition: all .3s;
+}
+
+.translate {
+  transform: translate(1rpx, 1rpx);
+}

@@ -1,0 +1,28 @@
+.popup-view {
+  height: 60vh;
+  overflow: scroll;
+}
+
+.btn-view {
+  margin: 60rpx 10rpx;
+  display: flex;
+}
+
+.btn-view .btn {
+  flex: 1;
+  height: 84rpx;
+  margin: 0 20rpx;
+}
+.switch {
+  margin: 0 20rpx;
+  position: relative;
+  /* transform: scale(0.8); */
+}
+
+.switch-pick::after {
+  content: "是";
+}
+
+.switch-pick::before {
+  content: "否";
+}

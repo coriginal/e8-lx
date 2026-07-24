@@ -1,0 +1,13 @@
+{
+    "navigationBarTitleText": "任务详情",
+    "enablePullDownRefresh": true,
+    "backgroundColor": "#f5f7fa",
+    "usingComponents": {
+        "van-empty": "@vant/weapp/empty/index",
+        "van-icon": "@vant/weapp/icon/index",
+        "van-loading": "@vant/weapp/loading/index",
+        "van-tab": "@vant/weapp/tab/index",
+        "van-tabs": "@vant/weapp/tabs/index",
+        "van-tag": "@vant/weapp/tag/index"
+    }
+}

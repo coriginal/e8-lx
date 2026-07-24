@@ -1,0 +1,215 @@
+<view class="container">
+    <view class="title">
+        <view>
+            订单{{orderDetail.serviceOrderStatusName}}
+        </view>
+        <image src="../../../../images/right.png"></image>
+    </view>
+    <view style="height: 100rpx;width: 100%;"></view>
+    <view class="detail_box">
+        <view>
+            <view>服务单号</view>
+            <view>{{orderDetail.serviceOrderNo}}</view>
+        </view>
+        <view>
+            <view>服务类型</view>
+            <view>{{orderDetail.serviceOrderTypeName}}</view>
+        </view>
+        <view>
+            <view>客户名称</view>
+            <view>{{orderDetail.customerName || "未知"}}</view>
+        </view>
+        <view>
+            <view>客户电话</view>
+            <view>{{orderDetail.customerPhone || "未填写"}}</view>
+        </view>
+        <view>
+            <view>服务地址</view>
+            <view>{{orderDetail.serviceAddress}}</view>
+        </view>
+        <view>
+            <view>问题描述</view>
+            <view style="font-weight: bold;" class="text-red">{{orderDetail.problemDesc}}</view>
+        </view>
+        <view>
+            <view>备注</view>
+            <view>{{orderDetail.remark || "无"}}</view>
+        </view>
+    </view>
+    <view class="detail_box">
+        <view>
+            <view>创建时间</view>
+            <view>{{orderDetail.createTime}}</view>
+        </view>
+        <view>
+            <view>派单时间</view>
+            <view>{{orderDetail.dispatchTime || "暂未派单"}}</view>
+        </view>
+        <view wx:if="{{orderDetail.acceptOrderTime}}">
+            <view>接/拒单时间</view>
+            <view>{{orderDetail.acceptOrderTime}}</view>
+        </view>
+        <view>
+            <view>预约时间</view>
+            <view>{{orderDetail.subscribeTime||"暂未预约"}}</view>
+        </view>
+    </view>
+    <view class="detail_box">
+        <view>
+            <view>服务开始时间</view>
+            <view>{{orderDetail.serviceStartTime||"暂未开始"}}</view>
+        </view>
+        <view>
+            <view>服务结束时间</view>
+            <view>{{orderDetail.serviceEndTime || "暂未结束"}}</view>
+        </view>
+    </view>
+
+    <view class="feedback_box" wx:if="{{orderDetail.serviceOrderStatus==80 && orderDetail.serviceAttaches}}">
+        <view class="feedback_title text-green">货物完成情况</view>
+        <view class="feedback_list" wx:if="{{completeImg.length}}">
+            <view class="feedback_content">
+                <view>
+                    <view>完成人</view>
+                    <view>{{item.creator_name}}</view>
+                </view>
+                <view></view>
+                <view>
+                    <view>完成时间</view>
+                    <view>{{orderDetail.completeTime}}</view>
+                </view>
+            </view>
+            <view class="feedback_img">
+                <view>完成照片<span class="text-blue" style="font-size: 25rpx;font-weight: normal;">（点击图片放大查看）</span></view>
+                <view class="img_box">
+                    <image src="{{urls}}" wx:for-item="urls" wx:for="{{completeImg}}" data-index="{{index}}" bindtap="previewImages" data-imgList="{{completeImg}}"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="feedback_box" wx:if="{{feedBackList.length}}">
+        <view class="feedback_title text-red">货物问题反馈</view>
+        <view class="feedback_list" wx:for="{{feedBackList}}">
+            <view class="feedback_content">
+                <view>
+                    <view>反馈人</view>
+                    <view>{{item.creator_name}}</view>
+                </view>
+                <view>
+                    <view>反馈内容</view>
+                    <view>{{item.feedback||''}}</view>
+                </view>
+                <view>
+                    <view>反馈时间</view>
+                    <view>{{item.createtime}}</view>
+                </view>
+            </view>
+            <view class="feedback_img">
+                <view>反馈照片<span class="text-blue" style="font-size: 25rpx;font-weight: normal;">（点击图片放大查看）</span></view>
+                <view class="img_box">
+                    <image src="{{urls}}" wx:for-item="urls" wx:for="{{item.imgList}}" data-index="{{index}}" bindtap="previewImages" data-imgList="{{item.imgList}}"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="repair_list_box" wx:if="{{repairList.length}}">
+        <view class="repair_list_box_title">
+            <view>货物明细</view>
+            <view class="text-blue" bindtap="{{orderDetail.serviceOrderStatus==60||orderDetail.serviceOrderStatus==70 ? 'openFeedBack':''}}">{{orderDetail.serviceOrderStatus==60||orderDetail.serviceOrderStatus==70 ? '点此进行问题反馈' :'' }}</view>
+        </view>
+        <view class="goods" wx:for="{{repairList}}">
+            <view>{{item.skuName}}:</view>
+            <view>
+                <view>件数：·································{{item.amount}}</view>
+                <view>重量：·································{{item.amount}}</view>
+                <view>体积：·································{{item.amount}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="bottom_button">
+        <view class="bg-blue" wx:if="{{orderDetail.serviceOrderStatus==40|| orderDetail.serviceOrderStatus==50}}" bindtap="openSubscribe">
+            预约上门
+        </view>
+        <view class="bg-green" wx:if="{{orderDetail.serviceOrderStatus==50}}" bindtap="startService">
+            开始服务
+        </view>
+        <view class="bg-orange" wx:if="{{orderDetail.serviceOrderStatus==60 ||orderDetail.serviceOrderStatus==70}}" bindtap="openFeedBack">
+            问题反馈
+        </view>
+        <view class="bg-red" wx:if="{{orderDetail.serviceOrderStatus==70}}" bindtap="openEndService">
+            结束服务
+        </view>
+    </view>
+</view>
+<page-container position="bottom" show="{{showPageContainer}}">
+    <!-- 0 1 2问题反馈 -->
+    <view class="feedback_page" wx:if="{{pageContainerType==2}}">
+        <view class="feedback_page_title">
+            货物问题反馈
+        </view>
+        <view class="feedback_page_list">
+            <view>
+                <view>服务单号</view>
+                <view class="text-gray">{{orderDetail.serviceOrderNo}}</view>
+            </view>
+            <view>
+                <view>问题说明</view>
+                <textarea value="{{feedBackContent}}" bindinput="setFeedback"></textarea>
+            </view>
+            <view>
+                <view>图片上传</view>
+                <view>
+                    <image src="../../../../images/upImage.png" bindtap="chooseImage"></image>
+                    <image class="img" src="{{appHost+item.downloadUrl}}" wx:for="{{feedbackImages}}">
+                        <image bindtap="delImg" data-type="-25" data-id="{{item.id}}" data-index="{{index}}" class="delimg" src="../../../../images/删除.png"></image>
+                    </image>
+                </view>
+            </view>
+        </view>
+        <view class="feedback_up_button bg-blue" bindtap="submitFeedBack">确认提交</view>
+    </view>
+    <view class="subscribe_box" wx:if="{{pageContainerType==0}}">
+        <view class="subscribe_title">服务单号：{{orderDetail.serviceOrderNo}}</view>
+        <view class="subscribe_items">
+            <view>
+                <view>预约日期</view>
+                <view class="text-gray">
+                    <picker mode="date" value="{{subcribe_date}}" bindchange="bindDateChange">
+                        {{subscribe_date || "点击选择日期"}}
+                    </picker>
+                </view>
+            </view>
+            <view>
+                <view>预约时间</view>
+                <view class="text-gray">
+                    <picker mode="time" value="{{subcribe_time}}" bindchange="bindTimeChange">
+                        {{subscribe_time || "点击选择时间"}}
+                    </picker>
+                </view>
+            </view>
+        </view>
+        <view class="subscribe_button bg-blue" bindtap="upSubscribeTime">确认</view>
+    </view>
+    <view class="feedback_page" wx:if="{{pageContainerType==1}}">
+        <view class="feedback_page_title">
+            结束订单
+        </view>
+        <view class="feedback_page_list">
+            <view>
+                <view>服务单号</view>
+                <view class="text-gray">{{orderDetail.serviceOrderNo}}</view>
+            </view>
+            <view>
+                <view>图片上传</view>
+                <view>
+                    <image src="../../../../images/upImage.png" bindtap="endChooseImages"></image>
+                    <image class="img" src="{{appHost+item.attachPath2}}" wx:for="{{endImages}}">
+                        <image bindtap="delImg" data-type="-24" data-id="{{item.id}}" data-index="{{index}}" class="delimg" src="../../../../images/删除.png"></image>
+                    </image>
+                </view>
+            </view>
+        </view>
+        <view class="feedback_up_button bg-blue" bindtap="endService">确认提交</view>
+    </view>
+</page-container>

@@ -1,0 +1,15 @@
+{
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "tab": "../../../components/tab/index",
+    "tag": "../../../components/tag/index",
+    "field": "../../../components/field/index",
+    "icontab": "../../../components/icontab/index",
+    "monthnav": "../../../components/monthnavigation/index",
+    "addperson": "../../../components/addperson/index",
+    "attach": "../../../components/attach/index",
+    "datetime": "../../../components/datetime/index",
+    "cell":"../../../components/cell/index",
+    "searchpicker": "../../../components/searchpicker/index"
+  }
+}

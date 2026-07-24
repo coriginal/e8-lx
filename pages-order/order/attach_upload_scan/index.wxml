@@ -1,0 +1,38 @@
+<view class="wrap">
+<form bindsubmit="forSubmit">
+	<view class="scan">
+		<input  focus="{{true}}"  bindconfirm="inputOcode" value="{{ocode}}"  placeholder="请先填写单号或扫码单号"></input>
+		<icon color="#5c96ec" type="i-scan" size="50" style="margin:5px 0 0 10px;"  bindtap="doScan" ></icon>
+	</view>
+
+	<view class="signDetail" hidden="{{!showReceive}}">
+		<view class="uploadAttach">
+			<view wx:for="{{uploadList}}" wx:key>
+				<view>{{item.title}}</view>
+				<attach recordCode="{{item.recordId}}" bindaddattach="addProof" list="{{item.urls}}" binddelattach="delattach" scrollx="true" data-index="{{index}}" itemID="{{item.itemId}}" waterMark="{{ item.waterMark }}" markMode="{{ item.markMode }}" sourceType="{{ item.sourceType }}"/>
+			</view>
+		</view>
+
+		<view class="receive-bottom-btn">
+			<button style="height: 40px;line-height: 40px;" form-type="submit" class="bg-blue">确定上传</button>
+		</view>
+	</view>
+
+	<view class="scan_choose" bindtap="doScan">
+		<image src="../../../images/icon-scan.png"></image>
+	</view>
+</form>
+</view>
+
+<!-- <receive show="{{showReceive}}" receiveItem="{{order}}" bind:success="successReceive"  /> -->
+
+<!-- <popup title="签收单号查询" visible="{{ visible }}" >
+	<view class="content">
+		<view class="title">单号：</view>
+    <input focus="{{true}}" bindinput="inputOcode"  value="{{ocode}}" class="pop-input solid" placeholder="请填写签收单号" />
+    <icon type="i-scan" size="40" bindtap="doScan" />
+	</view>
+	<view class="btn-view">
+		<button bindtap="confirmBtn" class="confirm-btn btn bg-blue">确定</button>
+	</view>
+</popup> -->

@@ -1,0 +1,20 @@
+<view class="options-panel">
+	<block wx:if="{{!isNothing}}">
+		<view class="fade msg-panel shadow-blur" wx:for="{{list}}" wx:key data-title="{{index}}" data-item="{{item}}" bindtap="readMessage">
+			<view class="title">
+				<icon size="40" type="i-{{item.icon}}" color="{{item.color}}"></icon>
+				<text class="title-text">{{index}}</text>
+				<text class="no-read">未读 {{item.children.length}} 条</text>
+			</view>
+			<view class="content">
+				<text class="content-text">{{item.text}}</text>
+			</view>
+			<view class="foot">
+				<text class="foot-text">{{item.date}}</text>
+			</view>
+		</view>
+	</block>
+	<block wx:else>
+		<view class="nothing">暂无未读消息</view>
+	</block>
+</view>

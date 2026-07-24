@@ -1,0 +1,20 @@
+<!--pages-work/tss/capacity/truck_task_fee/index.wxml-->
+<view class="box">
+    <view wx:for="{{feeFieldList}}" wx:key="{{index}}">
+        <view class='cargo-info'>
+            <view class="input-panel solid-bottom">
+                <view class='title'>{{item.subject_name}}</view>
+                <input bindinput="inputChange" data-type="fee" data-item="{{item}}" class="t-right t-f24" placeholder="请输入金额" value="{{formData[item.subject_id].feeAmount}}"/>
+                <view style="width: 10px;"></view>
+            </view>
+            <view class="input-panel solid-bottom">
+                <view class='title'></view>
+                <input value="{{formData[item.subject_id].remark}}" bindinput="inputChange" class="t-right t-f24" data-type="remark" data-item="{{item}}" placeholder="请输入备注" />
+                <view style="width: 10px;"></view>
+            </view>
+        </view>
+    </view>
+</view>
+<view style="border-top: 1px solid whitesmoke;height: 60px;padding: 0 10px;z-index: 99;background-color: white;width: 100vw;position:fixed;bottom:0">
+    <button bind:tap="submitFee" class="btn bg-blue order-confirm">确定</button>
+</view>

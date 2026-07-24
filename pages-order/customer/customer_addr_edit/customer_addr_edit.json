@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "customer-addr-used":"../customer_addr_used/index"
+  },
+  "navigationBarTitleText": "地址填写"
+}

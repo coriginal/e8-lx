@@ -1,0 +1,2 @@
+<!--skills/order-skill/components/order-detail/index.wxml-->
+<text>{{orderInfo.code}}</text>

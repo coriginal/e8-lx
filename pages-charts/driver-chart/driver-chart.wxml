@@ -1,0 +1,235 @@
+<view class="toplist">
+    <div class="{{currentPage==0?'toplistchecked':''}}" bindtap="choosePage" data-index="0">单量</div>
+    <div class="{{currentPage==1?'toplistchecked':''}}" bindtap="choosePage" data-index="1">收入</div>
+</view>
+<view hidden="{{currentPage!=0}}">
+    <view hidden="{{show}}" class="container">
+        <view class="section">
+            <view class="section__title">日期选择:</view>
+            <view class="choosedate">
+                <picker class="picker" mode="date" value="{{datefrom}}" bindchange="bindDateFromChange">
+                    <view class="picker">
+                        {{datefrom}}
+                    </view>
+                </picker>
+                至
+                <picker class="picker" mode="date" value="{{dateto}}" bindchange="bindDateToChange">
+                    <view>
+                        {{dateto}}
+                    </view>
+                </picker>
+                <button bindtap="search" size="mini" style="height: 60rpx;line-height: 60rpx;">查询</button>
+            </view>
+        </view>
+        <view style="height: 100%;width: 100%;" hidden="{{IsNull}}" class="switchContainer">
+            <view style="width: 50%;text-align: center;">
+                圆饼图
+                <switch class="switch blue" checked="{{isShowPie}}" bindtap="showPieChart"></switch>
+            </view>
+            <view style="width: 50%;text-align: center;">
+                深色模式
+                <switch class="switch blue" checked="{{viewMode=='dark'?true:false}}" bindtap="modeSwitch"></switch>
+            </view>
+            <view style="width: 50%;text-align: center;">
+                <button style="height: 60rpx;width: 180rpx;font-size: 25rpx;background-color:#188df0;color: white;" bindtap="saveChart" id="bar">生成图片</button>
+            </view>
+        </view>
+        <view style="height: 100%;width: 100%;" hidden="{{IsNull}}">
+            <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ecBar }}"></ec-canvas>
+            <view wx:if="{{isShowPie}}" style="width: 100%;text-align: center;margin: 10rpx;margin-bottom: 10rpx;">
+                <button style="height: 60rpx;line-height: 60rpx;width: 180rpx;font-size: 25rpx;background-color:#188df0;color: white;float: right;margin-right: 40rpx;" id="pie" bindtap="saveChart">生成图片</button>
+            </view>
+            <ec-canvas wx:if="{{isShowPie}}" id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ ecPie }}"></ec-canvas>
+        </view>
+        <view class="bar" hidden="{{IsNull}}">
+            <view class='search'>
+                <view class='search-form'>
+                    <icon size='36' type='i-search' />
+                    <input bindconfirm="searchCode" bindinput="bindKeyInput" placeholder="关键词过滤（姓名）" type="text" />
+                </view>
+            </view>
+            <view class='customer_list' wx:if="{{filterData.length}}">
+                <view class='customer_panel' wx:for="{{filterData}}" wx:key data-item="{{item}}" catchtap='chooseDriver' hover-class="hover-round">
+                    <view class="head">
+                        <view class="flex-1 ">
+                            <text wx:if="{{item.driver}}" class='name'>{{item.driver||''}}</text>
+                            <text wx:if="{{item.phone}}" class="phone">{{item.phone||''}}</text>
+                        </view>
+                        <view class='type'>
+                            <text wx:if="{{item.plate_num}}"> {{item.plate_num}} </text>
+                            <text wx:if="{{item.countweight}}"> {{item.countweight}} {{unit}}</text>
+                            <icon type="i-right"></icon>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!-- <button bindtap="testButton">go</button> -->
+    </view>
+
+    <page-container show="{{show}}" round="{{round}}" overlay="{{overlay}}" duration="{{duration}}" position="{{position}}" close-on-slide-down="{{false}}" bindbeforeenter="onBeforeEnter" bindenter="onEnter" bindafterenter="onAfterEnter" bindbeforeleave="onBeforeLeave" bindleave="onLeave" bindafterleave="onAfterLeave" bindclickoverlay="onClickOverlay" custom-style="{{customStyle}}" overlay-style="{{overlayStyle}}">
+        <view class="toplist">
+            <div class="{{i_currentPage==0?'toplistchecked':''}}" bindtap="choosePage" data-index="0">单量</div>
+            <div class="{{i_currentPage==1?'toplistchecked':''}}" bindtap="choosePage" data-index="1">收入</div>
+        </view>
+        <view class="container" hidden="{{i_currentPage!=0}}">
+            <view class="section">
+                <view class="section__title">日期选择:</view>
+                <view class="choosedate">
+                    <picker class="picker" mode="date" value="{{datefrom}}" bindchange="bindDetailDateFromChange">
+                        <view class="picker">
+                            {{detailDatefrom}}
+                        </view>
+                    </picker>
+                    至
+                    <picker class="picker" mode="date" value="{{dateto}}" bindchange="bindDetailDateToChange">
+                        <view>
+                            {{detailDateto}}
+                        </view>
+                    </picker>
+                    <button bindtap="searchDetail" size="mini" style="width: 120rpx;height: 60rpx;line-height: 60rpx;">查询</button>
+                </view>
+            </view>
+            <view style="width: 100%;height:100%;" hidden="{{detailIsNull}}">
+                <view style="width: 100%;height: auto;" hidden="{{lineHidden}}">
+                    <ec-canvas id="mychart-dom-line" canvas-id="mychart-line" ec="{{ ecLine }}"></ec-canvas>
+                </view>
+                <view class="bar">
+                    <view class='search'>
+                        <view class='search-form'>
+                            <icon size='36' type='i-search' />
+                            <input bindconfirm="searchCode" bindinput="codeInput" placeholder="关键词过滤（单号）" type="text" />
+                        </view>
+                    </view>
+                    <view class='customer_list' style="height: 45vh;overflow:scroll;" wx:if="{{driverData.length}}">
+                        <view class='customer_panel' wx:for="{{driverData}}" wx:key data-item="{{item}}" catchtap='orderDetail' hover-class="hover-round">
+                            <view class="head">
+                                <view class="flex-1 ">
+
+                                    <text wx:if="{{item.code}}" class='name'>订单号：{{item.code||''}}</text>
+                                </view>
+                                <view class='type'>
+                                    <text wx:if="{{item.weight}}"> {{item.weight}} {{unit}}</text>
+                                    <icon type="i-right"></icon>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view hidden="{{i_currentPage!=1}}" class="page2">
+            <view class="coin_bg">
+                <view>-{{currentDriver.driver}}的总收入-</view>
+                <view>
+                    <view bindtap="changeDate" id="i_last">
+                        <icon style="transform: rotate(180deg);" color="white" type='i-right' size='32'></icon>上个月
+                    </view>
+                    <view>￥<text style="font-size: 50rpx;">{{sumCoin}}</text></view>
+                    <view bindtap="changeDate" id="i_next">下个月<icon color="white" type='i-right' size='32'></icon>
+                    </view>
+                </view>
+                <view>{{coin_datefrom}} - {{coin_dateto}}</view>
+            </view>
+            <view class="box">
+                <view>
+                    <view>
+                        <view class="point" style="background: blue;"></view>
+                        <text>{{otherList[0]}}</text>
+                    </view>
+                    <view>总单量(单)</view>
+                </view>
+                <view>
+                    <view>
+                        <view class="point" style="background: orange;"></view>
+                        <text>{{otherList[1]?otherList[1]:0}}</text>
+                    </view>
+                    <view>平均每单收入(元)</view>
+                </view>
+                <view>
+                    <view>
+                        <view class="point" style="background: yellow;"></view>
+                        <text>{{otherList[2]?otherList[2]:0}}</text>
+                    </view>
+                    <view>一单最高收入(元)</view>
+                </view>
+            </view>
+            <view class="coin_search">
+                <icon color="gray" type='i-search' size='40'></icon>
+                <input type="text" value="{{coinSx}}" placeholder="搜索（运输单号）" bindinput="searchCoin"/>
+            </view>
+            <view class="coin_order_list">
+                <view class="coin_order_item" wx:for="{{driverCoin}}">
+                    <view class="title">
+                        <view style="display: flex;align-items: center;">
+                            <view class="point"></view>{{item.code}}
+                        </view>
+                        <view>收入：{{item.fee}}元</view>
+                        <!-- <view>均利：80元/kg</view> -->
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!-- <button bindtap="toBack">返回</button> -->
+        <modal title="订单详情" hidden="{{detailHidden}}" no-cancel="{{true}}" bindconfirm="hiddenDetail">
+            <view wx:for="{{currentDetail}}">
+                <view>线路：{{item.send_province}}->{{item.receive_province}}</view>
+                <view wx:if="{{item.cargo}}">货品：{{item.cargo}}</view>
+                <view>客户：{{item.customer_name}}</view>
+                <view wx:if="{{item.weight}}">重量：{{item.weight}}{{unit}}</view>
+            </view>
+        </modal>
+    </page-container>
+</view>
+<view hidden="{{currentPage!=1}}" class="page2">
+    <view class="coin_bg">
+        <view>-总收入-</view>
+        <view>
+            <view bindtap="changeDate" id="last">
+                <icon style="transform: rotate(180deg);" color="white" type='i-right' size='32'></icon>上个月
+            </view>
+            <view>￥<text style="font-size: 50rpx;">{{sumCoin}}</text></view>
+            <view bindtap="changeDate" id="next">下个月<icon color="white" type='i-right' size='32'></icon>
+            </view>
+        </view>
+        <view>{{coin_datefrom}} - {{coin_dateto}}</view>
+    </view>
+    <view class="box">
+        <view>
+            <view>
+                <view class="point" style="background: blue;"></view>
+                <text>{{otherList[0]}}</text>
+            </view>
+            <view>总单量(单)</view>
+        </view>
+        <view>
+            <view>
+                <view class="point" style="background: orange;"></view>
+                <text>{{otherList[1]?otherList[1]:0}}</text>
+            </view>
+            <view>平均每单收入(元)</view>
+        </view>
+        <view>
+            <view>
+                <view class="point" style="background: yellow;"></view>
+                <text>{{otherList[2]?otherList[2]:0}}</text>
+            </view>
+            <view>一单最高收入(元)</view>
+        </view>
+    </view>
+    <view class="coin_search">
+        <icon color="gray" type='i-search' size='40'></icon>
+        <input value="{{coinSx}}" type="text" placeholder="搜索（运输单号）" bindinput="searchCoin"/>
+    </view>
+    <view class="coin_order_list">
+        <view class="coin_order_item" wx:for="{{driverCoin}}">
+            <view class="title">
+                <view style="display: flex;align-items: center;">
+                    <view class="point" style="background: red;"></view>{{item.code}}
+                </view>
+                <view>收入：{{item.fee}}元</view>
+                <!-- <view>均利：80元/kg</view> -->
+            </view>
+        </view>
+    </view>
+</view>

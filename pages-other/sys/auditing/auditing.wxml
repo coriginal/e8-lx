@@ -1,0 +1,18 @@
+<!-- <view class="image-view">
+	<image mode="widthFix" class="image" src="{{src}}"></image>
+</view>
+
+<view class="content">
+	<row>
+		<col span="6" wx:for="{{list}}" wx:key>
+		<view class="panel-view shadow-blur" hover-class="default" bindtap="goAuditing" id="{{item.code}}" style="box-shadow: 0 1rpx 10rpx var(--{{item.shadowColor}})">
+			<icon type="i-{{item.icon}}" size="34" color="var(--{{item.iconColor}})"></icon>
+			<text class="margin-text">{{item.label}}</text>
+		</view>
+		</col>
+	</row>
+</view>
+
+ <fab-button fields="{{['date','customer','order','status','send_addr','receive_addr']}}" />  -->
+
+ <work />

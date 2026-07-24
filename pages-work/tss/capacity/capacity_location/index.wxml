@@ -1,0 +1,105 @@
+<view>
+    <view class="top_line" style="background:#fff;justify-content: space-around;">
+        <view wx:for='{{typeObj[task_type].top_btn}}' wx:for-index="key" class="{{item.class}} top_view" bindtap="{{item.bindtap}}" wx:key hover-class="default" hover-stay-time="500">
+            <icon type="{{item.icon}}" size="40" wx:if="{{item.icon}}"></icon>
+            <text wx:if="{{item.useIfList}}">{{if_list ? '地图模式' : '列表模式'}}</text>
+            <text wx:if="{{!item.useIfList}}">{{key}}</text>
+            <switch checked="{{show_done}}" class="top-switch blue" color="blue" wx:if="{{item.type == 'switch'}}"></switch>
+        </view>
+    </view>
+
+    <view wx:if="{{if_list}}" class="middle_body">
+        <view class="flex_view" wx:for="{{showData}}" wx:for-item="order" wx:key>
+            <view class='panel t-f32 {{order.selected}}' catchtap="goDetail" data-location_key="{{order.key}}">
+                <view class='head'>
+                    <view class="left_head">
+                        <view class="padding-tb">
+                            <tag color="{{order.type == 'start' ? 'blue' : 'red'}}">{{order.type == 'start' ? '装' : '卸'}}</tag>
+                            <text class="loc_name">
+                                <text class="text-blue">{{order.location.site||order.location.name}}</text>
+                            </text>
+                            <tag wx:if="{{order.tag}}" color='red'>{{order.tag}}</tag>
+                        </view>
+                    </view>
+                </view>
+                <view class="flex_view">
+                    <image class="addr_pic" src="{{order.type == 'order' ? '../../../../images/receive.png' : '../../../../images/addr.png'}}"></image>
+                    <view class="flex-1" style="font-size:16px;">{{order.addr}}
+                        <text class="nav" wx:if="{{order.lng_lat}}" bindtap="goMap" data-lng_lat="{{order.lng_lat}}" data-loc="{{order.addr}}">导航</text>
+                    </view>
+                </view>
+                <view class="line_info">
+                    <view>
+                        <text class="t-f28 text-gray">货物信息：</text>
+                        <text>{{order.cargoInfo}}</text>
+                    </view>
+                </view>
+                <view>
+                    <block wx:for='{{flexTagObj[order.type]}}' wx:for-index="key" wx:key>
+                        <tag wx:if="{{order[key] && (order[key] == item.value || !item.value)}}" color="{{item.color}}">{{item.title}}</tag>
+                    </block>
+                </view>
+                <view class="flex_view flex-between">
+                    <abnormal udf_btn_class="a_btn" type="{{order.num == 1 ? 'order' : 'loc'}}" task_id="{{task_id}}" order_id="{{order.num == 1 ? order.sub_order_ids : order.location.id}}" task_type="{{task_type}}" recordid="-5" bindreport="reportAbnormal"></abnormal>
+                    <button wx:if="{{task_type == '中转' && !order.done}}" class="btn bg-blue" catchtap="showDepartArrive" data-type="{{order.type}}" data-location_id="{{order.location.id}}" data-amount="{{order.amount}}">{{order.type == 'start' ? '已出发' : '已到达'}}</button>
+                    <pick_sign wx:if="{{task_type != '中转' && !order.if_done}}" task_id="{{task_id}}" location_id="{{order.location.id}}" type="{{order.type}}" volume="{{order.volume}}" weight="{{order.weight}}" amount="{{order.amount}}" num="{{order.num}}" sub_order_ids="{{order.sub_order_ids}}" order_ids="{{order.order_ids}}" rcode_type="{{order.need_rcode}}" bindpick="queryOrder" bindsign="queryOrder"></pick_sign>
+                    <!-- <button wx:if="{{task_type != '中转' && !order.if_done}}" class="btn bg-blue" catchtap="showPickSign" data-location_id="{{order.location_id}}" data-type="{{order.type}}" data-volume="{{order.volume}}" data-weight="{{order.weight}}" data-amount="{{order.amount}}" data-num="{{order.num}}" data-sub_order_ids="{{order.sub_order_ids}}" data-rcode_type="{{order.rcode_type}}">{{order.type == 'start' ? '确认取件' : '签 收'}}</button> -->
+                </view>
+                <!-- <view class="other-btn">
+					<view class="text-red" bindtap="removeOrder" data-sub-id="{{order.sub_order_ids}}" data-task-id="{{order.task_id}}">移除此单</view>
+				</view> -->
+
+            </view>
+
+        </view>
+    </view>
+    <view wx:else>
+        <map id="map" longitude="{{lng}}" latitude="{{lat}}" scale="14" data-id="{{item.id}}" markers="{{markers}}" bindmarkertap="goMap" bindcallouttap="goMap" data-lng_lat="{{item.lng_lat}}" data-loc="{{item.addr}}" show-location style="width: 100%; height: 100vh;"></map>
+    </view>
+    <view wx:if="{{task_status != '已到达'}}" class="flex_view bottom_btn">
+        <view wx:for='{{typeObj[task_type].bottom_btn}}' wx:for-index="key" class="{{item.class}}" bindtap="{{item.bindtap}}" wx:key>{{key}}</view>
+    </view>
+</view>
+<view class="line_go" wx:if="{{domain=='D509'}}">
+    <view class="bg-green" data-operate="干线出发" bindtap="editStatus">干线出发</view>
+    <view class="bg-blue" data-operate="干线到达" bindtap="editStatus">干线到达</view>
+</view>
+<modal show="{{show_depart_arrive}}" title="确认信息">
+    <form bindsubmit="locDepartArrive">
+        <view class="pick_dlg">
+            <view class="pick_dlg">
+                <text class="label">件数</text>
+                <input class="ipt" name="amount" type="number" value="{{amount}}"></input>
+            </view>
+        </view>
+        <view class="attach_title">上传凭证</view>
+        <attach recordId="-4" bindaddattach="addProof" binddelattach="delattach" list="{{attachUrls}}" scrollx="true" />
+        <button class=" confirm_btn bg-blue" form-type="submit">确认已{{type == 'start' ? '出发' : '到达'}}</button>
+    </form>
+</modal>
+
+<modal title="获取位置需要您授权" show="{{showPerModal}}" height='auto' hideConfirm>
+    <button open-type="openSetting" bindopensetting="settingCallback" class="_setting">点此打开授权</button>
+</modal>
+
+
+<wxs module="fn">
+    module.exports = {
+        unit: function (value) {
+            switch (value) {
+                case 'amount':
+                    return '件';
+                    break;
+                case 'num':
+                    return '票';
+                    break;
+                case 'volume':
+                    return 'm³';
+                    break;
+                case 'weight':
+                    return 'kg';
+                    break;
+            }
+        }
+    }
+</wxs>

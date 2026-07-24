@@ -1,0 +1,7 @@
+ <view wx:if="{{show}}" class="modal-mask" catchtap="hideModal" catchtouchmove="true" ></view>
+  <view wx:if="{{show}}" class="modal-dialog" catchtap="forbidBubble">
+    <view wx:if="{{title}}" class="modal-title">{{title}}</view>
+    <view class="modal-content">
+      <slot></slot>
+    </view>
+  </view>

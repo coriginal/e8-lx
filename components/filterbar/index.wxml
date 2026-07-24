@@ -1,0 +1,54 @@
+<view class="wux-class {{ classes.wrap }}">
+  <wux-backdrop id="wux-backdrop" data-index="{{ index }}" data-item="{{ options[index] }}" bind:click="onClose" />
+  <view class="{{ classes.bd }}">
+    <block wx:for="{{ options }}" wx:key="">
+      <view class="{{ classes.item }} {{ paramsChecked ? prefixCls + '__item--checked' : '' }}" bindtap="onClick" data-index="{{ index }}">
+      <icon type="i-filter" size='32' color="{{ paramsChecked ? prefixCls + '__item--checked' : '' }}"></icon>
+        <text class="{{ classes.text }}">{{ item.label }}</text>
+      </view>
+    </block>
+  </view>
+  <block wx:for="{{ options }}" wx:key="">
+    <wux-animation-group wux-class="{{ classes.pop }}" in="{{ item.visible }}" class-names="wux-animate--slideInRight" bind:enter="onEnter" bind:exit="onExit">
+      <scroll-view class="{{ classes.scrollView }}" scroll-y bindscroll="onScroll">
+        <block wx:for="{{ item.children }}" wx:for-item="p" wx:for-index="pIndex" wx:key="">
+          <view class="{{ classes.panel }}">
+            <view class="{{ classes.panelHd }}">
+              <div class="{{ classes.panelTitle }}">{{ p.label }}</div>
+              <div class="{{ classes.panelSelected }}">{{ p.selected }}</div>
+            </view>
+            <view class="{{ classes.panelBd }}">
+              <radio-group bindchange="onRadioChange" data-parent-index="{{ index }}" data-index="{{ pIndex }}" data-item="{{ p }}" wx:if="{{ p.type === 'radio' }}">
+                <view class="{{ classes.groups }}">
+                  <block wx:for="{{ p.children }}" wx:for-item="g" wx:key="">
+                    <view class="{{ classes.group }}">
+                      <radio class="{{ classes.radio }}" value="{{ g.value }}" checked="{{ g.checked }}" />
+                      <view class="{{ classes.btn }} {{ g.checked ? prefixCls + '__btn--checked' : '' }}">{{ g.label }}</view>
+                    </view>
+                  </block>
+                </view>
+              </radio-group>
+              <checkbox-group bindchange="onCheckboxChange" data-parent-index="{{ index }}" data-index="{{ pIndex }}" data-item="{{ p }}" wx:if="{{ p.type === 'checkbox' }}">
+                <view class="{{ classes.groups }}">
+                  <block wx:for="{{ p.children }}" wx:for-item="g" wx:key="">
+                    <view class="{{ classes.group }}">
+                      <checkbox class="{{ classes.check }}" value="{{ g.value }}" checked="{{ g.checked }}" />
+                      <view class="{{ classes.btn }} {{ g.checked ? prefixCls + '__btn--checked' : '' }}">{{ g.label }}</view>
+                    </view>
+                  </block>
+                </view>
+              </checkbox-group>
+              <view class="{{ classes.input }}" wx:if="{{p.type == 'input'}}">
+                <input data-parent-index="{{ index }}" data-index="{{ pIndex }}" data-item="{{ p }}" bindinput="onInputChange"  placeholder='{{p.label}}'></input>
+              </view>
+            </view>
+          </view>
+        </block>
+      </scroll-view>
+      <div class="{{ classes.btns }}">
+        <button class='btn bg-red flex-1 m-p' data-index="{{ index }}" data-item="{{ item }}" bindtap="onReset">重置</button>
+        <button class="btn bg-blue flex-4 m-p" data-index="{{ index }}" bindtap="onConfirm">确定</button>
+      </div>
+    </wux-animation-group>
+  </block>
+</view>

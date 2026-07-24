@@ -1,0 +1,40 @@
+.addpersoncell{
+  display: flex;  
+  background-color: #fff;
+  padding: 0 16px;
+  position:relative;
+  flex-wrap:wrap;
+}
+.addperson{
+  height:50px;
+  width: 50px;
+  border-radius:5%;
+  border:2rpx solid #c1c1c1;
+  line-height: 50px;
+  text-align: center;
+  font-size:15px;
+  margin: 15px 30px 15px 0;
+  position:relative;
+}
+.plus{
+  font-size:25px;
+  color:#eee;
+}
+.delete {
+  width:50rpx;
+  height:50rpx;
+  position: absolute;
+  right: -15rpx;
+  top:-15rpx;
+}
+.arrow:after{
+  content:'··>';
+  color:#c1c1c1;
+  position:absolute; 
+  font-weight: bold;
+  font-size:10px;
+  left:58px;  
+} 
+.noarrow:after{
+  content:'';
+}

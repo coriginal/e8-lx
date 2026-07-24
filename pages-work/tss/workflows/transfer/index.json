@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "转审",
+  "usingComponents": {
+    "addperson": "../../../components/addperson/index"
+  }
+}

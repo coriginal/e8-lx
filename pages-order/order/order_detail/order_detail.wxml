@@ -1,0 +1,40 @@
+<dialog id="wux-dialog" />
+
+<view class="page">
+    <view class='flex'>
+        <view style='width:100%'>
+            <view wx:for='{{tabs}}' wx:key class='send' bindtap='chooseOrderType' id="{{item.code}}" data-index="{{index}}">
+                <text class="choose {{chooseType==item.code?'line':''}}">{{item.title}}</text>
+            </view>
+        </view>
+    </view>
+</view>
+<!-- <view>该订单已取消</view> -->
+<swiper bindchange="swiperChange" current='{{current}}' circular>
+    <swiper-item wx:for="{{tabs}}" wx:key>
+        <view class="item">
+            <detail status_code="{{status_code}}" bind:info="getOrders" orderId="{{id}}" orderIdx="{{orderIdx}}" wx:if="{{item.code == 'detail'}}">
+                <view class="inline-block text-blue" slot="map">
+                    <tag bind:click="goMap" data-type="send" wux-class="map-tag">
+                        <icon size="28" type="i-locationfill"></icon>
+                        <text>导航</text>
+                    </tag>
+                </view>
+                <view class="inline-block text-blue" slot="map_receive">
+                    <tag bind:click="goMap" data-type="receive" wux-class="map-tag">
+                        <icon size="28" type="i-locationfill"></icon>
+                        <text>导航</text>
+                    </tag>
+                </view>
+            </detail>
+            <!-- <route orderId = "{{id}}" wx:if="{{item.code == 'route'}}" /> -->
+            <!-- <cc-work orderId = "{{id}}" wx:if="{{item.code == 'ccwork'}}" /> -->
+            <fee-info orderId="{{id}}" wx:if="{{item.code == 'feeinfo'}}" />
+            <car-location task="{{task}}" wx:if="{{item.code == 'order_car_location'}}" />
+        </view>
+    </swiper-item>
+</swiper>
+<!-- <view class="foot">
+  <button class="btn bg-ered">取消发货</button>
+  <button class="btn bg-blue">打印</button>
+</view> -->

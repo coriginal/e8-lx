@@ -1,0 +1,47 @@
+<view class="map">
+  <map id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="14" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" bindregionchange="regionchange" show-location style="width: 100%; height: 100%;" enable-zoom="{{false}}"></map>
+</view>
+
+<view class="show foot-panel">
+  <view class="plate_num padding-tb">
+    <text class="cu-tag bg-yellow">{{plate_num}}</text>
+    <text bindtap="closePanel" class="icon-roundclose"></text>
+  </view>
+  <view class="padding-tb">
+    <text class="text-gray">车辆状态：</text>在线</view>
+  <view class="padding-tb">
+    <text class="text-gray">最后更新：</text>{{carLocation.utc}}</view>
+  <view class="padding-tb flex">
+    <view class="flex-sub1">
+      <text class="text-gray ">当前车速：</text>{{carLocation.spd}} km/s
+    </view>
+  </view>
+  <view class="location-msg padding-tb">
+    <text class="text-gray nowrap"> 位置信息：</text>
+    <view>{{carLocation.adr}}</view>
+  </view>
+  <view class="btn-view flex">
+    <button class="btn bg-blue" bindtap="refreshLocation">刷新定位</button>
+  </view>
+</view>
+
+
+<view wx:if="{{dialogName=='showModal'}}" class="cu-modal show">
+  <view class="cu-dialog pickOrder">
+    <view class="cu-bar bg-white  padding-xs">
+      <view class="text-center flex-sub1 font-weight">未能定位到车辆</view>
+    </view>
+    <view class="padding-sm bg-white">
+      <view class="text-left solids-bottom results">
+        <view>原因：</view>
+        <view class="line-h margin-top-sm">1、车辆离线，车辆安装的定位设备没有上报位置信息.</view>
+        <view class="line-h">2、车辆所在地区信号弱.</view>
+        <view class="line-h">3、设备故障或设备未续费停用.</view>
+        <view class="line-h">4、该司机未开启设备.</view>
+      </view>
+    </view>
+    <view class="cu-bar bg-white padding-bottom-sm">
+      <view class="action margin-0 flex-sub1 text-green solid-left" bindtap='confirmMoadl'>确定</view>
+    </view>
+  </view>
+</view>

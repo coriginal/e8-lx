@@ -1,0 +1,52 @@
+<popup visible="{{show}}" wux-class="pops" title="{{receiveItem.code}}" bind:close="onClose">
+  <view class="receive-panel" >
+    <form bindsubmit="forSubmit">
+      <view class="text-left solid-top">
+        <view class="panel">
+          <view class="receive-title">签收人：</view>
+          <input class="solid-bottom flex-1" name="sign_man" value="{{receive_man}}" />
+          <view bindtap="handleReceiver" class="same">同收件人</view>
+        </view>
+        <view class="panel">
+          <view class="receive-title">签收时间：</view>
+          <input disabled name="sign_date" value="{{time}}" class="solid-bottom flex-1" />
+        </view>
+        <view class="panel">
+          <view class="receive-title">签收方式：</view>
+          <input disabled name="sign_method" value="{{choosedType}}" bindtap="showReceiveType"
+            class="solid-bottom flex-1" />
+          <icon type="i-triangledownfill" size="48" />
+        </view>
+        <view class="panel">
+          <view class="receive-title">签收类型：</view>
+          <input disabled name="status" value="{{choosedType2}}" bindtap="showReceiveType2"
+            class="solid-bottom flex-1" />
+          <icon type="i-triangledownfill" size="48" />
+        </view>
+        <view class="panel">
+          <view class="receive-title">备注：</view>
+          <input name="remark" value="{{remark}}" class="solid-bottom flex-1" />
+        </view>
+        <block wx:for="{{uploadList}}">
+          <view class="">
+            <view class="panel receive-title">{{item.title}}</view>
+            <view class="img-view">
+              <view wx:for="{{item.urls}}" wx:key>
+                <block wx:if="{{item}}">
+                  <image class="img mt-20" src="{{item}}" />
+                </block>
+              </view>
+
+              <view wx:if="{{urls.length < 3}}" class="img mt-20" data-code="{{item.code}}" bindtap="chooseImg">
+                <icon type="i-camera" color="#eee" />
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+      <view class="receive-bottom-btn">
+        <button form-type="submit" class="btn bg-blue">确定签收</button>
+      </view>
+    </form>
+  </view>
+</popup>

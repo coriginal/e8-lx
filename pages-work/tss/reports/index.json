@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "报表",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "cell": "../../components/cell/index"
+  }
+}

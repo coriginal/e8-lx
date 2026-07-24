@@ -1,0 +1,115 @@
+@import "../capacity_detail/index.wxss";
+
+.nav {
+  display: inline-block;
+  margin-left: 10rpx;
+  border: 1rpx solid var(--blue);
+  padding: 2rpx 18rpx;
+  color:var(--blue);
+  background-color: var(--white);
+  font-size: 13px;
+}
+
+.loc_name {
+  margin-right: 10rpx;
+}
+
+.line_info{
+  padding: 10rpx 0 10rpx;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.with-100 {
+  width: 100%;
+}
+
+.width-30 {
+  width: calc(100% / 3);
+}
+
+.t-f22 {
+  margin-left: 5rpx;
+}
+
+.abnormal_btn {
+  color: var(--red) !important;
+  background-color: transparent !important;
+  border: none !important;
+  font-size: 30rpx !important;
+}
+
+.btn {
+  margin: 0;
+}
+
+.flex-between {
+  justify-content: space-between;
+}
+
+.padding-tb {
+  padding: 10rpx 0;
+}
+
+.ipt {
+  border-bottom: 1px solid#eee;
+}
+
+.foot-panel {
+  padding: 10rpx 20rpx;
+}
+
+.foot-panel .cargo{
+  margin-right: 10rpx;
+}
+
+.pick_dlg {
+  display: flex;
+  flex-wrap: wrap;
+  line-height: 60rpx;
+  margin: 10rpx;
+  display: -webkit-flex;
+}
+.ipt {
+  border: 1rpx solid var(--grey);
+  width: 150rpx;
+  padding: 5rpx;
+  text-align: center;
+  border-radius: 10rpx;
+  height: 60rpx;
+  margin: 0 10rpx;
+}
+
+
+.other-btn{
+  padding: 30rpx 0 10rpx 0;
+  text-align: right;
+}
+.line_go{
+    left: 0;
+    width: 100%;
+    text-align: center;
+    line-height: 100rpx;
+    position:fixed;
+    bottom: 0;
+    background: white;
+    height: 100rpx;
+    color:white;
+    font-size: 28rpx;
+    z-index: 99;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+    align-items: center;
+}
+.line_go view{
+   width: 48%;
+   height: 80rpx;
+   line-height: 80rpx;
+   border-radius: 10rpx;
+}
+.line_go view:active{
+    opacity: 0.6;
+}

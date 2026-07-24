@@ -1,0 +1,141 @@
+.map {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 84rpx);
+}
+
+.topInput {
+  background-color: white;
+  height: 96rpx;
+  padding: 20rpx;
+  display: flex;
+}
+
+.query-input {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
+.search {
+  height: 100%;
+  width: 64rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-search {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.foot-panel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  padding: 20rpx;
+}
+
+.plate_num {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.location-msg {
+  display: flex;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.cu-tag.bg-yellow {
+  font-size: 30rpx;
+}
+
+.padding-tb {
+  padding: 8rpx 0;
+  font-size: 26rpx;
+}
+
+.icon-roundclose {
+  font-size: 36rpx;
+}
+
+.pieces {
+  /* height: 100rpx; */
+  width: 84rpx;
+  position: fixed;
+  top: 90rpx;
+  right: 10rpx;
+  background-color: white;
+  border-radius: 6rpx;
+  text-align: center;
+  padding: 10rpx;
+}
+
+.pieces image {
+  width: 58Prpx;
+  height: auto;
+  border-radius: 5000rpx !important;
+}
+
+.margin-tb {
+  margin: 10rpx 0;
+}
+
+.history-car {
+  justify-content: center;
+  align-items: center;
+  height: 64rpx;
+}
+
+.icon-roundclosefill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chepai {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pickOrder {
+  vertical-align: sub;
+  margin-top: 20%;
+}
+
+.pickOrder .cu-bar {
+  height: 60rpx;
+  text-align: center;
+}
+
+.cu-form-group {
+  padding: 0;
+}
+
+.font-weight {
+  font-weight: bold;
+}
+
+.results {
+  padding: 15rpx;
+}
+
+.line-h {
+  line-height: 42rpx
+}
+.flex{
+  display: flex;
+}
+.btn-view .btn {
+  margin: 0 auto;
+}

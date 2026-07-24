@@ -1,0 +1,196 @@
+<toptips id="wux-toptips" />
+<view class="segmented-choose">
+    <segmented current="{{ currentSeg }}" controlled bind:change="onChangeSeg" theme="positive" values="{{ ['零担','整车'] }}" />
+</view>
+<view class="fade">
+    <!-- 客户选择 -->
+    <view hover-class="default" class="bar customer solid-bottom">
+        <view wx:if="{{!isCustomer}}" bindtap="goChooseCustomer" class='choose-view'>
+            <text>{{(orderInfo.customerInfo&&orderInfo.customerInfo.name)||"- 点击此处选择客户 -"}}</text>
+        </view>
+        <view wx:if="{{orderInfo.trans_mode}}" class="t-fw solid-left solid-right fade trans-mode-view" bind:tap="chooseTransMode">
+            {{orderInfo.trans_mode}}
+        </view>
+    </view>
+
+    <!-- 收寄件信息 -->
+    <view class='content solid-bottom'>
+        <view class="addr  {{index=='send'?'solid-bottom':''}}" wx:for="{{fn.deal(orderInfo)}}" wx:key='addr'>
+            <view class='img mr-r'>
+                <image class='left-img' mode='widthFix' src='../../../images/{{index}}.png'> </image>
+            </view>
+            <view class='middle' bindtap='goEditAddr' id='{{index}}'>
+                <view class="text-name {{item.info?'':'text-grey'}}">{{fn.contact(item.info)}}</view>
+                <view class='text-addr'>{{fn.contact(item.addr)}}</view>
+            </view>
+            <view class='img mr-l' bindtap='goChooseAddr' id='{{index}}'>
+                <view class='right-addr'>
+                    <text>地址薄</text>
+                </view>
+            </view>
+        </view>
+        <!-- 地址识别 -->
+        <view class="panel-textarea ">
+            <view class='content-menu'>
+                <button class='btn' id="{{item.code}}" wx:key wx:for="{{contentMenu}}" bindtap="menuClick">
+                    <icon color='#5c96ec' type='{{item.icon}}' size='32' />{{item.title}}
+                </button>
+            </view>
+            <view class='textarea ' wx:if="{{!visible&&!voicePop}}">
+                <view class="margin-bottom">
+                    <textarea placeholder-class="placeholder" type="text" value="{{inputAddr}}" bindinput="addrFinished" placeholder="{{textarea}}">
+                    </textarea>
+                </view>
+                <view class='absolute-ai'>
+                    <button class="btn green-light" bindtap="aiAddressParse">AI解析</button>
+                </view>
+                <view class='absolute'>
+                    <button class="btn green-light" bindtap="addrInput">智能识别</button>
+                </view>
+            </view>
+        </view>
+        <!-- <view class="distance_box">
+            <label>总里程：{{distance}} 公里</label>
+        </view> -->
+    </view>
+    <view wx:if="{{line_list}}" class="cargo-select nodis" bindtap="showPickLine">
+        <label>线路选择</label>
+        <div class="t-right t-f24" style="flex:1">{{line_list[line_index].name}}</div>
+        <pick current="{{line_index}}" showPickCargo="{{showPickLine}}" cargoList="{{line_list}}" bind:cargoChange="lineChange"></pick>
+        <view class='scan'>
+            <icon color="grey" type='i-right' size='34'></icon>
+        </view>
+    </view>
+    <view class="cargo-select" bindtap="showPickCargo">
+        <label>货物填写</label>
+        <!-- <picker class="t-right t-f24" mode="selector" range="{{cargo_list}}" range-key="{{'cargo'}}" value="{{cargo_list[cargo_index].cargo}}">{{cargo_list[cargo_index].cargo}}
+		</picker> -->
+        <input bindinput="cargoInput" style="text-align: right;margin-right: 30rpx;"/>
+        <!-- <div class="t-right t-f24" style="flex:1">{{cargo_list[cargo_index].cargo}}</div>
+        <pick current="{{cargo_index}}" showPickCargo="{{showPickCargo}}" cargoList="{{cargo_list}}" bind:cargoChange="cargoChange"></pick> -->
+        <!-- <view class='scan'>
+            <icon color="grey" type='i-right' size='34'></icon>
+        </view> -->
+    </view>
+    <view class="colume" wx:if="{{currentSeg === 0}}">
+        <row>
+            <!-- style="top: {{custractorPosition.y}}px;left: {{custractorPosition.x}}px;-->
+            <!--bindtouchstart="touchStart" catchtouchmove="touchMove" bindtouchend="touchEnd" -->
+            <col span="4" wx:for="{{list}}" wx:key="{{item.code}}">
+            <view class="colume-view padding">
+                <view class="colume-view-flex colume-view-after">
+                    <text class="opcity">{{item.title}}</text>
+                    <input type="digit" id="{{index}}" bindinput="inputCargoInfos" class="flex-1 input-flex" placeholder="" value="{{item.value}}"></input>
+                </view>
+            </view>
+            </col>
+        </row>
+    </view>
+    <view wx:if="{{currentSeg === 0}}" style="background: white;height:120rpx;display: flex;justify-content: center;align-items: center;">
+        <!-- <view bindtap="openCustractor" id="counterIcon" class="custractorBtn" hidden="{{!closeCustractor}}" wx:if="{{!addpageshow}}">
+			<image src="../../../images/计算器.png" style="width: 80rpx;height: 100rpx;position: absolute;"></image>
+		</view> -->
+        <button style="width: 90%;color: gray;" type="default" bindtap="openCustractor">打开计算器</button>
+    </view>
+    <view class="flex">
+        <view class="item_list item-list-flex" bindtap="handleService" id="if_visit">
+            <view class="item-list-icon">
+                <view class="icon-border">
+                    <icon color="gray" type="i-pick"></icon>
+                </view>
+            </view>
+            <view class="item-list-content">
+                <view class="t-f26">提货服务</view>
+                <view class=" t-f24 {{orderInfo.customerInfo.if_visit?'text-orange':''}}">
+                    <text class="text-margin">{{orderInfo.customerInfo.if_visit?'已选':'可选'}}</text>
+                </view>
+            </view>
+            <view wx:if="{{orderInfo.customerInfo.if_visit}}" class="aaaaaaa">
+            </view>
+        </view>
+
+        <view class="item_list item-list-flex " bindtap="handleService" id="service_mode">
+            <view class="item-list-icon">
+                <view class="icon-border">
+                    <icon color="gray" type="i-deliver"></icon>
+                </view>
+            </view>
+            <view class="item-list-content">
+                <view class="t-f26">派送服务</view>
+                <view class=" t-f24 {{orderInfo.customerInfo.service_mode?'text-orange':''}}">
+                    <view class="t-f24">
+                        <text class="text-margin ">{{orderInfo.customerInfo.service_mode?'已选':'可选'}}</text>
+                    </view>
+                </view>
+            </view>
+            <view wx:if="{{orderInfo.customerInfo.service_mode}}" class="aaaaaaa">
+            </view>
+        </view>
+    </view>
+
+    <view class="btn-view">
+        <button class="btn bg-blue next-step" bindtap="nextStep">下一步</button>
+    </view>
+
+    <!-- <view class="btn-view">
+		<button class="btn bg-blue next-step" open-type="getUserInfo" bindgetuserinfo="getUserInfo">下一步</button>
+	</view> -->
+</view>
+
+<cascader visible="{{ visible }}" controlled value="{{ value_addr }}" title="地址选择" options="{{ cantonInfo }}" bind:close="onClose" bind:change="onChange" />
+
+
+<popup position="bottom" visible="{{ showPopup }}" bind:close="onClosePopup">
+    <cell-group title="请选择业务类型">
+        <block wx:for="{{transModeList}}" wx:key>
+            <cell hover-class="default" bind:click="popupClick" data-id="{{item.id}}" data-name="{{item.name}}" title="{{item.name}}"></cell>
+        </block>
+    </cell-group>
+</popup>
+
+<wxs module="fn">
+    module.exports = {
+        contact: function (value) {
+            if (value)
+                return value.join(' ')
+        },
+        deal: function (obj) {
+            if (obj)
+                return {
+                    'send': obj.send,
+                    'receive': obj.receive
+                }
+        }
+    }
+</wxs>
+<!--计算器开关浮动按钮-->
+<!-- <view id="counterIcon" class="custractorBtn" hidden="{{!closeCustractor}}" wx:if="{{!addpageshow}}" style="top: {{custractorPosition.y}}px;left: {{custractorPosition.x}}px;" bindtouchstart="touchStart" catchtouchmove="touchMove" bindtouchend="touchEnd" bindtap="openCustractor">
+	<image src="../../../images/计算器.png" style="width: 100%;height: 100%;position: absolute;"></image>
+</view> -->
+<!--计算器-->
+<view class="custractor bg-blue" style="top: {{custractorPosition.y}}px;left: {{custractorPosition.x}}px;opacity: {{counterOpacity}};" hidden="{{closeCustractor||currentSeg === 1}}">
+    <view class="monitor" id="counter" bindtouchstart="touchStart" bindtouchend="touchEnd" catchtouchmove="touchMove">
+        <view class="cargo-select">
+            <label class="t-right t-f24" style="flex:1;color: white;">{{list[1].value}}</label>
+        </view>
+    </view>
+    <form bindsubmit="calculate" bindreset="clearCounter">
+        <view class="cargo-select text-gray">
+            <label>长(米)</label>
+            <input name="length" type="digit" class="t-right t-f24" style="border-radius: 10rpx;" />
+        </view>
+        <view class="cargo-select text-gray">
+            <label>宽(米)</label>
+            <input name="width" type="digit" class="t-right t-f24" style="border-radius: 10rpx;" />
+        </view>
+        <view class="cargo-select text-gray">
+            <label>高(米)</label>
+            <input name="height" type="digit" class="t-right t-f24" style="border-radius: 10rpx;" />
+        </view>
+        <view class="counterBtn">
+            <button form-type="submit" class="bg-yellow">计算</button>
+            <button form-type="reset" class="bg-yellow">清空</button>
+            <button bindtap="closeCounter" class="bg-yellow">关闭</button>
+        </view>
+    </form>
+</view>

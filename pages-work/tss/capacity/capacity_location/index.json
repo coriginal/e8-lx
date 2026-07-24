@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "abnormal": "../report_abnormal/index",
+    "modal": "../../modal/index",
+    "attach": "../../../components/attach/index",
+    "pick_sign": "../pick_sign/index"
+  }
+}

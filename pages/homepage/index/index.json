@@ -1,0 +1,12 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "home": "../home/index",
+    "my": "../my/index",
+    "oc": "../oc/index",
+    "table": "../table/table",
+    "work": "../workflows/index",
+    "take-phone": "../../../components/take-phone/take-phone"
+  },
+  "disableSwipeBack": true
+}

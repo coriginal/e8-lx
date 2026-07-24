@@ -1,0 +1,13 @@
+<nav-bar title="运行位置"/>
+<view wx:if="{{show_wrap}}">
+  <button wx:if="{{show_setting}}" open-type="openSetting" bindopensetting="callback">设 置</button>
+  <view wx:else style="position:relative;">
+    <view class="loc">{{loc}}<image class="refresh" src="../../../../images/refresh.png" bindtap="getLoc"></image></view>
+    <view class="today_info">{{today}}{{week}}</view>
+    <view class="clock_circle" bindtap="clock">
+        <view class="circle_content check">发送位置</view>
+        <view class="circle_content">{{hour}}<b class="{{point}}">:</b>{{minute}}</view>
+    </view>
+  </view>
+</view>
+

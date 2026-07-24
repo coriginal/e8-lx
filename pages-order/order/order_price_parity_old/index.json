@@ -1,0 +1,8 @@
+{
+    "usingComponents": {
+        "pick-time":"../../../components/choose-pick-time",
+        "van-checkbox": "@vant/weapp/checkbox/index",
+        "van-checkbox-group": "@vant/weapp/checkbox-group/index"
+    },
+    "navigationBarTitleText": "比价下单"
+}

@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "签收扫描",
+  "usingComponents": {
+    "receive":"../../../Cpts/order_receive",
+    "attach": "../../components/attach/index"
+  }
+}

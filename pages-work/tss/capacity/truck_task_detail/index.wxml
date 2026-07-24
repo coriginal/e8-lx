@@ -1,0 +1,111 @@
+<!--pages-work/tss/capacity/truck_task_detail/index.wxml-->
+<van-tabs active="{{ active }}" bind:change="onChange">
+    <van-tab title="主单明细">
+        <scroll-view bindscrolltolower="loadMore" class="box">
+            <view wx:if="{{!list.length}}" style="text-align: center;">暂无数据</view>
+            <view class="card" data-code="{{item.taskCode}}" bind:tap="toDetail" wx:for="{{list}}" wx:key="{{index}}">
+                <view class="top">
+                    <view class="left">
+                        <text class="task-code">运输单号：{{item.taskCode}}</text>
+                        <!-- <button class="copy-btn">复制</button> -->
+                    </view>
+                    <text class="right">{{item.status}}</text>
+                </view>
+                <view style="margin-top: 20px;display: flex;flex-direction: row;justify-content: space-around;">
+                    <view style="display: flex;flex-direction: column;text-align: center;">
+                        <text style="font-size: 17px;font-weight: bold;">{{item.amount}}件</text>
+                    </view>
+
+                    <view style="display: flex;flex-direction: column;text-align: center;">
+                        <text style="font-size: 17px;font-weight: bold;">{{item.weight}}kg</text>
+                    </view>
+
+                    <view style="display: flex;flex-direction: column;text-align: center;">
+                        <text style="font-size: 17px;font-weight: bold;">{{item.volume}}m³</text>
+                    </view>
+                </view>
+                <view class="info-box">
+                    <view class="info-item">
+                        <text class="title">我的单号：</text>
+                        <text class="info">{{item.code}}</text>
+                    </view>
+                    <view wx:if="{{item.ccode}}" class="info-item">
+                        <text class="title">客户单号：</text>
+                        <text class="info">{{item.ccode}}</text>
+                    </view>
+                    <view wx:if="{{item.receiveMan}}" class="info-item">
+                        <text class="title">收件人：</text>
+                        <text class="info">{{item.receiveMan}}</text>
+                    </view>
+                    <view wx:if="{{item.receivePhone}}" class="info-item">
+                        <text class="title">收件人电话：</text>
+                        <text class="info">{{item.receivePhone}}</text>
+                    </view>
+                    <view wx:if="{{item.orderDate}}" class="info-item">
+                        <text class="title">寄件时间：</text>
+                        <text class="info">{{item.orderDate}}</text>
+                    </view>
+                </view>
+                <view class="btn-box">
+                    <view>
+                    </view>
+                    <view class="right-btn">
+                        <button data-order="{{item}}" catch:tap="unload" wx:if="{{item.statusCode === 88}}">卸车</button>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+    </van-tab>
+    <van-tab title="费用明细">
+        <view class="box">
+            <view wx:if="{{!feeList.length}}" style="text-align: center;">暂无数据</view>
+            <view class="card" data-code="{{item.taskCode}}" bind:tap="toDetail" wx:for="{{feeList}}" wx:key="{{index}}">
+                <view class="top">
+                    <view class="left">
+                        <text class="task-code">运输单号：{{item.taskCode}}</text>
+                        <!-- <button class="copy-btn">复制</button> -->
+                    </view>
+                    <text class="right">{{item.feeName}}</text>
+                </view>
+                <view class="info-box">
+                    <view class="info-item">
+                        <text class="title">类型：</text>
+                        <text class="info">{{item.feeType==='income'?'收入':'支出'}}</text>
+                    </view>
+                    <view class="info-item">
+                        <text class="title">金额：</text>
+                        <text class="info">{{item.feeAmount}}</text>
+                    </view>
+                    <view wx:if="{{item.remark}}" class="info-item">
+                        <text class="title">备注：</text>
+                        <text class="info">{{item.remark}}</text>
+                    </view>
+                    <view wx:if="{{item.createTime}}" class="info-item">
+                        <text class="title">发起时间：</text>
+                        <text class="info">{{item.createTime}}</text>
+                    </view>
+                    <view wx:if="{{item.orderDate}}" class="info-item">
+                        <text class="title">寄件时间：</text>
+                        <text class="info">{{item.orderDate}}</text>
+                    </view>
+                </view>
+                <view class="btn-box">
+                    <view>
+                    </view>
+                    <view class="right-btn">
+                        <button data-order="{{item}}" catch:tap="unload" wx:if="{{item.statusCode === 88}}">卸车</button>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </van-tab>
+</van-tabs>
+<van-action-sheet bind:close="close" show="{{ show }}" title="{{currentUnloadOrder.code+'核对'}}">
+    <form bindsubmit="submit">
+        <van-field name="orderWeight" type="digit" value="{{form.orderWeight}}" label="运单重量" placeholder="请输入运单重量" input-align="right" />
+        <van-field name="orderVolume" type="digit" value="{{form.orderVolume}}" label="运单体积" placeholder="请输入运单体积" input-align="right" />
+        <view style="padding: 10px;">
+            <van-button form-type="submit" size="small" type="primary" block>确定</van-button>
+        </view>
+    </form>
+</van-action-sheet>

@@ -1,0 +1,24 @@
+<view class='fade content'>
+    <view class='swiper'>
+        <view class='text-center top-title' style='height:{{height*2}}px'>
+            <image class='e8-png' mode='widthFix' src='{{TitleImgUrl}}'></image>
+        </view>
+        <swiper class='swiper-box' circular autoplay style='top:{{height*1.5}}px;height:calc(100vh - {{height}}px );'>
+            <swiper-item wx:for="{{ImgList}}" wx:key>
+                <image mode='widthFix' class='homepage-image' src='{{item}}'></image>
+            </swiper-item>
+        </swiper>
+    </view>
+    <view class='group' hidden="{{hide}}">
+        <checkbox-group class="checkbox_box" bindchange="checkChange">
+            <checkbox checked="{{agreement}}" value="agree" class="agree_box">我已阅读并同意<view data-type='/pages/agreements/userProtocol.html' catchtap="toProtocal">《用户协议》</view>和<view data-type="/pages/agreements/secretProtocol.html" catchtap="toProtocal">《隐私协议》</view></checkbox>
+        </checkbox-group>
+        <view class='btn-group'>
+            <button class='btn bg-blue'  open-type="{{agreement?'getPhoneNumber':''}}" bindtap="{{!agreement && 'cantLogin'}}" bindgetphonenumber="getPhoneNumber">
+                登录 / 注册
+            </button>
+        </view>
+        <view wx:if="{{ifShowTest}}" class="text-gray login-test" bindtap="loginByTest">返回首页</view>
+    </view>
+    <!-- <view class='bottom-text'>杭州卜数科技有限公司提供技术支持</view> -->
+</view>

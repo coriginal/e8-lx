@@ -1,0 +1,63 @@
+.list{
+  background:#fff;
+  border-top: 5px solid #f1f3f5;
+  padding: 12px 14px 10px 14px;
+  font-size: 15px;
+}
+.title{
+  border-bottom: 1px solid #f1f3f5;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+.status{
+  color: orange;
+}
+.start{
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0px;
+}
+.icon{
+  border: 1px solid;
+  padding: 2px 5px;
+  border-radius: 100%;
+  font-size: 13px;
+}
+.green{
+  color: green;
+}
+.red{
+  color: orangered;
+}
+.point{
+  font-weight: bold;padding-left: 5px;
+}
+.truck{
+  border: 1px solid palevioletred;
+  background:pink;
+  padding: 1px 4px;
+  font-size:12px;
+}
+.detail{
+  font-size: 12px;
+  color: grey;
+}
+.arrive_fee{
+  padding: 8px 0px 10px;
+  border-bottom: 1px solid #f1f3f5;
+}
+.total_fee{
+  font-size: 14px;
+  padding-top: 8px;
+  color: orange;
+}
+.list_income{
+  font-size: 14px;
+  padding: 10px 0px;
+  border-bottom: 1px solid #f1f3f5;
+}
+.flex{
+  display: flex;justify-content: space-between;
+  padding-top: 10px;
+}

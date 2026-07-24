@@ -1,0 +1,75 @@
+page{
+  background: #fff;
+}
+.station{
+  display: flex;padding: 10px;
+}
+.stop{
+  font-size: 18px;padding-left: 8px;color: #5c96ec;width: 100%;
+}
+
+.main_scan{
+  display: flex;
+}
+.body{
+  margin: 40rpx 14rpx 40rpx 40rpx;width: 75%;
+  padding: 10px;font-size: 15px;
+  border: 1px solid;
+}
+.text-list{
+  padding: 5px;display: flex;justify-content: space-between;
+}
+
+.thumb{
+  padding: 36rpx 0;
+}
+.num{
+  font-size: 48rpx;font-weight: bold;text-align: center;color: red;
+}
+
+image{
+  height: 110rpx;width: 110rpx;
+}
+
+.modal-cancel{
+  padding: 10px 10px 2px 15px;text-align: center;
+  display: flex; flex-wrap: wrap;max-height: 700rpx;
+}
+.abnormal{
+  padding: 5px 8px;margin: 3px;
+  text-align: center;border: 1px solid;
+}
+
+.unfold{
+  padding-right: 28rpx;
+}
+.oldTask-list{
+  background: #f1f3f5;padding: 20rpx;
+}
+.text-list{
+  padding: 5px;display: flex;justify-content: space-between;
+}
+.scan_code{
+  width: 65%;
+}
+
+.site{
+  text-align: center;border: 1px solid;
+  font-size: 15px;
+  padding: 5px 8px;
+  margin: 5px 8px;
+  height: fit-content;
+}
+
+.frozen{
+  padding: 5px 8px 10px 8px;
+}
+.customer{
+  display: flex;
+  padding: 15px 0px 10px 15px;
+  border-bottom: 1px solid #f1f3f5;
+}
+.customer text{
+  margin-right: 15px;
+}
+

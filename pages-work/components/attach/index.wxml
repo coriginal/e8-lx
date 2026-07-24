@@ -1,0 +1,14 @@
+<scroll-view scroll-x="{{scrollx}}" scroll-into-view="{{toView}}" class="{{scrollx ? 'scroll_w' : ''}} attachline" style="text-align: left;">
+  <view class="attachcell {{notopmargin ? 'notopmargin' : ''}} {{nobottommargin ? 'nobottommargin' : ''}}" data-value="{{ item.value }}"  wx:for="{{ list }}" wx:key="item" catchtap="previewAttach" data-index="{{ index }}">
+    <image wx:if="{{item.type == '2'}}" class="attach image" src="../../../images/word.png" data-index="{{ index }}">
+      <view class="attach_docname" data-index="{{ index }}">
+      {{item.name}}
+      </view>
+    </image>
+    <image wx:else class="attach image" mode="{{ imagemode }}"  data-index="{{ index }}" src="{{ item.url }}"></image>
+    <image class="delete image" hidden="{{ hidedel }}" src="../../../images/icon-delete.png" data-index="{{ index }}" catchtap="delattach"></image>
+  </view>
+  <view class="attachcell {{notopmargin ? 'notopmargin' : ''}} {{nobottommargin ? 'nobottommargin' : ''}}" hidden="{{ hideadd }}" catchtap="addattach" recordId="{{recordId}}" recordCode="{{recordCode}}" itemId="{{itemId}}">
+    <image id="addattach" class="addattach image" src="../../../images/icon-photo.png"></image>
+  </view>
+</scroll-view>

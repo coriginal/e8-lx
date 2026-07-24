@@ -1,0 +1,11 @@
+<nav-bar title="报表"/>
+<view wx:for="{{ list }}" wx:key="item.code">
+    <cell image="{{ app_host + item.wxicon }}" 
+          title="{{ item.name }}" 
+          bindtap="openReport" 
+          data-reportid="{{ item.id }}" 
+          data-wxurl="{{ item.wxurl }}" 
+          data-coldefs="{{ item.colDefs }}" 
+          is-link>
+    </cell>
+</view>

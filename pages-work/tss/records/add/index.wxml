@@ -1,0 +1,50 @@
+<nav-bar title="{{title}}"/>
+<form wx:if="{{showpage}}" bindsubmit="submit">
+  <view class="formview">
+    <view wx:if="{{disabled}}" wx:for="{{ define }}" wx:key="item.code" class="line"> 
+      <view wx:if="{{item.type=='file'}}" class="header">{{item.label}}</view> 
+      <attach wx:if="{{item.type=='file'}}" list="{{form[item.code]}}" recordId="{{ recordid }}" itemId="{{ itemid }}" hidedel="{{disabled}}" hideadd="{{disabled}}"/>
+      <field wx:elif="{{item.type!='hidden'}}" title="{{ item.label }}" custom-class="fieldClass" name="{{ item.code }}" value="{{ form[item.code] ? form[item.code]+(item.unit ? item.unit : '') : '无'}}" type="{{ item.height ? 'textarea' : 'input' }}" disabled="true" ud_confirmbar="{{false}}" ud_required="{{ item.nullable ? true : false }}" ud_show="ud_show4" ud_call="{{item.call}}"></field>
+    </view>
+    <view wx:if="{{!disabled}}" wx:for="{{ define }}" wx:key="item.code" class="line"> 
+      <view wx:if="{{item.type=='file'}}" class="header">{{item.label}}</view> 
+      <attach wx:if="{{item.type=='file'}}" list="{{form[item.code]}}" recordId="{{ recordid }}" itemId="{{ itemid }}" hidedel="{{disabled}}" hideadd="{{disabled}}" data-col="{{item.code}}" bindaddattach="addattach" binddelattach="delattach"/>
+      <picker wx:elif="{{ item.type == 'date' && item.type!='hidden'}}" mode="date" class="picker" bindchange="pickerChange" data-field="{{ item.code }}" data-type="date" disabled="{{ item.readonly}}"> 
+        <text class="pickerlabel {{ item.nullable ? 'required' : ''}} {{item.readonly ? 'disabled' : ''}}">{{ item.label }}</text>
+        <text class="value">{{  form[item.code] || ''}}</text>
+      </picker>
+      <view wx:elif="{{ item.type == 'datetime'}}" class='datetimeview'>
+        <text class="pickerlabel {{(item.nullable) ? 'required' : ''}} {{item.readonly ? 'disabled' : ''}}">{{ item.label }}</text>
+        <view class='datetime value'>
+          <datetime disabled="{{ item.readonly}}" data-field="{{ item.code }}" data-type="date" bindconfirm="pickerChange" text="{{ form[item.code] }}" not-use="{{ item.notuse ? (item.notuse == 'minutes' ? ['minutes','seconds'] : ['seconds']) : ''}}"/>
+        </view>
+      </view>
+      <field wx:elif="{{ !item.choose && !item.options && item.type!='hidden' }}" title="{{ item.label }}" custom-class="fieldClass" name="{{ item.code }}" value="{{ form[item.code] }}" inputType="{{ item.type == 'int' ? 'number' : (item.type == 'number' ? 'digit' : 'text') }}" type="{{ item.height ? 'textarea' : 'input' }}" placeholder="{{ item.placeholder || item.errorMsg}}" disabled="{{ item.readonly || item.qhq}}" ud_confirmbar="{{false}}" ud_required="{{ item.nullable ? true : false }}" bindblur="fieldChange" data-field="{{item.code}}" ud_call="{{item.call}}">{{ item.unit }}</field>
+      <field wx:elif="{{ item.options && item.choose && (item.choose == 'just_write' || item.choose == 'write_search') && item.type!='hidden'}}" title="{{ item.label }}" name="{{ item.code }}" custom-class="fieldClass" value="{{ form[item.code] }}" inputType="{{ item.type == 'int' ? 'number' : (item.type == 'number' ? 'digit' : 'text') }}" type="{{ (item.height && !showModal) ? 'textarea' : 'input' }}" placeholder="{{ item.placeholder || item.errorMsg}}" disabled="{{ item.readonly || item.qhq}}" ud_confirmbar="{{false}}" ud_required="{{ item.nullable ? true : false }}" bindblur="fieldChange" data-field="{{item.code}}" ud_call="{{item.call}}" ud_picker="{{item.choose == 'write_search' ? 'searchpicker' : item.choose}}" ud_choose_text="{{item.choose_text}}" ud_range="{{item.options}}" bindpchange="pickerChange" data-index="{{ index }}" data-getnext="{{ item.onchange }}">{{ item.unit }}</field> 
+      <searchpicker wx:elif="{{ item.choose && item.type!='hidden' && !item.qhq  && !item.wfeditable && item.pickertype != 'cell'}}" custom-class="picker" range="{{ item.options }}" range-key="name" bindchange="pickerChange" data-field="{{ item.code }}" data-index="{{ index }}" disabled="{{ item.readonly }}" data-getnext="{{ item.onchange }}"> 
+        <text class="pickerlabel {{(item.nullable) ? 'required' : ''}} {{item.readonly ? 'disabled' : ''}}">{{ item.label }}</text>
+        <text class="value">{{ form[item.code] || ''}}</text>
+      </searchpicker>
+      <picker wx:elif="{{ item.type!='hidden' && !item.qhq && item.pickertype != 'cell'}}" class="picker" range="{{ item.options }}" range-key="name" bindchange="pickerChange" data-field="{{ item.code }}" data-index="{{ index }}" disabled="{{ item.readonly}}" data-getnext="{{ item.onchange }}"> 
+        <text class="pickerlabel {{(item.nullable) ? 'required' : ''}} {{item.readonly ? 'disabled' : ''}}">{{ item.label }}</text>
+        <text class="value">{{ form[item.code] || ''}}</text>
+      </picker>
+      <cell wx:elif="{{ item.type!='hidden' && !item.qhq  && !item.wfeditable}}" custom-class="cellClass" title="{{item.label}}" value="{{  form[item.code] || ''}}" bindtap="chooseSezi" data-field="{{item.code}}" data-list="{{item.options}}" data-getnext="{{ item.onchange }}" ud_required="{{ item.nullable ? true : false }}" is-link></cell>
+    </view>
+    <view wx:if="{{needAttach}}" class="header">附件</view>
+    <attach wx:if="{{needAttach}}" list="{{attachURLs}}" recordId="{{ recordid }}" itemId="{{ itemid }}" hidedel="{{disabled}}" hideadd="{{disabled}}" bindaddattach="addattach"/>
+  </view>
+  <view wx:if="{{!disabled}}" class="btn">
+    <button class="delete-btn" type="primary" formType="delete" bindtap='delete'>删除</button>
+    <button class="submit-btn" type="primary" style="background-color:{{color}}" formType="submit">保存</button>
+  </view>
+</form>
+<!--隐藏区域  -->
+<view class='maskLayer' wx:if="{{showModal}}" bindtap='hideModal'></view>
+<view class='choose' wx:if="{{showModal}}" animation='{{animationData}}'>
+  <view class="box">
+      <view class="truck_cell" wx:for="{{cellList}}" wx:key="">
+          <view bindtap="clickCell" data-field="{{cell_field}}" data-value="{{item.name}}" class="cell_item {{cell_select_value == item.name ? 'select_item' : ''}}" data-name="{{item.name}}">{{item.name}}</view>
+      </view>
+  </view>
+</view>

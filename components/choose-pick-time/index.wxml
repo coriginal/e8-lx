@@ -1,0 +1,16 @@
+<popup position="bottom" visible="{{showPickTime}}" bind:close="close">
+    <view class="flex">
+        <tabs wux-class="tabs-class" theme="positive" current="{{current}}" controlled bind:change="changeTabs" direction="vertical">
+            <tab wx:for="{{tabList}}" wx:key key="{{index}}" title="{{item.title}}"></tab>
+        </tabs>
+        <scroll-view scroll-y class="flex-1 padding-30 scroll-view">
+            <view class="time time-flex {{tabList[current].childChoosed === index && 'choosed'}}" wx:for="{{tabList[current].child}}" id="{{index}}" bindtap="choosedTime" wx:key>
+                <text class="margin-right flex-1">{{item.label}}</text>
+                <icon wx:if="{{tabList[current].childChoosed === index && 'choosed'}}" type="i-check" color="var(--blue)" size="40"></icon>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="tab-btn">
+        <button class="btn bg-blue" bindtap="confirm">确定</button>
+    </view>
+</popup>

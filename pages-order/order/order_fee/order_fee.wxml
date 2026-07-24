@@ -1,0 +1,52 @@
+<view class="fade">
+	<view class="content">
+		<view wx:if="{{ifShowArrivePay}}">
+			<view class="input-panel">
+				<view class='title'>到付款</view>
+			</view>
+			<view class="flex">
+				<input value="{{arrive_pay}}" type="digit" placeholder="请填写金额" bindinput="arrivePayInput" class="flex-1 border cod-input {{arrive_pay?'checked':''}}"></input>
+			</view>
+		</view>
+
+		<!-- <view>
+			<view class="input-panel">
+				<view class='title'>代收货款</view>
+				<input disabled placeholder-class="t-f20" placeholder="（选填 , 代收费率请咨询物流公司）"></input>
+			</view>
+			<view class="flex">
+				<input value="{{cod}}" type="digit" placeholder="请填写金额" bindinput="codInput" class="flex-1 border cod-input {{cod?'checked':''}}"></input>
+			</view>
+		</view> -->
+		<view wx:for="{{list}}" wx:for-item="list_item" wx:for-index="list_index" class="" wx:key>
+			<view class="input-panel">
+				<view wx:if="{{list_item.title}}" class="title {{(list_item.required && list_item.mark && hasMark) && 'markRequired'}}"><text style="color: red;">{{list_item.required?'* ':''}}</text>{{list_item.title}}</view>
+				<input disabled placeholder-class="t-f20" placeholder="{{list_item.placeholder}}" name="{{list_index}}" value="{{list[value]}}"></input>
+			</view>
+			<block wx:if="{{list_item.type.fieldType == 'list'}}">
+				<view class="flex">
+					<block wx:for="{{list_item.children}}" wx:key>
+						<view data-list-item="{{list_index}}" data-item="{{item}}" bindtap="chooseFeeItem" class="flex-1 border {{item.checked?'checked':''}}">{{item.name}}</view>
+					</block>
+				</view>
+			</block>
+			<block wx:if="{{list_item.type.fieldType == 'input'}}">
+				<view class="flex">
+					<input value="{{list_item.value}}" id="{{list_index}}" type="{{list_item.type.inputType}}" placeholder="请填写{{list_item.title}}" bindinput="inputValue" class="flex-1 input-border cod-input {{list_item.value?'checked':''}}"></input>
+				</view>
+			</block>
+
+			<block wx:if="{{list_item.type.fieldType == 'checkbox'}}">
+				<view class="flex">
+					<block wx:for="{{list_item.children}}" wx:key>
+						<view data-list-item="{{list_index}}" data-item="{{item}}" bindtap="chooseFeeItem" class="flex-1 border {{item.checked?'checked':''}}">{{item.name}}</view>
+					</block>
+				</view>
+			</block>
+		</view>
+	</view>
+	<view style="height:1px"></view>
+	<view class='bottom-btn'>
+		<button bindtap="formSubmit" class='btn bg-blue m-p'>确定</button>
+	</view>
+</view>

@@ -1,0 +1,31 @@
+<dialog id="wux-dialog" />
+
+<!-- 跳转页&&切账号 -->
+<view class="my-system-options margin-top" wx:if="{{menu_list.length}}">
+  <view class="my-system-menu {{index==menu_list.length-1?'':'solid-bottom'}}" wx:for="{{menu_list}}" wx:key bindtap="clickSettingMenu" id="{{item.code}}" >
+    <view class="left-view">
+      <icon size='30' type='i-{{item.icon}}' />{{item.name}}
+    </view>
+    <view class="right-view">
+      <view class="my-system-notice bold">{{item.notice}}</view>
+      <icon size='30' color="gray" type='i-radiobox' />
+    </view>
+  </view>
+</view>
+
+<!-- 切环境 -->
+<view class="my-system-options margin-top" wx:if="{{_menu_list.length}}">
+  <view class="my-system-menu " wx:for="{{_menu_list}}" wx:key bindtap="clickSettingMenu" id="{{item.code}}" >
+    <view class="left-view">
+      <icon size='30' type='i-{{item.icon}}' />{{item.name}}
+    </view>
+    <view class="right-view">
+      <view class="my-system-notice bold">{{item.notice}}</view>
+      <icon size='30' color="gray"  type='i-radiobox' />
+    </view>
+  </view>
+</view>
+
+<landscap visible="{{ visible }}" bind:close="onClosePop">
+  <image show-menu-by-longpress bindtap="priviewImg" class="landscap" src="{{URL}}" />
+</landscap>

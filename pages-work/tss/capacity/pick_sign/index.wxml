@@ -1,0 +1,38 @@
+<button class="btn bg-blue" catchtap="showPickSign" data-location_id="{{location_id}}" data-type="{{type}}" data-volume="{{volume}}" data-weight="{{weight}}" data-amount="{{amount}}" data-num="{{num}}" data-sub_order_ids="{{sub_order_ids}}" data-rcode_type="{{rcode_type}}">{{type == 'start' ? '确认取件' : '签 收'}}</button>
+
+<modal show="{{show_pick}}" title="货物信息核对">
+    <form bindsubmit="confirm_pick">
+        <view class="pick_dlg">
+            <view class="pick_dlg">
+                <text class="label">件数:</text>
+                <input class="ipt" name="amount" type="number" value="{{amount}}"></input> 件
+            </view>
+            <view class="pick_dlg">
+                <text class="label">重量:</text>
+                <input class="ipt" name="weight" type="digit" value="{{weight}}"></input> kg
+            </view>
+            <view class="pick_dlg">
+                <text class="label">体积:</text>
+                <input class="ipt" name="volume" type="digit" value="{{volume}}"></input> 方
+            </view>
+            <view class="pick_dlg">
+                <text class="label">包装:</text>
+                <picker bindchange="packChange" value="{{packIndex}}" range="{{packList}}" class="ipt" style="border:none;padding:0;text-decoration: underline;color: var(--blue);">{{packList[packIndex]}}</picker>
+            </view>
+        </view>
+        <view class="attach_title">上传凭证</view>
+        <attach recordId="-4" bindaddattach="addProof" binddelattach="delattach" list="{{attachURLs}}" scrollx="true" />
+        <view style="display: flex;flex-direction: row;">
+            <button style="flex: 1;margin-right: 10rpx;line-height: 40px;" class="confirm_btn bg-red" bind:tap="changeOrder">修改订单</button>
+            <button style="flex: 1;margin-left: 10rpx;line-height: 40px;" class="confirm_btn bg-cyan" form-type="submit">确认</button>
+        </view>
+    </form>
+</modal>
+
+<modal show="{{show_sign}}" title="确认派件完成?">
+    <view wx:if="{{rcode_type}}" class="attach_title">回单</view>
+    <attach wx:if="{{rcode_type}}" list="{{receipt_list}}" recordId="-19" itemNum="{{num}}" bindaddattach="addreceipt" binddelattach="delattach" scrollx="true" />
+    <view class="attach_title">上传凭证</view>
+    <attach list="{{attachURLs}}" recordId="-7" bindaddattach="addsign" itemNum="{{num}}" binddelattach="delattach" scrollx="true" />
+    <button class="confirm_btn bg-cyan" bindtap="confirmSign">确认</button>
+</modal>

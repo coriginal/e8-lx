@@ -1,0 +1,117 @@
+.redpacket {
+  margin-bottom: 136rpx;
+}
+
+.redpacket-panel {
+  margin: 20rpx;
+  min-height: 188rpx;
+  border-radius: 10rpx;
+  display: flex;
+  overflow: hidden;
+  background: radial-gradient(circle at right top, transparent 6px, var(--red) 0) top left / 33% 67% no-repeat,
+    radial-gradient(circle at right bottom, transparent 6px, var(--red) 0) bottom left / 33% 67% no-repeat,
+    radial-gradient(circle at left top, transparent 6px, white 0) top right / 67% 67% no-repeat,
+    radial-gradient(circle at left bottom, transparent 6px, white 0) bottom right / 67% 67% no-repeat;
+  filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, .1));
+}
+
+.left-panel {
+  /* background-color: var(--red); */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 33%;
+}
+
+.right-panel {
+  width: 67%;
+  padding: 10rpx 20rpx;
+}
+
+.money {
+  font-size: 72rpx;
+  font-weight: bold;
+}
+
+.money::before {
+  content: '¥';
+  margin: 0 6rpx;
+  font-size: 14px;
+}
+
+.right-panel-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.right-panel-foot {
+  min-height: 40rpx;
+  line-height: 40rpx;
+  color: gray;
+  font-size: 12px;
+}
+
+.right-panel-content {
+  min-height: 84rpx;
+  display: flex;
+  padding: 10rpx 0;
+  align-items: center;
+}
+
+.bg-redpacket {
+  background-color: rgba(229, 77, 66, 0.808);
+  padding: 0 20rpx;
+  font-size: 13px;
+  border-radius: 1000rpx;
+}
+
+.text-white {
+  color: white;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.left-createtime {
+  font-size: 12px;
+  color: gray;
+  flex: 1;
+}
+
+
+.wux-badge__count {
+  top: -13px !important;
+  right: -16px !important;
+}
+
+.redpacket-used.redpacket-panel {
+  color: #eee;
+  background: radial-gradient(circle at right top, transparent 6px, #b3b3b3 0) top left / 33% 67% no-repeat,
+    radial-gradient(circle at right bottom, transparent 6px, #b3b3b3 0) bottom left / 33% 67% no-repeat,
+    radial-gradient(circle at left top, transparent 6px, white 0) top right / 67% 67% no-repeat,
+    radial-gradient(circle at left bottom, transparent 6px, white 0) bottom right / 67% 67% no-repeat;
+}
+
+.redpacket-used .bg-redpacket {
+  background-color: rgba(128, 128, 128, 0.5);
+  color: #eee;
+}
+
+.text-black {
+  color: #444;
+}
+
+.foot-ocode {
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  color: #444;
+}
+
+.ocode-margin {
+  margin-right: 10rpx;
+}

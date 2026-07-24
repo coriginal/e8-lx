@@ -1,0 +1,74 @@
+
+<wxs module="fn">
+	module.exports = {
+		ifAdmin: function(roles, user) {
+			if (roles && user.indexOf(roles) < 0) {
+				return false
+			}
+			return true
+		},
+		dealGroup: function(groups) {
+			if (groups) {
+				var length = groups.split(',').length
+				return groups.split(',')[length - 1]
+			}
+		},
+		isEffClerk: function(isEff, roles, app_name) {
+			console.log(isEff,roles,app_name)
+			if (app_name == 'eff') {
+				if (roles.indexOf('业务员') < 0) {
+					return true
+				}
+			}
+		}
+	}
+</wxs>
+<view class="box fade">
+    <!-- <image style="top:{{-30-top}}px" class="bg" src="../../../images/bg.png"/> -->
+    <image style="position: absolute; top: 0;width: 100vw;z-index: -9;" src="https://tongnet-file.oss-cn-hangzhou.aliyuncs.com/wx/me-bg.png"></image>
+    <view id="avatar" class="me_box" style="margin-top: {{top}}px;">
+        <view class="avatar" bindtap="{{user.openid=='testing'?'toLogin':'goUserEdit'}}">
+            <open-data class='userAvatarUrl' type="userAvatarUrl"></open-data>
+        </view>
+        <view class="avatar-msg" bindtap="{{user.openid=='testing'?'toLogin':'goUserEdit'}}">
+            <view class="avatar-qrcode">
+                <view class="name block">{{user.openid=='testing'?'点击登录':(user.mobile == 'null'?user.cnName:user.mobile)}}</view>
+                <!-- <image bindtap="drawQrcode" class="qrcode" src="{{qrcodeUrl}}"></image> -->
+            </view>
+            <!-- <text class="company block">{{user.company}}</text> -->
+            <!-- <view class="role block">{{user.mobile == 'null'?'':user.mobile}}</view> -->
+            <view wx:if="{{user.openid!='testing'}}" class="role block">{{companyName}}</view>
+            <view wx:if="{{user.openid!='testing'}}" class="role block">{{user.role}}</view>
+        </view>
+        <view wx:if="{{user.openid!='testing'}}" class="avatar-user" bindtap="goPersonInfo">
+            <icon type="i-settings" size="50" color="#333"></icon>
+        </view>
+    </view>
+    <view class="big_box" id="menu" wx:if="{{_options.length}}">
+        <view class="my-menu" wx:for="{{_options}}" wx:key bindtap="goOptionsMenu" id="{{item.code}}">
+            <icon size='48' type='i-{{item.icon}}' />
+            <view class="my-options-title">{{item.name}}</view>
+        </view>
+    </view>
+    <view class="options2" wx:if="{{_options2.length}}">
+        <view class="title">常用功能</view>
+        <view class="options2_box">
+            <view class="my-system-menu" hover-class="default" wx:for="{{_options2}}" wx:key bindtap="goOptionsMenu" id="{{item.code}}">
+                <icon size='50' type='i-{{item.icon}}' />
+                <view>{{item.name}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="options3">
+		<view class="my-system-menu1 {{index==_options2.length-1?'':'solid-bottom'}}" wx:for="{{system_options}}" wx:key bindtap="goSystemPage" id="{{item.url}}" data-param="{{item.param}}" wx:if="{{item.roles?fn.ifAdmin(item.roles,user.roles):true}}">
+			<view class="left-view">
+				<icon size='30' type='i-{{item.icon}}' />{{item.title}}
+			</view>
+			<view class="right-view">
+				<view class="my-system-notice">{{item.notice}}</view>
+				<icon size='30' color="gray" type='i-right' />
+			</view>
+		</view>
+	</view>
+    <view bindtap="logOut" wx:if="{{user.openid!='testing'}}" class="logout">注销登录</view>
+</view>

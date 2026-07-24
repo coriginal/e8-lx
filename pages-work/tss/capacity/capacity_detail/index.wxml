@@ -1,0 +1,123 @@
+<location></location>
+<view>
+  <view class="top_line">
+    <view wx:if="{{!just_see}}" wx:for='{{typeObj[task_type].top_btn}}' wx:for-index="key" class="{{item.class}} top_view" bindtap="{{item.bindtap}}" wx:key hover-class="default" hover-stay-time="500" data-check="{{showCheck}}">
+      <icon type="{{item.icon}}" size="40" wx:if="{{item.icon}}"></icon>
+      <!-- <text wx:if="{{item.useShow}}">{{show_done ? '显示' : '隐藏'}}</text> -->
+      <text wx:if="{{item.useIfList}}">{{if_list ? '地图模式' : '列表模式'}}</text>
+      <!-- <text wx:if="{{showCheck && key == '批量操作'}}">取消</text> -->
+      <text wx:if="{{!item.useIfList}}">{{key == '批量操作' && showCheck?'取消操作':key}}</text>
+      <switch checked="{{show_done}}" class="top-switch blue" color="blue" wx:if="{{item.type == 'switch'}}"></switch>
+    </view>
+  </view>
+
+  <view wx:if="{{if_list}}" class="middle_body">
+    <view class="flex_view" wx:for="{{orderList}}" wx:for-item="order" wx:key>
+      <view class='panel t-f32 {{order.selected}}' catchtap="goDetail" data-order_id="{{order.id}}">
+        <view class='head'>
+          <view class="left_head">
+            <view>
+              <view class="status start-end">
+                <view>
+                  <!-- <text class="text-blue">{{order.title}}</text> -->
+                  <text class="text-blue send-site {{typeObj[task_type].send_site_class}}">{{order.send_site||'无'}}</text>
+                  <text class="icon-right"> - </text>
+                  <text class="text-red receive-site {{typeObj[task_type].receive_site_class}}">{{order.receive_site||'无'}} </text>
+                </view>
+              </view>
+
+              <tag wx:if="{{order.tag}}" color='red'>{{order.tag}}</tag>
+            </view>
+            <view class="order-code text-gray ">订单号：{{order.show_code}}</view>
+          </view>
+          <view wx:if="{{showLc}}" style="text-align:right;">
+            <view style="font-size:14px;color:red;" wx:if="{{order.lc_name}}">已分流-{{order.lc_name || ''}}</view>
+            <view class="order-code text-red " wx:if="{{order.tcode}}">承运单号：{{order.tcode || ''}}</view>
+          </view>
+          <view class="check" hidden="{{!showCheck}}">
+            <!-- <text>{{order.status}}</text> -->
+            <checkbox color="#5c96ec" class="radio" checked="{{order.selected}}" value="{{item.title}}" catchtap="switchChange" data-id="{{order.id}}" data-rcode_type="{{order.rcode_type}}"></checkbox>
+          </view>
+        </view>
+        <view class="addr_info">
+          <view wx:if="{{task_type != '派送' || order.tag == '直送'}}" class="flex_view">
+            <image class="addr_pic" src="../../../../images/send.png"></image>
+            <view class="flex-1">{{order.send_addr}}</view>
+          </view>
+          <view wx:if="{{task_type != '提货' || order.tag == '直送'}}" class="flex_view">
+            <image class="addr_pic" src="../../../../images/receive.png"></image>
+            <view class="flex-1">{{order.receive_addr}}</view>
+          </view>
+        </view>
+
+        <view class="content-foot flex align-center">
+          <view class="status">
+            <view class="title">客户</view>
+            <view class="value">{{order.customer_name||''}}</view>
+            <view wx:if="{{order.ccode}}" class="value text-grey">{{order.ccode||''}}</view>
+          </view>
+
+          <view class="status solid-left solid-right">
+            <view class="title">货物信息</view>
+            <view class="value">
+              <text wx:if="{{order.amount>0}}">{{order.amount}}件 </text>
+              <text wx:if="{{order.weight>0}}">{{order.weight}}kg </text>
+              <text wx:if="{{order.volume>0}}">{{order.volume}}m³ </text>
+            </view>
+          </view>
+
+          <view class="status">
+            <view class="title">状态</view>
+            <view class="text-orange value">{{order.status||''}}</view>
+          </view>
+        </view>
+
+        <view>
+          <block wx:for='{{flexTagObj[task_type]}}' wx:for-index="key" wx:key>
+            <tag wx:if="{{order[key] && (order[key] == item.value || !item.value)}}" color="{{item.color}}">{{item.title}}</tag>
+          </block>
+        </view>
+      </view>
+
+    </view>
+  </view>
+  <view style="height:1px"></view>
+  <view wx:if="{{!if_list}}">
+    <map id="map" longitude="{{lng}}" latitude="{{lat}}" scale="14" data-id="{{item.id}}" markers="{{markers}}" bindmarkertap="goDetail" bindcallouttap="goDetail" show-location style="width: 100%; height: 100vh;"></map>
+  </view>
+  <view wx:if="{{if_list && !just_see}}" class="flex_view bottom_btn">
+    <view hidden="{{showCheck}}" wx:for='{{typeObj[task_type].bottom_btn}}' wx:for-index="key" wx:key class="{{item.class}}" bindtap="{{item.bindtap}}">{{key}}</view>
+    <view hidden="{{!showCheck}}" wx:for='{{typeObj[task_type].batch_btn}}' wx:for-index="key" wx:key class="{{item.class}}" wx:if="{{(item.if_op||if_op)== if_op}}" bindtap="{{item.bindtap}}">{{key}}</view>
+  </view>
+</view>
+
+<view class="scan_choose" bindtap="scanOrder">
+  <image src="../../../../images/icon-scan.png"></image>
+</view>
+
+<modal show="{{show_sign}}" title="确认派件完成?">
+  <view wx:if="{{batch.rcode_type}}" class="attach_title">回单</view>
+  <attach wx:if="{{batch.rcode_type}}" list="{{receipt_list}}" itemNum="{{batch.itemNum}}" recordId="-19" bindaddattach="addreceipt" binddelattach="delattach" scrollx="true" />
+  <view class="attach_title">上传凭证</view>
+  <attach list="{{batch.sign_list}}" recordId="-7" bindaddattach="addsign" itemNum="{{batch.itemNum}}" binddelattach="delattach" scrollx="true" />
+  <button class="confirm_btn" bindtap="confirmSign">确认</button>
+
+</modal>
+
+<wxs module="fn">
+  module.exports = {
+    unit: function (value) {
+      switch (value) {
+        case 'amount':
+          return '件';
+          break;
+        case 'volume':
+          return 'm³';
+          break;
+        case 'weight':
+          return 'kg';
+          break;
+      }
+    }
+  }
+</wxs>

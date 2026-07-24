@@ -1,0 +1,48 @@
+
+.flex {
+  display: flex;
+  font-family: Consolas, Monaco, monospace;
+}
+
+.flex-1 {
+  flex: 1
+}
+
+.time {
+  line-height: 72rpx;
+  text-align: left;
+}
+
+.scroll-view {
+  height: 500rpx;
+}
+
+.tabs-class {
+  padding: 20rpx;
+}
+
+.padding-30 {
+  padding: 30rpx;
+}
+
+.tab-btn {
+  padding: 20rpx;
+}
+
+.tab-btn .btn {
+  width: 66.66%;
+  border-radius: 1000rpx;
+  height: 72rpx;
+}
+
+.choosed {
+  color: var(--blue);
+  font-weight: bold;
+}
+.margin-right{
+  margin-right: 60rpx;
+}
+.time-flex{
+  display: flex;
+  align-items: center;
+}

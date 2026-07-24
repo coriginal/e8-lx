@@ -1,0 +1,8 @@
+<!--pages-charts/revenue-chart/index.wxml-->
+<view class="container">
+    <view class="title_box">
+        <view class="title">经营日报</view>
+        <view class="title_date">2022-08-15</view>
+    </view>
+    <revenue></revenue>
+</view>

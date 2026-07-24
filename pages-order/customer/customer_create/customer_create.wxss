@@ -1,0 +1,41 @@
+@import '../customer_addr_edit/customer_addr_edit.wxss';
+
+.t-bar {
+  background-color: white;
+  padding: 0 20rpx;
+  display: flex;
+  align-items: center;
+  height: 96rpx;
+  z-index: 999;
+  justify-content: space-between;
+}
+
+.title {
+  position: relative;
+}
+
+.title > text {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.t-bar text:last-child {
+  position: absolute;
+  bottom: -5rpx;
+  min-width: 50%;
+  height: 6rpx;
+  left: 0;
+  background-color: var(--grey);
+  color: var(--white);
+}
+.addr{
+  margin-top: 0;
+  box-shadow: none;
+}
+.other.addr {
+  margin-top: 0;
+}
+
+.other {
+  margin-top: 20rpx;
+}

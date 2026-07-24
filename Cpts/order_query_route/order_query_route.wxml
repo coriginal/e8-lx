@@ -1,0 +1,105 @@
+<view class="fade">
+    <!-- banner -->
+    <view class="flex flex-center">
+        <image class="router-banner" src="{{bannerUlr}}"></image>
+    </view>
+    <!-- search框 -->
+    <view class="flex search-input-view {{domain=='D529'?'D529':''}}">
+        <view class="flex flex-1 margin-lf">
+            <view class="search-icon i-search">
+                <icon type="i-search" size="{{domain=='D529'?'45':'32'}}"></icon>
+            </view>
+            <input class="search-input t-f24 flex-1" placeholder="{{searchParam}}." bindinput="getSearchValue" confirm-type='search' bindblur="{{inputBlur}}" value="{{searchValue}}" focus="{{_focus}}" bindconfirm="goSearch" />
+            <view wx:if="{{searchValue}}" class="search-icon i-scan" bindtap="resetInput">
+                <icon type="i-roundclose" size="{{domain=='D529'?'45':'32'}}"></icon>
+            </view>
+            <view wx:else class="search-icon i-scan" bindtap="scanCode">
+                <icon type="i-scan" size="{{domain=='D529'?'45':'32'}}"></icon>
+            </view>
+        </view>
+        <view class="search-button-vwiew">
+            <button class="btn bg-blue search-button" bindtap="goSearch">搜索</button>
+        </view>
+    </view>
+    <!-- data-list -->
+    <scroll-view scroll-y class="data-list" style="height:calc({{_height}})" bindscrolltolower="scrollReachBottom" enable-back-to-top lower-threshold="50">
+        <block wx:for="{{datalist}}" wx:key>
+            <view class="router-panel slide-bottom" data-id="{{item.id}}" data-code="{{item.code}}" data-domain="{{item.domain}}" data-item="{{item}}" bindtap="goRoutes">
+                <view class="first-row">
+                    <view>
+                        <!-- <image class='icon' src='http://e8.boudata.com/images/e8_prod/logo.png' /> -->
+                        <text class="datalist-direction" selectable>{{fn.contact([item.code,item.directions])}}</text>
+                    </view>
+                    <view>
+                        <view class="{{item.status == '已签收'?'sign':''}}">{{item.status}}</view>
+                    </view>
+                </view>
+                <view class="second-row">
+                    <!-- <view class="nowrap">
+          <block wx:for="{{[item.amount?item.amount+'件':'',item.weight?item.weight+'kg':'',item.volume?item.volume+'m³':'']}}" wx:key>
+            <tag class="tag" wx:if="{{item}}" >{{item}}</tag>
+            </block>
+          </view> -->
+                    <view>
+                        <view wx:if="{{!hideCargoInfo}}">
+                            <text class="_amount">{{ (item.amount||'-') + '件'}}</text>
+                            <!-- dzsf即D075 d zero seven five -->
+                            <text wx:if="{{!!item.weight && dzsf}}" class="_amount">{{ item.weight+ 'kg'}}</text>
+                            <text wx:if="{{!!item.volume && dzsf}}" class="_amount">{{ item.volume + '方'}}</text>
+                        </view>
+                        <text class="flex-1 text-path">{{(item.send_city||item.send_site)||''}}</text>
+                        ->
+                        <text class="flex-1 text-path">{{(item.receive_city||item.receive_site)||''}}</text>
+                    </view>
+                    <view wx:if="{{showQRcodeButton}}">
+                        <button catch:tap="getQRcodeImg" data-id="{{item.id}}" class="bg-blue" style="margin-left: 20rpx;height: 60rpx;line-height: 60rpx;" size="mini">签收二维码</button>
+                    </view>
+                </view>
+                <view class="thrid-row solid-bottom">
+                    <view class='text-cut'>
+                        {{item.hideSubOrderPaths?'行程：':'主单轨迹：'}}
+                        <text class="flex-1 text-path">{{item.newpath}}</text>
+                        <icon color="grey" type="i-right" size="36"></icon>
+                    </view>
+                </view>
+                <view class="sub_box" wx:if="{{!item.hideSubOrderPaths}}">
+                    <view class="title">子单轨迹：</view>
+                    <view class="sub_item" wx:for="{{item.sub_order_paths}}" wx:for-item="sub">
+                        <view>{{sub.code}}</view>
+                        <view>
+                            {{sub.paths[0].description || "暂无轨迹"}}
+                            <!-- <icon color="grey" type="i-right" size="36"></icon> -->
+                        </view>
+                    </view>
+                </view>
+                <view class="fourth-row">
+                    <text class="t-f22 text-date">{{item.order_date}}</text>
+                    <panel wx:if="{{!item.hide_company && item.company}}">
+                        <text class='t-f22'>由</text>
+                        <text class='text-company t-f22' selectable>{{item.company|| ''}}</text>
+                        <text class='t-f22'>承运</text>
+                    </panel>
+                </view>
+            </view>
+        </block>
+        <view wx:if="{{datalist.length == 0}}" class="blank-img-view" style="height:calc({{_height}})">
+            <image class="blank-img" src="{{blankUrl}}" mode="widthFix"></image>
+            <view class='text-grey t-f32 margin-top light'>暂无订单</view>
+            <view class='margin-top t-f28 text-grey'>立即
+                <text class='text-blue' bindtap='focusOn'>[搜索订单]</text>查询物流进度吧！
+            </view>
+        </view>
+    </scroll-view>
+</view>
+
+
+<wxs module="fn">
+    module.exports = {
+        contact: function (value) {
+            var new_value = value.filter(function (item) {
+                return item
+            })
+            return new_value.join(' - ')
+        }
+    }
+</wxs>

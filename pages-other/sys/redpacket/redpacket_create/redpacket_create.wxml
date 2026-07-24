@@ -1,0 +1,23 @@
+<view class="redpacket-create">
+	<row>
+		<col wx:for="{{list}}" span="{{item.col}}">
+		<view class="redpacket-create-view solid-bottom">
+			<text>{{item.title}}：</text>
+			<input class="create-input" type="{{item.type}}" focus="{{item.focus}}" placeholder="{{item.title}}" disabled="{{item.disabled}}" confirm-type="{{item.confirm}}" bindconfirm="inputConfirm" data-idx="{{index}}" data-item="{{item}}" bindtap="inputClick" value="{{item.value}}" bindinput="inputValue"></input>
+			<view class="redpacket-required" wx:if="{{item.required}}">必填</view>
+		</view>
+		</col>
+	</row>
+</view>
+
+<view class="notice-text bg-white ">
+	<text >规则说明：\n1、每个客户能在生成的优惠券理领取一张优惠券 \n2、红包内容是本公司可为最近的活动优惠，可作为客户录单结算时的运费抵扣</text>
+</view>
+
+<button class="btn bg-blue" bindtap="createRedpacket">确定</button>
+
+<!-- <view>
+	<image mode="widthFix" src="{{src}}"></image>
+</view> -->
+
+ 	<date-picker visible="{{pickerShow }}" controlled mode="date"  lang="zh_CN" value="{{ time }}" data-mode="date" bind:confirm="onConfirmDatePicker" bind:cancel="onCancelDatePicker" />

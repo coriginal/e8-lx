@@ -1,0 +1,65 @@
+<view>
+  <view class="top">
+    <tab class="tab" list="{{ list }}" selected-id="{{ selectedId }}" bindtabchange="handleTabChange"></tab>  
+  </view>
+
+  <view class="body">
+    <view class="list">
+      <view class="title">
+        <text class="code">运输单号：{{task.code}}</text>
+        <text class="status">{{task.status}}</text>
+      </view>
+
+      <view class="task_msg">
+        <view class="line">
+          <view class="start">
+            <view><text class="icon green">发</text><text class="point">{{task.start}}</text></view>
+            <view class="detail">{{task.real_depart_time||''}}</view>
+          </view>
+          <view class="start">
+            <view><text class="icon red">到</text><text class="point">{{task.end}}</text></view>
+            <view class="detail">{{task.real_arrive_time||''}}</view>
+          </view>
+        </view>
+        <view class="arrive_fee detail">
+          <text>{{task.remark||''}}</text>
+          <!-- <text>到付运费:</text>
+          <text>9000</text> -->
+        </view>
+        <view class="total_fee">
+          <text>合计运输费：{{task.cost_fee||'-'}} </text>
+          <text> 毛利：{{totalFee - task.cost_fee||'-'}}元</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="list">
+      <view class="title" bindtap="goDetail">
+        <text class="code">装车清单：{{task.suborder_total}}单</text>
+        <icon type="i-right"></icon>
+      </view>
+      <view class="task_msg">
+        <view class="list_income">总运费：{{totalFee}}元（到付{{arriveFee}}元）</view>
+        <view class="detail flex">
+          <text>{{task.amount_total + '件/' + task.weight_total + 'KG/' + task.volume_total + '方'}}</text>
+          <text>代收货款{{cod}}元</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- <view class="list">
+      <view class="title">
+        <text class="code">返款</text>
+      </view>
+      <view>
+        <view class="detail flex">
+          <text>现返</text>
+          <text>100元</text>
+        </view>
+      </view>
+    </view> -->
+  </view>
+
+  <view class="bottom">
+  </view>
+</view>

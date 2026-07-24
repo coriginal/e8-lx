@@ -1,0 +1,126 @@
+<view class="container">
+    <view class="box" wx:for="{{dataList}}">
+        <view class="bar bg-orange">
+            <view>{{item.service_order_no}}</view>
+            <view>{{item.service_order_status_name}}</view>
+        </view>
+        <view class="content">
+            <view>
+                客户名称：{{item.customer_name}}
+            </view>
+            <view>
+                客户电话：{{item.customer_phone||"未填写"}}
+            </view>
+            <view>
+                服务地址：{{item.area||"未填写"}}
+            </view>
+            <view>
+                服务类型：{{item.service_order_type_name}}
+            </view>
+            <view>
+                问题描述：{{item.problem_desc || "无"}}
+            </view>
+            <view>
+                备注：{{item.remark || "无"}}
+            </view>
+            <view>
+                派单时间：{{item.dispatch_time || "无"}}
+            </view>
+        </view>
+        <view class="cxkfooter">
+            <!-- accept  refuse-->
+            <view data-order_no="{{item.service_order_no}}" class="text-black" bindtap="goDetail">
+                详情
+            </view>
+            <view data-phoneNumber="{{item.customer_phone}}" class="bg-green" bindtap="callCustomer" wx:if="{{item.customer_phone}}">
+                联系客户
+            </view>
+            <view data-order_no="{{item.service_order_no}}" data-phoneNumber="{{item.customer_phone}}" class="bg-yellow" bindtap="openSubscribe" wx:if="{{item.service_order_status==40 || item.service_order_status==50}}">
+                预约时间
+            </view>
+            <view data-order_no="{{item.service_order_no}}" data-phoneNumber="{{item.customer_phone}}" class="bg-orange" bindtap="openFeedBack" wx:if="{{item.service_order_status==60||item.service_order_status==70}}">
+                问题反馈
+            </view>
+            <view data-order_no="{{item.service_order_no}}" class="bg-blue" data-order_no="{{item.service_order_no}}" data-operate="accept" wx:if="{{item.service_order_status==50}}" bindtap="startService">
+                开始服务
+            </view>
+            <view data-order_no="{{item.service_order_no}}" class="bg-red" data-id="{{item.id}}" data-operate="reject" bindtap="orderOperate" wx:if="{{item.service_order_status==70}}" bindtap="openEndService">
+                结束服务
+            </view>
+        </view>
+    </view>
+    <view class="isAll" wx:if="{{isAll}}">
+        暂无更多订单，<span class="text-blue" bindtap="goTop">点击返回顶部</span>
+    </view>
+</view>
+<page-container position="bottom" show="{{showPageContainer}}">
+    <!-- 0 1 2问题反馈 -->
+    <view class="feedback_page" wx:if="{{pageContainerType==2}}">
+        <view class="feedback_page_title">
+            货物问题反馈
+        </view>
+        <view class="feedback_page_list">
+            <view>
+                <view>服务单号</view>
+                <view class="text-gray">{{currentOrderNo}}</view>
+            </view>
+            <view>
+                <view>问题说明</view>
+                <textarea value="{{feedBackContent}}" bindinput="setFeedback"></textarea>
+            </view>
+            <view>
+                <view>图片上传</view>
+                <view>
+                    <image src="../../../../images/upImage.png" bindtap="chooseImage"></image>
+                    <image class="img" src="{{appHost+item.downloadUrl}}" wx:for="{{feedbackImages}}">
+                        <image bindtap="delImg" data-type="-25" data-id="{{item.id}}" data-index="{{index}}" class="delimg" src="../../../../images/删除.png"></image>
+                    </image>
+                </view>
+            </view>
+        </view>
+        <view class="feedback_up_button bg-blue" bindtap="submitFeedBack">确认提交</view>
+    </view>
+    <view class="subscribe_box" wx:if="{{pageContainerType==0}}">
+        <view class="subscribe_title">服务单号：{{currentOrderNo}}</view>
+        <view class="subscribe_items">
+            <view>
+                <view>预约日期</view>
+                <view class="text-gray">
+                    <picker mode="date" value="{{subcribe_date}}" bindchange="bindDateChange">
+                        {{subscribe_date || "点击选择日期"}}
+                    </picker>
+                </view>
+            </view>
+            <view>
+                <view>预约时间</view>
+                <view class="text-gray">
+                    <picker mode="time" value="{{subcribe_time}}" bindchange="bindTimeChange">
+                        {{subscribe_time || "点击选择时间"}}
+                    </picker>
+                </view>
+            </view>
+        </view>
+        <view class="subscribe_button bg-blue" bindtap="upSubscribeTime">确认</view>
+    </view>
+    <view class="feedback_page" wx:if="{{pageContainerType==1}}">
+        <view class="feedback_page_title">
+            结束订单
+        </view>
+        <view class="feedback_page_list">
+            <view>
+                <view>服务单号</view>
+                <view class="text-gray">{{currentOrderNo}}</view>
+            </view>
+            <view>
+                <view>图片上传</view>
+                <view>
+                    <image src="../../../../images/upImage.png" bindtap="endChooseImages"></image>
+                    <image class="img" src="{{appHost+item.attachPath2}}" wx:for="{{endImages}}">
+                        <image bindtap="delImg" data-type="-24" data-id="{{item.id}}" data-index="{{index}}" class="delimg" src="../../../../images/删除.png"></image>
+                    </image>
+                </view>
+            </view>
+        </view>
+        <view class="feedback_up_button bg-blue" bindtap="endService">确认提交</view>
+    </view>
+</page-container>

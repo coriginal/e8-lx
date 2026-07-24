@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "field": "../../../components/field/index",
+    "attach": "../../../components/attach/index",
+    "datetime": "../../../components/datetime/index",
+    "cell": "../../../components/cell/index",
+    "searchpicker": "../../../components/searchpicker/index"
+  }
+}

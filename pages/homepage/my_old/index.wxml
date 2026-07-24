@@ -1,0 +1,97 @@
+<wxs module="fn">
+	module.exports = {
+		ifAdmin: function(roles, user) {
+			if (roles && user.indexOf(roles) < 0) {
+				return false
+			}
+			return true
+		},
+		dealGroup: function(groups) {
+			if (groups) {
+				var length = groups.split(',').length
+				return groups.split(',')[length - 1]
+			}
+		},
+		isEffClerk: function(isEff, roles, app_name) {
+			console.log(isEff,roles,app_name)
+			if (app_name == 'eff') {
+				if (roles.indexOf('业务员') < 0) {
+					return true
+				}
+			}
+		}
+	}
+</wxs>
+
+<view class='fade my'>
+	<!-- <noticebar wx:if="{{fn.isEffClerk(user.isEff,user.roles,app_name)}}" backgroundcolor='white' color='#5c96ec' icon="deliver_fill" url="{{joinE8}}" closable>尚未认证成为独立物流承运商，
+		<text class='text-red'>点击申请 ></text>
+	</noticebar> -->
+	<view class='my-bg'>
+		<!-- style='background-image:url({{myImg}})' -->
+		<!-- <view class='gif-wave' style="background-image:url({{wave}})"></view> -->
+		<view class="my-top-panel">
+			<view class="avatar" bindtap="{{user.openid=='testing'?'toLogin':'goUserEdit'}}">
+				<open-data class='userAvatarUrl' type="userAvatarUrl"></open-data>
+			</view>
+			<view class="avatar-msg" bindtap="{{user.openid=='testing'?'toLogin':'goUserEdit'}}">
+				<view class="avatar-qrcode">
+					<view class="name block">{{user.openid=='testing'?'点击登录':(user.mobile == 'null'?user.cnName:user.mobile)}}</view>
+					<!-- <image bindtap="drawQrcode" class="qrcode" src="{{qrcodeUrl}}"></image> -->
+				</view>
+				<!-- <text class="company block">{{user.company}}</text> -->
+				<!-- <view class="role block">{{user.mobile == 'null'?'':user.mobile}}</view> -->
+				<view wx:if="{{user.openid!='testing'}}" class="role block">{{companyName}}</view>
+				<view wx:if="{{user.openid!='testing'}}" class="role block">{{user.role}}</view>
+			</view>
+			<view wx:if="{{user.openid!='testing'}}" class="avatar-user" bindtap="goPersonInfo">
+				<icon type="i-playfill" size="32" color="white"></icon>
+			</view>
+		</view>
+		<image class="gif-wave" src="{{wave}}" mode="scaleToFill"></image>
+	</view>
+
+	<view class="my-options" wx:if="{{_options.length}}">
+		<view class="my-menu" wx:for="{{_options}}" wx:key bindtap="goOptionsMenu" id="{{item.code}}">
+			<icon size='48' type='i-{{item.icon}}' />
+			<view class="my-options-title">{{item.name}}</view>
+		</view>
+	</view>
+
+	<view class="my-system-options margin-top" wx:if="{{_options2.length}}">
+		<view class="my-system-menu" hover-class="default" wx:for="{{_options2}}" wx:key bindtap="goOptionsMenu" id="{{item.code}}">
+			<view class="left-view">
+				<icon size='30' type='i-{{item.icon}}' />{{item.name}}
+			</view>
+			<view class="right-view">
+				<view class="my-system-notice">{{item.notice}}</view>
+				<icon size='30' color="gray" type='i-right' />
+			</view>
+		</view>
+	</view>
+
+	<view class="{{_options.length?'margin-top':''}} my-system-options">
+		<view class="my-system-menu {{index==_options2.length-1?'':'solid-bottom'}}" wx:for="{{system_options}}" wx:key bindtap="goSystemPage" id="{{item.url}}" data-param="{{item.param}}" wx:if="{{item.roles?fn.ifAdmin(item.roles,user.roles):true}}">
+			<view class="left-view">
+				<icon size='30' type='i-{{item.icon}}' />{{item.title}}
+			</view>
+			<view class="right-view">
+				<view class="my-system-notice">{{item.notice}}</view>
+				<icon size='30' color="gray" type='i-right' />
+			</view>
+		</view>
+	</view>
+
+	<view class="my-foot-img">
+		<image src="{{foot_img}}"></image>
+	</view>
+</view>
+
+
+<!-- 注销登陆 -->
+<block wx:if="{{user.openid!='testing'}}">
+	<view class="logout">
+		<view bindtap="logOut" class="text-red text-center t-fw">注销登录</view>
+		<!-- <button bindtap="logOut" class="btn bg-red flex-sub1">注销登陆</button> -->
+	</view>
+</block>

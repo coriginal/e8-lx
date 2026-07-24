@@ -1,0 +1,36 @@
+<view class="model-content">
+	<view class="header">
+		<icon type="i-warn" size="30" color="gray"></icon>
+		<text class="t-f24 text-gray">报价不含特殊费用 价格和具体时效标准请咨询物流公司>></text>
+	</view>
+	<view class="card-model" wx:for="{{modelList}}" id="{{index}}" catchtap="chooseCard">
+		<card title="{{item.product_name||item.name}}" choosed="{{chooseCardIdx == index?'choosed-red':'choosed'}}" hdBorder="solid-bottom">
+			<view slot="extra">
+				<text class="text-gray">预估价格：</text>
+				<text class="margin-lr t-fw text-red t-f32">{{item.allMoney || '-'}}</text>
+			</view>
+			<view slot="body" class="card-model-content">{{item.billModel.billModel.remark||''}}</view>
+			<view slot="footer">
+				<view class="card-footer" >
+					<text catchtap="showDetail" id="{{index}}" class="text-gray t-f24" >产品说明>></text>
+					<text class="f-f26 text-blue" wx:if="{{orderInfo.red_packet.id}}">
+						预计减免：{{orderInfo.red_packet.redPacket.money}} 元
+					</text>
+				</view>
+			</view>
+		</card>
+	</view>
+</view>
+<view class="btn-view fade" wx:if="{{modelList.length>0}}">
+	<button class="btn bg-blue next-step" bindtap="nextStep">录单</button>
+</view>
+<view class="nothing" wx:else>
+	暂无找到相关报价
+	<view hover-class="default" class="text-blue" bindtap="goOnOrder">继续录单</view>
+</view>
+
+<popup title="产品说明" visible="{{ showPop }}" bind:close="onClosePopup">
+	<view class="popup-view">
+		<text>{{product||'暂无说明'}}</text>
+	</view>
+</popup>

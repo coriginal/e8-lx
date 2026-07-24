@@ -1,0 +1,43 @@
+.redpacket-create {
+  background-color: white;
+  margin: 20rpx;
+  border-radius: 10rpx;
+  padding: 15rpx;
+}
+
+.redpacket-create-view {
+  margin: 10rpx;
+  white-space: nowrap;
+  display: flex;
+  padding: 10rpx;
+  align-items: center;
+}
+
+.create-input {
+  height: 100%;
+  flex: 1;
+  padding: 0 20rpx;
+}
+
+.notice-text {
+  margin: 20rpx;
+  padding: 20rpx;
+  font-size: 24rpx;
+  line-height: 32rpx;
+  color: #8799a3;
+  background-color: white;
+}
+
+.btn.bg-blue {
+  height: 84rpx;
+  margin: 20rpx;
+  display: flex;
+}
+
+.redpacket-required {
+  color: var(--orange);
+  font-size: 12px;
+  border-radius: 10rpx;
+  border: 1px solid var(--orange);
+  padding: 4rpx 12rpx;
+}

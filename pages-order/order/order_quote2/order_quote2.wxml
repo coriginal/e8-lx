@@ -1,0 +1,229 @@
+<view class="fade margin-bottom-fade">
+	<!-- 收寄件信息 -->
+	<row>
+		<col span="12" class="">
+		<view class="placeorder">
+			<view class="placeorder-flex">
+				<text class="title-big">发货</text>
+				<text class="text-underline"></text>
+			</view>
+		</view>
+		</col>
+	</row>
+	<view class='content solid-bottom'>
+		<view class="addr solid-bottom'">
+			<view class='img mr-r'>
+				<image class='left-img' mode='widthFix' src='../../../images/send.png'> </image>
+			</view>
+			<view class='middle' id='send'>
+				<view class='text-name'>{{fn.contact([orderInfo.send.obj.name,orderInfo.send.obj.phone])}}</view>
+				<view class='text-name'>{{fn.contact(orderInfo.send.obj.region)}}</view>
+				<view class='text-name'>{{orderInfo.send.obj.addr_detail}}</view>
+			</view>
+		</view>
+		<row>
+			<col span="12">
+			<view class="placeorder">
+				<view class="placeorder-flex solid-bottom">
+					<text class="t-fw fee-total">提货地址：</text>
+					<input class="placeorder-input" bindinput="inputOrderInfo" id="addr_detail" data-id="send" placeholder-class="opcity8" placeholder="街道/乡 门牌号" value="{{orderInfo.send.obj.addr_detail}}"></input>
+				</view>
+			</view>
+			</col>
+		</row>
+		<row>
+			<col span="12">
+			<view class="placeorder">
+				<view class="placeorder-flex solid-bottom">
+					<text class="t-fw fee-total">联系人：</text>
+					<input bindinput="inputOrderInfo" id="name" class="placeorder-input" data-id="send" placeholder-class="opcity8" placeholder="真实姓名" value="{{orderInfo.send.obj.name}}"></input>
+				</view>
+			</view>
+			</col>
+		</row>
+		<row>
+			<col span="12">
+			<view class="placeorder">
+				<view class="placeorder-flex solid-bottom">
+					<text class="t-fw fee-total">电话：</text>
+					<input bindinput="inputOrderInfo" id="phone" class="placeorder-input" data-id="send" placeholder-class="opcity8" placeholder="用于通知收货" value="{{orderInfo.send.obj.phone}}"></input>
+				</view>
+			</view>
+			</col>
+		</row>
+	</view>
+
+
+	<row>
+		<col span="12" class="">
+		<view class="placeorder">
+			<view class="placeorder-flex">
+				<text class="title-big">收货</text>
+				<text class="text-underline"></text>
+			</view>
+		</view>
+		</col>
+	</row>
+	<view class='content solid-bottom'>
+		<view class="addr  ">
+			<view class='img mr-r'>
+				<image class='left-img' mode='widthFix' src='../../../images/receive.png'> </image>
+			</view>
+			<view class='middle' id='receive'>
+				<view class='text-name'>{{fn.contact([orderInfo.receive.obj.name,orderInfo.receive.obj.phone])}}</view>
+				<view class='text-name'>{{fn.contact(orderInfo.receive.obj.region)}}</view>
+				<view class='text-name'>{{orderInfo.receive.obj.addr_detail}}</view>
+			</view>
+		</view>
+		<!-- <row>
+			<col span="12">
+			<view hover-class="default" class="import-address solid-bottom">
+				<text class="text-orange">+ 导入最近用过的地址</text>
+				<icon type="i-right" size="34" color="var(--orange)"></icon>
+			</view>
+			</col>
+		</row> -->
+
+		<row>
+			<col span="12">
+			<view class="placeorder">
+				<view class="placeorder-flex solid-bottom">
+					<text class="t-fw fee-total">详细地址：</text>
+					<input class="placeorder-input" bindinput="inputOrderInfo" id="addr_detail" data-id="receive" placeholder-class="opcity8" placeholder="街道/乡 门牌号" value="{{orderInfo.receive.obj.addr_detail}}"></input>
+				</view>
+			</view>
+			</col>
+		</row>
+		<row>
+			<col span="12">
+			<view class="placeorder">
+				<view class="placeorder-flex solid-bottom">
+					<text class="t-fw fee-total">联系人：</text>
+					<input bindinput="inputOrderInfo" id="name" class="placeorder-input" data-id="receive" placeholder-class="opcity8" placeholder="真实姓名" value="{{orderInfo.receive.obj.name}}"></input>
+				</view>
+			</view>
+			</col>
+		</row>
+		<row>
+			<col span="12">
+			<view class="placeorder">
+				<view class="placeorder-flex solid-bottom">
+					<text class="t-fw fee-total">电话：</text>
+					<input bindinput="inputOrderInfo" id="phone" class="placeorder-input" data-id="receive" placeholder-class="opcity8" placeholder="用于通知收货" value="{{orderInfo.receive.obj.phone}}"></input>
+				</view>
+			</view>
+			</col>
+		</row>
+	</view>
+	<row>
+		<col span="12" class="">
+		<view class="placeorder">
+			<view class="placeorder-flex">
+				<text class="title-big">货物信息</text>
+				<text class="text-underline"></text>
+			</view>
+		</view>
+		</col>
+	</row>
+	<row>
+		<col span="12">
+		<view class="placeorder">
+			<view class="placeorder-flex solid-bottom">
+				<text class="t-fw fee-total">基本信息：</text>
+				<text>{{orderInfo.cargoInfo.amount&&(orderInfo.cargoInfo.amount+'件')}} {{orderInfo.cargoInfo.weight&&(orderInfo.cargoInfo.weight+'kg')}} {{orderInfo.cargoInfo.volume&&(orderInfo.cargoInfo.volume+'方')}} </text>
+				<text class="text-padding" wx:if="{{orderInfo._transModeTitle == '整车'}}">{{orderInfo.truck_type}} {{orderInfo.pallet_num&&(orderInfo.pallet_num+'拖')}}</text>
+			</view>
+		</view>
+		</col>
+	</row>
+	<row>
+		<col span="12">
+		<view class="placeorder">
+			<view class="placeorder-flex solid-bottom">
+				<text class="t-fw fee-total">货物名称：</text>
+				<input bindinput="inputOrderInfo" id="cargo" class="placeorder-input" value="{{orderInfo.cargoInfo.cargo}}"></input>
+			</view>
+		</view>
+		</col>
+	</row>
+	<row wx:if="{{orderInfo._transModeTitle == '整车'}}">
+		<col span="12">
+		<view class="placeorder">
+			<view class="placeorder-flex solid-bottom">
+				<text class="t-fw fee-total">托盘数量：</text>
+				<input type="number" bindinput="bigCarInput" id="pallet_num" class="placeorder-input" value="{{orderInfo.pallet_num}}"></input>
+			</view>
+		</view>
+		</col>
+	</row>
+	<row wx:if="{{orderInfo._transModeTitle == '整车'}}">
+		<col span="12">
+		<view class="placeorder">
+			<view class="placeorder-flex solid-bottom">
+				<text class="t-fw fee-total">装车时间：</text>
+				<input disabled bindtap="showDatePicker"  id="expect_arrive" class="placeorder-input" value="{{orderInfo.expect_arrive}}"></input>
+			</view>
+		</view>
+		</col>
+	</row>
+	<row wx:if="{{orderInfo._transModeTitle == '整车'}}">
+		<col span="12">
+		<view class="placeorder">
+			<view class="placeorder-flex solid-bottom">
+				<text class="t-fw fee-total">卸车时间：</text>
+				<input disabled bindtap="showDatePicker"  id="expect_depart" class="placeorder-input" value="{{orderInfo.expect_depart}}"></input>
+			</view>
+		</view>
+		</col>
+	</row>
+
+	<row wx:if="{{orderInfo._transModeTitle != '整车'}}">
+		<col span="12">
+		<view class="placeorder" bindtap="openChoosePack">
+			<view class="placeorder-flex solid-bottom">
+				<text class="t-fw fee-total">包装方式：</text>
+				<input disabled  class="placeorder-input" value="{{orderInfo.cargoInfo.pack}}"></input>
+			</view>
+		</view>
+		</col>
+	</row>
+</view>
+<view style="height:2px" />
+
+	<view class="btn-view">
+		<button class="btn bg-blue next-step" bindtap="nextStep">下一步</button>
+	</view>
+
+<popup position="bottom" visible="{{ showPopup }}" bind:close="onClosePopup">
+	<cell-group title="请选择包装类型">
+		<block wx:for="{{packList}}" wx:key>
+			<col span="3">
+			<view class="pack solid" hover-class="default" bindtap="choosePack" id="{{index}}">
+				{{item}}
+			</view>
+			</col>
+		</block>
+	</cell-group>
+</popup>
+
+
+<date-picker visible="{{ date_picker }}" controlled mode="datetime" value="{{ time }}" lang="zh_CN" data-index="1" data-mode="datetime" bind:confirm="onConfirm" bind:visibleChange="onVisibleChange" />
+
+
+
+
+<wxs module="fn">
+	module.exports = {
+		contact: function(value) {
+			if (value)
+				return value.join(' ')
+		},
+		deal: function(obj) {
+			if (obj)
+				return {
+					'send': obj.send,
+					'receive': obj.receive
+				}
+		}
+	}
+</wxs>

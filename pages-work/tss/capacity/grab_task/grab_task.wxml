@@ -1,0 +1,222 @@
+<tabs class="solid-bottom" controlled theme="positive" current="{{ tab_current }}" bindchange="onChangeTabs">
+	<tab key="{{item.code}}" wx:for="{{tabs}}" wx:key>
+		<badge count="{{item.count}}">{{item.title}}</badge>
+	</tab>
+</tabs>
+
+<view class="detail-page fade" wx:if="{{tab_current == 'my_quote'}}">
+	<row wx:for="{{quoteList}}" wx:key class="solid-bottom">
+		<col span="12">
+		<view class="my-quote">
+			<view>
+				<text class="quote-title t-fw">金额：</text>
+				<text>{{item.price}}</text>
+			</view>
+			<view wx:if='{{item.remark}}'>
+				<text class="quote-title t-fw">备注：</text>
+				<text>{{item.remark}}</text>
+			</view>
+			<view>
+				<text class="quote-title t-fw">报价时间：</text>
+				<text>{{item.createtime}}</text>
+			</view>
+		</view>
+		</col>
+	</row>
+</view>
+
+<view class="detail-page fade" wx:if="{{task && tab_current == 'task'}}">
+	<view class="top-ocode">
+		<view class="receive-panel flex-1">
+			<text class="">运输单号</text>
+			<view class="receive_city">{{task.code||''}}</view>
+		</view>
+	</view>
+	<row>
+
+		<!-- <col span="6" class="solid-bottom">
+		<view class="placeorder">
+			<view class="placeorder-flex">
+				<text class="opcity">客户名称：</text>
+				<view class="flex-1 t-right">{{task.customer||'陈大力' }}</view>
+			</view>
+		</view>
+		</col> -->
+		<col span="6" class="solid-bottom">
+		<view class="placeorder">
+			<view class="placeorder-flex">
+				<text class="opcity">业务类型：</text>
+				<view class="flex-1 t-right color-red">{{task.type}}</view>
+			</view>
+		</view>
+		</col>
+	</row>
+
+	<row>
+		<col span="6">
+		<view class="placeorder">
+			<view class="placeorder-flex">
+				<text class="opcity">订单数：</text>
+				<view class="flex-1 t-right color-red">{{task.num||''}} 票</view>
+			</view>
+		</view>
+		</col>
+		<col span="6">
+		<view class="placeorder">
+			<view class="placeorder-flex">
+				<text class="opcity">区域：</text>
+				<view class="flex-1 t-right">{{task.area||''}}</view>
+			</view>
+		</view>
+		</col>
+	</row>
+
+	<row>
+		<col span="6">
+		<view class="placeorder">
+			<view class="placeorder-flex">
+				<text class="opcity">车型：</text>
+				<view class="flex-1 t-right">{{task.truck_type||''}}</view>
+			</view>
+		</view>
+		</col>
+		<col span="6">
+		<view class="placeorder">
+			<view class="placeorder-flex">
+				<text class="opcity">定位方式：</text>
+				<view class="flex-1 t-right">{{task.position_type||''}}</view>
+			</view>
+		</view>
+		</col>
+	</row>
+
+	<row>
+		<col span="12">
+		<view class="placeorder placeorder-load">
+			<view class="placeorder-flex ">
+				<text class="opcity">货物信息：</text>
+				<view class="flex-1 t-right text-flex-end">
+					{{task.amount||''}} 件 {{task.weight||''}} kg {{task.volume||''}} m³
+				</view>
+			</view>
+		</view>
+		</col>
+	</row>
+
+
+	<row wx:if="{{task.if_load||task.if_unload}}">
+		<col span="12" class="solid-bottom">
+		<view class="placeorder placeorder-load">
+			<view class="placeorder-flex text-flex-end">
+				{{task.if_load?'需装':''}} {{task.if_unload?'需卸':''}}
+			</view>
+		</view>
+		</col>
+	</row>
+
+	<row wx:if="{{task.plan_depart_time}}">
+		<col span="12">
+		<view class="placeorder">
+			<view class="placeorder-flex">
+				<text class="opcity">计划出发：</text>
+				<view class="flex-1 t-right">{{task.plan_depart_time||''}}</view>
+			</view>
+		</view>
+		</col>
+	</row>
+
+	<row wx:if="{{task.plan_arrive_time}}">
+		<col span="12" class="solid-bottom">
+		<view class="placeorder">
+			<view class="placeorder-flex">
+				<text class="opcity">计划到达：</text>
+				<view class="flex-1 t-right">{{task.plan_arrive_time||''}}</view>
+			</view>
+		</view>
+		</col>
+	</row>
+
+	<row class="solid-bottom">
+		<col span="12">
+		<view class="flex-1 text-remark"><text class="opcity">备注：</text>{{task.remark||''}} </view>
+		</col>
+	</row>
+
+	<view class="sub-orders">子单：</view>
+
+	<block wx:for="{{subOrders}}" wx:key>
+		<view hover-class="default" bindtap="goOrderDetail" data-id="{{item.order_id}}" data-code="{{item.code}}">
+			<row>
+				<col span="5">
+				<view class="placeorder placeorder-load">
+					<view class="placeorder-flex">
+						<text class="opcity">单号：</text>
+						<view class="flex-1 t-right t-fw">{{item.code||''}}</view>
+					</view>
+				</view>
+				</col>
+				<col span="7">
+				<view class="placeorder placeorder-load">
+					<view class="placeorder-flex">
+						<text class="opcity">货物信息：</text>
+						<view class="flex-1 t-right">{{item.amount||''}} 件 {{item.weight}} kg {{item.volume}} m³</view>
+					</view>
+				</view>
+				</col>
+			</row>
+			<row>
+				<col span="12">
+				<view class="placeorder placeorder-load">
+					<view class="placeorder-flex">
+						<text class="opcity text-send">寄：</text>
+						<view class="flex-1 t-left">{{fn.joinAddr(item,'send')}}</view>
+					</view>
+				</view>
+				</col>
+			</row>
+			<row>
+				<col span="12" class="solid-bottom">
+				<view class="placeorder placeorder-load">
+					<view class="placeorder-flex">
+						<text class="opcity text-receive">收：</text>
+						<view class="flex-1 t-left">{{fn.joinAddr(item,'receive')}}</view>
+					</view>
+				</view>
+				</col>
+			</row>
+		</view>
+	</block>
+</view>
+
+<view style="height:2px"></view>
+<view class='bottom-btn'>
+	<button class='btn bg-blue m-p' bindtap="submitQuote">我要报价</button>
+</view>
+
+<popup title="我的报价" visible="{{ showPop }}" bind:close="onClosePopup">
+	<view class="content">
+		<view class="">报价：</view>
+		<input  focus="{{focus}}" bindinput="inputQuote" id="quoteMoney" value="{{quoteMoney}}" type="digit" class="pop-input solid-bottom" placeholder-class="pop-placeorder" placeholder="请填写报价金额" />
+	</view>
+	<view class="content">
+		<view class="">备注：</view>
+		<input bindinput="inputQuote" id="quoteRemark" value="{{quoteRemark}}" class="pop-input solid-bottom" placeholder-class="pop-placeorder" placeholder="请输入备注" />
+	</view>
+	<view class="btn-view">
+		<button bindtap="confirmBtn" class="confirm-btn btn bg-blue">确定</button>
+	</view>
+</popup>
+
+
+<wxs module="fn">
+	module.exports = {
+		joinAddr: function(item, type) {
+			if (type == 'send') {
+				return [item.send_district, item.send_town, item.send_street_no].join('')
+			} else {
+				return [item.receive_district, item.receive_town, item.receive_street_no].join('')
+			}
+
+		}
+	};
+</wxs>

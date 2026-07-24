@@ -1,0 +1,74 @@
+<view class="search-view">
+  <view class="father-panel">
+    <search-bar label="单号" showLabel="{{false}}" labelName="value" bind:change="searchCode" />
+  </view>
+  <view class="choose-all {{params.query_tag?'query-tag':''}}" bindtap="paramsChoose">
+    <icon type="i-filter" size="34"></icon>
+    <text>筛选</text>
+  </view>
+</view>
+
+<view class="margin-bottom" wx:if="{{filterlist.length}}">
+  <checkbox-group name="order_ids" bindchange="checkboxChange">
+    <block wx:for="{{filterlist}}" wx:key wx:for-item="item">
+      <view class="content">
+        <view class="content-top solid-bottom flex align-center">
+          <view class="flex-1">
+            <view class="status start-end">
+              <view class="value">
+                <text class="text-blue">{{item.send_site||item.send_city||item.send_district||'无'}}</text>
+                <text> - </text>
+                <text class="text-red">{{item.receive_site||item.receive_city||item.receive_district||'无'}} </text>
+              </view>
+            </view>
+            <text class="order-code text-gray" selectable>订单号：{{item.order_code||item.code}}</text>
+            <text wx:if="{{item.tcode}}" class="order-code text-gray block" selectable>运单号：{{item.tcode}}</text>
+          </view>
+          <checkbox class="fade" color="#5c96ec" checked="{{item.checked}}" value="{{item.id}}" />
+        </view>
+        <view class="content-middle solid-bottom" data-code="{{item.code}}" data-domain="{{item.domain}}" data-id="{{item.id}}" catchtap="goOrderRoute">
+          <view class="flex align-center" wx:for="{{['send','receive']}}" wx:for-item="addr" wx:if="{{item[addr+'_addr']}}" wx:key>
+            <image mode="widthFix" class="images" src="../../../../images/{{addr}}.png"></image>
+            <view class="flex-1 solid-left">{{item[addr+'_addr']}}</view>
+          </view>
+        </view>
+
+        <view class="content-foot flex align-center">
+
+          <view class="status">
+            <view class="title t-f26 {{item.real_lc_name?'text-black':''}}">{{item.real_lc_name?'【 '+item.real_lc_name+' 】':'暂无承运商'}}</view>
+            <view class="text-orange value">{{item.next_lc_status||''}}</view>
+          </view>
+
+
+          <view class="status solid-left solid-right">
+            <view class="title">货物信息</view>
+            <view class="value">
+              <text wx:if="{{item.amount>0}}">{{item.amount}}件 </text>
+              <text wx:if="{{item.weight>0}}">{{item.weight}}kg </text>
+              <text wx:if="{{item.volume>0}}">{{item.volume}}m³ </text>
+            </view>
+          </view>
+
+          <view class="status">
+            <view class="title">客户</view>
+            <view class="value">{{item.customer_name||''}}</view>
+            <view wx:if="{{item.ccode}}" class="value text-grey">{{item.ccode||''}}</view>
+          </view>
+
+
+        </view>
+      </view>
+    </block>
+  </checkbox-group>
+</view>
+
+<view wx:else class="text-gray nothing">
+  暂无订单
+</view>
+<view style="height:2px" />
+
+<view class="bottom-btn">
+  <button bindtap="{{chooseAllTag?'cancelChooseAllOrders':'chooseAllOrders'}}" class='btn bg-btn2 choose-all-order'>{{chooseAllTag?'取消全选':'全选'}}</button>
+  <button bindtap="goChooseLogistic" class='btn bg-btn2 flex-2'>推送订单</button>
+</view>

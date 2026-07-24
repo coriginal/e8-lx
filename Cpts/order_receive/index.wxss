@@ -1,0 +1,38 @@
+.panel {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  line-height: 64rpx;
+}
+
+.receive-title {
+  white-space: nowrap;
+}
+
+.same {
+  border: 1px solid var(--cyan);
+  color: var(--cyan);
+  padding: 0 10rpx;
+  font-size: 26rpx;
+  white-space: nowrap;
+}
+
+.img-view {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.img {
+  width: 148rpx;
+  height: 148rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #eee;
+  border-radius: 10rpx;
+  margin: 20rpx 20rpx 0 0;
+}
+
+.receive-bottom-btn {
+  margin-top: 20rpx;
+}

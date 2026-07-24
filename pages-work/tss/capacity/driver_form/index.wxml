@@ -1,0 +1,156 @@
+ <view class="form-container">
+   <van-cell-group>
+     <van-field
+       value="{{formData.plate_num}}"
+       label="车牌号"
+       placeholder="请输入车牌号"
+       required
+       bind:change="onFieldChange"
+       data-field="plate_num"
+     />
+     <van-field
+       value="{{formData.trailer_num}}"
+       label="车挂号"
+       placeholder="请输入车挂号"
+       bind:change="onFieldChange"
+       data-field="trailer_num"
+     />
+     <van-cell
+       title="车型"
+       value="{{formData.truck_type || '请选择车型'}}"
+       is-link
+       required
+       bind:click="openTruckTypePicker"
+     />
+     <van-field
+       value="{{formData.brand}}"
+       label="品牌"
+       placeholder="请输入品牌"
+       bind:change="onFieldChange"
+       data-field="brand"
+     />
+     <van-field
+       value="{{formData.can_load_weight}}"
+       label="额载/公斤"
+       placeholder="请输入额载（公斤）"
+       type="digit"
+       bind:change="onFieldChange"
+       data-field="can_load_weight"
+     />
+     <van-field
+       value="{{formData.can_load_volume}}"
+       label="额载/立方"
+       placeholder="请输入额载（立方）"
+       type="digit"
+       bind:change="onFieldChange"
+       data-field="can_load_volume"
+     />
+     <van-field
+       value="{{formData.driver}}"
+       label="司机"
+       placeholder="请输入司机姓名"
+       required
+       bind:change="onFieldChange"
+       data-field="driver"
+     />
+     <van-field
+       value="{{formData.phone}}"
+       label="司机电话"
+       placeholder="请输入司机电话"
+       type="number"
+       required
+       bind:change="onFieldChange"
+       data-field="phone"
+     />
+     <van-cell
+       title="承运商"
+       value="{{formData.lc_name || '请选择承运商'}}"
+       is-link
+       bind:click="openLcPicker"
+     />
+     <van-cell
+       title="类型"
+       value="{{formData.type || '请选择类型'}}"
+       is-link
+       required
+       bind:click="openTypePicker"
+     />
+     <van-cell
+       title="状态"
+       value="{{formData.status || '请选择状态'}}"
+       is-link
+       bind:click="openStatusPicker"
+     />
+     <van-cell
+       title="定位方式"
+       value="{{formData.position_type_name || '无'}}"
+       is-link
+       bind:click="openPositionTypePicker"
+     />
+     <van-field
+       value="{{formData.device_num}}"
+       label="设备号"
+       placeholder="请输入设备号"
+       bind:change="onFieldChange"
+       data-field="device_num"
+     />
+     <van-field
+       value="{{formData.robot_notify_wxid}}"
+       label="调度通知"
+       placeholder="请输入微信号（多输入逗号分隔）"
+       type="textarea"
+       autosize
+       bind:change="onFieldChange"
+       data-field="robot_notify_wxid"
+     />
+   </van-cell-group>
+ 
+   <view class="submit-btn-wrap">
+     <van-button type="info" block round bind:click="submitForm">保存</van-button>
+   </view>
+ </view>
+ 
+ <van-popup show="{{showTruckTypePicker}}" position="bottom" bind:close="onTruckTypeCancel">
+   <van-picker
+     columns="{{truckTypeColumns}}"
+     show-toolbar
+     bind:confirm="onTruckTypeConfirm"
+     bind:cancel="onTruckTypeCancel"
+   />
+ </van-popup>
+ 
+ <van-popup show="{{showLcPicker}}" position="bottom" bind:close="onLcCancel">
+   <van-picker
+     columns="{{lcColumns}}"
+     show-toolbar
+     bind:confirm="onLcConfirm"
+     bind:cancel="onLcCancel"
+   />
+ </van-popup>
+ 
+ <van-popup show="{{showPositionTypePicker}}" position="bottom" bind:close="onPositionTypeCancel">
+   <van-picker
+     columns="{{positionTypeColumns}}"
+     show-toolbar
+     bind:confirm="onPositionTypeConfirm"
+     bind:cancel="onPositionTypeCancel"
+   />
+ </van-popup>
+ 
+ <van-popup show="{{showStatusPicker}}" position="bottom" bind:close="onStatusCancel">
+   <van-picker
+     columns="{{statusColumns}}"
+     show-toolbar
+     bind:confirm="onStatusConfirm"
+     bind:cancel="onStatusCancel"
+   />
+ </van-popup>
+ 
+ <van-popup show="{{showTypePicker}}" position="bottom" bind:close="onTypeCancel">
+   <van-picker
+     columns="{{typeColumns}}"
+     show-toolbar
+     bind:confirm="onTypeConfirm"
+     bind:cancel="onTypeCancel"
+   />
+ </van-popup>

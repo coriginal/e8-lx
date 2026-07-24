@@ -1,0 +1,710 @@
+{
+    "description": "项目配置文件，详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
+    "setting": {
+        "urlCheck": true,
+        "es6": true,
+        "enhance": true,
+        "postcss": true,
+        "preloadBackgroundData": false,
+        "minified": true,
+        "newFeature": true,
+        "coverView": true,
+        "nodeModules": false,
+        "autoAudits": false,
+        "showShadowRootInWxmlPanel": true,
+        "scopeDataCheck": false,
+        "uglifyFileName": true,
+        "checkInvalidKey": true,
+        "checkSiteMap": true,
+        "uploadWithSourceMap": true,
+        "compileHotReLoad": false,
+        "lazyloadPlaceholderEnable": false,
+        "useMultiFrameRuntime": true,
+        "babelSetting": {
+            "ignore": [],
+            "disablePlugins": [],
+            "outputPath": ""
+        },
+        "enableEngineNative": false,
+        "useIsolateContext": true,
+        "userConfirmedBundleSwitch": false,
+        "packNpmManually": false,
+        "packNpmRelationList": [],
+        "minifyWXSS": true,
+        "disableUseStrict": false,
+        "minifyWXML": true,
+        "showES6CompileOption": false,
+        "useStaticServer": true,
+        "ignoreUploadUnusedFiles": true,
+        "ignoreDevUnusedFiles": false,
+        "condition": false,
+        "useCompilerPlugins": [
+            "sass"
+        ],
+        "compileWorklet": false,
+        "localPlugins": false,
+        "swc": false,
+        "disableSWC": true
+    },
+    "compileType": "miniprogram",
+    "simulatorType": "wechat",
+    "simulatorPluginLibVersion": {
+        "wxext14566970e7e9f62": "2.27.3"
+    },
+    "editorSetting": {
+        "tabIndent": "insertSpaces",
+        "tabSize": 4
+    },
+    "condition": {
+        "plugin": {
+            "list": []
+        },
+        "game": {
+            "list": []
+        },
+        "gamePlugin": {
+            "list": []
+        },
+        "miniprogram": {
+            "list": [
+                {
+                    "id": 0,
+                    "name": "订单列表",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=21",
+                    "scene": null
+                },
+                {
+                    "id": 1,
+                    "name": "pages/redirect-work/index",
+                    "pathName": "pages/redirect-work/index",
+                    "query": "pid=88,recordid=193,id=1,mystatus=wait,type=approval,title=开票申请",
+                    "scene": null
+                },
+                {
+                    "id": 2,
+                    "name": "print",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=27",
+                    "scene": null
+                },
+                {
+                    "id": 3,
+                    "name": "pages-work/tss/capacity/phone_location/index",
+                    "pathName": "pages-work/tss/capacity/phone_location/index",
+                    "query": "task_id=23&task_type=提货",
+                    "scene": null
+                },
+                {
+                    "id": 4,
+                    "name": "打印",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=26&order_id=123",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "公众号镶嵌查单",
+                    "pathName": "pages/homepage/home_gzh/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": 6,
+                    "name": "录单",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=18",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "任务单",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=36",
+                    "scene": null
+                },
+                {
+                    "id": 8,
+                    "name": "运输单分享",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=40&params={\"task_id\":116}",
+                    "scene": 1008
+                },
+                {
+                    "name": "车辆认证",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=95",
+                    "scene": null
+                },
+                {
+                    "id": 10,
+                    "name": "抢单",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=80&params=1231",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "订单详情",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=24",
+                    "scene": null
+                },
+                {
+                    "id": 12,
+                    "name": "qrcode",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=11",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages-order/order/order_print/order_print",
+                    "pathName": "Cpts/order_query_route/order_query_route",
+                    "query": "q=https%3A%2F%2Fe8dev.boudata.com%09&scancode_time=1569748144",
+                    "scene": null
+                },
+                {
+                    "id": 14,
+                    "name": "Cpts/order_query_route/order_query_route",
+                    "pathName": "Cpts/order_query_route/order_query_route",
+                    "query": "q=https%3A%2F%2Fe8dev.boudata.com%3F_queryCode%3D18877884412&scancode_time=1569748221",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "Cpts/order_query_route/order_query_route",
+                    "pathName": "Cpts/order_query_route/order_query_route",
+                    "query": "scene=1%2C2%2C3%2Cos%2C156190929010",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "Cpts/order_query_route/order_query_route",
+                    "pathName": "Cpts/order_query_route/order_query_route",
+                    "query": "q=https%3A%2F%2Fe8dev.boudata.com%3F_queryCode%3D18877884412&scancode_time=1569749042",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "轨迹查询",
+                    "pathName": "pages-order/order/order_routes/order_routes",
+                    "query": "8600000062",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "消息盒子",
+                    "pathName": "pages/homepage/options/index",
+                    "query": "pid=23",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "/cost_flow",
+                    "pathName": "pages-other/sys/cost_flow/cost_flow",
+                    "query": "pid=38",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "arrange",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=38",
+                    "scene": null
+                },
+                {
+                    "id": 21,
+                    "name": "个人信息",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=42",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "quickin",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=45",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages-order/order/order_list/order_list",
+                    "pathName": "pages/homepage/home_gzh/index&qrCode=true",
+                    "query": "q=https%3A%2F%2Ftms.boudata.com%3Fcode%3D8600000001&scancode_time=1572836556",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages-order/order/order_list/order_list",
+                    "pathName": "Cpts/order_query_route/order_query_route",
+                    "query": "q=https%3A%2F%2Ftms.boudata.com%3Fcode%3D8600000001&scancode_time=1572838278",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages-other/sys/qrcode/qrcode",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "scene=D001%2Ccustomer%2C18142024017%2C18",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "kj",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "scene=D001%2Ccustomer%2C18142024017%2C18",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages/login/login",
+                    "pathName": "Cpts/order_query_route/order_query_route",
+                    "query": "scene=1%2C2%2C3%2Cos%2C8600000030",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "Cpts/order_query_route/order_query_route",
+                    "pathName": "Cpts/order_query_route/order_query_route",
+                    "query": "scene=1%2C2%2C3%2Cos%2C8600000030",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages/homepage/index/index",
+                    "pathName": "pages/login/login",
+                    "query": "scene=%2Ccustomer%2CAdmin",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages-other/sys/admin/admin",
+                    "pathName": "pages/login/login",
+                    "query": "scene=%2Ccustomer%2CAdmin",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages-other/sys/admin/admin",
+                    "pathName": "pages/login/login",
+                    "query": "scene=%2Ccustomer%2CAdmin",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages-other/sys/admin/admin",
+                    "pathName": "pages/homepage/homepage",
+                    "query": "domain=&group=customer&belong=Admin",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages-other/sys/admin/admin",
+                    "pathName": "pages/login/login",
+                    "query": "scene=1%2C2%2C3%2C4%2C5%2C6%2C7",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "order_list",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=21",
+                    "scene": null
+                },
+                {
+                    "id": 35,
+                    "name": "qrcode",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=11",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "person_info",
+                    "pathName": "pages-other/sys/person_info/person_info",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": 37,
+                    "name": "pages-other/sys/router_connect_1/router_connect_1",
+                    "pathName": "pages-other/sys/router_connect_1/router_connect_1",
+                    "query": "pid=12",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages/homepage/home_gzh/index",
+                    "pathName": "pages/homepage/home_gzh/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages-order/order/order_list/order_list",
+                    "pathName": "pages/add/add",
+                    "query": "pid=12",
+                    "scene": null
+                },
+                {
+                    "id": 40,
+                    "name": "pages/add/add",
+                    "pathName": "pages/add/add",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": 41,
+                    "name": "pages/homepage/index/index",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "scene=D006%2Ccustomer%2C%2C12%2C55",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages/homepage/index/index",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "scene=D009%2Ccustomer%2C18142024017%2C12",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages-order/order/order_detail/order_detail",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "scene=1%2C2%2C3%2C12",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages/homepage/index/index",
+                    "pathName": "pages/homepage/index/index",
+                    "query": "scene=1%2C2%2C3%2C12",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages/homepage/index/index",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "scene=D009%2Ccustomer%2C%2C12",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages-other/sys/joinE8_1/joinE8_1",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "domain=&group=customer&belong=Admin&qparam=D071,customer,,18",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages/homepage/index/index",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "domain=D071&group=customer&belong=18100271560",
+                    "scene": null
+                },
+                {
+                    "id": 48,
+                    "name": "pages/homepage/index/index",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=18&domain=D007",
+                    "scene": 1035,
+                    "referrerInfo": {
+                        "appId": "wx1f18a0c7e9272b40"
+                    }
+                },
+                {
+                    "id": -1,
+                    "name": "pages/homepage/index/index",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "scene=%2C%2C%2C12%2C41%2C",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages/login/login",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "domain=D006&group=customer&belong=13656679984&qparam=18",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages-work/tss/capacity/truck_choose/index",
+                    "pathName": "pages-work/tss/capacity/truck_choose/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages/login/login",
+                    "pathName": "pages/my/redirect/redirect",
+                    "query": "scene=EFF%2Ccustomer%2C13950133815%2C2",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages/homepage/index/index",
+                    "pathName": "pages/my/redirect/redirect",
+                    "query": "scene=EFF%2Ccustomer%2C13950133815%2C2",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages-order/order/order/order",
+                    "pathName": "pages-order/order/order/order",
+                    "query": "pid=55",
+                    "scene": null
+                },
+                {
+                    "id": 55,
+                    "name": "pages/redirect/redirect",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=55",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages/redirect/redirect",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=56",
+                    "scene": null
+                },
+                {
+                    "id": 57,
+                    "name": "pages/redirect/redirect",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=55",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages-work/tss/capacity/order_params/order_params",
+                    "pathName": "pages-work/tss/capacity/order_params/order_params",
+                    "query": "pid=57",
+                    "scene": null
+                },
+                {
+                    "id": 59,
+                    "name": "pages/redirect/redirect",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=55",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages-order/order/order_warehouse/order_warehouse",
+                    "pathName": "pages-order/order/order_warehouse/order_warehouse",
+                    "query": "pid=55",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages-order/order/order_warehouse/order_warehouse",
+                    "pathName": "pages-order/order/order_warehouse/order_warehouse",
+                    "query": "pid=55",
+                    "scene": null
+                },
+                {
+                    "id": 62,
+                    "name": "pages/redirect/redirect",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=62",
+                    "scene": null
+                },
+                {
+                    "id": 63,
+                    "name": "order_detail",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=26&id=15054&code=8600008176",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "运输单操作",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=60",
+                    "scene": null
+                },
+                {
+                    "id": 65,
+                    "name": "pages/redirect/redirect",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=66",
+                    "scene": null
+                },
+                {
+                    "id": 68,
+                    "name": "pages/homepage/index/index",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "scene=D075%2Ccustomer%2C18913390076",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages/homepage/index/index",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "scene=D006%2Ccustomer%2C13656679984",
+                    "scene": null
+                },
+                {
+                    "id": 68,
+                    "name": "pages/redirect/redirect",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=66",
+                    "scene": 1035,
+                    "referrerInfo": {}
+                },
+                {
+                    "id": -1,
+                    "name": "pages/login/login",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "scene=D020%2Ccustomer%2C13950133815%2C18",
+                    "scene": null
+                },
+                {
+                    "id": 70,
+                    "name": "运输单批量审批",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=75",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "消息中心",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=72",
+                    "scene": null
+                },
+                {
+                    "id": 72,
+                    "name": "费用审批详情",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=71",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "录单成功",
+                    "pathName": "pages-order/order/order_success/order_success",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": 74,
+                    "name": "我的优惠券",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=83",
+                    "scene": null
+                },
+                {
+                    "id": 75,
+                    "name": "我的卡包",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=85",
+                    "scene": null
+                },
+                {
+                    "id": 76,
+                    "name": "pages-other/sys/redpacket/redpacket_list/redpacket_list",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "scene=%2C%2C%2C%2C%2C%2C2",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages-other/sys/redpacket/redpacket_list/redpacket_list",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "scene=%2C%2C13656679984%2C%2C%2C%2C11",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages-order/order/order_print/print_platform/print_platform",
+                    "pathName": "pages-order/order/order_print/print_platform/print_platform",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": 79,
+                    "name": "pages/redirect/redirect",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages/homepage/index/index",
+                    "pathName": "pages/homepage/index/index",
+                    "query": "pid=0&params={code:123}",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages/login/login",
+                    "pathName": "pages/login/login",
+                    "query": "code=work",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages-order/order/order/order",
+                    "pathName": "pages-order/order/order/order",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": 83,
+                    "name": "公众号自定义菜单 - 华航",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "domain_group=HH",
+                    "scene": 1035,
+                    "referrerInfo": {
+                        "appId": "wx7e266656c6c618af"
+                    }
+                },
+                {
+                    "id": 84,
+                    "name": "pages/redirect/redirect",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=1&code=work",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "pages/login/login",
+                    "pathName": "pages/login/login",
+                    "query": "domain=D006",
+                    "scene": null
+                },
+                {
+                    "name": "我的收件",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=92",
+                    "scene": null
+                },
+                {
+                    "name": "车辆上传",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=82&domain=D341",
+                    "scene": null
+                },
+                {
+                    "name": "二维码邀请",
+                    "pathName": "pages/redirect/redirect",
+                    "query": "pid=97",
+                    "scene": null
+                }
+            ]
+        }
+    },
+    "packOptions": {
+        "ignore": [
+            {
+                "value": "flowChart",
+                "type": "folder"
+            }
+        ],
+        "include": []
+    },
+    "appid": "wx373e19c339513a4e",
+    "libVersion": "3.16.1"
+}

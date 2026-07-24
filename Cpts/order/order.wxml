@@ -1,0 +1,367 @@
+<wxs module="fn">
+  module.exports = {
+    contact: function (value) {
+      if (value)
+        return value.join(' ')
+    },
+    deal: function (obj) {
+      if (obj)
+        return {
+          'send': obj.send,
+          'receive': obj.receive
+        }
+    }
+  }
+</wxs>
+
+<dialog id="wux-dialog"></dialog>
+
+<pick-time showPickTime="{{showPickTime}}" bind:change="changePickTime" />
+
+<view class="fade">
+  <!-- D509独立需求 -->
+  <!-- 当客户名称为手机号时需输入名称 -->
+  <view class="bar customer" wx:if="{{showInputCustomer}}">
+    <icon size='30' type='i-people' />
+    <text class='customer-choose'>寄件公司：</text>
+    <view class='choose-view'>
+      <input disabled="{{!isNotCustomerName}}" bindblur="updateCustomerName" value="{{customerName}}" placeholder="请输入公司名称" />
+    </view>
+    <view bind:tap="customerNameChange" class="text-blue" wx:if="{{!isNotCustomerName}}">修改</view>
+  </view>
+
+  <view class="cu-modal {{modalName=='DialogModal'?'show':''}}">
+    <view class="cu-dialog">
+      <view class="modal-bar">
+        <view class="modal-title">公司名称修改</view>
+        <view style="min-width: 100rpx;min-height: 100rpx;margin-right: 0;" class="modal-action" bindtap="hideModal">
+          <text class="cuIcon-close text-red"></text>
+        </view>
+      </view>
+      <view class="padding-xl" style="padding: 30rpx;">
+        <input bindinput="modalCustomerNameInput" style="height: 80rpx;width: 100%;background-color: #f1f1f1;" value="{{modalCustomerName}}" placeholder="请输入公司名称" />
+      </view>
+      <view class="modal-bar">
+        <view class="modal-action">
+          <button class="modal-btn line-green text-green" bindtap="hideModal">取消</button>
+          <button style="margin-left: 30rpx;" class="modal-btn bg-green" bindtap="modalUpdateCustomerName">确定</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 客户选择 -->
+  <view class="bar customer" wx:if="{{showCustomerChoose}}">
+    <icon size='30' type='i-people' />
+    <text class='customer-choose'>客户：</text>
+    <view bindtap="goChooseCustomer" class='choose-view'>
+      <text style='font-size:26rpx;'>{{(orderInfo.customerInfo&&orderInfo.customerInfo.name)||"- 点击此处选择客户 -"}}</text>
+    </view>
+    <!-- <tag color="blue">默认</tag> -->
+    <!-- <button class="btn bg-blue opacity8">产品系列</button> -->
+  </view>
+
+  <!-- 始发地和目的地 -->
+  <view class="bar customer">
+    <icon size='30' type='i-form' bindtap='goChooseAddr' id='send' />
+    <input class="ccode center" placeholder-class='pclass' placeholder="始发地" name='send_site' value='{{orderInfo.send.site}}' bindinput="getSite" data-type="send"></input>
+    <text> — </text>
+    <input class="ccode center" placeholder-class='pclass' placeholder="目的地" name='receive_site' value='{{orderInfo.receive.site}}' bindinput="getSite" data-type="receive"></input>
+    <icon size='30' type='i-form' bindtap='goChooseAddr' id='receive' />
+  </view>
+
+  <!-- 承运商选择 -->
+  <view class="bar customer" wx:if="{{showEffCompany}}">
+    <icon size='30' type='i-deliver' />
+    <text class='customer-choose'>承运商：</text>
+    <view class='choose-view'>
+      <text style='font-size:26rpx;'>{{(orderInfo.customerInfo&&orderInfo.customerInfo.clerk_name)||"- 暂无绑定承运商 无法录单 -"}}</text>
+    </view>
+    <!-- <tag color="blue">默认</tag> -->
+    <!-- <button class="btn bg-blue opacity8">产品系列</button> -->
+  </view>
+
+  <!-- 收寄件信息 -->
+  <view class='content'>
+    <!-- <image mode="heightFix" src="/images/logo.jpg" class="addr-bg"></image> -->
+    <watermark type="image" imgUrl="/images/logo.jpg"></watermark>
+    <view class="addr  {{index=='send'?'solid-bottom':''}}" wx:for="{{fn.deal(orderInfo)}}" wx:key='addr'>
+      <view class='img mr-r'>
+        <image class='left-img' mode='widthFix' src='../../images/{{index}}.png'> </image>
+      </view>
+      <view class='middle' bindtap='goEditAddr' id='{{index}}'>
+        <view class='text-name'>{{fn.contact(item.info)}}</view>
+        <view class='text-addr'>{{fn.contact(item.addr)}}</view>
+      </view>
+      <view class='img mr-l' bindtap='goChooseAddr' id='{{index}}'>
+        <view class='right-addr'>
+          <text>地址簿</text>
+        </view>
+      </view>
+    </view>
+    <view class='content-menu'>
+      <view wx:key wx:for="{{contentMenu}}" class="{{index==1?'solid-left solid-right':''}}">
+        <button class="btn trans" id="{{item.code}}" bindtap="menuClick">
+          <icon color='#5c96ec' type='{{item.icon}}' size='32' />{{item.title}}
+        </button>
+      </view>
+    </view>
+    <view class='content-menu' style="border-top: 1rpx solid whitesmoke;padding: 10rpx 10rpx 20rpx;" wx:if="{{otherMenu.length}}">
+      <view wx:key wx:for="{{otherMenu}}" class="{{index==1?'solid-left solid-right':''}}">
+        <button class="btn trans" id="{{item.code}}" bindtap="otherClick">
+          <icon color='#5c96ec' type='{{item.icon}}' size='32' />{{item.title}}
+        </button>
+      </view>
+    </view>
+  </view>
+  <form bindsubmit='getFormData' report-submit="true">
+    <!-- 单号填写 -->
+    <view class='cargo-info'>
+      <view class="input-panel solid-bottom" wx:if="{{form.code || user.domain == 'D717'}}">
+        <view class="trans-mode" wx:if="{{!user.isCustomer}}" bindtap="chooseTransMode">{{form.trans_mode}}</view>
+        <!-- <view  class='title'>单号</view> -->
+        <input disabled="{{user.domain != 'D717'}}" class="t-center" placeholder-class='pclass' placeholder="请填写单号（至少4位）可不填" name='code' value='{{form.code}}'></input>
+      </view>
+
+      <!-- <view class="input-panel solid-bottom" wx:elif="{{form.code}}">
+                <view class="trans-mode" wx:if="{{!user.isCustomer}}" bindtap="chooseTransMode">{{form.trans_mode}}</view>
+                <view  class='title'>单号</view>
+                <input disabled class="t-center" placeholder-class='pclass' placeholder="请填写单号（至少4位）可不填" name='code' value='{{form.code}}'></input>
+            </view> -->
+
+      <view class="input-panel solid-bottom" wx:elif="{{form.ccode || !user.isCustomer || customerOrderCode}}">
+        <view class="trans-mode" wx:if="{{!user.isCustomer || user.domain=='D047' || user.domain=='D242' || user.domain == 'D1028'}}" bindtap="chooseTransMode">{{form.trans_mode}}</view>
+
+
+        <input disabled="{{form.ccode}}" class="t-center" placeholder-class='pclass' placeholder="请填写单号（至少4位）可不填" name='ccode' value='{{form.ccode}}'></input>
+        <view wx:if="{{!form.ccode}}" class='scan' bindtap="doScan">
+          <icon type='i-scan' size='34'></icon>
+        </view>
+      </view>
+      <view class="input-panel solid-bottom" wx:elif="{{user.domain=='D063' || user.domain == 'D1034'}}">
+        业务类型
+        <view class="trans-mode" bindtap="chooseTransMode">{{form.trans_mode}}</view>
+        <!-- <input disabled class="t-center" placeholder-class='pclass' placeholder="请填写单号（至少4位）可不填" name='ccode' value='{{form.ccode}}'></input>
+                <view wx:if="{{!form.ccode}}" class='scan' bindtap="doScan">
+                    <icon type='i-scan' size='34'></icon>
+                </view> -->
+      </view>
+      <!-- || customerOrderCode -->
+
+      <!-- 上门取货&付款方式 -->
+      <view class='input-panel solid-bottom'>
+        <view class='flex flex-1'>
+          <view class="flex no-padding if-visit">
+            <view class='flex-1'>上门取件</view>
+            <switch bindchange="switchChange" class='switch blue  switch-pick' name='if_visit' checked="{{form.if_visit}}"></switch>
+          </view>
+          <!-- <view class="flex flex-1 radio-group">
+						<view class="settle-type-view" bindtap="showSettleTypeChoose" hover-class="default">
+							<text class="settle-type-view-text">{{orderSettleType}}</text>
+							<icon color="gray" type="i-playfill" size="32"></icon>
+						</view>
+						<view>
+							<input bindinput="settleMoneyInput" class="money-input" placeholder="金额"></input>
+						</view>
+					</view> -->
+          <!-- <radio-group name='settle_type' class="flex flex-1 radio-group" bindchange="settleTypeChoose">
+						<view wx:for="{{orderInfo.settleTypeList}}" wx:key>
+							<radio color="#5c96ec" checked="{{item.checked}}" value="{{item.title}}" />{{item.title}}
+						</view>
+					</radio-group> -->
+          <view class="flex flex-1">
+            <view class="flex flex-1 flex-center" bindtap="chooseSettleType">
+              <text class="mr-10">{{settle_type}}</text>
+              <icon size="24" type="i-unfold " />
+            </view>
+            <view class="flex flex-1 flex-center" bindtap="chooseServer">
+              <text class="mr-10">{{service_mode}}</text>
+              <icon size="24" type="i-unfold " />
+            </view>
+            <view wx:if="{{lineList}}" class="flex flex-1 flex-center" bindtap="chooseLine">
+              <text class="mr-10">{{current_line||"点击选择线路"}}</text>
+              <icon size="24" type="i-unfold " />
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 现付金额 / 到付金额填写 -->
+      <view wx:if="{{settle_type == '到付' }}" class="input-panel solid-bottom fade">
+        <view class='title'>{{settle_type}}金额</view>
+        <input type="digit" value="{{arrive_pay}}" bindinput="settleMoneyInput" class="t-left t-f24" />
+      </view>
+
+
+      <!-- 整车信息填写 -->
+      <view wx:if="{{form.if_wt}}" class="input-panel solid-bottom fade" bindtap="goTransModeInfo">
+        <view class='title'>{{form.trans_mode}}信息</view>
+        <input class="t-right t-f24" placeholder-class='t-f24' placeholder="编辑{{form.trans_mode}}信息" disabled value="{{orderInfo[form.trans_mode].message}}"></input>
+        <view class='scan'>
+          <icon color="grey" type='i-right' size='34'></icon>
+        </view>
+      </view>
+
+      <!-- 取件时间 -->
+      <view wx:if="{{showPickTimeRow}}" class="input-panel solid-bottom" bindtap="getPickTimes">
+        <view class='title'>预约取件时间
+        </view>
+        <input class="t-right t-f24" placeholder-class='t-f24' placeholder="选择时间" disabled value="{{orderInfo.scheduled_pick_time}}"></input>
+        <view class='scan'>
+          <icon color="grey" type='i-right' size='34'></icon>
+        </view>
+      </view>
+
+      <!-- <view wx:if="{{form.if_wt()}}" class="input-panel solid-bottom" bindtap="getPickTimes">
+                <view class='title'>
+                    车型
+                </view>
+                <input class="t-right t-f24" placeholder-class='t-f24' placeholder="选择车型" disabled value="{{orderInfo.scheduled_pick_time}}"></input>
+                <view class='scan'>
+                    <icon color="grey" type='i-right' size='34'></icon>
+                </view>
+            </view> -->
+
+      <view class="input-panel solid-bottom">
+        <view class='title'>业务员</view>
+        <input class="t-right t-f24" disabled="{{user.isCustomer}}" name='clerk' placeholder="请填写业务员（选填）" value='{{orderInfo.customerInfo.clerk}}' />
+        <view class='scan' bindtap="{{user.isCustomer||'clerkChoose'}}">
+          <icon color="grey" type='i-people' size='34'></icon>
+        </view>
+      </view>
+
+      <!-- 货物信息 -->
+      <view class="input-panel solid-bottom" wx:for="{{cargoLength}}">
+        <view class='title'>货物信息{{cargoLength==1 ? "" : index+1}}
+          <!-- <tag color="red">必填</tag> -->
+        </view>
+        <input data-index="{{index}}" class="t-right t-f24" placeholder-class='t-f24' placeholder="点击填写货物信息" disabled value="{{orderId?orderInfo.cargo.message:orderInfo.cargo[index].message}}" bindtap="goCargoInfo"></input>
+        <view class='scan'>
+          <icon wx:if="{{!orderId && allow_split_order}}" data-index="{{index}}" bindtap="{{index==0?'addCargo':'delCargo'}}" color="grey" type="{{index==0?'i-roundadd':'i-delete'}}" size='34'></icon>
+          <icon wx:if="{{orderId || !allow_split_order}}" color="grey" type='i-right' size='34'></icon>
+        </view>
+      </view>
+      <!-- <button bindtap="test">获取订单信息</button> -->
+      <!-- 增值服务 -->
+      <view class="input-panel solid-bottom" bindtap="goFeeInfo">
+        <view class='title'>更多服务</view>
+        <input class="t-right t-f24" placeholder-class='t-f24' placeholder="{{addedService.length?'存在必填项':'选填'}}" disabled value="{{orderInfo.fee._fees}}"></input>
+        <view class='scan'>
+          <icon color="grey" type='i-right' size='34'></icon>
+        </view>
+      </view>
+      <!-- 其他 -->
+      <view wx:if="{{recordsList}}" class="input-panel solid-bottom" bindtap="goOtherInfo">
+        <view class='title'>其他</view>
+        <input class="t-right t-f24" placeholder-class='t-f24' placeholder="点击填写其他信息" disabled value="{{curRecords}}"></input>
+        <view class='scan'>
+          <icon color="grey" type='i-right' size='34'></icon>
+        </view>
+      </view>
+      <page-container bind:afterleave="closePageContainer" show="{{showPageContainer}}" position="{{showOther ? 'center' :'bottom'}}">
+        <view wx:if="{{showOther}}">
+          <view class="otherContainer" wx:for="{{recordsList}}">
+            <view>{{item.label}}:</view>
+            <input data-label="{{item.label}}" id="{{item.code}}" bindinput="recordInput" class="t-left t-f24" name='{{item.code}}' value='{{form.recordsList["udf"+(index+1)]}}' />
+          </view>
+          <view class="recordsBtn">
+            <block>
+              <button style="width:95%;position:absolute;bottom: 0;" class="btn bg-blue order-confirm" bindtap="setRecords">
+                确定
+              </button>
+            </block>
+          </view>
+        </view>
+        <view class="clerk-box" wx:if="{{showClerkChoose}}">
+          <view class="bar-1">
+            <view class='search'>
+              <view class='search-form'>
+                <icon size='36' type='i-search' />
+                <input bindconfirm="searchCode" bindinput="bindKeyInput" placeholder="业务员过滤" type="text" />
+              </view>
+            </view>
+          </view>
+          <view class="item-box">
+            <view bind:tap="selectedClerk" data-item="{{item}}" class="clerk-item" wx:for="{{filterClerkList}}" wx:key=":this">{{item.userName}}</view>
+          </view>
+        </view>
+      </page-container>
+      <!-- 订单备注 -->
+      <!--如果想隐藏没有值的自定义字段-->
+      <!--wx:if="{{form.recordsList?form.recordsList['udf'+(index+1)]?true:false:true}}"-->
+      <!-- <view class="input-panel solid-bottom" wx:for="{{recordsList}}">
+				<view class='title'>{{item.label}}</view>
+				<input bindinput="recordInput" class="t-left t-f24" name='{{item.code}}' value='{{form.recordsList["udf"+(index+1)]}}' />
+			</view> -->
+      <view class="input-panel solid-bottom">
+        <view class='title'>备注</view>
+        <input bindinput="remarkInput" class="t-left t-f24" name='remark' value='{{form.remark}}' />
+      </view>
+
+      <!-- 服务协议 -->
+      <view class="" wx:if="{{!!companyInfo.order_agreement}}">
+        <checkbox-group name="agreement" bindchange="onAgreementChange">
+          <label for="xieyi" class="checkbox-label">
+            <checkbox value="xieyi" checked="{{agreement}}" class="checkbox" id="xieyi" />
+            <view>
+              <text>我已同意</text>
+              <text class="xieyi" bindtap="onHandlePdf">《服务协议》</text>
+            </view>
+          </label>
+        </checkbox-group>
+      </view>
+
+      <!-- 确认录单 -->
+      <view class="confirm-view">
+        <block wx:if="{{!showCustomerChoose || isCustomer}}">
+          <button disabled="{{orderDisabled}}" form-type='submit' class="btn bg-blue order-confirm">
+            <icon wx:if="{{orderDisabled}}" type="i-loading2 i-spin" size="36"></icon>
+            {{orderId?'确定修改':'确定录单'}}
+          </button>
+        </block>
+        <block wx:else>
+          <button form-type='submit' class="btn bg-blue order-confirm">
+            下一步
+          </button>
+        </block>
+      </view>
+    </view>
+  </form>
+</view>
+<popup position="bottom" visible="{{ showPopup }}" bind:close="onClosePopup">
+  <cell-group title="请选择业务类型">
+    <block wx:for="{{transModeList}}" wx:key>
+      <cell hover-class="default" bind:click="popupClick" data-id="{{item.id}}" data-name="{{item.name}}" data-wt="{{item.if_wt}}" title="{{item.name}}"></cell>
+    </block>
+  </cell-group>
+</popup>
+
+<popup visible="{{ chooseSettleTypePop }}" bind:close="onClosePopup">
+  <cell-group title="请选择付款方式">
+    <cell hover-class="default" bind:click="serverPopHandle" id="settle_type" data-type="现付" title="现付"></cell>
+    <cell hover-class="default" bind:click="serverPopHandle" id="settle_type" data-type="月结" title="月结"></cell>
+    <cell hover-class="default" bind:click="serverPopHandle" id="settle_type" data-type="到付" title="到付"></cell>
+    <cell hover-class="default" bind:click="serverPopHandle" id="settle_type" data-type="合约欠款" title="合约欠款"></cell>
+  </cell-group>
+</popup>
+
+<popup visible="{{ chooseServerPop }}" bind:close="onClosePopup">
+  <cell-group title="请选择服务方式">
+    <cell hover-class="default" bind:click="serverPopHandle" id="service_mode" data-type="派送" title="派送"></cell>
+    <cell hover-class="default" bind:click="serverPopHandle" id="service_mode" data-type="自提" title="自提"></cell>
+  </cell-group>
+</popup>
+<popup visible="{{ chooseLinePop }}" bind:close="onClosePopup">
+  <cell-group title="请选择线路">
+    <view style="max-height: 500rpx;overflow: auto;">
+      <cell wx:for="{{lineList}}" hover-class="default" bind:click="linePopHandle" id="line" data-line_id="{{item.id}}" data-name="{{item.name}}" title="{{item.name}}"></cell>
+    </view>
+  </cell-group>
+</popup>
+<!-- <popup visible="{{ showClerkChoose }}" bind:close="onClosePopup">
+    <cell-group title="请选择业务员">
+        <view style="max-height: 500rpx;overflow: auto;">
+            <cell wx:for="{{clerkList}}" hover-class="default" bind:click="linePopHandle" id="line" data-line_id="{{item.id}}" data-name="{{item.userName}}" title="{{item.userName}}"></cell>
+        </view>
+    </cell-group>
+</popup> -->

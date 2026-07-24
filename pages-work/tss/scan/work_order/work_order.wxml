@@ -1,0 +1,57 @@
+<view class="wrap">
+<form bindsubmit="formSubmit">
+
+  <view class="top flex">
+    <text class="task-list" bindtap="openList">列表</text>
+    <field name="task"  placeholder="任务单号" value="{{task.code}}"  bindchange="getValue"></field>
+    <icon type="i-search" color="green" size="50" class="task-icon" bindtap="queryTicon" hidden="{{!inputTask}}"></icon>
+    <icon type="i-scan" size="50" class="task-icon" bindtap="scanTask"></icon>
+  </view>
+  <view class="head flex">
+    <view class="num"> 
+      <text class="font text-green" bindtap="showScand" data-field="scand">{{scandOrder.length}}</text><text>/{{totalOrder.length}}</text>
+      <view>扫描进度</view>
+    </view>
+    <view class="num" bindtap="showScand" data-field="error"> 
+      <view class="font text-red">{{errorScan.length}}</view>
+      <view>异常扫描</view>
+    </view>
+  </view>
+  <scroll-view scroll-y="true" style="height: 800rpx;" class="body">
+    <view class="order title">
+      <view class="one">子单号</view>
+      <view class="three">库位</view>
+      <view class="four">问题件</view>
+    </view>
+    <view class="order text-{{color}}"  wx:for="{{showScan}}" wx:key=''>
+      <view class="one">{{item.code||item.scan_code}}</view>
+      <view class="three">{{item.end_location_name||''}}</view>
+      <icon type="i-warn" class="four" color="{{item.ifRegit?'red':'grey'}}"  bindtap="abnormalReport" data-code="{{item.scan_code||item.code}}" data-index="{{index}}" size="40" data-regit="{{item.ifRegit}}"></icon>
+    </view>
+    <view hidden="{{isDefault}}"  bindtap="showScand" data-field="default" class="backdefault">返回</view>
+  </scroll-view>
+
+  <view class="order footer">
+    <view class="thumb" wx:for="{{ btnScan }}" wx:key='' bindtap="{{item.bindtap}}">
+      <image src="{{'../../../../images/'+ item.img}}"></image>
+      <view>{{item.name}}</view>
+    </view>
+  </view>
+
+</form>
+</view>
+
+<modal title="问题件登记" show="{{showModal}}" height='auto'  bindconfirm='modalConfirm' bindcancel='modalCancel' showModal>
+  <view class="modal-cancel" hidden="{{!abnormal.length}}">
+    <view class="modal-cancel">
+      <view class="abnormal" wx:for="{{abnormal}}" wx:key="" data-text="{{item.text}}" bindtap="abnormalSelect" style="{{item.text == abSelect.content?'color:red;boder:red':'color:grey;boder:grey'}}">{{item.text}}</view>
+    </view>
+    <attach recordCode="{{abRecordId}}" bindaddattach="addProof" list="{{_thumbURLS}}" binddelattach="delattach" scrollx="true" itemId="{{abSelect.itemId}}" />
+  </view>
+</modal>
+
+<modal title="任务单列表" show="{{showModalTask}}" height='auto'  bindconfirm='modalConfirmTask' bindcancel='modalCancel' showModal>
+  <view class="modal-cancel" hidden="{{!allTask.length}}" >
+    <view class="taskSelect" wx:for="{{allTask}}" wx:key="" data-text="{{item}}" bindtap="taskSelect" style="{{item.code == task.code?'color:red;boder:red':'color:grey;boder:grey'}}">{{item.code}}-{{item.driver}}</view>
+  </view>
+</modal>

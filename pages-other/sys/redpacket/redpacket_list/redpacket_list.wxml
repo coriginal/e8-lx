@@ -1,0 +1,64 @@
+<tabs class="solid-bottom" controlled theme="positive" current="{{ tab_current }}" bindchange="onChangeTabs">
+	<tab key="{{item.code}}" wx:for="{{tabs}}" wx:key="{{index}}">
+		<badge count="{{list[item.code].data.total}}">{{item.title}}</badge>
+	</tab>
+</tabs>
+
+<view class="redpacket">
+	<block wx:for="{{list[tab_current].data.rows}}" wx:key="{{index}}">
+		<view class="list-panel">
+			<view class="title solid-bottom">
+				<text class="t-fw">{{item.name}}</text>
+				<view wx:if="{{tab_current == 'using'}}" class="show-pic" hover-class="default" bindtap="showPic" data-item="{{item}}">
+					<text class="panel-margin-lr">图片分享</text>
+					<icon size="36" type="i-pic"></icon>
+				</view>
+			</view>
+			<view class="content">
+				<row>
+					<col wx:if="{{item.money}}" span="6">
+					<view class="list-blocks">
+						<text class="left-title">金额：</text>
+						<text>{{item.money||''}}</text>
+					</view>
+					</col>
+					<col wx:if="{{item.amount}}" span="6">
+					<view class="list-blocks">
+						<text class="left-title">数量：</text>
+						<text>{{item.amount||''}}</text>
+					</view>
+					</col>
+					<col span="12">
+					<view wx:if="{{item.requirement}}" class="list-blocks">
+						<text class="left-title">使用条件：</text>
+						<text>{{item.requirement||''}}</text>
+					</view>
+					</col>
+					<col span="12" wx:if="{{item.content}}">
+					<view class="list-blocks">
+						<text class="left-title">内容：</text>
+						<text>{{item.content||''}}</text>
+					</view>
+					</col>
+				</row>
+			</view>
+			<view wx:if="{{item.phone}}" class="footer">
+				<text>电话：{{item.phone}}</text>
+				<!-- <text>{{item.createtime}}</text> -->
+			</view>
+			<view id="{{item.id}}" bindtap="getRedpacketDetail" class="footer-btn">查看领取记录</view>
+		</view>
+	</block>
+</view>
+
+<view style="height:1px"></view>
+<view class="bottom-btn" bindtap="createRedpacket">
+	<button class="btn bg-blue  m-p">优惠券制作</button>
+</view>
+
+
+<canvasdrawer painting="{{painting}}" class="canvasdrawer" bind:getImage="eventGetImage" />
+
+<landscap visible="{{ visible }}" bind:close="onClosePop">
+	<image show-menu-by-longpress class="landscap" src="{{imgUrl}}" />
+</landscap>

@@ -1,0 +1,48 @@
+<view class="bar">
+	<view class='search'>
+		<view class='search-form'>
+			<icon size='36' type='i-search' />
+			<input bindconfirm="searchCode" bindinput="bindKeyInput" placeholder="关键词过滤（姓名、电话）" type="text" />
+		</view>
+	</view>
+</view>
+
+<view class='customer_list fade' wx:if="{{filterData.length}}">
+	<view class='customer_panel' wx:for="{{filterData}}" wx:key id="{{index}}" catchtap='chooseCustomer' hover-class="hover-round">
+		<view class='head'>
+			<view class="flex-1">
+				<text wx:if="{{item.name}}" class='name'>{{item.name||''}}</text>
+				<text wx:if="{{item.phone}}" class="phone">{{fn.secretPhone(item.phone||'',4,-4)}}</text>
+			</view>
+		</view>
+		<view class='content' wx:if="{{item.address}}">
+			<text class='addr'> {{item.address||''}} </text>
+		</view>
+	</view>
+</view>
+
+<wxs module="fn">
+	module.exports = {
+		remarkSplit: function(string) {
+			if (string == null) return
+			var a = getRegExp(",|，", "g");
+			var array = string.split(a).filter(function(x) {
+				return x
+			})
+			return array
+		},
+		remarkColor: function(index) {
+			return ['orange', 'gold', 'volcano', 'geekblue', 'blue'][index]
+		},
+		secretPhone: function(str, beginLen, endLen) {
+			if (str) {
+				var reg = getRegExp("[\s\S]", "g");
+				var len = str.length;
+				var firstStr = str.slice(0, beginLen);
+				var lastStr = str.slice(endLen);
+				var middleStr = str.substring(beginLen, len - Math.abs(endLen)).replace(reg, '*');
+				return firstStr + middleStr + lastStr;;
+			}
+		}
+	}
+</wxs>

@@ -1,0 +1,9 @@
+@import '../customer_list/customer_list.wxss';
+
+
+.customer_list{
+  margin: 112rpx 0 0 0 ;
+}
+.customer_panel{
+  padding: 10rpx 40rpx;
+}

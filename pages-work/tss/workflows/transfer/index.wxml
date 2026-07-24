@@ -1,0 +1,10 @@
+<nav-bar title="转审"/>
+<form bindsubmit="submit">
+  <view class="header required">转审人</view>
+  <addperson list="{{ list }}" hidden="{{ hidden }}" type="trans" bindaddperson="addPerson" binddelperson="delPerson"/>
+  <view class="header">转审意见</view>
+  <view class="tranopinion">
+    <textarea class="opinion" placeholder="请填写转审意见" name="opinion"></textarea>
+  </view>
+  <button class="submit-btn" type="primary" style="background-color:{{color}}" formType="submit">提交</button>
+</form>

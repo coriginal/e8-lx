@@ -1,0 +1,87 @@
+<view class="coin_bg">
+    <view>-总成本-</view>
+    <view>
+        <view bindtap="changeDate" id="last">
+            <icon style="transform: rotate(180deg);" color="white" type='i-right' size='32'></icon>上个月
+        </view>
+        <view>￥<text style="font-size: 50rpx;">{{sumInCome}}</text></view>
+        <view bindtap="changeDate" id="next">下个月<icon color="white" type='i-right' size='32'></icon>
+        </view>
+    </view>
+    <view>{{datefrom}} - {{dateto}}</view>
+    <view class="customer">
+        <view>
+            客户归属:{{customerList||"无"}}
+        </view>
+    </view>
+</view>
+<view class="box">
+    <view>
+        <view>
+            <view class="point" style="background: blue;"></view>
+            <text>{{customerOrderNum||(dataList_cpy.length||0)}}</text>
+        </view>
+        <view>总单量(单)</view>
+    </view>
+    <view>
+        <view>
+            <view class="point" style="background: orange;"></view>
+            <text>{{avgOrderCost||0}}</text>
+        </view>
+        <view>平均每单成本(元)</view>
+    </view>
+    <view>
+        <view>
+            <view class="point" style="background: yellow;"></view>
+            <text>{{higherCost||0}}</text>
+        </view>
+        <view>一单最高成本(元)</view>
+    </view>
+</view>
+<view class="fbox" hidden="{{!dataList.length}}">
+    <view class="filterBox" wx:if="{{customerArr.length!=0}}">
+        <view wx:if="{{(customerChecked[index] || customerChecked[0]==1)&&index!=0}}" class="filterItem" data-index="{{index}}" wx:for="{{customerArr}}">
+            {{item}}
+        </view>
+    </view>
+    <view class="filterLabel" bindtap="openFilter">
+        <image src="../../images/筛选.png"></image>
+        筛选
+    </view>
+</view>
+<view class="coin_search">
+    <icon color="gray" type='i-search' size='40'></icon>
+    <input value="{{orderCode}}" type="text" placeholder="搜索（运单号）" bindinput="searchOrder" />
+</view>
+<view class="coin_order_list">
+    <view data-index="{{index}}" bindtap="openDetail" class="coin_order_item" wx:for="{{dataList}}">
+        <view class="title">
+            <view style="display: flex;align-items: center;">
+                <view class="point" style="background: red;"></view>{{item[0].code}}
+            </view>
+            <view>成本：{{item[0].sum_fee}}元</view>
+            <!-- <view>均利：80元/kg</view> -->
+        </view>
+    </view>
+</view>
+<page-container show="{{pageContainerShow}}" round="true" bind:beforeenter="backUpFilter" bind:clickoverlay="backFilter">
+    <view class="detailBox" wx:if="{{false}}" wx:if="{{!mode}}">
+        <view class="detailTop">
+            <image src="../../images/订单.png"></image>
+            <text>{{curOrderDetail[0].code}}</text>
+        </view>
+        <view class="detailBody">
+            <view>客户：{{curOrderDetail[0].customer_name}}</view>
+            <!-- <view>线路：浙江->云南</view> -->
+            <view wx:for="{{curOrderDetail}}">{{item.name}}：{{item.fee}}元</view>
+        </view>
+    </view>
+    <view class="pcFilter" wx:if="{{mode}}">
+        <view>
+            <view class="pcFilter_item" style="{{customerChecked[index]&&'background: #188df0;font-weight: bold;'}}" data-index="{{index}}" wx:for="{{customerArr}}" bindtap="chooseCustomer">
+                {{item}}
+            </view>
+        </view>
+        <button bindtap="confirmFilter">确定</button>
+    </view>
+</page-container>

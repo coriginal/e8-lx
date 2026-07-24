@@ -1,0 +1,50 @@
+<!--pages-order/account/account_home/index.wxml-->
+<view>
+    <view class="cu-list menu">
+        <view  bind:tap="openWareHouseList" class="cu-item flex" style="justify-content: center;">
+            <!-- <view class="content">
+                <text class="cuIcon-homefill text-gray"></text>
+                <text class="text-grey">当前仓库</text>
+            </view>
+            <view class="action" bind:tap="openWareHouseList">
+                <text>{{wareHouseList[currentWareHouseIndex].name}}</text>
+            </view> -->
+            <view class="text-blue">
+                {{wareHouseList[currentWareHouseIndex].name}}
+            </view>
+        </view>
+    </view>
+    <view class="list">
+        <view class="list-box" wx:for="{{ownerList}}" wx:key>
+            <view class="flex justify-between top">
+                <view>{{item.name}}</view>
+                <view>{{item.type}}</view>
+            </view>
+            <view class="_content">
+                <view>
+                    <view class="yue">余额：{{item.sku_ios[0].endqty||''}}</view>
+                    <view class="zzh">子账户：{{item.c_account}}</view>
+                </view>
+                <view class="lsmx" data-wh_id="{{item.warehouse_id}}" data-location_id="{{item.sku_ios[0].location_id}}" data-owner_id="{{item.id}}" bind:tap="toDetail">流水明细</view>
+            </view>
+            <view class="footer flex">
+                <view class="text-green" style="margin-right: 20rpx;">流入：{{item.sku_ios[0].inqty||''}}</view>
+                <view class="text-red">流出：{{item.sku_ios[0].outqty || ''}}</view>
+            </view> 
+        </view>
+    </view>
+    <view class="cu-modal {{modalName=='RadioModal'?'show':''}}" bindtap="hideModal">
+        <view class="cu-dialog" catchtap>
+            <radio-group class="block" bindchange="wareHouseChange">
+                <view class="cu-list menu text-left" style="height: 60vh;overflow: auto;">
+                    <view class="cu-item" wx:for="{{wareHouseList}}" wx:key>
+                        <label class="flex justify-between align-center flex-sub">
+                            <view class="flex-sub">{{item.name}}</view>
+                            <radio checked="{{currentWareHouseIndex==index}}" value="{{index}}" class="round"></radio>
+                        </label>
+                    </view>
+                </view>
+            </radio-group>
+        </view>
+    </view>
+</view>

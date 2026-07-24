@@ -1,0 +1,20 @@
+<view class="tips-control-background" wx:if="{{ _showTips }}">
+  <view class="tips-control-wrap">
+    <view class="tips-control-img">
+      <image class="tips-control-mainimg" src="../../../images/{{image}}"></image>
+      <image class="tips-control-cancel" src="../../../images/cancel-control.png" catchtap="_clearIconTapped"></image>
+    </view>
+    <view class="tips-area">
+      <view class="tips-area-title">{{title}}</view>
+      <view class="tips-area-content">{{content}}
+</view>
+      <view class="tips-area-icon">
+        <view class="tips-area-icon- {{color}}" wx:if="{{ _showCancel }}"  catchtap="_cancelTips">{{fail}}</view>
+        <view class="tips-area-icon- {{color}}bac" bindtap="_comfrimTips">{{success}}</view>
+      </view>
+      <view class="tips-area-subicon {{color}}text" wx:if="{{ _showSub }}" catchtap="_clearIconTapped">
+        {{ignore}}
+      </view>
+    </view>
+  </view>
+</view>

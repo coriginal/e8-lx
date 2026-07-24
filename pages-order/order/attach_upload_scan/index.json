@@ -1,0 +1,7 @@
+{
+    "navigationBarTitleText": "附件上传",
+    "usingComponents": {
+      "receive":"../../../Cpts/order_receive",
+      "attach": "../../components/attach/index"
+    }
+  }

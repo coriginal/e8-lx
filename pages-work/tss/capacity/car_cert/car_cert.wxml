@@ -1,0 +1,56 @@
+<view class="bg-white top-list">
+		<view>
+			已上传车牌：{{truckPlateNum}}
+		</view>
+	</view>
+<view class="container p-20">
+	<block wx:for="{{imgList}}" wx:key="imgList">
+		<view class="panel flex p-20 bg-white">
+			<view class="flex-1 panel-view" bindtap="onImgUpload" data-name="imgList" data-fn="{{item.fn}}" id="{{index}}">
+				<block wx:if="{{item.url}}">
+					<image class="upload-img" src="{{item.url}}" mode="widthFix" />
+				</block>
+				<block wx:else>
+					<view class="mt-20">
+						<image class="bg-img " mode="widthFix" src="{{item.bgImg}}">
+							<image class="photo-img {{item.className}}" mode="widthFix" src="{{photoImg}}" />
+						</image>
+					</view>
+				</block>
+			</view>
+		</view>
+	</block>
+	<gap />
+	<form bindsubmit="formSubmit">
+		<view class="bg-white">
+			<view class="panel-title ">基本信息</view>
+			<view wx:for="{{fields}}" wx:key="field" class="input-view  ml-30 mr-30 mt-20 pb-10 flex solid-bottom "
+				id="{{index}}" bindtap="handleField">
+				<view class="">{{ item.title }}：</view>
+				<input type="text" class="flex-1 " placeholder="请输入{{item.title}}" name="{{index}}" value="{{item.value}}"
+					bindinput="inputCardText" disabled="{{item.disabled}}" id="{{index}}" />
+			</view>
+			<view style="height:1px;"></view>
+			<view class="bottom-btn">
+				<button form-type="submit" class="btn bg-blue">确定新增</button>
+			</view>
+		</view>
+	</form>
+</view>
+<view style="height:136rpx" />
+
+<popup position="bottom" visible="{{ showTruck }}" bind:close="onClose">
+	<view class="p-20 truck-type">
+		<!-- <row> -->
+		<!-- <col span="4" wx:for="{{carList}}" wx:key="list"> -->
+		<view wx:for="{{carList}}" bindtap="chooseTruck" id="{{index}}" data-name="{{item.name}}"
+			class="{{checkedId === index?'text-blue text-bold solid-blue':''}} panel solid">
+			{{item.name}}
+		</view>
+		<!-- </col> -->
+		<!-- </row> -->
+	</view>
+</popup>
+
+<date-picker visible="{{ showDateChoose }}" controlled mode="date" value="{{ itemId }}" bind:confirm="confirmDateTime"
+	bind:visibleChange="onVisibleChange" />

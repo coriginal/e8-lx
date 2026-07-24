@@ -1,0 +1,150 @@
+page {
+  background-color: white;
+}
+
+.result {
+  padding: 3% 40rpx;
+  text-align: center;
+}
+
+.desc {
+  font-size: 28rpx;
+  color: grey;
+}
+
+.title {
+  font-weight: 400;
+  font-size: 40rpx;
+  height: 60rpx;
+}
+
+.text-xsl {
+  font-size: 93px;
+}
+
+.route {
+  width: 92%;
+  text-align: center;
+  border-bottom: 1px solid rgb(131, 129, 129);
+  margin: 0 4%;
+  padding-bottom: 2%;
+}
+
+.margin-right {
+  margin-right: 10rpx;
+}
+
+.ll-margin {
+  margin: -10rpx;
+}
+
+.margin-left {
+  margin-left: 10rpx;
+}
+
+.round1 {
+  margin-right: 30rpx;
+  padding: 0 10rpx;
+  font-weight: 300;
+  border-radius: 5000rpx;
+}
+
+.bg-grey {
+  background-color: var(--grey);
+  color: #fff;
+}
+
+.cu-list.card-menu {
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+
+.cu-list.menu {
+  display: block;
+  overflow: hidden;
+}
+
+.margin-top {
+  margin-top: 30rpx;
+}
+
+.cu-list.menu>.cu-item {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100rpx;
+  background: #fff;
+  padding: 20rpx;
+}
+
+.cu-list.menu>.cu-item .content {
+  line-height: 1.6em;
+  flex: 1;
+  font-size: 30rpx;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.grid.col-1>view {
+  width: 100%;
+}
+
+
+.margin-left {
+  margin-left: 15rpx;
+}
+
+.t-f26 {
+  opacity: 0.7;
+}
+
+.btn {
+  height: 78rpx;
+  margin: 0 15rpx;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.padding {
+  padding: 30rpx;
+}
+
+.i-share, .i-punch {
+  margin-right: 10rpx;
+}
+
+.bg-xx {
+  background-color: white;
+  color: var(--blue);
+  border-color: var(--blue);
+  border: 1px solid;
+}
+
+
+.take-photo{
+  font-size: 32rpx;
+}
+
+.photo-view{
+  margin-bottom: 10rpx;
+  line-height: 48rpx;
+}
+.photo-view view{
+  margin: 0 10rpx;
+}
+.photo-view text{
+  font-size: 14px;
+}

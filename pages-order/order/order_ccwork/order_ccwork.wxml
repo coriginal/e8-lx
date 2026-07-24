@@ -1,0 +1,51 @@
+<view class="cc-work" wx:if="{{workList.length}}">
+    <block wx:for="{{workList}}" wx:key>
+        <timeline date="{{item.createTime}}" icon="i-infofill {{index==0?'text-red':''}}" title="{{item.level1}}" titleclass="{{index==0?'text-red':''}}">
+            <view class="timel-slot {{index==0?'text-blue':''}}">
+                <view>
+                    <text class="slot-title">跟单信息：</text>
+                    <text>{{item.content||''}}</text>
+                </view>
+                <view wx:if="{{item.level1!='客户登记'}}">
+                    <text class="slot-title">跟单人：</text>
+                    <text>{{item.follow_man||''}}</text>
+                </view>
+                <view class="time-align-center" wx:else>
+                    <text class="slot-title">登记人：</text>
+                    <text>{{showCustomerPhone?item.creator||'':item.hide_creator}}</text>
+                    <icon type="{{showCustomerPhone?'i-attention':'i-attentionfill'}}" size="36" bindtap="showCustomerPhone"></icon>
+                </view>
+                <view>
+                    <text class="slot-title">记录状态：</text>
+                    <text>{{item.level2||''}} {{item.level3||''}}</text>
+                </view>
+                <view>
+                    <text class="slot-title">记录日期：</text>
+                    <text>{{item.createTime}}</text>
+                </view>
+            </view>
+        </timeline>
+    </block>
+</view>
+<view wx:else class="nothing">
+    暂无跟单信息
+</view>
+
+<view wx:if="{{user.uToken}}" class="bottom-btn">
+    <button class="btn bg-blue m-p" bindtap="createCargoTransInfo">货物问题登记</button>
+</view>
+
+<popup visible="{{ _visible }}" bind:close="onClosePop">
+    <view class="pop-title">{{user.isCustomer?'公开登记':'问题记录'}}</view>
+    <view class="pop-textarea-panel">
+        <textarea bindinput="inputTextarea" disabled="{{date_picker}}" class="pop-textarea" value="{{inputTextarea}}" focus="{{textarea_focus}}">
+    </textarea>
+    </view>
+    <view class="popup-flex">
+        <view class="popup-flex-switch" wx:if="{{!user.isCustomer}}">
+            <text>内部记录</text>
+            <switch bindchange="switchChange" checked="{{switchChecked}}" class="switch blue  switch-pick"></switch>
+        </view>
+        <button class="btn bg-red flex-1" bindtap="confirmPop">确定</button>
+    </view>
+</popup>

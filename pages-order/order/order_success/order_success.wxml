@@ -1,0 +1,67 @@
+<view class='result'>
+    <view class='icon'>
+        <icon size="186" type='i-roundcheckfill  text-blue text-xsl' />
+    </view>
+    <view class="title">录单成功</view>
+    <view class="photo-view text-blue" bindtap="takePhotos">
+        <text class=" margin-right">[</text>
+        <text class="take-photo ">拍照上传</text>
+        <icon type="i-camera" size="28"></icon>
+        <text class="">]</text>
+    </view>
+    <view bindtap="copyOcode">
+        <text class="desc" selectable>订单号：{{data.code||''}}</text>
+        <icon type="i-copy margin-left" size="30"></icon>
+    </view>
+</view>
+
+<view class='route t-f32'>
+    <text class='margin-right'>{{data.send_site||data.send_city||''}} </text>
+    <icon size="32" type='i-right text-yellow' />
+    <icon size="32" type='i-right ll-margin text-yellow' />
+    <icon size="32" type='i-right text-yellow' />
+    <text class='margin-left'> {{data.receive_site||data.receive_city||''}}</text>
+</view>
+
+
+<view class='cu-list  menu card-menu margin-top'>
+    <view class='cu-item solid-bottom'>
+        <view class='content flex'>
+            <view class='left-title  round1  bg-grey text-white'>寄</view>
+            <view class='grid col-1  '>
+                <view>{{data.send_man||''}} {{data.send_phone||''}}</view>
+                <view class="t-f26 ">{{data.send_province||''}} {{data.send_city||''}} {{data.send_district||''}}{{data.send_town||''}}</view>
+                <view class="t-f26 ">{{data.send_street_no||''}}</view>
+            </view>
+        </view>
+    </view>
+    <view class='cu-item '>
+        <view class='content flex'>
+            <view class='left-title  round1  bg-blue text-black'>收</view>
+            <view class='grid col-1 '>
+                <view>{{data.receive_man||''}} {{data.receive_phone||''}} </view>
+                <view class="t-f26 ">{{data.receive_province||''}} {{data.receive_city||''}} {{data.receive_district||''}}{{data.receive_town||''}}</view>
+                <view class="t-f26 ">{{data.receive_street_no||''}}</view>
+            </view>
+        </view>
+    </view>
+</view>
+
+
+<view class="padding margin-top flex">
+    <button openType="share" class="btn bg-blue flex-1">
+        <icon type="i-share text-white" size="30"></icon>通知收件人
+    </button>
+    <button class="btn bg-xx" bindtap="orderAgain">
+        <icon type="i-punch " size="30"></icon>再下一单
+    </button>
+    <button class="btn bg-xx" bindtap="goPrint">
+        <icon type="i-punch " size="30"></icon>打印
+    </button>
+</view>
+<view wx:if="{{!paySuccess && asnno}}" class="padding flex">
+    <button open-type="" style="flex:1" class="btn bg-green" bindtap="toPay">
+        <icon type="i-pay " size="30"></icon>立即支付 ¥ {{income}}
+    </button>
+</view>
+<canvasdrawer painting="{{painting}}" class="canvasdrawer" bind:getImage="eventGetImage" />

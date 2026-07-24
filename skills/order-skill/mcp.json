@@ -1,0 +1,26 @@
+{
+  "apis": [
+    {
+      "name": "queryOrder",
+      "description": "根据订单号查询订单",
+      "_meta": {
+        "ui": {
+          "componentPath": "components/order-detail/index"
+        }
+      },
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "orderNo": {
+            "type": "string",
+            "description": "要查询的订单号"
+          }
+        },
+        "required": [
+          "orderNo"
+        ]
+      },
+      "outputSchema": {}
+    }
+  ]
+}

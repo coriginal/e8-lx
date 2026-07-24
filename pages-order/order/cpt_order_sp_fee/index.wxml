@@ -1,0 +1,33 @@
+<popup title="报销" content="{{pop_content}}" visible="{{ visiale }}" bind:close="onClosePopup">
+	<view class="pop-content">
+		<col span="12">
+		<view class="pop-view">
+			<view>金额：</view>
+			<input focus="{{true}}" bindinput="inputValue" value="{{submit_money}}" id="submit_money" type="digit" class="t-left solid-bottom flex-1"></input>
+			<!-- <view wx:if="{{param.add_fee_flow=='否'}}">(可报：<text class="t-fw t-ered t-f26">{{can_sp_fee_value<0?0:can_sp_fee_value}}</text> 元)</view> -->
+		</view>
+		</col>
+		<col span="12">
+		<view class="pop-view">
+			<view>备注：</view>
+			<input bindinput="inputValue" id="submit_remark" class="t-left solid-bottom flex-1"></input>
+		</view>
+		</col>
+		<col span="4" wx:for="{{image_urls}}">
+		<view class="image-url t-left">
+			<image class="pop-image" src="{{item}}"></image>
+		</view>
+		</col>
+		<col span="4">
+		<view class="image-view" bindtap="addImages">
+			<!-- <icon type="i-add"></icon> -->
+			上传附件
+		</view>
+		</col>
+	</view>
+	<row>
+		<col span="12">
+		<button class=" btn bg-blue confirm-btn" bindtap="submitFees">确定报销</button>
+		</col>
+	</row>
+</popup>

@@ -1,0 +1,16 @@
+<view class="search-control-wrap custom-class">
+  <!-- <image src="../../images/search.png"></image> -->
+  <icon type="i-search" size='32' />
+  <view class="edit-area">
+    <input class="text-field"
+          value="{{ _value }}"
+          type="{{ type }}"
+          placeholder="{{placeholder}}"
+          focus="{{ _focus }}"
+          confirm-type="done"
+          bindinput="_editing"
+          bindfocus="_beginEditing"
+          bindblur="_endEditing"></input>
+    <icon size="18" color="#231b14" type="cancel" catchtap="_clearIconTapped" wx:if="{{ _showClear }}"></icon>
+  </view>
+</view>

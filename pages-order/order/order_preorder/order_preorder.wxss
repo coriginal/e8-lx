@@ -1,0 +1,46 @@
+.top{
+  display: flex;
+  justify-content: space-between;
+  background: #fff;
+  padding: 0px 10px 5px 10px;font-size: 17px;
+}
+.station,.scan,.one,.two,.input,.code,.bottom{ display: flex; }
+.stop{ padding-left: 10px; }
+b{ padding: 0 5px; color: red;font-weight: bold;font-size: 21px;}
+
+.scan{
+  margin-top: 5px;
+  background: #fff;
+  padding: 10px;
+}
+.scan input{ font-size: 16px;padding: 5px;width: 90%;height: 38px;
+background:#f1f3f5;color:blue;}
+
+.scan_list{
+  margin-bottom: 68px;
+}
+.detail{
+  background: #fff;
+  margin: 5px 5px 0px 5px;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+text{color: #888;padding-left:5px; padding-right:8px;}
+.one{ border-bottom: 1px solid #f1f3f5;padding-bottom: 5px;justify-content: space-between;}
+
+.input input{border: 1px solid #f1f3f5;height: 30px;padding:4px;margin-top: 5px;min-width:92vw}
+.codenum{font-size: 16px;color: red;font-weight: bold;width: 67vw;}
+
+.bottom{
+  padding: 7px 10px 13px 10px;background: #fff;margin-top: 80rpx;
+  position: fixed;bottom: 0px;right: 0px;left: 0px;z-index: 100;
+}
+.bottom-btn{
+  margin-top: 5px;
+  width: 66%;font-size: 17px;
+  color: #fff;
+  line-height: 74rpx;
+}
+.checkbox{ padding-top: 10px;font-size: blod;}
+

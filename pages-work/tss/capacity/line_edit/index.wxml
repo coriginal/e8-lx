@@ -1,0 +1,139 @@
+<view class="page">
+ <!-- Basic form -->
+  <view class="addr">
+    <view class="bar solid-bottom">
+      <view class='title required'>名称</view>
+      <input placeholder="请输入线路名称" value="{{name}}" bindinput="onNameInput" />
+    </view>
+    <view class="bar solid-bottom">
+      <view class='title'>类型</view>
+      <picker class="picker" range="{{typeList}}" value="{{typeIndex}}" bindchange="onTypeChange">
+        <view class="picker-value">{{typeList[typeIndex] || '请选择'}}</view>
+      </picker>
+      <icon type="i-right" size="32" color="#999" />
+    </view>
+    <view class="bar solid-bottom">
+      <view class='title'>归属方类型</view>
+      <picker class="picker" range="{{belongTypeList}}" value="{{belongTypeIndex}}" bindchange="onBelongTypeChange">
+        <view class="picker-value">{{belongTypeList[belongTypeIndex] || '请选择'}}</view>
+      </picker>
+      <icon type="i-right" size="32" color="#999" />
+    </view>
+    <view class="bar" bindtap="openBelongNameSearch">
+      <view class='title'>归属方名称</view>
+      <view class="belong-name-selector">
+        <text class="picker-value {{!belong_dim_name ? 'placeholder' : ''}}">{{belong_dim_name || '请选择归属方'}}</text>
+      </view>
+      <icon type="i-right" size="32" color="#999" />
+    </view>
+  </view>
+
+  <!-- Location cards -->
+  <view class="cards-section">
+    <view wx:for="{{locations}}" wx:for-index="idx" wx:for-item="loc" wx:key="idx">
+      <!-- Card body -->
+     <view class="location-card">
+       <view class="card-title">
+         <text wx:if="{{idx === 0}}">始发地</text>
+         <text wx:elif="{{idx === locations.length - 1}}">目的地</text>
+         <view wx:else class="card-title-row">
+            <text>经停点 {{idx}}</text>
+           <view data-index="{{idx}}" bindtap="deleteMiddleNode"><icon type="i-close" size="30" color="#ff4d4f" /></view>
+         </view>
+       </view>
+
+       <view class="card-item">
+          <text class="label required">
+            <text wx:if="{{idx === 0}}">始发地</text>
+            <text wx:elif="{{idx === locations.length - 1}}">目的地</text>
+            <text wx:else>经停点</text>
+          </text>
+         <view class="site-selector" data-index="{{idx}}" bindtap="openSiteSearch">
+           <text class="site-value {{!loc.site ? 'placeholder' : ''}}">{{loc.site || '点击选择位置点'}}</text>
+           <icon type="i-search" size="28" color="#3c9cff" />
+         </view>
+       </view>
+
+        <view class="card-item">
+          <text class="label">联系人</text>
+          <input class="input" placeholder="请输入联系人" value="{{loc.name}}" data-index="{{idx}}" bindinput="onCardNameInput" />
+        </view>
+
+        <view class="card-item">
+          <text class="label">联系电话</text>
+          <input class="input" placeholder="请输入联系电话" value="{{loc.phone}}" data-index="{{idx}}" bindinput="onCardPhoneInput" />
+        </view>
+
+        <view class="card-item">
+          <text class="label">省市区</text>
+          <view class="region-selector" data-index="{{idx}}" bindtap="openCascader">
+            <text class="region-value {{!loc.region[0] ? 'placeholder' : ''}}">
+              <block wx:if="{{loc.region[0]}}">{{loc.region[0]}} {{loc.region[1]}} {{loc.region[2]}} {{loc.region[3]}}</block>
+              <block wx:else>点击选择省市区</block>
+            </text>
+            <icon type="i-right" size="28" color="#999" />
+          </view>
+        </view>
+
+        <view class="card-item">
+          <text class="label">详细地址</text>
+          <input class="input" placeholder="请输入详细地址" value="{{loc.street_no}}" data-index="{{idx}}" bindinput="onCardStreetNoInput" />
+        </view>
+      </view>
+
+      <!-- Plus button between cards -->
+      <view wx:if="{{idx < locations.length - 1}}" class="add-node-btn" data-index="{{idx}}" bindtap="addMiddleNode">
+        <icon type="i-add" size="36" color="#3c9cff" />
+      </view>
+    </view>
+  </view>
+
+  <!-- Save button -->
+  <view class="save-area">
+    <button class="save-btn" bindtap="save">保存</button>
+  </view>
+
+  <!-- Site search popup -->
+  <popup position="bottom" visible="{{siteSearchVisible}}" bind:close="closeSiteSearch">
+    <view class="site-search-panel">
+      <view class="site-search-header">
+        <text class="site-search-title">选择位置点</text>
+        <icon type="i-close" size="36" color="#999" bindtap="closeSiteSearch" />
+      </view>
+      <input class="site-search-input" placeholder="搜索位置点名称" value="{{siteSearchKeyword}}" bindinput="onSiteSearchInput" focus="{{siteSearchVisible}}" />
+      <scroll-view class="site-search-list" scroll-y bindscrolltolower="onSiteSearchLoadMore">
+        <view wx:if="{{siteSearchResults.length === 0 && siteSearchKeyword}}" class="search-empty">
+          <text>无匹配结果</text>
+        </view>
+        <view class="site-result-item" wx:for="{{siteSearchResults}}" wx:key="id" data-item="{{item}}" bindtap="selectSite">
+          <view class="site-result-name">{{item.site || item.name}}</view>
+          <view class="site-result-addr">{{item.province}}{{item.city}}{{item.district}}{{item.street_no}}</view>
+        </view>
+        <view wx:if="{{siteSearchNomore && siteSearchResults.length}}" class="search-nomore">没有更多了</view>
+      </scroll-view>
+    </view>
+  </popup>
+
+
+  <!-- Belong name search popup -->
+  <popup position="bottom" visible="{{belongNameSearchVisible}}" bind:close="closeBelongNameSearch">
+    <view class="site-search-panel">
+      <view class="site-search-header">
+        <text class="site-search-title">选择{{belong_type}}</text>
+        <icon type="i-close" size="36" color="#999" bindtap="closeBelongNameSearch" />
+      </view>
+      <input class="site-search-input" placeholder="搜索{{belong_type}}名称" value="{{belongNameSearchKeyword}}" bindinput="onBelongNameSearchInput" focus="{{belongNameSearchVisible}}" />
+      <scroll-view class="site-search-list" scroll-y>
+        <view class="site-result-item" wx:for="{{belongNameSearchResults}}" wx:key="id" data-item="{{item}}" bindtap="selectBelongName">
+          <view class="site-result-name">{{item.name || item.text}}</view>
+          <view class="site-result-addr">{{item.phone || item.clerk || ''}}</view>
+        </view>
+        <view wx:if="{{!belongNameSearchResults.length && belongNameSearchKeyword}}" class="search-empty">
+          <text>无匹配结果</text>
+        </view>
+      </scroll-view>
+    </view>
+  </popup>
+</view>
+  <!-- Region cascader -->
+  <cascader wx:if="{{cascaderVisible}}" isLeaf="{{isLeaf}}" visible="{{cascaderVisible}}" title="地址选择" bind:close="onCascaderClose" bind:change="onCascaderChange" />

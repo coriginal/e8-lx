@@ -1,0 +1,81 @@
+<view class="fade">
+  <view class="suborder">
+    <block wx:for="{{subOrders}}" wx:key>
+      <view class="sub-panel fade {{index!=0?'margin-top':''}}">
+        <view class="sub-flex">
+          <view>
+            <view class="sub-unit">子单号：</view>
+            <input class="sub-input text-left" bindinput="changeValue" placeholder="不填时自动产生" data-index="{{index}}" value="{{item.code}}" data-id="code" />
+          </view>
+          <icon type="i-copy sub-icon-padding" color="var(--blue)" size="40" />
+          <icon bindtap="deleteSubOrder" id="{{index}}" wx:if="{{index>0}}" type="i-roundclosefill sub-icon-padding" color="var(--red)" size="40" />
+        </view>
+        <view class="sub-flex">
+          <view>
+            <input class="sub-input" data-id="amount" data-index="{{index}}" bindinput="changeValue" name="amount" placeholder="(件数)" value="{{item.amount}}" />
+            <view class="sub-unit">件</view>
+          </view>
+          <view>
+            <input class="sub-input" data-id="weight" data-index="{{index}}" bindinput="changeValue" name="weight" placeholder="(重量)" value="{{item.weight}}" />
+            <view class="sub-unit">{{weight_unit}}</view>
+          </view>
+          <view>
+            <input class="sub-input" data-id="volume" data-index="{{index}}" bindinput="changeValue" name="volume" placeholder="(体积)" value="{{item.volume}}" />
+            <view class="sub-unit" id="{{index}}">m³</view>
+          </view>
+        </view>
+        <view class="input_grids_list">
+          <block wx:for="{{v}}" wx:for-index="idx" wx:key>
+            <input name="{{item.code}}" type="digit" class="text-center" placeholder-class='' placeholder="{{item.title}}" data-name="{{item.code}}" bindinput="computedListVolume" data-index="{{index}}" value="{{v_list_value[index][item.code]}}"></input>
+          </block>
+          <view>=</view>
+          <input name="{{item.code}}" type="digit" class="text-center" disabled placeholder-class='' placeholder="体积" value="{{v_list_value[index].volume}}"></input>
+          <button data-index="{{index}}" bind:tap="addVolumeItem">增加</button>
+        </view>
+        <view class="table">
+          <view class="table-title">
+            <view>长(cm)</view>
+            <view>宽(cm)</view>
+            <view>高(cm)</view>
+            <view>件数</view>
+            <view>立方米</view>
+            <view>操作</view>
+          </view>
+          <view class="table-item" wx:for="{{volumeList[index]}}" wx:for-item="items">
+            <view>{{items.long}}</view>
+            <view>{{items.width}}</view>
+            <view>{{items.height}}</view>
+            <view>{{items.c_amount}}</view>
+            <view>{{items.volume}}</view>
+            <view bind:tap="removeVolumeItem" data-index="{{index}}">
+              <icon size='30' type='i-delete' />
+            </view>
+          </view>
+        </view>
+        <view class="sub-flex">
+          <view>
+            <view class="sub-unit">货名：</view>
+            <input class="sub-input" data-id="cargo" data-index="{{index}}" bindinput="changeValue" name="cargo" value="{{item.cargo}}" />
+          </view>
+          <view>
+            <view class="sub-unit">包装：</view>
+            <input class="sub-input" data-id="pack" data-index="{{index}}" bindinput="changeValue" name="pack" value="{{item.pack}}" />
+          </view>
+        </view>
+        <view class="sub-flex" wx:if="{{showMark}}">
+          <view>
+            <view class="sub-unit">标记：</view>
+            <input class="sub-input" data-id="sudf1" data-index="{{index}}" bindinput="changeValue" name="sudf1" value="{{item.sudf1}}" />
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view style="height: 1px;"></view>
+  <view class='bottom-btn'>
+    <button class='btn text-blue m-p' bindtap="addSubOrder">
+      <icon type="i-roundadd sub-icon-padding" color="var(--blue)" size="40" />
+    </button>
+    <button class='btn bg-blue m-p flex-1' bindtap="formSubmit">确定</button>
+  </view>
+</view>

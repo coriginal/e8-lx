@@ -1,0 +1,7 @@
+{
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "field": "../../../components/field/index",
+    "datetime": "../../../components/datetime/index"
+  }
+}

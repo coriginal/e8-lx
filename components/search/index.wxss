@@ -1,0 +1,32 @@
+.search-control-wrap {
+  display: flex;
+  align-items: center;
+  padding: 0 16rpx;
+  background: #fff;
+  height: 40px;  
+  display: -webkit-box;
+  display: -webkit-flex;
+}
+
+.edit-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 0 16rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+}
+
+.edit-area icon {
+  margin-left: 8rpx;
+}
+
+.text-field {
+  flex: 1;
+  font-size: 30rpx;
+  padding: 4rpx 0;
+}
+
+image {
+  width: 45rpx; height: 45rpx;
+}

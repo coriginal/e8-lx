@@ -1,0 +1,31 @@
+/* pages-order/order/order_scan_print_log/index.wxss */
+.box{
+    padding: 20rpx;
+}
+.table{
+    background-color: white;
+    width: 100%;
+    border-radius: 20rpx;
+    display: flex;
+    flex-direction: row;
+    padding: 10rpx;
+}
+.table .tr{
+    display: flex;
+    flex-direction: column;
+}
+.table .th,.table .tr{
+    flex: 1;
+    text-align: center;
+}
+.table .tr:nth-child(2){
+    border-left: 2rpx solid whitesmoke;
+    border-right: 2rpx solid whitesmoke;
+}
+.table .th{
+    padding: 20rpx;
+    border-bottom: 2rpx solid whitesmoke;
+}
+.table .th:last-child{
+    border-bottom: none;
+}

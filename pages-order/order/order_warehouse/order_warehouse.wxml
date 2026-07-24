@@ -1,0 +1,38 @@
+  <cell-group title="基本信息">
+    <cell bind:click="" title="名称">
+      <view slot="footer">
+        <input id="ware_house_name" bindinput="inputValue" ></input>
+      </view>
+    </cell>
+    <cell bind:click="" title="类型">
+      <view slot="footer">
+        <checkbox-group class="flex-group" bindchange="checkboxChange">
+          <view>
+            <checkbox value="基地仓" color="var(--blue)" />
+            <text>基地仓</text>
+          </view>
+          <view>
+            <checkbox value="分仓" color="var(--blue)" />
+            <text>分仓</text>
+          </view>
+        </checkbox-group>
+      </view>
+    </cell>
+  </cell-group>
+
+  <cell-group title="联系方式">
+    <cell bind:click="" title="联系人">
+      <view slot="footer">
+        <input id="name" bindinput="inputValue" value="{{name}}"></input>
+      </view>
+    </cell>
+    <cell bind:click="" title="联系方式">
+      <view slot="footer">
+        <input id="phone" bindinput="inputValue" value="{{phone}}"></input>
+      </view>
+    </cell>
+  </cell-group>
+
+<view class="btn-view">
+  <button bindtap="confirm" class=" btn bg-blue">确定</button>
+</view>

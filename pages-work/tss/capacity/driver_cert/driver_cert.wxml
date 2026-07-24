@@ -1,0 +1,44 @@
+<ShowCert bind:click="certTap" showPop="{{showPop}}" extra="{{extra}}" isCerting="{{isCerting}}" />
+
+<!-- 个人认证 -->
+<view class="fade">
+	<form bindsubmit="doCheck">
+		<block wx:for="{{[idCardList,driverList]}}" wx:for-item="item" >
+			<view class="order-panel ">
+				<view>
+					<view class="title">
+						<text>{{item.title}}</text>
+						<text class="notice">{{item.extra}}</text>
+					</view>
+					<view style="display:flex;overflow:scroll;">
+						<view class="inline-block" wx:for="{{item.imglist}}"  wx:for-item="list">
+							<view class="upload-view {{list.loading?'loading':''}}" id="{{index}}" data-type="{{item.type}}" bindtap="uploadFile" data-name="{{item.name}}">
+								<image wx:if="{{list.url}}" class="upload-img " src="{{list.url}}" mode="widthFix"></image>
+								<block wx:else>
+									<icon color="#444" type="i-camera block" size="50"></icon>
+									<view class="text-gray t-f24">{{item.title}}</view>
+								</block>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</block>
+
+		<view class="order-panel margin-bottom">
+			<block wx:for="{{[idCardList.list,driverList.list]}}">
+				<view wx:for="{{item}}">
+					<view class="input-group">
+						<text>{{item.title}}</text>
+						<input disabled="{{item.disabled}}" value="{{item.value}}" name="{{item.code}}" class="solid-bottom flex-1" placeholder="请输入{{item.title}}"></input>
+					</view>
+				</view>
+			</block>
+		</view>
+
+		<view style="height:1px;"></view>
+		<view class="bottom-btn">
+			<button form-type="submit" class="btn bg-blue">提交审核</button>
+		</view>
+	</form>
+</view>

@@ -1,0 +1,25 @@
+
+<view hidden="{{hidden}}" style="{{style}}"></view>
+<view hidden="{{hidden}}" style="{{style}}" class='custom shadow-blur'>
+  <view wx:if="{{isBack>1}}" class='is-back' bindtap='goBack'>
+    <icon color='#000000' type='i-back' />
+  </view>
+
+  <view wx:else>
+    <badge class='dot' dot="{{ifDot}}">
+      <button class='btn icon bg-opc' bindtap='goOptions'>
+        <view class='notice'>
+          <icon class='notice-icon' size='36' type='i-notice' />
+        </view>
+      </button>
+    </badge>
+  </view>
+
+  <view class='custom-content'>
+    <text class='custom-title'>{{title?title:''}}</text>
+    <slot></slot>
+  </view>
+  <view class="popover fade" wx:if="{{showPop}}" bindtap='closePop' style='{{pop}}'>
+    点击收藏：添加到我的小程序或点击浮窗户
+  </view>
+</view>

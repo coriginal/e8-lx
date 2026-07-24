@@ -1,0 +1,257 @@
+<dialog id="wux-dialog" />
+
+<!--e8用户顶部菜单 -->
+<view class="fade flex  bg-white" wx:if="{{ !task_id}}">
+    <scroll-view scroll-x class="width-80 top-swiper " scroll-with-animation scroll-left="{{scrollLeft}}">
+        <view bindtap="tabSelect" class="swiper-panel {{index==TabCur?'shadow-blue':''}}" wx:for='{{typesList}}' data-id="{{index}}" wx:key>{{item}}</view>
+    </scroll-view>
+    <view class="flex align-center ">
+        <button class="btn bg-opc text-blue solid " bindtap="goOrder">新建订单</button>
+    </view>
+</view>
+<view class="fade date-picker">
+    日期区间：
+    <picker value="{{date_from}}" mode="date" bindchange="bindDateFromChange">
+        <view>{{date_from}}</view>
+    </picker>
+    至
+    <picker value="{{date_to}}" mode="date" bindchange="bindDateToChange">
+        <view>{{date_to}}</view>
+    </picker>
+</view>
+<view class="fade search-view">
+    <view class="father-panel">
+        <search-bar label="关键词" showLabel="{{false}}" labelName="value" bind:change="searchCode" />
+    </view>
+    <!-- <view wx:if="{{user.isEff}}" class="choose-all {{params.query_tag?'query-tag':''}}" bindtap="paramsChoose">
+		<icon type="i-filter" size="34"></icon>
+		<text>筛选</text>
+	</view> -->
+</view>
+
+<form bindsubmit="goTask">
+    <view class="margin-bottom" wx:if="{{filterlist.length}}">
+        <checkbox-group name="order_ids" bindchange="checkboxChange">
+            <block wx:for="{{filterlist}}" wx:key wx:for-item="item">
+                <view class="content">
+                    <view class="content-top solid-bottom flex align-center">
+                        <view class="flex-1">
+                            <!-- <view class="customer-name" catchtap="copyCode" id="{{item.code}}">
+                <icon type="i-copy margin-icon" size="28"></icon>
+                <text>{{item.code}}</text>
+              </view> -->
+                            <view class="status start-end">
+                                <view class="value">
+                                    <text class="text-blue">{{item.send_site||item.send_city||item.send_district||'无'}}</text>
+                                    <text> - </text>
+                                    <text class="text-red">{{item.receive_site||item.receive_city||item.receive_district||'无'}} </text>
+                                </view>
+                            </view>
+                            <text class="order-code text-gray" selectable>订单号：{{item.order_code||item.code}}--<text style="color:#000;">{{item.createtime}}</text></text>
+                            <text class="order-code text-gray" wx:if="{{item.tcode}}" selectable>运单号：{{item.tcode}}</text>
+                            <text class="order-code text-red" selectable wx:if="{{item.real_lc_name}}">
+                                下游承运商：{{item.real_lc_name}}{{item.next_lc_status? ('-' + item.next_lc_status) : ""}}
+                            </text>
+                        </view>
+                        <!-- <view class="order-status">{{item.status||''}}</view> -->
+                        <checkbox class="fade" color="#5c96ec" checked="{{item.checked}}" value="{{item.id}}" />
+                    </view>
+                    <view class="content-middle solid-bottom" data-order-code="{{item.order_code}}" data-order-id="{{item.order_id}}" catchtap="goOrderInfo">
+                        <view class="flex align-center" wx:for="{{['send','receive']}}" wx:for-item="addr" wx:if="{{item[addr+'_addr']}}" wx:key>
+                            <image mode="widthFix" class="images" src="../../../../images/{{addr}}.png"></image>
+                            <view class="flex-1 solid-left">{{item[addr+'_addr']}}</view>
+                        </view>
+                        <view class="notices" wx:if="{{item.scheduled_delivery_time}}">
+                            <text class="deliver-time">预约送货时间：</text>
+                            <text class="time">{{item.scheduled_delivery_time}}</text>
+                        </view>
+                    </view>
+
+
+                    <view class="content-foot flex align-center">
+                        <view class="status">
+                            <view class="title">客户</view>
+                            <view class="value">{{item.customer_name||''}}</view>
+                            <view wx:if="{{item.ccode}}" class="value text-grey">{{item.ccode||''}}</view>
+                        </view>
+
+                        <!-- <view class="status ">
+              <view class="title">货物信息</view>
+              <view class="value">
+                {{(item.amount||'')+'件'}} / {{(item.weight||'')+'kg'}} / {{(item.volume||'')+'方'}}
+              </view>
+            </view> -->
+
+                        <view class="status solid-left solid-right">
+                            <view class="title">货物信息</view>
+                            <view class="value">
+                                <text wx:if="{{item.amount>0}}">{{item.amount}}件 </text>
+                                <text wx:if="{{item.weight>0}}">{{item.weight}}{{weight_unit}} </text>
+                                <text wx:if="{{item.volume>0}}">{{item.volume}}m³ </text>
+                            </view>
+                        </view>
+
+                        <view class="status" bindtap="goRouteInfo" data-domain="{{item.domain}}" data-code="{{item.order_code}}" data-id="{{item.order_id}}">
+                            <!-- <view class="title">状态</view> -->
+                            <view class="text-orange value">{{item.status||''}}</view>
+                            <view class="text-blue value">【查看轨迹】</view>
+                        </view>
+                        <!-- <view class="status" >
+              <view class="title">起 - 终</view>
+              <view class="value">
+                <text class="text-blue">{{item.send_site||item.send_city||item.send_district||'无'}}</text>
+                <text> - </text>
+                <text class="text-red">{{item.receive_site||item.receive_city||item.receive_district||'无'}} </text>
+              </view>
+            </view> -->
+
+                    </view>
+                </view>
+            </block>
+        </checkbox-group>
+    </view>
+
+    <view wx:else class="text-gray nothing">
+        暂无订单
+    </view>
+    <view style="height:2px" />
+
+    <view class="bottom-btn" wx:if="{{user.isEff}}">
+        <block wx:if="{{TabCur == 0}}">
+            <!-- <button bindtap="{{chooseAllTag?'cancelChooseAllOrders':'chooseAllOrders'}}" class='btn bg-btn2'>{{chooseAllTag?'取消全选':'全选'}}</button> -->
+            <!-- <button bindtap="effOrderPick" class='btn bg-btn2'>批量接单</button> -->
+            <button class="btn bg-red all-choose" bindtap="{{chooseAllTag?'cancelChooseAllOrders':'chooseAllOrders'}}">{{chooseAllTag?'取消全选':'全选'}}</button>
+            <button class="btn bg-btn2" bindtap="orderBatch" class='btn bg-btn2'>批量操作</button>
+        </block>
+        <block wx:else>
+            <!-- <button bindtap="pushInvitePlatform" class='btn bg-btn2'>推送下游</button>
+			<button form-type="submit" class='btn bg-btn2'>分派到新任务</button>
+			<button bindtap="goHasTask" class='btn bg-btn2'>调度到已有任务</button> -->
+            <button class="btn bg-red all-choose" bindtap="{{chooseAllTag?'cancelChooseAllOrders':'chooseAllOrders'}}">{{chooseAllTag?'取消全选':'全选'}}</button>
+            <button bindtap="orderBatch" class='btn bg-btn2'>批量操作</button>
+        </block>
+    </view>
+    <view class="bottom-btn" wx:elif="{{TabCur == 0}}">
+        <!-- <button bindtap="{{chooseAllTag?'cancelChooseAllOrders':'chooseAllOrders'}}" class='btn bg-btn2'>{{chooseAllTag?'取消全选':'全选'}}</button>
+		<button bindtap="effOrderPick" class='btn bg-btn2'>批量接单</button> -->
+        <button class="btn bg-red all-choose" bindtap="{{chooseAllTag?'cancelChooseAllOrders':'chooseAllOrders'}}">{{chooseAllTag?'取消全选':'全选'}}</button>
+        <button bindtap="orderBatch" class='btn bg-btn2'>批量操作</button>
+    </view>
+    <view class="bottom-btn" wx:else>
+        <!-- <button bindtap="pushInvitePlatform" class='btn bg-btn2'>推送下游</button>
+		<button form-type="submit" class='btn bg-btn1'>调度到新任务</button>
+		<button bindtap="goHasTask" class='btn bg-btn2'>调度到已有任务</button> -->
+        <button class="btn bg-red all-choose" bindtap="{{chooseAllTag?'cancelChooseAllOrders':'chooseAllOrders'}}">{{chooseAllTag?'取消全选':'全选'}}</button>
+        <button bindtap="orderBatch" class='btn bg-btn2'>批量操作</button>
+    </view>
+
+    <drawer mode="right" visible="{{rightDrawer}}" bind:close="closeDrawer" data-mode="right">
+        <view class="d-container">
+            <view class="drawer-view">
+                当前已选中：{{order_ids.length}}
+            </view>
+            <block wx:if="{{!task_id}}">
+                <button wx:if="{{TabCur == 0}}" class="btn bg-blue margin" bindtap="effOrderPick">批量接单</button>
+                <button wx:if="{{TabCur == 0}}" class="btn bg-blue margin" bindtap="refuseOrderPick">拒绝接单</button>
+                <button wx:if="{{ TabCur !=0}}" class="btn bg-blue margin" bindtap="pushInvitePlatform">推送下游</button>
+                <button wx:if="{{ TabCur !=0 }}" form-type="submit" class="btn bg-blue margin">委派司机新任务</button>
+                <!-- <button wx:if="{{user.isEff && TabCur !=0 && TabCur !=1}}" form-type="submit" class="btn bg-blue margin">委派司机新任务</button> -->
+                <button wx:if="{{!user.isEff && TabCur !=0}}" bindtap="goHasTask" class="btn bg-blue margin">调度到已有任务</button>
+                <button wx:if="{{user.isEff && TabCur !=0}}" bindtap="goHasTask" class="btn bg-blue margin">调度到已有任务</button>
+                <button wx:if="{{ TabCur !=0}}" bindtap="orderRouteBatch" class="btn bg-blue margin">运输行程登记</button>
+                <button wx:if="{{ TabCur==1 || TabCur == 0 && showPickButton}}" bindtap="orderPick" class="btn bg-blue margin">提货</button>
+                <button bindtap="orderPrint" class="btn bg-blue margin">打印</button>
+                <button wx:if="{{ TabCur !=0}}" bindtap="orderSendMessage" class="btn bg-blue margin">短息通知</button>
+                <button wx:if="{{TabCur==1}}" bind:tap="upPlatform" class="btn bg-blue margin">上传至平台</button>
+
+                <button wx:if="{{ TabCur==2 && showRobOrder }}" bindtap="robOrders" class="btn bg-blue margin">抢单</button>
+            </block>
+            <block wx:else>
+                <button class="btn bg-blue margin" bindtap="removeTaskOrder">移除订单</button>
+                <button bindtap="orderRouteBatch" class="btn bg-blue margin">运输行程登记</button>
+            </block>
+        </view>
+    </drawer>
+</form>
+
+<popup visible="{{ route_visible }}" bind:close="onCloseRoute">
+    <view class="pop-title">自定义轨迹</view>
+    <view class="pop-date-choose solid-bottom" bindtap="clickTap">
+        <view>选择日期时间 </view>
+        <view class="value">{{datetime?datetime:'请选择'}}</view>
+        <icon type="i-right" size="32"></icon>
+    </view>
+    <view class="router-pop-auto {{click_auto_route_id==1?'choose-auto shadow-blur':''}}" bindtap="chooseRouteAuto" id="1">从 <input class="auto-route-input" value="{{route_district_location}}" bindinput="popRouteInput" id="1"></input> 出发
+        | <view class="pop-choose {{click_auto_route_id==1?'text-blue':''}}">
+            <icon color="{{click_auto_route_id==1?'var(--blue)':''}}" type="i-radioboxfill" size="34"></icon> 选择
+        </view>
+    </view>
+    <view class="router-pop-auto {{click_auto_route_id==2?'choose-auto shadow-blur':''}}" bindtap="chooseRouteAuto" id="2">到达<input class="auto-route-input" value="{{route_district_location}}" bindinput="popRouteInput" id="2"></input>
+        | <view class="pop-choose {{click_auto_route_id==2?'text-blue':''}}">
+            <icon color="{{click_auto_route_id==2?'var(--blue)':''}}" type="i-radioboxfill" size="34"></icon> 选择
+        </view>
+    </view>
+
+    <view bindtap="showMoreTextarea" class="more-textarea">{{more_textarea?'- 隐藏':'+ 更多'}}</view>
+    <view wx:if="{{more_textarea}}" class="pop-textarea-panel">
+        <textarea bindinput="inputTextarea" disabled="{{date_picker}}" class="pop-textarea" placeholder="签收规则：如果该单已做签收，请在轨迹填写中写明自定义签收文字内容，然后点击按钮【确认签收】。否则将默认为‘签收’" value="{{inputTextarea}}" bindfocus="focusTextarea">
+    </textarea>
+        <!-- <view class="pop-locationfill" bindtap="doLocation">
+			<icon type="i-locationfill" size="34"></icon>
+			<text>重新定位</text>
+		</view> -->
+    </view>
+    <view class="popup-flex">
+        <button class="btn bg-green flex-1" bindtap="confirmSign">签收</button>
+        <button class="btn bg-red flex-2" bindtap="confirmRouter">确定</button>
+    </view>
+</popup>
+
+
+<popup visible="{{ send_message_pop }}" closable maskClosable="{{false}}" bind:close="onCloseMessagePop">
+    <view class="pop-content">
+        <checkbox-group bindchange="popCheckGroup">
+            <view class="checkbox-group-view">
+                <checkbox checked="{{message_send}}" value="send"><text style="font-size:17px;">发送至 发件人</text></checkbox>
+            </view>
+            <view class="checkbox-group-view">
+                <checkbox checked="{{message_receive}}" value="receive"><text style="font-size:17px;">发送至 收件人</text></checkbox>
+            </view>
+        </checkbox-group>
+        <view class="padding" wx:if="{{show_send_date}}" bindtap="chooseDate">
+            <text style="margin:0 10rpx;">{{message_datetime?'预到日：'+message_datetime:'选择预到日'}}</text>
+            <icon type="i-calendar" size="32" color="var(--blue)"></icon>
+        </view>
+    </view>
+    <view class="popup-flex">
+        <button class="btn bg-red flex-2" bindtap="confirmSendMessage">确定发送(0.1元/条)</button>
+    </view>
+</popup>
+
+<date-picker visible="{{ message_date_picker }}" controlled mode="date" value="{{ datetime }}" lang="zh_CN" data-index="1" data-mode="date" bind:confirm="onConfirmMessageDate" bind:visibleChange="onVisibleChange" />
+
+
+<date-picker visible="{{ date_picker }}" controlled mode="datetime" value="{{ time }}" lang="zh_CN" data-index="1" data-mode="datetime" bind:confirm="onConfirm" bind:visibleChange="onVisibleChange" />
+
+<popup visible="{{pick_visible}}" bind:close="onClosePick">
+    <view class="pop-title">确认货物信息</view>
+    <form class="pick-form" bindsubmit="pickSign">
+        <view class="pick-item">
+            <view>件数：</view>
+            <input type="number" name="amount" value="{{order_ids[0].amount}}" />
+        </view>
+        <view class="pick-item">
+            <view>重量：</view>
+            <input type="digit" name="weight" value="{{order_ids[0].weight}}" />
+        </view>
+        <view class="pick-item">
+            <view>体积：</view>
+            <input type="digit" name="volume" value="{{order_ids[0].volume}}" />
+        </view>
+        <view class="pick-item">
+            <view>回单：</view>
+            <view style="flex: 1;text-align: center;">{{order_ids[0].rcode_type||'无'}}</view>
+        </view>
+        <button type="primary" form-type="submit">确认提货</button>
+    </form>
+</popup>

@@ -1,0 +1,132 @@
+/* pages-work/tss/capacity/truck_task_fee/index.wxss */.bar {
+    background-color: white;
+    /* position: fixed; */
+    width: 100%;
+    top: 0;
+    box-shadow: 0 1rpx 6rpx rgba(0, 0, 0, 0.1);
+    padding: 20rpx;
+    display: flex;
+    align-items: center;
+    height: 96rpx;
+    z-index: 999;
+
+    .customer-choose {
+        line-height: 96rpx;
+        font-size: 30rpx;
+        margin: 0 20rpx;
+    }
+
+    .choose-view {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+
+}
+
+.input-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 96rpx;
+}
+.pclass {
+    font-size: 28rpx;
+    text-align: center;
+}
+.confirm-view {
+    text-align: center;
+}
+
+.order-confirm {
+    /* border-radius: 5000rpx; */
+    width: 100%;
+    height: 84rpx;
+    margin: 20rpx auto;
+}
+.cargo-info {
+    padding: 20rpx;
+    margin-top: 12rpx;
+    background-color: white;
+}
+.input-panel .title {
+    padding-right: 30rpx;
+    font-size: 28rpx;
+}
+.input-panel input{
+    flex:1;
+}
+.scan {
+    height: 96rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 72rpx;
+}
+.switch {
+    margin: 0 20rpx;
+    position: relative;
+    transform: scale(0.8);
+}
+.switch-pick::after {
+    content: "是";
+}
+
+.switch-pick::before {
+    content: "否";
+}
+.clerk-box {
+    height: 50vh;
+    background-color: white;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.clerk-box .bar-1 {
+    background-color: white;
+    width: 100%;
+    top: 0;
+    box-shadow: 0 1rpx 6rpx rgba(0, 0, 0, 0.1);
+    padding: 20rpx;
+    height: 100rpx;
+    z-index: 999;
+}
+
+.clerk-box .search-form {
+    background: #f5f5f5;
+    line-height: 64rpx;
+    height: 64rpx;
+    font-size: 24rpx;
+    color: #666;
+    display: flex;
+    align-items: center;
+    border-radius: 10rpx;
+}
+
+.clerk-box .search-form view {
+    margin: 0 15rpx;
+}
+
+.clerk-box .search-form input {
+    flex: 1;
+    padding-right: 20rpx;
+    font-size: 26rpx;
+}
+
+.clerk-item {
+    text-align: center;
+    height: 80rpx;
+    line-height: 80rpx;
+    border-bottom: 2rpx solid whitesmoke;
+}
+
+.clerk-item:active {
+    background-color: whitesmoke;
+}
+
+.box{
+    padding-bottom: calc(60px + 10px);
+}

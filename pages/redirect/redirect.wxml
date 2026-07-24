@@ -1,0 +1,4 @@
+<view class="loading">
+  <image src="{{loadingUrl}}" mode="widthFix"></image>
+  <redirect-cpt bind:domain="chooseDomain" show="{{showChooseDomain}}" />
+</view>

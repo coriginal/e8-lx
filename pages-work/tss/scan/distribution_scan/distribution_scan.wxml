@@ -1,0 +1,128 @@
+<view class="wrap">
+    <form bindsubmit="formSubmit">
+
+        <view class="top" hidden="{{ifContinue}}">
+            <view class="station">
+                <icon type="i-locationfill" color="#5c96ec" size="40" bindtap="openSiteList"></icon>
+                <input name="station" placeholder="本站" class="stop" bindinput="getValue" data-name="station" value="{{select.station}}"></input>
+                <icon type="i-focus" color="#5c96ec" size="40" bindtap="doLocation"></icon>
+            </view>
+            <view wx:if="{{select.fields.length}}">
+                <field wx:for="{{select.fields}}" wx:key="" title="{{item.name}}" name="{{item.code}}" bindchange="getValue" data-field="{{item.code}}" placeholder="{{item.placeholder}}" value="{{select[item.code]}}" disabled="{{item.disabled||''}}" bindtap="{{item.bindtap||''}}">
+                    <icon wx:if="{{item.code == 'task'}}" type="i-unfold" size="40" bindtap="openTaskList" class="unfold"></icon>
+                    <icon wx:if="{{item.code=='next_stop'}}" type="i-settingsfill" size='40' bindtap="nextStation"></icon>
+                    <icon wx:if="{{item.scan}}" type="i-scan" size="40" bindtap="scanField" data-field="{{item.code}}"></icon>
+                </field>
+            </view>
+            <view class="oldTask-list" hidden="{{listHidden}}">
+                <view class="text-list grey">
+                    <text>历史任务单</text>
+                </view>
+                <scroll-view scroll-y="true" class="task-padding" style="height:300rpx;">
+                    <view wx:for="{{oldTask}}" wx:key='' bindtap="checkedTask" data-value="{{item.task}}" data-id="{{item.id}}" class="text-list">
+                        <text>{{item.task}}</text>
+                        <text>{{item.submitTime}}</text>
+                        <text class="text-red">类型：{{item.type && item.type}}</text>
+                        <text class="text-blue">状态：{{item.status && item.status}}</text>
+                    </view>
+                </scroll-view>
+            </view>
+            <!-- <view wx:if="{{select.field}}">
+    <field title="{{select.field}}" name="{{select.field_code}}" bindchange="getValue" data-field="{{select.field_code}}" value="{{select[select.field_code]}}">
+      <icon wx:if="{{select.needScan}}" type="i-scan" size="40" bindtap="scanTask" data-field="{{select.field_code}}"></icon>
+    </field>
+    </view> -->
+
+            <!-- <view class="customer" hidden="{{!select.ifcustomer}}">
+      <text>客户</text>
+      <input name="customer" bindtap="openCustomer" value="{{select.customer}}" placeholder="客户选择" disabled="true"></input>
+    </view>
+    <view hidden="{{!select.iftask}}">
+      <field title="班次单" name="task" bindchange="getValue" data-field="task" value="{{select.task}}" placeholder="班次单/托盘号/车牌号">
+        <icon type="i-unfold" size="40" bindtap="openTaskList" class="unfold"></icon>
+        <icon type="i-scan" size="40" bindtap="scanTask" data-field="task"></icon>
+      </field>
+      <view class="oldTask-list" hidden="{{listHidden}}">
+        <view class="text-list grey">
+          <text>历史任务单</text>
+        </view>
+        <scroll-view scroll-y="true" class="task-padding" style="height:300rpx">
+          <view wx:for="{{oldTask}}" wx:key='' bindtap="checkedTask" data-value="{{item.task}}" class="text-list">
+            <text>{{item.task}}</text>
+            <text>{{item.submitTime}}</text>
+          </view>
+        </scroll-view>
+      </view>
+    </view> -->
+
+            <view class="customer">
+                <text>手工调整</text>
+                <input name="scan_hand" placeholder="手动输入单号" data-field="scan_hand" value="{{select.scan_hand}}" confirm-type="done" bindconfirm="handInput"></input>
+            </view>
+
+        </view>
+        <view class="main_scan">
+            <scroll-view scroll-y="true" style="height: 800rpx;" class="body">
+                <view wx:for="{{scanData}}" wx:key="" class="text-list" wx:if="{{index < 20}}">
+                    <text style="{{item.upload == 1?'color:#57bc81':''}}" class="scan_code">{{item.scan_code}}</text>
+                    <icon wx:if="{{item.upload != 1}}" type="i-delete" size="36" bindtap="deleteCode" id="{{index}}" color="grey"></icon>
+                    <icon type="i-warn" color="{{item.ifRegit?'red':'grey'}}" bindtap="abnormalReport" data-code="{{item.scan_code}}" data-index="{{index}}" size="40" data-regit="{{item.ifRegit}}"></icon>
+                </view>
+            </scroll-view>
+
+            <view class="part-right">
+                <view class="thumb">
+                    <view class="num">{{scanData.length?scanData.length:0}}</view>
+                    <view>已扫数量</view>
+                </view>
+                <view class="thumb" wx:for="{{ btnScan }}" wx:key='' bindtap="{{item.bindtap}}" data-ifcontinue="{{item.ifContinue}}">
+                    <image src="{{'../../../../images/'+ item.img}}"></image>
+                    <view>{{item.name}}</view>
+                </view>
+            </view>
+        </view>
+
+    </form>
+</view>
+
+<modal title="问题件登记" show="{{showModal}}" height='auto' bindconfirm='modalConfirm' bindcancel='modalCancel' showModal>
+    <view class="modal-cancel" hidden="{{!abnormal.length}}">
+        <view class="modal-cancel">
+            <view class="abnormal" wx:for="{{abnormal}}" wx:key="" data-text="{{item.text}}" bindtap="abnormalSelect" style="{{item.text == abSelect.content?'color:red;boder:red':'color:grey;boder:grey'}}">{{item.text}}</view>
+        </view>
+        <attach recordCode="{{abRecordId}}" bindaddattach="addProof" list="{{_thumbURLS}}" binddelattach="delattach" scrollx="true" itemId="{{abSelect.itemId}}" />
+    </view>
+</modal>
+
+<modal title="是否新建班次号" show="{{showModalTask}}" height='auto' bindconfirm='modalConfirmTask' bindcancel='modalCancel' showModal>
+    <view class="modal-cancel">
+        <!-- <view class="modal-cancel"> -->
+        <field title="班次号" name="createtask" bindchange="getValue" data-field="task" value="{{select.task}}" placeholder="若不填则默认生成">
+            <icon type="i-scan" size="40" bindtap="scanTask" data-field="task"></icon>
+        </field>
+        <attach recordCode="{{task.tbId}}" bindaddattach="addProof" list="{{task._thumbURLS}}" binddelattach="delattach" scrollx="true" itemId="{{tempid}}" />
+    </view>
+</modal>
+
+<modal title="选择站点" show="{{showSite}}" height='auto' bindconfirm='modalConfirmSite' bindcancel='modalCancel' showModal>
+    <view class="modal-cancel" hidden="{{!site.length}}">
+        <view class="site" wx:for="{{site}}" wx:key="" data-text="{{item}}" bindtap="siteSelect" style="{{item.name == currentStation.name?'color:red;boder:red':'color:grey;boder:grey'}}">{{item.name}}</view>
+    </view>
+</modal>
+<modal title="选择下一站站点" show="{{showNextSite}}" height='auto' bindconfirm='modalConfirmNextSite' bindcancel='modalNextCancel' showModal>
+    <view class="modal-cancel" hidden="{{!site.length}}">
+        <view class="site" wx:for="{{site}}" wx:key="" data-text="{{item}}" bindtap="nextSiteSelect" style="{{item.name == currentNextStation.name?'color:red;boder:red':'color:grey;boder:grey'}}">{{item.name}}</view>
+    </view>
+</modal>
+
+<modal title="选择客户" show="{{showCustomer}}" height='auto' bindconfirm='modalConfirmCustomer' bindcancel='modalCancel' showModal>
+    <view class="modal-cancel" hidden="{{!customer.length}}">
+        <view class="site" wx:for="{{customer}}" wx:key="" data-text="{{item}}" bindtap="customerSelect" style="{{item.name == select.customer?'color:red;boder:red':'color:grey;boder:grey'}}">{{item.name}}</view>
+    </view>
+</modal>
+
+<modal title="客户要求留仓" show="{{showFrozen}}" height='auto' bindconfirm='modalConfirmFrozen' bindcancel='modalCancel' showModal>
+    <view class="modal-cancel" hidden="{{!frozen.length}}">
+        <view class='frozen' style="{{item.ifHand? 'color:grey;':'color:red;'}}" wx:for="{{frozen}}" wx:key="" data-index="{{index}}" bindtap="frozenHand">{{item.code}}</view>
+    </view>
+</modal>

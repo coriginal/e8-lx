@@ -1,0 +1,255 @@
+<view class="select_size" hidden="{{hide}}">
+    <view>请输入创建的面单尺寸大小:</view>
+    <view class="size_box">
+        宽
+        <input bindinput="whChange" data-type="width" type="number" />
+        mm
+        长
+        <input bindinput="whChange" data-type="height" type="number" />
+        mm
+    </view>
+    <view>
+        <view bindtap="create" class="btn bg-blue button">创建</view>
+        <view bindtap="loadMb" class="btn bg-yellow button">加载</view>
+    </view>
+</view>
+<view hidden="{{!hide}}" class="edit_box">
+    <view id="box" class="box" style="height: {{height*8}}rpx;width:{{width*8}}rpx">
+        <view wx:for="{{rowLineList}}" style="background:black;height: {{item.width}}rpx;width: {{(item.x1-item.x0)*8}}rpx;left:{{item.x0*8}}rpx;top:{{item.y0*8}}rpx">rl{{index+1}}</view>
+        <view wx:for="{{colLineList}}" style="background:black;width: {{item.width}}rpx;height: {{(item.y1-item.y0)*8}}rpx;left:{{item.x0*8}}rpx;top:{{item.y0*8}}rpx">cl{{index+1}}</view>
+        <text wx:for="{{textList}}" style="font-size: {{item.fontsize*item.mag}}rpx;top:{{item.y*8}}rpx;line-height:{{item.fontsize*item.mag}}rpx;left:{{item.center ? item.center:item.x*8}}rpx;display: inline-block;white-space: nowrap;">{{item._data|| item.data}}{{item.tail||''}}</text>
+        <view wx:for="{{barCodeList}}" style="width: 250rpx;height: {{item.height*8}}rpx;line-height: {{item.height*8}}rpx;left:{{item.x*8}}rpx;top:{{item.y*8}}rpx;text-align: center;background: gray;opacity: .5;">条码{{index+1}}</view>
+    </view>
+</view>
+<view class="ruler" hidden="{{!hide}}">
+    <view>
+        <view class="top_ruler" style="width: {{width*8+80}}rpx;">
+            <view class="{{index%5==0 ? 'ruler_mid' : ''}} {{index%10==0 ? 'ruler_long' : ''}}" wx:for="{{width+1}}">
+                <text wx:if="{{index%10==0}}">{{index/10}}</text>
+            </view>
+        </view>
+    </view>
+    <view>
+        <view class="bottom_ruler" style="height: {{height*8}}rpx;">
+            <view class="{{index%5==0 ? 'ruler_mid_r' : ''}} {{index%10==0 ? 'ruler_long_r' : ''}}" wx:for="{{height+1}}">
+                <text wx:if="{{index%10==0}}">{{index/10}}</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="bottom_bar" hidden="{{!hide}}">
+    <view class="tools_bar" bindtap="selectTools" data-type="{{item.type}}">
+        <view bindtap="cc" data-type="{{item.type}}" class="btn bg-{{item.color || 'blue'}}" wx:for="{{tools}}">
+            <view>{{item.name}}</view>
+        </view>
+    </view>
+    <view bindtap="openSave" class="save btn bg-green">保存</view>
+    <view class="line"></view>
+    <view class="del btn bg-red">重建</view>
+</view>
+<view class="mask" wx:if="{{open}}" style="opacity: {{maskOpacity}};">
+    <view class="design_box" wx:if="{{cur.type=='rl'}}">
+        <form bindsubmit="editDesign">
+            <view class="design_item">
+                <view>X0坐标:</view>
+                <input name="x0" value="{{rowLineList[cur.index].x0}}" />
+                <view>毫米</view>
+            </view>
+            <view class="design_item">
+                <view>X1坐标:</view>
+                <input name="x1" value="{{rowLineList[cur.index].x1}}" />
+                <view>毫米</view>
+            </view>
+            <view class="design_item">
+                <view>Y坐标:</view>
+                <input name="y0" value="{{rowLineList[cur.index].y0}}" />
+                <view>毫米</view>
+            </view>
+            <view class="design_item">
+                <view>线条宽度:</view>
+                <input name="width" value="{{rowLineList[cur.index].width}}" />
+                <view>毫米</view>
+            </view>
+            <button data-type="preview" form-type="submit" class="bg-blue btn" style="width: 100%;margin-top: 10rpx;">预览</button>
+            <button form-type="submit" class="bg-green btn" style="width: 100%;margin-top: 10rpx;">确定</button>
+            <view bindtap="delete" class="bg-red btn" style="width: 100%;margin-top: 10rpx;">删除</view>
+            <view class="bg-ered btn" style="width: 100%;margin-top: 10rpx;" bindtap="closeMask">关闭</view>
+        </form>
+    </view>
+    <view class="design_box" wx:if="{{cur.type=='cl'}}">
+        <form bindsubmit="editDesign">
+            <view class="design_item">
+                <view>X坐标:</view>
+                <input name="x0" value="{{colLineList[cur.index].x0}}" />
+                <view>毫米</view>
+            </view>
+            <view class="design_item">
+                <view>Y0坐标:</view>
+                <input name="y0" value="{{colLineList[cur.index].y0}}" />
+                <view>毫米</view>
+            </view>
+            <view class="design_item">
+                <view>Y1坐标</view>
+                <input name="y1" value="{{colLineList[cur.index].y1}}" />
+                <view>毫米</view>
+            </view>
+            <view class="design_item">
+                <view>线条宽度:</view>
+                <input name="width" value="{{colLineList[cur.index].width}}" />
+                <view>毫米</view>
+            </view>
+            <button data-type="preview" form-type="submit" class="bg-blue btn" style="width: 100%;margin-top: 10rpx;">预览</button>
+            <button form-type="submit" class="bg-green btn" style="width: 100%;margin-top: 10rpx;">确定</button>
+            <view bindtap="delete" class="bg-red btn" style="width: 100%;margin-top: 10rpx;">删除</view>
+            <view class="bg-ered btn" style="width: 100%;margin-top: 10rpx;" bindtap="closeMask">关闭</view>
+        </form>
+    </view>
+    <view class="design_box" wx:if="{{cur.type=='text'}}">
+        <form class="form" bindsubmit="editDesign">
+            <view class="design_item">
+                <view>X坐标:</view>
+                <input name="x" value="{{textList[cur.index].x}}" />
+                <view>毫米</view>
+            </view>
+            <view class="design_item">
+                <view>Y坐标:</view>
+                <input name="y" value="{{textList[cur.index].y}}" />
+                <view>毫米</view>
+            </view>
+            <view class="design_item">
+                <view>字体大小:</view>
+                <input name="fontsize" value="{{textList[cur.index].fontsize}}" />
+                <view>单位</view>
+            </view>
+            <view class="design_item" wx:if="{{!textList[cur.index].bind}}">
+                <view>文本内容:</view>
+                <input name="data" value="{{textList[cur.index].data}}" />
+                <view>文本</view>
+            </view>
+            <view class="design_item">
+                <view>尾巴:</view>
+                <input name="tail" value="{{textList[cur.index].tail}}" />
+                <view>字符</view>
+            </view>
+            <view class="design_item">
+                <view>传入字段:</view>
+                <input name="deliver" value="{{textList[cur.index].deliver}}" />
+                <view>字段</view>
+            </view>
+            <view wx:if="{{orderInfo || textList[cur.index].bind}}" data-type="preview" bindtap="{{textList[cur.index].bind?'cancelBind':'openBindWindow'}}" class="bg-{{textList[cur.index].bind?'ered':'yellow'}} btn" style="width: 100%;margin-top: 10rpx;">{{textList[cur.index].bind?'取消绑定':'绑定字段'}}</view>
+            <view class="design_item">
+                <view>居中宽度:</view>
+                <input name="center_width" value="{{textList[cur.index].center_width}}" />
+                <view>毫米</view>
+            </view>
+            <view class="design_item">
+                <view>放大倍数</view>
+                <input name="mag" value="{{textList[cur.index].mag}}" />
+                <view>倍数</view>
+            </view>
+            <view class="design_item" wx:if="{{!textList[cur.index].need_cut}}">
+                <view>几字换行</view>
+                <input name="wrap" value="{{textList[cur.index].wrap}}" />
+                <view>个字</view>
+            </view>
+            <view class="design_item">
+                <checkbox-group bindchange="needCut">
+                    <checkbox checked="{{textList[cur.index]['need_cut']}}" value="need_cut">需要分隔</checkbox>
+                </checkbox-group>
+            </view>
+            <view class="design_item" wx:if="{{textList[cur.index].need_cut}}">
+                <view>分隔符</view>
+                <input bindinput="cutCharChange" name="cut_char" value="{{textList[cur.index].need_cut.char}}" />
+                <view>字符</view>
+            </view>
+            <view class="design_item" wx:if="{{textList[cur.index].need_cut}}">
+                <checkbox-group bindchange="cutWrap">
+                    <checkbox value="wrap" checked="{{textList[cur.index].need_cut.wrap}}">分隔后换行</checkbox>
+                </checkbox-group>
+            </view>
+            <view style="display: flex;" class="btn_box">
+                <button data-type="preview" form-type="submit" class="bg-blue btn" style="width: 100%;margin-top: 10rpx;">预览</button>
+                <button form-type="submit" class="bg-green btn" style="width: 100%;margin-top: 10rpx;">确定</button>
+            </view>
+            <view style="display: flex;" class="btn_box">
+                <view bindtap="delete" class="bg-red btn" style="width: 100%;margin-top: 10rpx;">删除</view>
+                <view class="bg-ered btn" style="width: 100%;margin-top: 10rpx;" bindtap="closeMask">关闭</view>
+            </view>
+        </form>
+    </view>
+    <view class="design_box" wx:if="{{cur.type=='barcode'}}">
+        <form bindsubmit="editDesign">
+            <view class="design_item">
+                <view>X坐标:</view>
+                <input name="x" value="{{barCodeList[cur.index].x}}" />
+                <view>毫米</view>
+            </view>
+            <view class="design_item">
+                <view>Y坐标:</view>
+                <input name="y" value="{{barCodeList[cur.index].y}}" />
+                <view>毫米</view>
+            </view>
+            <view class="design_item">
+                <view>条码高度:</view>
+                <input name="height" value="{{barCodeList[cur.index].height}}" />
+                <view>毫米</view>
+            </view>
+            <view class="design_item">
+                <checkbox-group bindchange="hasText">
+                    <checkbox checked="{{barCodeList[cur.index]['hastext']}}" value="hastext">是否显示单号</checkbox>
+                </checkbox-group>
+            </view>
+            <view class="design_item">
+                <view>传入字段:</view>
+                <input name="deliver" value="{{textList[cur.index].deliver}}" />
+                <view>字段</view>
+            </view>
+            <view wx:if="{{orderInfo}}" data-type="preview" bindtap="{{barCodeList[cur.index].bind?'cancelBind_bc':'openBindWindow'}}" class="bg-{{barCodeList[cur.index].bind?'ered':'yellow'}} btn" style="width: 100%;margin-top: 10rpx;">{{barCodeList[cur.index].bind?'取消绑定':'绑定字段'}}</view>
+            <button data-type="preview" form-type="submit" class="bg-blue btn" style="width: 100%;margin-top: 10rpx;">预览</button>
+            <button form-type="submit" class="bg-green btn" style="width: 100%;margin-top: 10rpx;">确定</button>
+            <view bindtap="delete" class="bg-red btn" style="width: 100%;margin-top: 10rpx;">删除</view>
+            <view class="bg-ered btn" style="width: 100%;margin-top: 10rpx;" bindtap="closeMask">关闭</view>
+        </form>
+    </view>
+    <view class="loadOrder" wx:if="{{cur.type=='load_order'}}">
+        <view>运单号：</view>
+        <input type="text" placeholder="请输入运单号" bindinput="inputLoadOrder" />
+        <view bindtap="startloadOrder" class="btn bg-green" style="width: 100%;">确认</view>
+        <view bindtap="closeLoadOrder" class="btn bg-ered" style="width:100%">关闭</view>
+    </view>
+    <view wx:if="{{cur.type=='save_mb'}}">
+        <form class="loadOrder" bindsubmit="save">
+            <view>保存模版：</view>
+            <input name="name" type="text" placeholder="请输入模板名称" bindinput="inputMbName" />
+            <button form-type="submit" class="btn bg-green" style="width: 100%;">确认</button>
+            <view bindtap="closeSave" class="btn bg-ered" style="width:100%">关闭</view>
+        </form>
+    </view>
+    <view class="load_mb_box" wx:if="{{cur.type=='load_mb'}}">
+        <view class="title">加载模板</view>
+        <view style="overflow: auto;width: 100%;height: 100%;padding: 10rpx 0;">
+            <view style="display: flex;flex-direction: row;" wx:for="{{historyList}}">
+                <view style="flex:5;width: 100%;margin: 10rpx 0;" class="btn bg-green" data-name="{{item}}" bindtap="loadRealMb">{{item}}</view>
+                <view data-name="{{item}}" style="flex:1;width: 100%;margin: 10rpx 10rpx;" class="btn bg-ered">删除</view>
+            </view>
+        </view>
+        <view class="btn bg-red" bindtap="closeSave">关闭</view>
+    </view>
+</view>
+<view class="selector" hidden="{{!hide}}" wx:if="{{rowLineList.length || colLineList.length||textList.length||barCodeList.length}}">
+    <view data-type="{{item.type}}" bindtap="design" data-index="{{index}}" class="btn bg-red" wx:for="{{rowLineList}}">rl{{index+1}}</view>
+    <view data-type="{{item.type}}" bindtap="design" data-index="{{index}}" class="btn bg-orange" wx:for="{{colLineList}}">cl{{index+1}}</view>
+    <view data-type="{{item.type}}" bindtap="design" data-index="{{index}}" class="bg-yellow" style="text-align: center;line-height: 64rpx;border-radius:6rpx;height:64rpx;min-width: 120rpx;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;" wx:for="{{textList}}">{{item.data}}</view>
+    <view data-type="{{item.type}}" bindtap="design" data-index="{{index}}" class="btn bg-orange" wx:for="{{barCodeList}}">bc{{index+1}}</view>
+</view>
+<view hidden="{{!hide}}" bindtap="{{orderInfo?'unLoadOrder':'loadOrder'}}" class="load btn bg-{{orderInfo?'red':'green'}}">
+    {{orderInfo?'卸载订单':'载入订单'}}
+</view>
+<page-container show="{{hide&&openbind}}">
+    <view class="bind_box">
+        <view class="title">可绑定字段</view>
+        <view bindtap="bindField" class="bg-blue field" wx:for="{{fieldList}}" data-field="{{item}}">{{item}}：{{orderInfo[item]}}</view>
+        <view class="title">平台子单信息</view>
+        <view bindtap="bindPlatformField" class="bg-blue field" wx:for="{{platformFieldList}}" data-field="{{item}}">{{item}}：{{platformInfo[item]}}</view>
+    </view>
+</page-container>

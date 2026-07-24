@@ -1,0 +1,31 @@
+
+<view class="margin-bottom">
+  <view class='addr' wx:for='{{tableList}}' wx:key wx:for-index="idx" wx:for-item="list">
+    <view class="flex">
+      <text>是否自动生成单号</text>
+      <switch class='blue switch-pick' id="{{idx}}" bindchange='switchChange' name='if_code_auto' checked="{{list.if_code_auto}}"></switch>
+      <view class="index">[ {{idx+1}} ]</view>
+    </view>
+    <view class="bar solid-bottom" wx:for="{{list.child}}" wx:key wx:if="{{item.code=='code'?!list.if_code_auto:true}}">
+      <view class='title'>{{item.title}}</view>
+      <input bindtap="{{item.disabled?'showDateChoose':''}}" placeholder-class='pclass' placeholder="{{item.placeholder}}" disabled="{{item.disabled}}" data-idx="{{idx}}" data-index="{{index}}" data-code='{{item.code}}' value='{{item.value}}' bindinput="inputValue"></input>
+      <icon style="height:100%;" data-idx="{{idx}}" data-index="{{index}}" bindtap="{{item.icon == 'i-scan'?'doScan':''}}" data-code='{{item.code}}' type="{{item.icon}}" size="36"></icon>
+    </view>
+    <!-- <view class="bar solid-bottom">
+      <view class='title'>日期选择：</view>
+      <input disabled placeholder-class='pclass' placeholder="至少7位" value='{{item.value}}' bindtap="showDateChoose"></input>
+      <icon style="height:100%;" type="i-right" size="36"></icon>
+    </view> -->
+  </view>
+</view>
+
+<view style="height:1px"></view>
+
+<view class='bottom-btn'>
+  <button class='btn text-blue m-p' bindtap="addListChild">
+    <icon type="i-roundadd sub-icon-padding" color="var(--blue)" size="40" /> </button>
+  <button class='btn bg-blue m-p flex-1' bindtap="confirmTieUp">确定绑定</button>
+</view>
+
+
+<date-picker visible="{{ date_picker }}" controlled mode="datetime" value="{{ time }}" lang="zh_CN" data-index="1" data-mode="datetime" bind:confirm="onConfirm" bind:visibleChange="onVisibleChange" />

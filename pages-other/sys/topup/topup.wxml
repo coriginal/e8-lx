@@ -1,0 +1,35 @@
+<view class="account-content">
+  <view class="f24">在线充值</view>
+  <view class="bg-account shadow-blur">
+    <view class="t-f36">我的余额</view>
+    <view class="t-f48 t-fw">{{balance}}</view>
+    <view class="free-content">
+      <view class="flex-b">
+        <text class="op-7">赠送金额：</text>
+        <text>¥{{balance2}}</text>
+      </view>
+      <view class="flex-b">
+        <text class="op-7">本金：</text>
+        <text>¥{{balance1}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="flex">
+    <view class="money-list {{clickItem == index?'click':''}}" bindtap="choosePanel" id="{{index}}" wx:for="{{money_list}}" wx:key>{{item}}
+      <text class="mini"> 元</text>
+    </view>
+  </view>
+  <view class="pay">
+    <view>
+      <icon type="i-weixin" color="var(--green)"></icon>
+    </view>
+    <view class="wx">微信支付</view>
+    <view>
+      <icon type="i-roundcheck" color="var(--red)"></icon>
+    </view>
+  </view>
+</view>
+<view style="height: 1px;"></view>
+<view class='bottom-btn '>
+  <button class='btn bg-gradul-red m-p' bindtap="confirmTopUp">确认支付</button>
+</view>

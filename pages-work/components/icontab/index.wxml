@@ -1,0 +1,11 @@
+<view class='box'>
+  <view class='cell' 
+        wx:for="{{ list }}" wx:key="item" 
+        data-item-id="{{ item.id }}" 
+        bindtap="_handleZanTabChange">
+    <image class='image' 
+           src='{{ selectedId == item.id ? item.selected_url : item.url }}'>
+    </image> 
+    <view class='text'> {{item.title}} </view>
+  </view>
+</view>

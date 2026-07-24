@@ -1,0 +1,109 @@
+.cc-work {
+  padding: 10rpx;
+  background-color: white;
+}
+
+.timel-slot {
+  padding: 10rpx 0 0 30rpx;
+  line-height: 1.6;
+  font-size: 26rpx;
+  color: rgb(102, 99, 99)
+}
+
+.slot-title {
+  opacity: 0.7;
+}
+
+.nothing {
+  height: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: grey;
+}
+
+.m-p {
+  margin: 0 20rpx;
+  padding: 20rpx 32rpx;
+  border-radius: 6rpx;
+  height: 84rpx;
+  font-weight: 500;
+  flex: 1;
+}
+
+.bottom-btn {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  padding: 30rpx 0;
+  background-color: white;
+  z-index: 999;
+}
+
+/* popup */
+
+
+.pop-title {
+  font-size: 17px;
+  color: #444;
+}
+
+.pop-textarea-panel {
+  margin-top: 20rpx;
+  border: 1px solid#eee;
+  padding: 20rpx;
+  border-radius: 10rpx;
+}
+
+.pop-textarea {
+  text-align: left;
+  font-size: 12px;
+  width: 100%;
+}
+
+.popup-flex {
+  display: flex;
+  padding-top: 20rpx;
+}
+
+.popup-flex .btn:first-child {
+  margin-right: 15rpx;
+}
+
+
+textarea {
+  height: 64px;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+
+.time-align-center {
+  display: flex;
+  align-items: center;
+}
+
+.time-align-center view {
+  padding: 0 15rpx;
+}
+
+.popup-flex-switch{
+  display: flex;
+  align-items: center;
+  margin-right: 30rpx;
+}
+.switch {
+  position: relative;
+  transform: scale(0.8);
+}
+
+.switch-pick::after {
+  content: "是";
+}
+
+.switch-pick::before {
+  content: "否";
+}

@@ -1,0 +1,11 @@
+<view class="page">
+  <cell-group>
+    <radio-group>
+      <block wx:for="{{ list }}" wx:key>
+        <cell title="{{ index }}" id="{{index}}" bindtap="clickRadio">
+          <radio slot="footer" checked="{{item.checked}}"></radio>
+        </cell>
+      </block>
+    </radio-group>
+  </cell-group>
+</view>

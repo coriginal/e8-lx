@@ -1,0 +1,61 @@
+<wxs module="utils">
+    var isEmpty=function(obj){
+        return JSON.stringify(obj)==='{}'
+    }
+    module.exports={
+        isEmpty:isEmpty,
+        msg:'nihasdoijosa'
+    }
+</wxs>
+<view class='container'>
+    <view class="camerabox" bindtap="manualScan">
+        <text>点击扫码</text>
+        <camera class="switch blue" bindscancode="getBoxCode" flash="{{openFlash?'on':'off'}}" wx:if="{{openCamera}}" mode="scanCode"></camera>
+    </view>
+    <view class="type_box">
+        <view>打印类型：</view>
+        <view bindtap="chooseType" data-index="{{index}}" class="item {{typeIndex==index && 'type_active'}}" wx:for="{{typeList}}">{{item}}</view>
+    </view>
+    <view class="inputBoxCode">
+        <input value="{{boxCode}}" bindinput="inputBoxCode" placeholder="请输入主单号/子单号/箱货码" />
+        <view class="btn-box">
+            <button bindtap="{{inputHasContent && 'delInput'}}" disabled="{{!inputHasContent}}" class="clear">清空</button>
+            <button class="print" bindtap="getInputBoxCode">打印</button>
+        </view>
+    </view>
+    <view class="list">
+        <view wx:if="{{utils.isEmpty(checkedPrinter)}}">
+            当前未连接热敏打印机，<span bind:tap="openPageContainer" class="golink">点击连接</span>
+        </view>
+        <view wx:else>
+            已连接至<span style="font-style:italic;color: #18bc37;">{{checkedPrinter.name}}</span>，<span bind:tap="openPageContainer" class="golink">重新连接</span>
+        </view>
+    </view>
+    <view class="scan-log-box">
+        <view bind:tap="toLogs" data-id="{{item.id}}" class="log-items" wx:for="{{printedList}}">
+            <view class="left">{{item.code}}</view>
+            <!-- <view class="mid">E8：{{item.e8}}</view> -->
+            <view class="right">平台子单打印进度:{{item.platform}}</view>
+        </view>
+    </view>
+</view>
+<page-container bind:beforeleave="stopBluetoothDevicesDiscovery" position="bottom" class="page-container" show="{{show}}">
+    <view class="printerList">
+        <view class="title">
+            <image src="../../../images/bluetooth.png"></image>
+            <text>蓝牙设备({{printerList.length}})</text>
+        </view>
+        <view class="printer" wx:for="{{!lockPrinter?printerList:''}}">
+            <image mode="aspectFill" src='../../../images/print.png' />
+            <view class="printInfo">
+                <text>{{item.name}}</text>
+                <text>信号强度:{{item.RSSI}}db</text>
+            </view>
+            <text data-name="{{item.name || item.localName}}" data-device-id="{{item.deviceId}}" class="status" style="color: {{checkedPrinter.deviceId==item.deviceId?'#8f939c':'#18bc37'}};" bindtap="createBLEConnection">{{checkedPrinter.deviceId==item.deviceId?'断开连接':'点击连接'}}</text>
+        </view>
+        <view class="lockContainer" hidden="{{!lockPrinter}}">
+            <view class="lock"></view>
+            <image src="../../../images/lockprinter.png"></image>
+        </view>
+    </view>
+</page-container>

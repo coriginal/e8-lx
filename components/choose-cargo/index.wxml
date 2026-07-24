@@ -1,0 +1,17 @@
+<popup position="bottom" visible="{{showPickCargo}}" bind:close="onClose">
+	<view class="flex">
+		<!-- <tabs wux-class="tabs-class" theme="positive" current="{{current}}" controlled bind:change="changeTabs" direction="vertical">
+			<tab wx:for="{{tabList}}" wx:key key="{{index}}" title="{{item.title}}"></tab>
+		</tabs> -->
+		<search placeholder="请输入搜索内容" bind:editing="search"></search>
+		<scroll-view scroll-y class="flex-1 scroll-view">
+			<view class="time time-flex {{current == index && 'choosed'}}" hidden="{{item.hidden}}" wx:for="{{cargoList}}" id="{{index}}" bindtap="choosedCargo" wx:key>
+				<text>{{item.cargo || item.name}}</text>
+				<icon wx:if="{{current == index && 'choosed'}}" type="i-check" color="var(--blue)" size="40"></icon>
+			</view>
+		</scroll-view>
+	</view>
+	<view class="tab-btn">
+		<button class="btn bg-blue" bindtap="confirm">确定</button>
+	</view>
+</popup>

@@ -1,0 +1,45 @@
+.box{
+    padding: 20rpx;
+    width: 100vw;
+    box-sizing: border-box;
+    height: 100vh;
+    .card{
+        width: 100%;
+        background-color: white;
+        height: 100%;
+        border-radius: 20rpx;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .location{
+            position: absolute;
+            top: 20%;
+            color: #333;
+            margin-bottom: 100rpx;
+            width: 60%;
+            text-align: center;
+        }
+        position: relative;
+        .clock-circle{
+            position: absolute;
+            top: 50%;
+            width: 300rpx;
+            height: 300rpx;
+            border-radius: 150rpx;
+            box-shadow: 0 1px 8px 1px rgba($color: #a5a5a5, $alpha: 0.2);
+            background-color: #2979ff;
+            font-size: 40rpx;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            &:active{
+                opacity: .5;
+            }
+        }
+    }
+}
+//40% 1000ms 400ms
+//40ms 1000ms-360ms = 640ms
+//1000/640=1.

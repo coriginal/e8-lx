@@ -1,0 +1,48 @@
+<tabs class="solid-bottom" controlled theme="assertive" current="{{ tab_current }}" bindchange="onChangeTabs">
+	<tab key="{{item.code}}" wx:for="{{tabs}}" wx:key="{{index}}">
+		<badge count="{{list[item.code].data.total}}">{{item.title||''}}</badge>
+	</tab>
+</tabs>
+
+<view class="redpacket">
+	<block wx:for="{{list[tab_current].data.rows}}" wx:key="{{index}}">
+		<view class="redpacket-panel shadow-black {{tab_current == 'using'?'':'redpacket-used'}}">
+			<view class="left-panel">
+				<text class="money">{{item.redPacket.money||''}}</text>
+				<text class="money-remark">录单运费抵扣券</text>
+			</view>
+			<view class="right-panel">
+				<view class="right-panel-title">
+					<text class="t-fw text-black">{{item.redPacket.name}}</text>
+					<text class="text-gray t-f26">限  {{item.redPacket.deadline||'2099-12-31'}} 前</text>
+				</view>
+				<view class="right-panel-content">
+					<view class="flex-1 left-createtime">
+						{{item.redPacket.content||''}}
+					</view>
+					<view>
+						<button class="btn bg-redpacket" bindtap="useRedPacket" data-item="{{item}}">
+							<text class="text-white">{{(item.status.data&&'立即使用')||'红包不可用'}}</text>
+						</button>
+					</view>
+				</view>
+				<view class="right-panel-foot" wx:if="{{item.use_time}}">
+					{{item.use_time}} 使用
+				</view>
+				<view wx:else class="right-panel-foot">
+					{{item.createTime}} 领取
+				</view>
+
+				<view class="foot-ocode" id="{{item.fk_value}}" wx:if="{{item.fk}}" bindtap="copyOcode">
+					<text>单号：</text>
+					<text class="ocode-margin">{{item.fk_value||''}}</text>
+					<icon type="i-copy" size="34"></icon>
+				</view>
+			</view>
+		</view>
+	</block>
+</view>
+<!-- <view style="height:1px"></view> -->
+<!-- <view class="bottom-btn" bindtap="createRedpacket">
+	<button class="btn bg-blue  m-p">优惠券制作</button>
+</view> -->

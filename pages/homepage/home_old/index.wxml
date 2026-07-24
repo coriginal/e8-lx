@@ -1,0 +1,80 @@
+<!-- <view class="box">
+    <view class="logo">
+        <image src="{{logoUrl}}" mode="heightFix" />
+    </view>
+    <view class='menu' wx:if="{{!user.isTest}}">
+        <view class="m-li bg-blue" wx:for="{{menuList1}}" bindtap='goList' id='{{item.url}}' wx:key="menuList" bindlongpress="showExplain" data-code="{{item.code}}">
+            <view class='m-title'>{{item.name}}</view>
+            <view class='m-name'>{{item.code}}</view>
+            <view class='m-icon'>
+                <icon size='60' type='i-{{item.icon}}'></icon>
+            </view>
+        </view>
+    </view>
+</view> -->
+<view class='fade homepage'>
+    <swiper class="card-swiper square-dot'" indicator-dots circular autoplay interval="5000" indicator-color="#8799a3" indicator-active-color="#5c96ec" bindchange="cardSwiper">
+        <swiper-item wx:for="{{swiperList}}" catchtap='swiperItemTap' id="{{item.code}}" data-code="{{item.name}}" wx:key class="{{cardCur==index?'cur':''}}">
+            <view class="swiper-item">
+                <image show-menu-by-longpress lazy-load src="{{item.url}}" mode="widthFix"></image>
+            </view>
+        </swiper-item>
+    </swiper>
+    <official-account class="fade"></official-account>
+    <!-- <noticebar bindtap="bindtapMessage" icon="notification" loop url="../../web/web/web?code=news" closable>
+     【 系统公告 】E8小程序3.0正式版本上线啦！
+    <text class='text-red'>点击查看新内容！</text>
+  </noticebar> -->
+    <view>
+        <slot></slot>
+    </view>
+
+    <view class='menu' wx:if="{{!user.isTest}}">
+        <view class="m-li bg-{{['blue','ered','green','blue','blue'][index]}}" wx:for="{{menuList1}}" bindtap='goList' id='{{item.url}}' wx:key="menuList" bindlongpress="showExplain" data-code="{{item.code}}">
+            <view class='m-title'>{{item.name}}</view>
+            <view class='m-name'>{{item.code}}</view>
+            <view class='m-icon'>
+                <icon size='60' type='i-{{item.icon}}'></icon>
+            </view>
+        </view>
+    </view>
+
+    <view class='card1' wx:if="{{!user.isCustomer}}">
+        <card title="快速入口" Icon="titles" Icolor="var(--blue)">
+            <view slot="body">
+                <grids>
+                    <!-- <grid  wx:for="{{gridList}}" hover-class='default' wx:key='grid' bind:click="goList" wx:if="{{item.app?app_name==item.app:true}}" id="{{item.url}}" thumb="{{item.img}}" label="{{item.name}}">
+                        <icon wx:if="{{item.icon}}" slot="header" size='56' color='{{item.color}}' type='i-{{item.icon}}'></icon>
+                    </grid> -->
+                    <grid wx:for="{{menuList2}}" hover-class='default' wx:key='grid' bind:click="goList" wx:if="{{item.app?app_name==item.app:true}}" id="{{item.url}}" thumb="{{item.img}}" label="{{item.name}}">
+                        <icon wx:if="{{item.icon}}" slot="header" size='56' type='i-{{item.icon}}'></icon>
+                    </grid>
+                </grids>
+            </view>
+        </card>
+    </view>
+
+    <view class='card2' wx:if="{{showHotProduct}}">
+        <card title="热门产品" Icon="titles" Icolor="var(--orange)">
+            <view slot="body">
+                <view class="scroll_box">
+                    <scroll-view class="scroll-view_x" scroll-x style="width: auto;overflow:hidden;">
+                        <view wx:for="{{productList}}" bindtap='swiperItemTap' wx:key="product" class="item_list" style='background-image:url({{item.url}})' id='{{item.title}}'>
+                            <view class="item-title"> {{item.title}} </view>
+                            <view class="item-name"> {{item.name}} </view>
+                        </view>
+                    </scroll-view>
+                </view>
+            </view>
+        </card>
+    </view>
+    <view class="divider">
+        <view class="divider-content">
+            <view>本小程序由杭州卜数科技有限公司提供技术支持</view>
+            <view>网页端请登录{{app_host}}</view>
+        </view>
+        <view class="divider-line"></view>
+    </view>
+    <!-- <button bindtap="startTest">测试按钮</button> -->
+</view>
+<!-- <button bindtap="toMdbjq">面单编辑器1.0</button> -->

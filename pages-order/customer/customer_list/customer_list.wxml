@@ -1,0 +1,73 @@
+<view class="bar">
+	<view class='search'>
+		<view class='search-form'>
+			<icon size='36' type='i-search' />
+			<input bindconfirm="searchCode" bindinput="bindKeyInput" placeholder="关键词过滤（姓名、电话）" type="text" />
+		</view>
+	</view>
+</view>
+
+<view class='customer_list fade' wx:if="{{list.length}}">
+	<view class='customer_panel' wx:for="{{list}}" wx:key id="{{index}}" catchtap='chooseCustomer' hover-class="hover-round">
+		<view class='head'>
+			<view class="flex-1">
+				<text wx:if="{{item.name}}" class='name'>{{item.text||''}}</text>
+				<text wx:if="{{item.phone}}" class="phone">{{fn.secretPhone(item.phone||'',4,-4)}}</text>
+			</view>
+			<view class='type'>
+				<!-- <tag wx:if="{{item.settle_type}}" color="{{item.settle_type == '月结'?'orange':'green'}}">{{item.settle_type}}</tag> -->
+				<!-- <icon type="i-more" color="var(--blue)" size="36" id="{{item.id}}" catchtap="showMoreMenu"></icon> -->
+				<view class="type-detail" id="{{item.id}}" catchtap="showMoreMenu">详细资料</view>
+			</view>
+		</view>
+		<view class='content' wx:if="{{item.address}}">
+			<text class='addr'> {{item.address||''}} </text>
+			<!-- <view class='tags'>
+      <tag wx:for="{{fn.remarkSplit(item.remark)}}" color="{{fn.remarkColor(index)}}" wx:key>{{item}}</tag>
+      <tag wx:for="{{fn.remarkSplit(item.model_name)}}" color='nocolor' wx:key>{{item}}</tag>
+      </view> -->
+		</view>
+	</view>
+</view>
+<view style="height: 1px;"></view>
+<view class="bottom-btn" >
+	<button class='btn bg-blue m-p' bindtap='newCustomer'>新增客户</button>
+</view>
+
+<popup position="bottom" visible="{{ visible }}" bind:close="closeMoreMenu">
+	<view class="more-menu">
+		<view class="round" hover-class="hover-round" wx:for="{{moreMenu}}" wx:key catchtap="clickMoreMenu" data-code="{{item.code}}">
+			<view class="flex-icon">
+				<icon size='48' color="#5a6b92" type="{{item.icon||'i-copy'}}" />
+			</view>
+			<view class="t-f24">{{item.title}}</view>
+		</view>
+	</view>
+	<view class="padding cancel" catchtap="closeMoreMenu">取消</view>
+</popup>
+
+<wxs module="fn">
+	module.exports = {
+		remarkSplit: function(string) {
+			if (string == null) return
+			var a = getRegExp(",|，", "g");
+			var array = string.split(a).filter(function(x) {
+				return x
+			})
+			return array
+		},
+		remarkColor: function(index) {
+			return ['orange', 'gold', 'volcano', 'geekblue', 'blue'][index]
+		},
+		secretPhone: function(str, beginLen, endLen) {
+			if (str) {
+				var reg = getRegExp("[\s\S]", "g");
+				var len = str.length;
+				var firstStr = str.slice(0, beginLen);
+				var lastStr = str.slice(endLen);
+				var middleStr = str.substring(beginLen, len - Math.abs(endLen)).replace(reg, '*');
+				return firstStr + middleStr + lastStr;;
+			}
+		}
+	}
+</wxs>

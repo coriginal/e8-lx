@@ -1,0 +1,82 @@
+<view class='addr solid-bottom'>
+    <view class="bar bg-white solid-bottom">
+        <view class='title'>订单号：</view>
+        <input disabled placeholder-class='pclass' value='{{printData.code}}'></input>
+        <icon type="i-scan scan" color="black" size="36" bindtap="doScanOrder"></icon>
+    </view>
+    <view class="bar bg-white solid-bottom" catchtap="choosePrintMode">
+        <view class='title'>打印模板：</view>
+        <input disabled placeholder-class='pclass' placeholder="{{printData.printMode}}" value='{{printData.printMode}}'></input>
+        <!-- <button catchtap="settingSpeed" class="btn bg-blue btn-setting">打印速度</button> -->
+    </view>
+    <view class="bar bg-white solid-bottom" catchtap="choosePrintTypePop">
+        <view class='title'>选择打印规格：</view>
+        <view>{{choosePrintType.title}}</view>
+    </view>
+</view>
+
+<view class="bar bluetooth-title">
+    <image mode="widthFix" src="../../../images/bluetooth.png" class="blue-img"></image>
+    <view class='flex-1 bluetooth-title'>蓝牙打印机（{{printList.length}}）
+        <text class="bluetooth-notice t-f24" wx:if="{{printList.length}}">点击下方即可进行打印</text>
+    </view>
+</view>
+
+<view wx:if="{{printList.length == 0}}" class="no-bluetooth fade">
+    <image mode="widthFix" src="../../../images/print.png"></image>
+    <view class="margin text-gray">无打印机，请先搜素并添加打印机</view>
+</view>
+<view wx:else>
+    <view class="bluetooth fade" id="{{index}}" catchtap="chooseBluetooth" wx:for="{{printList}}" wx:key>
+        <image class="print-img" src="../../../images/print.png"></image>
+        <view class="flex-1 print-msg">
+            <view class="name" wx:if="{{item.remark}}">{{item.remark}}</view>
+            <view class="name {{item.remark?'t-f24':''}}">{{item.name}}</view>
+            <view class="paper t-f24">纸张大小：
+                <text class="text-red">{{choosePrintType.title}}</text>
+            </view>
+            <view class="text-blue">【 点击打印 】</view>
+        </view>
+        <button class="btn bg-opc" catchtap="bluetoothSetting" id="{{index}}">设置</button>
+        <dialog id="wux-dialog" />
+    </view>
+</view>
+
+<view class="tip-box">
+    <view class="tip-title">
+        <icon type="i-new margin-lr" size="32"></icon>温馨提示
+    </view>
+    <view class='tip-item'>1.蓝牙打印机型号为汉印HM-A300. 部分安卓手机，搜索不到蓝牙设备时，尝试开启手机重的定位服务，开启后，重启蓝牙设备再进行搜索。</view>
+    <view class='tip-item'>2. 扫描不到蓝牙设备时，请尝试重启蓝牙设备、重启手机蓝牙、关闭手机微信，重新进入小程序进行打印机搜索。</view>
+    <view class='tip-item'>3. 以上操作如无法扫描到蓝牙设备，<text bindtap="showImages" class="text-blue underline">请联系客服或开发人员（微信扫一扫）</text>。</view>
+</view>
+
+<view class='bottom-btn'>
+    <!-- <button disabled="{{disabled}}" class='btn bg-blue m-p' catchtap='testPlatform'>
+        <icon wx:if="{{disabled}}" type="i-loading2 i-spin margin-right" size="32" />测试
+    </button> -->
+    <button disabled="{{disabled}}" class='btn bg-blue m-p' catchtap='creteBluetooth'>
+        <icon wx:if="{{disabled}}" type="i-loading2 i-spin margin-right" size="32" /> 搜索蓝牙打印机
+    </button>
+</view>
+
+<popup title="请选择子单补打区间" visible="{{ showLatePlay }}" maskClosable="{{false}}" closable bind:close="onClosePopup">
+    <view class="slider">
+        <wux-slider value="{{ sliderOptions.value }}" showValue min="{{sliderOptions.min}}" max="{{sliderOptions.max}}" controlled bind:change="onChangeSlider" bind:afterChange="afterChangeSlider" trackStyle="background-color:#5c96ec" />
+    </view>
+    <view class="slider-btn">
+        <button bindtap="confirmPlay" class="btn bg-blue">确定补打
+            {{sliderOptions.value[0]+1}}-{{sliderOptions.value[1]}}</button>
+    </view>
+</popup>
+
+<popup title='请选择打印机类型' visible="{{showPrintChoosed}}" bind:close="onClosePrintChoosed">
+    <view class="lh-74" bindtap="handleChoosedPrint" wx:for="{{choosedPrintList}}" data-item="{{item}}" wx:key>
+        {{item.title}}</view>
+</popup>
+
+<popup title='请选择打印规格' visible="{{showPrintTypeChoosed}}" bind:close="onClosePrintChoosed">
+    <view class="lh-74" bindtap="handleChoosedPrintType" wx:for="{{printTypeList}}" data-item="{{item}}" wx:key="key">
+        {{item.title}}
+    </view>
+</popup>

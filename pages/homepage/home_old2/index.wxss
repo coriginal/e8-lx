@@ -1,0 +1,26 @@
+/* pages/homepage/home/index.wxss */
+Page{
+    background-color: white;
+}
+.box{
+    
+}
+.box .top_bg{
+    height: 400rpx;
+    width: 100%;
+    background: linear-gradient(#0081ff,#fff);
+    position:absolute;
+    overflow: hidden;
+    top: 0;
+    opacity: .5;
+}
+.box .top_bg .top_bg_circle{
+    height: 600rpx;
+    width: 600rpx;
+    position: absolute;
+    right: -200rpx;
+    top:-100rpx;
+    border-radius: 300rpx;
+    background: radial-gradient(#0081ff,#1cbbb4 80%);
+    opacity: .7;
+}

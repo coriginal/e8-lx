@@ -1,0 +1,5 @@
+<toptips id="wux-toptips" />
+
+<order truckTaskCode="{{truckTaskCode}}" id="order" orderInfo="{{orderInfo}}" form="{{form}}" ifScan="{{ifScan}}" orderId="{{orderId}}" />
+
+<dialog id="wux-dialog"></dialog>

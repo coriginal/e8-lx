@@ -1,0 +1,114 @@
+<!-- pages-work/tss/capacity/scheduling_task_detail/index.wxml -->
+<view class="page">
+    <view class="task-summary">
+        <text class="summary-label">提货任务</text>
+        <text class="summary-code">{{taskCode || taskId}}</text>
+    </view>
+
+    <van-tabs active="{{activeTab}}" sticky color="#1677ff" bind:change="onTabChange">
+        <van-tab title="包含子单">
+            <view class="list-wrap">
+                <view
+                    wx:for="{{subOrderList}}"
+                    wx:key="id"
+                    class="detail-card"
+                    data-id="{{item.orderId}}"
+                    data-code="{{item.orderCode}}"
+                    bindtap="goSubOrderDetail"
+                >
+                    <view class="card-head">
+                        <view class="code-group">
+                            <text class="card-code">{{item.code || '-'}}</text>
+                            <text class="parent-code">主单 {{item.orderCode || '-'}}</text>
+                        </view>
+                        <van-tag type="primary" plain>{{item.status || '-'}}</van-tag>
+                    </view>
+
+                    <view class="cargo-row">
+                        <view class="cargo-main">
+                            <text class="cargo-name">{{item.cargo || '未填写货物名称'}}</text>
+                            <text class="cargo-pack">{{item.pack || '-'}}</text>
+                        </view>
+                        <text class="task-type">{{item.taskType || '提货'}}</text>
+                    </view>
+                    <view class="cargo-numbers">
+                        <text>{{item.amount || 0}}件</text>
+                        <text>{{item.weight || 0}}kg</text>
+                        <text>{{item.volume || 0}}m³</text>
+                    </view>
+
+                    <view class="address-row">
+                        <text class="address-label address-send">发</text>
+                        <text class="address-text">{{item.sendAddr || '-'}}</text>
+                    </view>
+                    <view class="address-row">
+                        <text class="address-label address-receive">收</text>
+                        <text class="address-text">{{item.receiveAddr || '-'}}</text>
+                    </view>
+                    <view class="customer-row">
+                        <text>客户：{{item.customerName || '-'}}</text>
+                        <van-icon name="arrow" color="#969799" />
+                    </view>
+                </view>
+
+                <van-empty wx:if="{{!subOrderLoading && !subOrderList.length}}" description="暂无子单" />
+                <view wx:if="{{subOrderLoading}}" class="load-state"><van-loading size="20px">加载中...</van-loading></view>
+                <view wx:if="{{subOrderFinished && subOrderList.length}}" class="load-state load-finished">没有更多了</view>
+            </view>
+        </van-tab>
+
+        <van-tab title="包含主单">
+            <view class="list-wrap">
+                <view
+                    wx:for="{{orderList}}"
+                    wx:key="id"
+                    class="detail-card"
+                    data-id="{{item.id}}"
+                    data-code="{{item.code}}"
+                    bindtap="goOrderDetail"
+                >
+                    <view class="card-head">
+                        <view class="code-group">
+                            <text class="card-code">{{item.code || '-'}}</text>
+                            <text class="parent-code">{{item.order_date || item.createtime || '-'}}</text>
+                        </view>
+                        <van-tag type="primary" plain>{{item.status || '-'}}</van-tag>
+                    </view>
+
+                    <view class="order-route">
+                        <view class="route-site">
+                            <text class="route-city route-city-send">{{item.send_city || item.send_site || '未填写'}}</text>
+                            <text class="route-address">{{item.send_addr || item.send_street_no || '-'}}</text>
+                        </view>
+                        <van-icon name="arrow" color="#969799" />
+                        <view class="route-site route-site-end">
+                            <text class="route-city route-city-receive">{{item.receive_city || item.receive_site || '未填写'}}</text>
+                            <text class="route-address">{{item.receive_addr || item.receive_street_no || '-'}}</text>
+                        </view>
+                    </view>
+
+                    <view class="cargo-row order-cargo-row">
+                        <view class="cargo-main">
+                            <text class="cargo-name">{{item.cargo || '未填写货物名称'}}</text>
+                            <text class="cargo-pack">{{item.pack || '-'}}</text>
+                        </view>
+                        <van-icon name="arrow" color="#969799" />
+                    </view>
+                    <view class="cargo-numbers">
+                        <text>{{item.amount || 0}}件</text>
+                        <text>{{item.weight || 0}}kg</text>
+                        <text>{{item.volume || 0}}m³</text>
+                    </view>
+                    <view class="customer-row">
+                        <text>客户：{{item.customer_name || '-'}}</text>
+                        <text>任务装载：{{item.to_amount || '-'}}</text>
+                    </view>
+                </view>
+
+                <van-empty wx:if="{{!orderLoading && !orderList.length}}" description="暂无主单" />
+                <view wx:if="{{orderLoading}}" class="load-state"><van-loading size="20px">加载中...</van-loading></view>
+                <view wx:if="{{orderFinished && orderList.length}}" class="load-state load-finished">没有更多了</view>
+            </view>
+        </van-tab>
+    </van-tabs>
+</view>

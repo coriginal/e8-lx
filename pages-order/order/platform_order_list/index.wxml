@@ -1,0 +1,81 @@
+<view class="list">
+    <!-- <scroll-view scroll-y class='list' scroll-top="{{page_scrollTop}}" enable-back-to-top bindscroll="pageScroll" scroll-into-view="{{scrollInto}}" bindscrolltolower="onReachPageBottom"> -->
+    <van-checkbox-group value="{{ checkboxResult }}" bind:change="checkboxOnChange">
+        <view class='panel fade' wx:for="{{list}}" wx:for-item="order" wx:key id="{{'code' + order.id}}">
+            <view class='head'>
+                <view bindtap="copyCode" id="{{order.code}}" class="head-code"><text class="text-gray">订单号：</text>{{order.code}}
+                    <icon type="i-copy" size="28"></icon>
+                </view>
+                <view style="display: flex;flex-direction: row;justify-content: flex-end;align-items: center;">
+                    <tag wx:if="{{order.hasFollow}}" color="red">跟</tag>
+                    <tag wx:if="{{order.status}}" color='{{statusColor[order.status]}}'>{{order.status}}</tag>
+                    <!-- <van-checkbox shape="square" name="{{order.id}}"></van-checkbox> -->
+                </view>
+            </view>
+            <view class='content' data-domain="{{order.domain}}" data-code="{{order.code}}" data-id="{{order.id}}" bindtap="goOrderRoute">
+                <view class="tag-names" wx:if="{{!_App.user.isCustomer}}">
+                    <view class="tags {{fn.dealTag(item.class)}}" wx:for="{{order.tag_names}}" wx:key="tags">
+                        {{item.title}}
+                    </view>
+                </view>
+                <view class="city">
+                    <view class='content-left'>
+                        <view class="t-f32">{{order.send_site||order.send_city||''}}</view>
+                        <view class="text-center text-gray t-f24">{{order.send_man||''}}</view>
+                    </view>
+                    <view class='content-center'>
+                        <view class="center-view ">
+                            <image class="jiantou opcity" mode="widthFix" src="../../../images/jiantou.png"></image>
+                        </view>
+                    </view>
+                    <view class='content-right'>
+                        <view class="t-f32">{{order.receive_site||order.receive_city||''}}</view>
+                        <view class="text-center text-gray t-f24">{{order.receive_man||''}}</view>
+                    </view>
+                </view>
+                <view class="route">
+                    <!-- <view>
+          <text class="text-gray opcity">运送中： </text>
+          <text>快件到达 【杭州下沙中转场】</text>
+        </view> -->
+                    <view wx:if="{{order.ccode}}">
+                        <text class="text-gray opcity">客户单号： </text>
+                        <text> {{order.ccode}}</text>
+                    </view>
+                    <view>
+                        <text class="text-gray opcity">寄件时间： </text>
+                        <text> {{order.order_date}}</text>
+                    </view>
+                    <view wx:if="{{ customerShowLc && !_App.user.isTest && order.lc_info.length>0}}" catchtap="copyCode" id="{{order.tcode}}">
+                        <text class="text-orange opcity">{{order.lc_info}} </text>
+                        <icon type="i-copy" size="26"></icon>
+                    </view>
+                </view>
+                <!-- <view wx:if="{{order.income_fee}}" style="font-size: 16px;font-weight: bold;color: #333;display: flex;flex-direction: row;justify-content: flex-end;padding:0 0 12px;">
+                    <view>运费：¥{{order.income_fee}}</view>
+                </view> -->
+            </view>
+            <view class='foot'>
+                <button class='btn detail' data-id="{{order.id}}" data-code="{{order.code}}" data-idx="{{index}}" catchtap='goOrderDetail'>订单详情</button>
+                <view class='btn-group'>
+                    <button class='btn text-gray' data-code="{{order.code}}" data-id="{{order.id}}" data-status="{{order.status}}" data-idx="{{index}}" catchtap='moreMenu'>更多操作</button>
+                    <!-- <button catchtap="toPay" data-orderId="{{order.id}}" style="height: 25px;" class="btn bg-green">上传平台</button> -->
+                </view>
+            </view>
+        </view>
+    </van-checkbox-group>
+    <!-- </scroll-view> -->
+</view>
+<popup position="bottom" visible="{{ popVisible }}" bind:close="closeMoreMenu">
+    <row wux-class="">
+        <col span="3" wx:for="{{realMoreMenu}}" wx:key>
+        <view class="round" catchtap="clickMoreMenu" hover-class="hover-round" data-code="{{item.code}}" data-index="{{index}}">
+            <view class="flex-icon">
+                <icon size='48' color="{{item.color||'#5a6b92'}}" type="{{item.icon||'i-copy'}}" />
+            </view>
+            <view class="t-f24 " style="color:{{item.color||''}}">{{item.title}}</view>
+        </view>
+        </col>
+    </row>
+    <view class="padding cancel" catchtap="closeMoreMenu">取消</view>
+</popup>

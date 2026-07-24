@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "转审人员名单",
+  "usingComponents": {
+    "field": "../../../components/field/index"
+  }
+}

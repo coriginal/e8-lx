@@ -1,0 +1,7 @@
+{
+    "navigationBarTitleText": "流程",
+    "enablePullDownRefresh": true,
+    "usingComponents": {
+        "badge": "../../../components/badge/index"
+    }
+}

@@ -1,0 +1,200 @@
+/* ------ Index ------ */
+.startup {
+    height: 100vh;
+    width: 100vw;
+    z-index: 999999999999999;
+    top: 0;
+    left: 0;
+    background-color: white;
+    position: absolute;
+    overflow: hidden;
+}
+
+.bottom-text {
+    font-size: 20rpx;
+    color: #aaa;
+    text-align: center;
+    position: absolute;
+    left: calc(50% - 160rpx);
+    bottom: 3%;
+}
+
+.startup swiper{
+    position: fixed;
+    width: calc(100vw - 60rpx);
+    text-align: center;
+    margin: 0 30rpx;
+}
+
+.top-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-box .wx-swiper-dots.wx-swiper-dots-horizontal {
+    margin-bottom: 2rpx;
+}
+
+.swiper-box .wx-swiper-dot {
+    width: 40rpx;
+    display: inline-flex;
+    height: 10rpx;
+    margin-left: 10rpx;
+    justify-content: space-between;
+    border-radius: 8rpx !important;
+}
+
+.swiper-box .wx-swiper-dot::before {
+    content: '';
+    flex-grow: 1;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 8rpx !important;
+}
+
+.swiper-box .wx-swiper-dot-active::before {
+    background: rgb(70, 150, 241);
+}
+
+.homepage {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.homepage-image {
+    height: auto;
+    width: 100%;
+}
+
+.text-center {
+    padding-top: 20px;
+    position: fixed;
+    width: 100%;
+}
+
+.e8-png {
+    height: 33px;
+    width: 70px;
+}
+
+.page {
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+.landscap {
+    height: 220px;
+    width: 250px !important;
+}
+
+/* ------ Home ------ */
+.wux-badge__dot {
+    right: -6px !important;
+}
+
+swiper .a-swiper-dot {
+    display: inline-block;
+    width: 16rpx;
+    height: 16rpx;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+swiper[class*="-dot"] .wx-swiper-dots {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+}
+
+swiper.square-dot .wx-swiper-dot {
+    background-color: var(--white);
+    opacity: 0.4;
+    width: 10rpx;
+    height: 10rpx;
+    border-radius: 20rpx;
+    margin: 0 8rpx !important;
+}
+
+swiper.square-dot .wx-swiper-dot.wx-swiper-dot-active {
+    opacity: 1;
+    width: 30rpx;
+    transition: all 0.5s;
+}
+
+.card-swiper swiper-item {
+    width: 610rpx !important;
+    left: 70rpx;
+    box-sizing: border-box;
+    padding: 40rpx 0rpx 60rpx;
+    overflow: initial;
+}
+
+.card-swiper swiper-item .swiper-item {
+    width: 100%;
+    display: block;
+    height: 100%;
+    border-radius: 10rpx;
+    transform: scale(0.9);
+    transition: all 0.2s ease-in 0s;
+    overflow: hidden;
+}
+
+.card-swiper swiper-item.cur .swiper-item {
+    transform: none;
+    transition: all 0.2s ease-in 0s;
+}
+
+.card-swiper swiper-item {
+    overflow: scroll !important;
+}
+
+/* ------ my ------ */
+
+/* ------ table ------ */
+
+/* ------ work ------ */
+
+/* ------ partner ------ */
+
+/* ------ order&&router ------ */
+
+.cpts-swiper {
+    height: 100%;
+}
+
+.cpts-swiper swiper-item {
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* ------ query_router ------ */
+
+/* 未选中的 背景样式 */
+
+radio.query_router .wx-radio-input {
+    border-radius: 6rpx;
+    background: transparent;
+    transform: scale(0.85);
+    border: 1rpx solid#eee;
+}
+
+/* 选中后的 背景样式 */
+
+radio.query_router .wx-radio-input.wx-radio-input-checked {
+    border-radius: 6rpx;
+    background: transparent;
+    border: 1rpx solid#eee;
+}
+
+/* 选中后的 对勾样式 */
+
+radio.query_router .wx-radio-input.wx-radio-input-checked::before {
+    color: #5c96ec;
+    zoom: 2;
+}

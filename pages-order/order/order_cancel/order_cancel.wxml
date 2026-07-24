@@ -1,0 +1,19 @@
+<view class="my-system-options fade" wx:if="{{list.length}}">
+  <radio-group>
+    <view class="my-system-menu {{index==_options2.length-1?'':'solid-bottom'}}" wx:for="{{list}}" wx:key id="{{index}}" bindtap="chooseList"  wx:if="{{item.content}}">
+      <view class="left-view">
+        <radio color="var(--red)" id="{{index}}" class="red radio" checked="{{clickId == index}}" ></radio><text class="{{clickId == index?'text-red':''}}">{{item.content}}</text>
+      </view>
+      <view class="right-view" >
+        <icon wx:if="{{clickId == index}}" size='32' color="var(--red)" type='i-check' />
+      </view>
+    </view>
+  </radio-group>
+</view>
+<view class="nothing" wx:else>
+  暂无可选择原因
+</view>
+
+<view class="bottom-btn fade">
+  <button disabled="{{!clickId||disabled}}" bindtap="cancelOrder" class="btn bg-red m-p">确定取消</button>
+</view>

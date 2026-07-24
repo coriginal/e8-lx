@@ -1,0 +1,29 @@
+.radio{
+  display:block;
+  margin:20rpx;
+}
+.write_reason{
+  display:inline-block;
+  border-bottom: 2rpx solid black;
+  font-size: 32rpx;
+  margin-left: 20rpx;
+  padding-bottom: 10rpx;
+}
+.abnormal_btn{
+  color:var(--white);
+  border:1rpx solid var(--orange);
+  padding:5rpx 15rpx;
+  display: flex;
+  align-items: center;
+  border-color:var(--orange);
+  background-color:var(--orange);
+}
+.btn{
+  background-color:var(--cyan);
+  color:var(--white);
+  width:60%;
+  margin: 20rpx 20% 20rpx;
+}
+.list-text{
+  margin: 0 6rpx 8rpx 0;
+}

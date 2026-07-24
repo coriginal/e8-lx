@@ -1,0 +1,38 @@
+<view class="wrap">
+  <scroll-view wx:if="{{taskList.length}}" scroll-y="true" style="height: 800rpx;" class="task_list">
+    <view class="part-title blue">已扫班次单</view>
+    <view wx:for="{{taskList}}" wx:key="item" class="task_card" bindtap="toScan" data-item="{{item}}">
+      <view class="row first">
+        <view><text>{{item.type}}</text><text>{{item.code}}</text></view>
+        <view class="tosacn">继续扫描</view>
+      </view>
+      <view class="row second">
+        <text>{{item.createtime}}</text>
+        <text class="truck">{{(item.driver||'') + '-' + (item.plate_num||'')}}</text>
+      </view>
+      <view class="row">
+        <text>{{item.num}}票</text>
+        <text>{{(item.amount||'-') + '件/' + (item.weight ||'-' )+ '公斤/' + (item.volume||'-') + '方'}}</text>
+      </view>
+    </view>
+  </scroll-view>
+  <view class="create_task">
+    <view class="part-title green">新建班次单</view>
+    <!-- <field title="班次号" name="createtask" bindchange="getValue" data-field="task" value="{{task}}" placeholder="若不填则默认生成">
+      <icon type="i-scan" size="40" bindtap="scanTask" data-field="task"></icon>
+    </field> -->
+    <field title="司机" name="createtask" bindchange="getValue" data-field="plate_num" value="{{task.driver}}">
+      <icon type="i-sort" size="40" bindtap="openTruckList" data-field="plate_num"></icon>
+    </field>
+    <attach recordCode="{{task.tbId}}" bindaddattach="addProof" list="{{task._thumbURLS}}" binddelattach="delattach" scrollx="true" itemId="{{tempid}}" />
+    <view class="row footer">
+      <view class="bottom-btn" bindtap='submit' style="background:var(--green);"> 确定新建 </view>
+    </view>
+  </view>
+</view>
+
+<modal title="选择车牌号" show="{{showModalTask}}" height='auto'  bindconfirm='modalConfirmTruck' bindcancel='modalCancel' showModal>
+  <view class="modal-cancel" hidden="{{!truckList.length}}" >
+    <view class="site" wx:for="{{truckList}}" wx:key="" data-text="{{item}}" bindtap="truckSelect" style="{{item.id == currentDriver.truck_id?'color:red;boder:red':'color:grey;boder:grey'}}">{{(item.plate_num||'') + '-' + (item.driver||'') + '-' + (item.phone||'')}}</view>
+  </view>
+</modal>

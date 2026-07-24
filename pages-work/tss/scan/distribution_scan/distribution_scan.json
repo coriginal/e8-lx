@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "field": "../../../components/field/index" ,
+    "modal": "../../../components/modal/index",
+    "attach": "../../../components/attach/index"
+  }
+}

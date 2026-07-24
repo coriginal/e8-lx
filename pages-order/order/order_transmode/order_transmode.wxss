@@ -1,0 +1,24 @@
+@import '../order_fee/order_fee.wxss';
+
+.flex-panel {
+  height: 84rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15rpx;
+  color: gray;
+  padding: 0 20rpx;
+}
+
+.flex-panel .time-input {
+  height: 84rpx;
+  line-height: 84rpx;
+  text-align: center;
+  margin: 0 20rpx;
+  border-bottom: 1px solid#eee;
+  width: calc((100vw - 70) / 2);
+}
+
+.fade-content{
+  margin-bottom:154rpx;
+}

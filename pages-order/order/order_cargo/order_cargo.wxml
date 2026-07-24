@@ -1,0 +1,110 @@
+<view class="fade">
+  <form bindsubmit='formSubmit'>
+    <block wx:for="{{list}}" wx:key="index">
+      <view bindtap="goComputed" data-type="{{item.type}}" class="{{item.type !== 'tag' && item.type !== 'cargo_selector' ? 'input-panel':''}} {{item.disabled?'':'solid-bottom'}} {{item.type=='navigate'?'margin-top':''}}">
+        <view wx:if="{{item.title && item.type!='tag' && item.type!='cargo_selector'}}" class='title'>{{item.title}}</view>
+        <view wx:if="{{item.type == 'tag'}}" class="tags-box">
+          <view>物品名称</view>
+          <view class="cargo-tags" wx:if="{{item.type=='tag'}}">
+            <view data-cargo="{{item}}" bind:tap="chooseCargoTag" wx:for="{{cargo_tag_list}}" wx:key="index" class="tag {{item.value === tagActive ? 'active-tag' :''}}">
+              {{item.text}}
+            </view>
+          </view>
+          <van-field bind:input="tagCargoChange" custom-style="border:1px solid #f4f4f5;margin-top:12px;" wx:if="{{showOtherCargoInput}}" value="{{ tagCargo }}" placeholder="请输入物品名称" border="{{false}}"/>
+        </view>
+        <view wx:if="{{item.type == 'cargo_selector'}}" class="cargo-selector-header">
+          <view class="title">{{item.title}}</view>
+          <view class="cargo-selector-value" bindtap="openCargoPopup">
+            <text wx:if="{{form.cargo}}" class="cargo-selected-text">{{form.cargo}}</text>
+            <text wx:else class="cargo-placeholder">{{item.placeholder}}</text>
+            <van-icon name="arrow" size="14" color="#999" />
+          </view>
+        </view>
+        <view style="flex:1;display: flex;justify-content: flex-end;" wx:if="{{item.type == 'input'}}">
+          <van-stepper min="{{item.inputType=='number' ? 1 : 0}}" value="{{init[index]}}" bind:change="stepperChange" data-name="{{index}}" name="{{index}}" disabled="{{item.disabled}}" wx:if="{{item.inputType == 'number' || item.inputType == 'digit'}}" integer="{{item.inputType == 'number'}}" input-class="stepper-input" input-width="128px" plus-class="stepper-plus" minus-class="stepper-minus" button-size="36px">
+            <view slot="minus" style="width: 28px;height: 28px;border-radius: 18px;background: #c4c6c9;display: flex;align-items: center;justify-content: center;">
+              <van-icon size="20" color="white" name="minus" />
+            </view>
+            <view slot="plus" style="width: 28px;height: 28px;border-radius: 18px;background: #3c9cff;display: flex;align-items: center;justify-content: center;">
+              <van-icon size="20" color="white" name="plus" />
+            </view>
+          </van-stepper>
+          <input style="text-align: right;" disabled="{{item.disabled}}" wx:else type="{{item.inputType?item.inputType:'digit'}}" placeholder="{{item.placeholder}}" name="{{index}}" data-name="{{index}}" bindinput="{{(item.inputType == 'digit' || !item.inputType) ? 'judgeNumber' : ''}}" bindblur="{{(item.inputType == 'digit' || !item.inputType) ? 'blurJudgeNumber' : '' }}" value="{{form[index]}}" />
+        </view>
+        <view wx:if="{{item.type === 'text'}}">
+          <input style="text-align: right;" disabled="{{item.disabled}}" type="text" placeholder="{{item.placeholder}}" name="{{index}}" data-name="{{index}}" value="{{form[index]}}" />
+        </view>
+        <!-- <view wx:if="{{item.unit}}" class='scan t-f24 '> {{item.unit}} </view> -->
+        <view wx:if="{{item.type === 'navigate'}}">
+          <icon type="i-right" size="34" />
+        </view>
+        <view wx:if="{{item.type == 'input_grids_list'}}" class="{{item.type}}">
+          <block wx:for="{{item.children}}" wx:key="index">
+            <input name="{{item.code}}" type="digit" class="text-center" placeholder-class='' placeholder="{{item.title}}" data-name="{{item.code}}" bindinput="computedListVolume" value="{{v_list_value[item.code]}}"></input>
+          </block>
+          <view>=</view>
+          <input name="{{item.code}}" type="digit" class="text-center" disabled placeholder-class='' placeholder="体积" value="{{v_list_value.volume}}"></input>
+          <button bind:tap="addVolumeItem">增加</button>
+        </view>
+        <view wx:if="{{item.type=='table'}}" class="{{item.type}}">
+          <view class="table-title">
+            <view>长(cm)</view>
+            <view>宽(cm)</view>
+            <view>高(cm)</view>
+            <view>件数</view>
+            <view>立方米</view>
+            <view>操作</view>
+          </view>
+          <view class="table-item" wx:for="{{volumeList}}" wx:for-item="items" wx:key="index">
+            <view>{{items.long}}</view>
+            <view>{{items.width}}</view>
+            <view>{{items.height}}</view>
+            <view>{{items.c_amount}}</view>
+            <view>{{items.volume}}</view>
+            <view bind:tap="removeVolumeItem" data-index="{{index}}">
+              <icon size='30' type='i-delete' />
+            </view>
+          </view>
+        </view>
+        <view wx:if="{{item.type == 'input_grids'}}" class="{{item.type}}">
+          <block wx:for="{{item.children}}" wx:key="index">
+            <input type="digit" class="text-center" placeholder-class='' placeholder="{{item.title}}" name="{{item.code}}" data-name="{{item.code}}" data-index="{{index}}" id="{{item.code}}" value="{{form[index]}}" bindinput="getVolumes"></input>
+          </block>
+        </view>
+        <view wx:if="{{item.type == 'grids'}}" class="{{item.type}}">
+          <!-- <grids>
+            <grid wx:for="{{item.children}}" wx:key>
+              <input type="{{item.title?'number':'text'}}" class="text-center" placeholder="{{item.placeholder}}" name="{{item.title||'其他'}}" value="{{form[item.placeholder]}}"></input>
+            </grid>
+          </grids> -->
+          <block wx:for="{{item.children}}" wx:key="index">
+            <col span="3">
+            <view class="pack solid {{choosePackIdx&&(choosePackIdx==index?'choosed':'')}}" bindtap="choosePack" id="{{index}}" data-pack="{{item}}">
+              {{item}}
+            </view>
+            </col>
+          </block>
+        </view>
+      </view>
+    </block>
+    <view style="height:2px"></view>
+    <view class='bottom-btn'>
+      <button form-type='submit' style="color: white;background-color:#3c9cff;border-radius: 21.5px;" class='btn m-p'>确定</button>
+    </view>
+  </form>
+  <van-popup position="bottom" show="{{ showCargoPopup }}" bind:close="closeCargoPopup" custom-style="border-radius:16rpx 16rpx 0 0;overflow:hidden;z-index:999999999">
+    <view style="background:white;max-height:70vh;overflow:hidden;">
+      <view style="padding:24rpx 32rpx;font-size:32rpx;font-weight:500;border-bottom:2rpx solid #eee;text-align:center;">选择物品</view>
+      <van-search value="{{ searchCargoValue }}" bind:change="onCargoSearch" placeholder="搜索物品名称" />
+      <scroll-view scroll-y style="max-height:55vh;">
+        <van-cell-group>
+          <van-cell wx:for="{{filteredCargoList}}" wx:key="id" title="{{item.cargo}}" label="{{item.udf1 ? '型号: ' + item.udf1 : ''}}" bindtap="selectCargo" data-item="{{item}}" value="{{item.udf4+'KG/'+item.udf5+'m³'}}" />
+        </van-cell-group>
+        <view wx:if="{{filteredCargoList.length === 0}}" style="text-align:center;padding:60rpx 0;color:#999;font-size:28rpx;">
+          <text wx:if="{{searchCargoValue}}">没有找到匹配的物品</text>
+          <text wx:else>暂无物品数据</text>
+        </view>
+      </scroll-view>
+    </view>
+  </van-popup>
+</view>

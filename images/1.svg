@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <style>
+      .stroke-main {
+        fill: none;
+        stroke: #20232A;
+        stroke-width: 9;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .card-bg {
+        fill: #FFFFFF;
+      }
+      .pink-accent {
+        fill: #FFDADB;
+      }
+      .red-accent {
+        fill: none;
+        stroke: #FF3B30;
+        stroke-width: 8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .scan-line {
+        fill: none;
+        stroke: #FF3B30;
+        stroke-width: 6;
+        stroke-linecap: round;
+        stroke-dasharray: 1 1;
+      }
+    </style>
+  </defs>
+
+  <!-- Printer Top Paper -->
+  <path d="M 64 60 L 64 30 C 64 24.5 68.5 20 74 20 L 126 20 C 131.5 20 136 24.5 136 30 L 136 60" class="stroke-main" />
+
+  <!-- Printer Body / Middle Base -->
+  <rect x="30" y="60" width="140" height="56" rx="14" class="card-bg" />
+
+  <!-- Pink Accent (Bottom Left Accent on Printer Base) -->
+  <path d="M 30,102 L 30,102 A 14,14 0 0,0 44,116 L 75,116 L 75,102 Z" class="pink-accent" />
+
+  <!-- Printer Body Outline -->
+  <rect x="30" y="60" width="140" height="56" rx="14" class="stroke-main" />
+
+  <!-- Paper Output (Printed Page below printer) -->
+  <path d="M 54 116 L 54 160 C 54 165.5 58.5 170 64 170 L 110 170 C 115.5 170 120 165.5 120 160 L 120 116" class="card-bg stroke-main" />
+
+  <!-- Lines on Printed Paper -->
+  <line x1="68" y1="134" x2="100" y2="134" class="stroke-main" stroke-width="6" />
+  <line x1="68" y1="150" x2="90" y2="150" class="stroke-main" stroke-width="6" />
+
+  <!-- QR Scan Corners Overlay on Printer Top/Front -->
+  <!-- Top Left Bracket -->
+  <path d="M 44,48 L 44,36 L 56,36" class="red-accent" stroke-width="6" />
+  <!-- Top Right Bracket -->
+  <path d="M 156,48 L 156,36 L 144,36" class="red-accent" stroke-width="6" />
+
+  <!-- Red Scan Line / Light Beam -->
+  <line x1="40" y1="88" x2="160" y2="88" class="red-accent" stroke-width="6" />
+
+  <!-- Bottom Right Badge Circle (QR / Scan Action Badge) -->
+  <circle cx="140" cy="140" r="26" class="card-bg stroke-main" />
+
+  <!-- QR Symbol / Grid Pattern inside Red Action Badge -->
+  <rect x="126" y="126" width="10" height="10" fill="#FF3B30" rx="2" />
+  <rect x="144" y="126" width="10" height="10" fill="#FF3B30" rx="2" />
+  <rect x="126" y="144" width="10" height="10" fill="#FF3B30" rx="2" />
+  <rect x="144" y="144" width="10" height="10" fill="#FF3B30" rx="2" />
+</svg>

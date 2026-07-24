@@ -1,0 +1,130 @@
+<form bindsubmit='submitForm'>
+    <view class="bar customer">
+        <icon size='30' type='i-people' />
+        <text class='customer-choose'>客户：</text>
+        <view bindtap="goChooseCustomer" class='choose-view'>
+            <text style='font-size:26rpx;'>{{(customerInfo&&customerInfo.name)||"- 点击此处选择客户 -"}}</text>
+            <input style="display: none;" name="customerId" disabled value="{{customerInfo.id}}" />
+        </view>
+    </view>
+    <view class='cargo-info'>
+        <view class="input-panel solid-bottom">
+            <view></view>
+            <input style="flex:1" disabled="{{noInputTaskCode}}" class="t-center" placeholder-class='pclass' placeholder="请填写运输单号（选填）" name='taskCode' value='{{formData.taskCode}}'></input>
+            <view class='scan' bindtap="doScan">
+                <icon type='i-scan' size='34'></icon>
+            </view>
+        </view>
+        <view class="input-panel solid-bottom" bindtap="getPickTimes">
+            <view class='title'>落货日期
+            </view>
+            <!-- <input class="t-right t-f24" placeholder-class='t-f24' placeholder="选择日期" disabled value="{{orderInfo.scheduled_pick_time}}"></input> -->
+            <picker name="taskDate" style="flex: 1;text-align: right;" mode="date" value="{{formData.taskDate}}" bindchange="bindDateChange">
+                <view class="text-gray">
+                    {{formData.taskDate || '选择日期'}}
+                </view>
+            </picker>
+            <view class='scan'>
+                <icon color="grey" type='i-right' size='34'></icon>
+            </view>
+        </view>
+        <view class="input-panel solid-bottom" bindtap="getPickTimes">
+            <view class='title'>需要卸车
+            </view>
+            <view class="flex no-padding if-visit">
+                <switch bindchange="switchChange" class='switch blue  switch-pick' name='ifUnload' checked="{{formData.ifUnload}}"></switch>
+            </view>
+        </view>
+        <view class="input-panel solid-bottom">
+            <view class='title'>司机</view>
+            <input class="t-right t-f24" name='driver' placeholder="请填写电话（选填）" value='{{formData.driver}}' />
+            <view class='scan' bindtap="driverChoose">
+                <icon color="grey" type='i-people' size='34'></icon>
+            </view>
+        </view>
+        <view class="input-panel solid-bottom">
+            <view class='title'>电话</view>
+            <input class="t-right t-f24" name='phone' placeholder="请填写司机电话" value='{{formData.phone}}' />
+            <view style="width: 10px;"></view>
+        </view>
+        <view class="input-panel solid-bottom">
+            <view class='title'>车牌</view>
+            <input class="t-right t-f24" name='plateNum' placeholder="请填写车牌" value='{{formData.plateNum}}' />
+            <view style="width: 10px;"></view>
+        </view>
+        <view class="input-panel solid-bottom">
+            <view class='title'>车挂</view>
+            <input class="t-right t-f24" name='trailerNum' placeholder="请填写车挂" value='{{formData.trailerNum}}' />
+            <view style="width: 10px;"></view>
+        </view>
+        <view class="input-panel solid-bottom">
+            <view class='title'>车型</view>
+            <input class="t-right t-f24" name='truckType' placeholder="请填写车型" value='{{formData.truckType}}' />
+            <view style="width: 10px;"></view>
+        </view>
+        <view class="input-panel solid-bottom">
+            <view class='title'>装车重量</view>
+            <input class="t-right t-f24" name='loadWeight' placeholder="装车重量KG" value='{{formData.loadWeight}}' />
+            <view style="width: 10px;"></view>
+        </view>
+        <view class="input-panel solid-bottom">
+            <view class='title'>卸车重量</view>
+            <input class="t-right t-f24" name='unloadWeight' placeholder="卸车重量KG" value='{{formData.unloadWeight}}' />
+            <view style="width: 10px;"></view>
+        </view>
+        <view class="input-panel solid-bottom" bindtap="selectPlanArriveTime">
+            <view class='title'>计划到达
+            </view>
+            <input disabled class="t-right t-f24" name='planArriveTime' placeholder="请选择计划到达时间" value='{{formData.planArriveTime}}' />
+            <view class='scan'>
+                <icon color="grey" type='i-right' size='34'></icon>
+            </view>
+        </view>
+        <view class="input-panel solid-bottom" bindtap="selectRealArriveTime">
+            <view class='title'>实际到达
+            </view>
+            <input disabled class="t-right t-f24" name='realArriveTime' placeholder="请选择实际到达时间" value='{{formData.realArriveTime}}' />
+            <view class='scan'>
+                <icon color="grey" type='i-right' size='34'></icon>
+            </view>
+        </view>
+        <view class="input-panel solid-bottom">
+            <view class='title'>备注</view>
+            <input class="t-right t-f24" name='remark' placeholder="此处输入备注" value='{{formData.remark}}' />
+            <view style="width: 10px;"></view>
+        </view>
+        <view class="input-panel solid-bottom" bindtap="goFee">
+            <view class='title'>费用</view>
+            <input class="t-right t-f24" placeholder-class='t-f24' disabled value="{{totalFee ? '总计：' + totalFee :'点击录入费用'}}"></input>
+            <view class='scan'>
+                <icon color="grey" type='i-right' size='34'></icon>
+            </view>
+        </view>
+        <view class="confirm-view">
+            <button form-type='submit' class="btn bg-blue order-confirm">
+                保存
+            </button>
+        </view>
+    </view>
+</form>
+<van-popup position="bottom" show="{{show}}">
+    <van-datetime-picker bind:confirm="confirmPlanTime" bind:cancel="closePlanPopup" type="datetime" value="{{ currentPlanDate }}" bind:input="onPlanInput" />
+</van-popup>
+<van-popup position="bottom" show="{{showReal}}">
+    <van-datetime-picker bind:confirm="confirmRealTime" bind:cancel="closeRealPopup" type="datetime" value="{{ currentRealDate }}" bind:input="onRealInput" />
+</van-popup>
+<page-container bind:afterleave="closePageContainer" show="{{showPageContainer}}" position="{{showOther ? 'center' :'bottom'}}">
+    <view class="clerk-box" wx:if="{{showClerkChoose}}">
+        <view class="bar-1">
+            <view class='search'>
+                <view class='search-form'>
+                    <icon size='36' type='i-search' />
+                    <input bindconfirm="searchCode" bindinput="bindKeyInput" placeholder="司机过滤" type="text" />
+                </view>
+            </view>
+        </view>
+        <view class="item-box">
+            <view bind:tap="selectedDriver" data-item="{{item}}" class="clerk-item" wx:for="{{filterDriverList}}" wx:key=":this">{{item.driver}}</view>
+        </view>
+    </view>
+</page-container>

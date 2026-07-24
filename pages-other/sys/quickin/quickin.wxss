@@ -1,0 +1,40 @@
+.wux-card__content view {
+  margin: 0 10rpx !important;
+}
+
+.wux-card__hd {
+  padding: 18rpx 10rpx !important;
+  font-size: 28rpx !important;
+}
+
+.gray .wux-grid__label {
+  color: var(--gray) !important;
+}
+
+.grid .wux-grid__label {
+  color: var(--black) !important;
+}
+
+
+.margin-lr {
+  margin: 0 8rpx;
+  color: var(--blue);
+}
+
+.tip-title {
+  font-size: 24rpx;
+  color: #999;
+  padding: 20rpx 30rpx;
+  display: flex;
+  align-items: center;
+  background-color: white;
+}
+
+.tip-item {
+  color: #888;
+  padding: 0 30rpx;
+  line-height: 50rpx;
+}
+.btn-setting {
+  zoom: 0.7;
+}
