@@ -83,12 +83,14 @@
 
   <!-- 收寄件信息 -->
   <view class='content'>
-    <!-- <image mode="heightFix" src="/images/logo.jpg" class="addr-bg"></image> -->
-    <watermark type="image" imgUrl="/images/logo.jpg"></watermark>
+
+    <!-- <image mode="widthFix" src="/images/logo.jpg" class="addr-bg addr-bg1"></image> -->
+    <!-- <watermark type="image" imgUrl="/images/logo.jpg"></watermark> -->
     <view class="addr  {{index=='send'?'solid-bottom':''}}" wx:for="{{fn.deal(orderInfo)}}" wx:key='addr'>
       <view class='img mr-r'>
         <image class='left-img' mode='widthFix' src='../../images/{{index}}.png'> </image>
       </view>
+      <image mode="heightFix" src="/images/logo.jpg" class="addr-bg {{'addr-bg-' + index}}"></image>
       <view class='middle' bindtap='goEditAddr' id='{{index}}'>
         <view class='text-name'>{{fn.contact(item.info)}}</view>
         <view class='text-addr'>{{fn.contact(item.addr)}}</view>
