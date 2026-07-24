@@ -114,14 +114,14 @@ input {
 .addr-bg{
   position: absolute;
   right: 0px;
-  top: calc(50% + 10px);
+  top: calc(50% - 20px);
   z-index: 0;
   opacity: .2;
   height: 40px;
 }
 
 .addr-bg-receive{
-  top: calc(50% + 10px);
+  top: calc(50% - 20px);
   right: 10px;
 }
 
