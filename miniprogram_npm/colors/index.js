@@ -4,7 +4,7 @@ var __DEFINE__ = function(modId, func, req) { var m = { exports: {}, _tempexport
 var __REQUIRE__ = function(modId, source) { if(!__MODS__[modId]) return require(source); if(!__MODS__[modId].status) { var m = __MODS__[modId].m; m._exports = m._tempexports; var desp = Object.getOwnPropertyDescriptor(m, "exports"); if (desp && desp.configurable) Object.defineProperty(m, "exports", { set: function (val) { if(typeof val === "object" && val !== m._exports) { m._exports.__proto__ = val.__proto__; Object.keys(val).forEach(function (k) { m._exports[k] = val[k]; }); } m._tempexports = val }, get: function () { return m._tempexports; } }); __MODS__[modId].status = 1; __MODS__[modId].func(__MODS__[modId].req, m, m.exports); } return __MODS__[modId].m.exports; };
 var __REQUIRE_WILDCARD__ = function(obj) { if(obj && obj.__esModule) { return obj; } else { var newObj = {}; if(obj != null) { for(var k in obj) { if (Object.prototype.hasOwnProperty.call(obj, k)) newObj[k] = obj[k]; } } newObj.default = obj; return newObj; } };
 var __REQUIRE_DEFAULT__ = function(obj) { return obj && obj.__esModule ? obj.default : obj; };
-__DEFINE__(1751248386366, function(require, module, exports) {
+__DEFINE__(1784885718625, function(require, module, exports) {
 var colors = require('./colors');
 module['exports'] = colors;
 
@@ -19,8 +19,8 @@ module['exports'] = colors;
 //
 require('./extendStringPrototype')();
 
-}, function(modId) {var map = {"./colors":1751248386367,"./extendStringPrototype":1751248386377}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1751248386367, function(require, module, exports) {
+}, function(modId) {var map = {"./colors":1784885718626,"./extendStringPrototype":1784885718636}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1784885718626, function(require, module, exports) {
 /*
 
 The MIT License (MIT)
@@ -233,8 +233,8 @@ for (var map in colors.maps) {
 
 defineProps(colors, init());
 
-}, function(modId) { var map = {"./styles":1751248386368,"./system/supports-colors":1751248386369,"./custom/trap":1751248386371,"./custom/zalgo":1751248386372,"./maps/america":1751248386373,"./maps/zebra":1751248386374,"./maps/rainbow":1751248386375,"./maps/random":1751248386376}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1751248386368, function(require, module, exports) {
+}, function(modId) { var map = {"./styles":1784885718627,"./system/supports-colors":1784885718628,"./custom/trap":1784885718630,"./custom/zalgo":1784885718631,"./maps/america":1784885718632,"./maps/zebra":1784885718633,"./maps/rainbow":1784885718634,"./maps/random":1784885718635}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1784885718627, function(require, module, exports) {
 /*
 The MIT License (MIT)
 
@@ -332,7 +332,7 @@ Object.keys(codes).forEach(function(key) {
 });
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1751248386369, function(require, module, exports) {
+__DEFINE__(1784885718628, function(require, module, exports) {
 /*
 The MIT License (MIT)
 
@@ -485,8 +485,8 @@ module.exports = {
   stderr: getSupportLevel(process.stderr),
 };
 
-}, function(modId) { var map = {"./has-flag.js":1751248386370}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1751248386370, function(require, module, exports) {
+}, function(modId) { var map = {"./has-flag.js":1784885718629}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1784885718629, function(require, module, exports) {
 /*
 MIT License
 
@@ -524,7 +524,7 @@ module.exports = function(flag, argv) {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1751248386371, function(require, module, exports) {
+__DEFINE__(1784885718630, function(require, module, exports) {
 module['exports'] = function runTheTrap(text, options) {
   var result = '';
   text = text || 'Run the trap, drop the bass';
@@ -573,7 +573,7 @@ module['exports'] = function runTheTrap(text, options) {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1751248386372, function(require, module, exports) {
+__DEFINE__(1784885718631, function(require, module, exports) {
 // please no
 module['exports'] = function zalgo(text, options) {
   text = text || '   he is here   ';
@@ -686,7 +686,7 @@ module['exports'] = function zalgo(text, options) {
 
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1751248386373, function(require, module, exports) {
+__DEFINE__(1784885718632, function(require, module, exports) {
 module['exports'] = function(colors) {
   return function(letter, i, exploded) {
     if (letter === ' ') return letter;
@@ -699,7 +699,7 @@ module['exports'] = function(colors) {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1751248386374, function(require, module, exports) {
+__DEFINE__(1784885718633, function(require, module, exports) {
 module['exports'] = function(colors) {
   return function(letter, i, exploded) {
     return i % 2 === 0 ? letter : colors.inverse(letter);
@@ -707,7 +707,7 @@ module['exports'] = function(colors) {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1751248386375, function(require, module, exports) {
+__DEFINE__(1784885718634, function(require, module, exports) {
 module['exports'] = function(colors) {
   // RoY G BiV
   var rainbowColors = ['red', 'yellow', 'green', 'blue', 'magenta'];
@@ -722,7 +722,7 @@ module['exports'] = function(colors) {
 
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1751248386376, function(require, module, exports) {
+__DEFINE__(1784885718635, function(require, module, exports) {
 module['exports'] = function(colors) {
   var available = ['underline', 'inverse', 'grey', 'yellow', 'red', 'green',
     'blue', 'white', 'cyan', 'magenta', 'brightYellow', 'brightRed',
@@ -736,7 +736,7 @@ module['exports'] = function(colors) {
 };
 
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1751248386377, function(require, module, exports) {
+__DEFINE__(1784885718636, function(require, module, exports) {
 var colors = require('./colors');
 
 module['exports'] = function() {
@@ -848,8 +848,8 @@ module['exports'] = function() {
   };
 };
 
-}, function(modId) { var map = {"./colors":1751248386367}; return __REQUIRE__(map[modId], modId); })
-return __REQUIRE__(1751248386366);
+}, function(modId) { var map = {"./colors":1784885718626}; return __REQUIRE__(map[modId], modId); })
+return __REQUIRE__(1784885718625);
 })()
 //miniprogram-npm-outsideDeps=["util","os"]
 //# sourceMappingURL=index.js.map

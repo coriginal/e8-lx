@@ -65,7 +65,7 @@ swiper image {
     left: 5%;
 }
 .custom_title{
-    color: #F53B36;
+    color: #000;
     position: absolute;
     font-size: 38rpx;
     left: 5%;
@@ -96,7 +96,7 @@ swiper image {
 
 .button-box>view:nth-child(1),
 .button-box>view:nth-child(4) {
-    background: linear-gradient(135deg, #0081ff, rgb(148, 193, 245));
+    background: linear-gradient(135deg, #E63939, #E63939);
 }
 
 .button-box>view:nth-child(1),
@@ -135,11 +135,11 @@ swiper image {
 }
 
 .button-box>view:nth-child(3) {
-    background: linear-gradient(135deg, #39b54a, rgb(166, 231, 169))
+    background: linear-gradient(135deg, #E63939, #E63939)
 }
 
 .button-box>view:nth-child(2) {
-    background: linear-gradient(135deg, #39b54a, rgb(166, 231, 169))
+    background: linear-gradient(135deg, #E63939, #E63939)
 }
 
 .button-box>view:nth-child(2) {
@@ -184,7 +184,7 @@ swiper image {
     justify-content: space-around;
     align-items: center;
     height: 120rpx;
-    color: gray;
+    color: black;
 }
 
 .row-button>view>view:nth-child(2) {

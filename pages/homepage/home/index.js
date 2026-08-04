@@ -77,11 +77,20 @@ Component({
       let list = menu.find(item => item.code == 'home').children
       let list1 = list.find(item => item.code == 'home_1')
       let list2 = list.find(item => item.code == 'home_2')
-      //D511
-      let menuList1 = list1 ? list1.children.map(i => ({
+    
+      let t = list1 ? list1.children.map(i => ({
         ...i,
         url: Pages[i.url]
       })) : []
+      let tList = [];
+      ["自助查单","快速下单","询价下单","比价下单"].map(k=>{
+        let i = t.findIndex(item=>item.name==k)
+        if(i!= -1){
+          tList.push(...t.splice(i, 1)) 
+        }
+      })
+      //D511
+      let menuList1 = [...tList, ...t]
       let menuList2 = list2 ? list2.children.map(i => ({
         ...i,
         url: Pages[i.url]

@@ -2,7 +2,7 @@
 <form bindsubmit="forSubmit">
 	<view class="scan">
 		<input  focus="{{true}}"  bindconfirm="inputOcode" value="{{ocode}}"  placeholder="请先填写单号或扫码单号"></input>
-		<icon color="#5c96ec" type="i-scan" size="50" style="margin:5px 0 0 10px;"  bindtap="doScan" ></icon>
+		<icon color="#E63939" type="i-scan" size="50" style="margin:5px 0 0 10px;"  bindtap="doScan" ></icon>
 	</view>
 
 	<view class="signDetail" hidden="{{!showReceive}}">

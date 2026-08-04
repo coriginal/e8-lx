@@ -8,7 +8,7 @@ page{
   justify-content: space-around;
 }
 .task-list{
-  font-size: 32rpx;padding-top: 20rpx;color:#5c96ec;
+  font-size: 32rpx;padding-top: 20rpx;color:#E63939;
 }
 .task-icon{
   padding-top: 20rpx;
@@ -58,7 +58,7 @@ image{
 }
 .backdefault{
   text-align: center;
-  color: #5c96ec;
+  color: #E63939;
 }
 
 .taskSelect{

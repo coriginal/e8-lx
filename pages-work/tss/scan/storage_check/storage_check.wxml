@@ -3,7 +3,7 @@
 
   <view class="top" >
     <view class="station">
-      <icon type="i-locationfill" color="#5c96ec" size="40"></icon>
+      <icon type="i-locationfill" color="#E63939" size="40"></icon>
       <input name="station" placeholder="本站" class="stop" bindinput="getValue" data-name="station" value="{{select.station}}"></input>
     </view>
     <view class="total">共<b> {{ scanList.length||0 }}</b> 单</view>
@@ -11,7 +11,7 @@
 
   <view class="scan">
     <input name="handcode" placeholder="输入或扫描单号" confirm-type="done" bindconfirm="handAdd" value="{{handcode}}"></input>
-    <icon color="#5c96ec" type="i-scan" size="50" style="margin:5px 0 0 10px;" bindtap="scanCode" ></icon>
+    <icon color="#E63939" type="i-scan" size="50" style="margin:5px 0 0 10px;" bindtap="scanCode" ></icon>
   </view>
 
   <view class="scan_list">
@@ -36,9 +36,9 @@
   </view>
 
   <view class='bottom'>
-    <!-- <view class="opicon"><icon type="i-roundadd" color="#5c96ec"></icon></view> -->
-    <button class="bottom-btn" type='primary' formType='submit' style="background:#5c96ec;"> 保 存 </button>
-    <!-- <view class="opicon"><icon type="i-list" color="#5c96ec"></icon></view> -->
+    <!-- <view class="opicon"><icon type="i-roundadd" color="#E63939"></icon></view> -->
+    <button class="bottom-btn" type='primary' formType='submit' style="background:#E63939;"> 保 存 </button>
+    <!-- <view class="opicon"><icon type="i-list" color="#E63939"></icon></view> -->
   </view>
 
 </form>

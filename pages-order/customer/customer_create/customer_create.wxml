@@ -45,7 +45,7 @@
 <view class="panel-textarea" style="margin-bottom: 0;">
     <!-- <view class='content-menu'>
         <button class='btn' id="{{item.code}}" wx:key wx:for="{{contentMenu}}" bindtap="menuClick">
-            <icon color='#5c96ec' type='{{item.icon}}' size='32' />{{item.title}}
+            <icon color='#E63939' type='{{item.icon}}' size='32' />{{item.title}}
         </button>
     </view> -->
     <view style="padding:0 20rpx;color: gray;font-size: 28rpx;line-height: 55rpx;">

@@ -1,6 +1,6 @@
 Component({
   properties: {
-    // dakaqiandao | shouhuodizhi | xunjia | shuzhuangtu | sousuo | yunyingzhongxintianchong | wode | shouye | shenpi1 | tongji | dingdan | zuzhi | shenghuo | caidan | tiaokong | qingdan | zixun | renwu1 | liuchengshenpi | shenpiliucheng | baoxiao | daifukuan | yue | fapiao | zhanghaoguanli | wuliu | wuyefei | licaibao | qingjiashenqing | lizhishenqing | renlizhaopin | kaizhibaoxiao | gongzimingxi | yuangongyeji | bianqian | shenpi | bianji | biaoji | zichan | bijia | pay | qr_code | form | scan
+    // xuqi2 | mangqujiance | wodezhanghu | sijirenzheng | xiadan | kehuxiadan | tuidanshezhi | saomadayin | jiedan | piliangxiadan | pay | wodedingdan | saomajiedan | yaoqinghan | chadan | piliangxiadan-old | gongzuotai | dakaqiandao | shouhuodizhi | shuzhuangtu | sousuo | xunjia | yunyingzhongxintianchong | pay-old | wode | shouye | shenpi1 | form | bijia | dingdan | qr_code | zuzhi | shenghuo | caidan | daifukuan | yue | fapiao | zhanghaoguanli | tiaokong | wuliu | qingdan | zixun | wuyefei | licaibao | tongji | renwu1 | qingjiashenqing | lizhishenqing | renlizhaopin | kaizhibaoxiao | liuchengshenpi | shenpiliucheng | gongzimingxi | yuangongyeji | baoxiao | bianqian | shenpi | bianji | biaoji | zichan | scan
     name: {
       type: String,
     },

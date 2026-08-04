@@ -62,7 +62,7 @@
 
 <popup title="请选择子单补打区间" visible="{{ showLatePlay }}" maskClosable="{{false}}" closable bind:close="onClosePopup">
     <view class="slider">
-        <wux-slider value="{{ sliderOptions.value }}" showValue min="{{sliderOptions.min}}" max="{{sliderOptions.max}}" controlled bind:change="onChangeSlider" bind:afterChange="afterChangeSlider" trackStyle="background-color:#5c96ec" />
+        <wux-slider value="{{ sliderOptions.value }}" showValue min="{{sliderOptions.min}}" max="{{sliderOptions.max}}" controlled bind:change="onChangeSlider" bind:afterChange="afterChangeSlider" trackStyle="background-color:#E63939" />
     </view>
     <view class="slider-btn">
         <button bindtap="confirmPlay" class="btn bg-blue">确定补打

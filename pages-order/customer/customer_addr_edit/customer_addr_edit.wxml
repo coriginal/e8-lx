@@ -72,7 +72,7 @@
         <view class="panel-textarea ">
             <view class='content-menu'>
                 <button class='btn' id="{{item.code}}" wx:key wx:for="{{contentMenu}}" bindtap="menuClick">
-                    <icon color='#5c96ec' type='{{item.icon}}' size='32' />{{item.title}}
+                    <icon color='#E63939' type='{{item.icon}}' size='32' />{{item.title}}
                 </button>
             </view>
             <view class='textarea ' wx:if="{{!visible&&!voicePop}}">

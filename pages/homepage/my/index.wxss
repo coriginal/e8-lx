@@ -1,4 +1,33 @@
 /* pages/homepage/my/index.wxss */
+.header-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 400px;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 20% 10%,
+      rgba(255, 225, 170, .45) 0%,
+      rgba(255, 225, 170, 0) 42%),
+
+    radial-gradient(circle at 80% 15%,
+      rgba(235, 53, 50, .28) 0%,
+      rgba(235, 53, 50, 0) 40%),
+
+    radial-gradient(circle at 55% 35%,
+      rgba(255, 175, 175, .18) 0%,
+      rgba(255, 175, 175, 0) 45%),
+
+    linear-gradient(
+      180deg,
+      #fffdfb 0%,
+      #fdf8f2 55%,
+      #ffffff 100%
+    );
+}
+
+
 .box {
     height: 100%;
 }
@@ -148,7 +177,7 @@
     height: 48px;
     border-radius: 24px;
     opacity: 1;
-    background: linear-gradient(168.4deg, rgba(122, 215, 255, 1) 0%, rgba(52, 123, 241, 1) 100%);
+    background: #E63939;
     box-shadow: 0px 8.5px 25.5px rgba(233, 239, 245, 1);
     text-align: center;
     line-height: 48px;

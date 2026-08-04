@@ -1,6 +1,6 @@
 <view class="search_bar">
     <input bindconfirm="getOrder" placeholder="请输入主单号/子单号/箱货码" />
-    <icon color="#5c96ec" type="i-scan" size="50" bindtap="scanCode"></icon>
+    <icon color="#E63939" type="i-scan" size="50" bindtap="scanCode"></icon>
 </view>
 <view class="order_info_box" hidden="{{!currentOrderInfo}}">
     <view class="title">订单信息</view>

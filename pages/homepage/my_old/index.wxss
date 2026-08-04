@@ -5,7 +5,7 @@
     position: relative;
     border: none;
     border-color: transparent;
-    /* background-color: #5c96ec; */
+    /* background-color: #E63939; */
     background-image: url(https://bd-image.oss-cn-hangzhou.aliyuncs.com/e8v3/wx_my/bg.png);
     /* overflow: hidden; */
     font-weight: 300;

@@ -54,7 +54,7 @@
                             </text>
                         </view>
                         <!-- <view class="order-status">{{item.status||''}}</view> -->
-                        <checkbox class="fade" color="#5c96ec" checked="{{item.checked}}" value="{{item.id}}" />
+                        <checkbox class="fade" color="#E63939" checked="{{item.checked}}" value="{{item.id}}" />
                     </view>
                     <view class="content-middle solid-bottom" data-order-code="{{item.order_code}}" data-order-id="{{item.order_id}}" catchtap="goOrderInfo">
                         <view class="flex align-center" wx:for="{{['send','receive']}}" wx:for-item="addr" wx:if="{{item[addr+'_addr']}}" wx:key>

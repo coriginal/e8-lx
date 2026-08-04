@@ -10,7 +10,7 @@
     <view style="top: {{titleTop}}px;" class="{{title=='E8物流'?'title':'custom_title'}}">{{title}}</view>
     <view style="margin-top: {{top}}px;width: 100%;">
         <!-- <navigator url="/pages-order/order/attach_upload_scan/index">tiao</navigator> -->
-        <swiper indicator-dots circular autoplay interval="5000" indicator-color="#8799a3" indicator-active-color="#5c96ec" bindchange="cardSwiper">
+        <swiper indicator-dots circular autoplay interval="5000" indicator-color="#8799a3" indicator-active-color="#E63939" bindchange="cardSwiper">
             <swiper-item wx:for="{{swiperList}}" catchtap='swiperItemTap' id="{{item.code}}" data-code="{{item.name}}" wx:key>
                 <image show-menu-by-longpress lazy-load src="{{item.url}}"></image>
             </swiper-item>
@@ -20,7 +20,7 @@
                 <view wx:for="{{menuList1}}" bindtap='goList' id='{{item.url}}' wx:key="menuList" bindlongpress="showExplain" data-code="{{item.code}}">
                     <view style="white-space: nowrap;">{{item.name}}</view>
                     <icon wx:if="{{index!=0&& item.name!='比价下单'}}" size="{{index==1?'78':'45'}}" type='i-{{item.icon}}'></icon>
-                    <iconfont wx:if="{{index!=0&&item.name=='比价下单'}}" size="50" name="bijia"></iconfont>
+                    <iconfont wx:if="{{index!=0&&item.name=='比价下单'}}" size="30" name="bijia"></iconfont>
                     <image class="cloud" wx:if="{{index==0}}" src="../../../images/duoyun.png"></image>
                     <image class="cloud2" wx:if="{{index==0}}" src="../../../images/duoyun.png"></image>
                     <image wx:if="{{index==0}}" src="../../../images/zhifeiji-3.png"></image>
@@ -30,7 +30,18 @@
         <view class="row-button" wx:if="{{menuList2.length}}">
             <view wx:for="{{menuList2}}" hover-class='default' wx:key='grid' bindtap="goList" wx:if="{{item.app?app_name==item.app:true}}" id="{{item.url}}">
                 <!-- <icon color="gray" size="45" type='i-{{item.icon}}'></icon> -->
-                <iconfont size="40" name="{{item.icon}}"></iconfont>
+                <iconfont wx:if="{{item.name=='批量下单'}}" size="28" name="piliangxiadan"></iconfont>
+                <iconfont wx:elif="{{item.name=='扫码接单'}}" size="28" name="jiedan"></iconfont>
+                <iconfont wx:elif="{{item.name=='扫码打印'}}" size="28" name="saomadayin"></iconfont>
+                <iconfont wx:elif="{{item.name=='扫码推单'}}" size="28" name="tuidanshezhi"></iconfont>
+                <iconfont wx:elif="{{item.name=='客户批量下单'}}" size="28" name="kehuxiadan"></iconfont>
+                <iconfont wx:elif="{{item.name=='邀请客户录单'}}" size="28" name="yaoqinghan"></iconfont>
+                <iconfont wx:elif="{{item.name=='扫码下单'}}" size="28" name="xiadan"></iconfont>
+                <iconfont wx:elif="{{item.name=='我的订单'}}" size="28" name="wodedingdan"></iconfont>
+                <iconfont wx:elif="{{item.name=='查盲区'}}" size="28" name="mangqujiance"></iconfont>
+                <iconfont wx:elif="{{item.name=='我的账户'}}" size="28" name="wodezhanghu"></iconfont>
+                <iconfont wx:elif="{{item.name=='续期'}}" size="28" name="xuqi2"></iconfont>
+                <iconfont wx:else="" size="28" name="{{item.icon}}"></iconfont>
                 <view>{{item.name}}</view>
             </view>
         </view>

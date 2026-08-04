@@ -50,7 +50,7 @@
 }
 
 .wux-tabbar-item--positive.wux-tabbar-item--current {
-  color: #5c96ec;
+  color: #E63939;
 }
 
 .wux-tabbar-item--calm.wux-tabbar-item--current {

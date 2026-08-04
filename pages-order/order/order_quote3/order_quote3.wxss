@@ -37,7 +37,7 @@
 }
 
 .choosed-transmode {
-  background-color: #5c96ec;
-  border-color: #5c96ec;
+  background-color: #E63939;
+  border-color: #E63939;
   color: white;
 }

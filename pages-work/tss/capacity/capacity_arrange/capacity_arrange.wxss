@@ -59,7 +59,7 @@
 .shadow-blue {
   background-color: var(--blue);
   color: white;
-  border-color: #5c96ec;
+  border-color: #E63939;
   box-shadow: 0 2rpx 6rpx var(--blue);
 }
 

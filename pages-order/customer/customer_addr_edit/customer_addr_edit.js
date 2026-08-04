@@ -71,7 +71,7 @@ Page({
             type: options.type || 'send',
             customer_id: options.customer_id,
             form: JSON.parse(options.data || "{}").obj || this.data.form,
-            textarea: "例子：陈大贞 13754729380 浙江省杭州市江干区1号大街68号",
+            textarea: "例子：皓景 18988826656 广东省佛山市三水区白坭镇汇金路43号1栋",
             ...((config?.xcx_edit_customer?.content=='true' && options.type == 'send') && {
                 companyName: options.companyName
             })

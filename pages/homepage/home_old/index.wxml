@@ -13,7 +13,7 @@
     </view>
 </view> -->
 <view class='fade homepage'>
-    <swiper class="card-swiper square-dot'" indicator-dots circular autoplay interval="5000" indicator-color="#8799a3" indicator-active-color="#5c96ec" bindchange="cardSwiper">
+    <swiper class="card-swiper square-dot'" indicator-dots circular autoplay interval="5000" indicator-color="#8799a3" indicator-active-color="#E63939" bindchange="cardSwiper">
         <swiper-item wx:for="{{swiperList}}" catchtap='swiperItemTap' id="{{item.code}}" data-code="{{item.name}}" wx:key class="{{cardCur==index?'cur':''}}">
             <view class="swiper-item">
                 <image show-menu-by-longpress lazy-load src="{{item.url}}" mode="widthFix"></image>

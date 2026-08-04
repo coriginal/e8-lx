@@ -107,7 +107,7 @@
 
 .bg-gradul-blue {
   color: white;
-  background: linear-gradient(45deg, #5c95ec, #5c96ec83);
+  background: linear-gradient(45deg, #5c95ec, #E6393983);
 }
 
 .share-content image {

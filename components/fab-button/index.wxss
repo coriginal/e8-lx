@@ -20,7 +20,7 @@
   border-radius: 1000rpx;
   padding: 0;
   box-shadow: 0 0 8rpx rgba(0, 0, 0, .14), 0 8rpx 16rpx rgba(0, 0, 0, .28);
-  background: linear-gradient(45deg, #5c96ec, rgb(92, 150, 236, .5));
+  background: linear-gradient(45deg, #E63939, rgb(92, 150, 236, .5));
   color: white;
   display: flex;
   justify-content: center;

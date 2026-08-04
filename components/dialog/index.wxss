@@ -43,7 +43,7 @@
 }
 
 .wux-dialog__button--blue {
-  color: #5c96ec !important
+  color: #E63939 !important
 }
 
 .wux-dialog__button--red {

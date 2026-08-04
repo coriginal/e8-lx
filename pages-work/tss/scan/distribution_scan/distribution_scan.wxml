@@ -3,9 +3,9 @@
 
         <view class="top" hidden="{{ifContinue}}">
             <view class="station">
-                <icon type="i-locationfill" color="#5c96ec" size="40" bindtap="openSiteList"></icon>
+                <icon type="i-locationfill" color="#E63939" size="40" bindtap="openSiteList"></icon>
                 <input name="station" placeholder="本站" class="stop" bindinput="getValue" data-name="station" value="{{select.station}}"></input>
-                <icon type="i-focus" color="#5c96ec" size="40" bindtap="doLocation"></icon>
+                <icon type="i-focus" color="#E63939" size="40" bindtap="doLocation"></icon>
             </view>
             <view wx:if="{{select.fields.length}}">
                 <field wx:for="{{select.fields}}" wx:key="" title="{{item.name}}" name="{{item.code}}" bindchange="getValue" data-field="{{item.code}}" placeholder="{{item.placeholder}}" value="{{select[item.code]}}" disabled="{{item.disabled||''}}" bindtap="{{item.bindtap||''}}">

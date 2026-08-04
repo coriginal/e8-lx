@@ -5,7 +5,7 @@ page{
   display: flex;padding: 10px;
 }
 .stop{
-  font-size: 18px;padding-left: 8px;color: #5c96ec;width: 100%;
+  font-size: 18px;padding-left: 8px;color: #E63939;width: 100%;
 }
 
 .main_scan{

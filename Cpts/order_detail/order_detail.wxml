@@ -1,5 +1,7 @@
 <take-phone bind:close="closePhone" phoneList="{{phoneList}}" />
 
+<image mode="widthFix" src="/images/watermark.jpg" class="watermark"></image>
+
 <view class="detail-page fade" wx:if="{{order}}">
     <row wx:if="{{order.status=='已取消'}}">
         <col span="12" class="solid-bottom">

@@ -15,7 +15,7 @@ Page({
     printData: {},
     elecImgUrl: '../../../images/modal.png',
     moreMenu: [
-      { code: 'doReceive', title: '签收', icon: 'i-pick', color: '#5c96ec' },
+      { code: 'doReceive', title: '签收', icon: 'i-pick', color: '#E63939' },
       { code: 'showElcOrder', title: '电子面单' },
       { code: 'printOrder', title: '打印订单', icon: 'i-punch' },
     ],

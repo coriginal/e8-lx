@@ -9,11 +9,11 @@ const defaulGridtList = (Pages = {}) => [
   { name: '邀请客户录单', url: Pages.qrcode, icon: 'qr_code' },
   { name: '充值', url: Pages.topup, icon: 'pay', app: 'eff' },
   { name: '续期', url: Pages.renew, icon: 'pay', app: 'e8_prod' },
-  // { name: '审批流', url: Pages.workflow, icon: 'post', color: '#5c96ec', app: 'e8_prod' }
+  // { name: '审批流', url: Pages.workflow, icon: 'post', color: '#E63939', app: 'e8_prod' }
   // { name: '报表', url: `${Pages.web}?type=reports`, icon: 'apps', color: '#e6833e' },
   // { name: '工作流', url: '', icon: 'squarecheck', color: '#e6833e' },
   // { name: '新手教程', url: Pages.learning, icon: 'video', color: '#e54d42' },
-  // { name: '问题反馈', url: '', icon: 'question', color: '#5c96ec' },
+  // { name: '问题反馈', url: '', icon: 'question', color: '#E63939' },
 ]
 
 const defaultMenuList = (Pages = {}) => [

@@ -60,7 +60,7 @@
 					</view>
 				</view>
 				<view wx:if="{{tab_current === 'Approving_list' && ifChoosedAll}}" class="right-checkbox" bindtap="chooseItem" id="{{index}}">
-					<checkbox value="{{item.id}}" color="#5c96ec" checked="{{item.checked}}"></checkbox>
+					<checkbox value="{{item.id}}" color="#E63939" checked="{{item.checked}}"></checkbox>
 				</view>
 			</view>
 		</block>

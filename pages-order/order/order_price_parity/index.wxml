@@ -37,7 +37,7 @@
       <!-- <view class="copy_content bg-blue">浙江省杭州市钱塘区下沙路浙江省杭州市钱塘区下沙路浙江省杭州市钱塘区下沙路浙江省</view> -->
       <view></view>
       <view bindtap="pasteAddress">
-        <icon color='#5c96ec' type='i-formfill' size='32' />
+        <icon color='#E63939' type='i-formfill' size='32' />
         <view style="margin-left: 20rpx;color:#333">智能粘贴</view>
       </view>
     </view>

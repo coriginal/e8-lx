@@ -27,7 +27,7 @@
   color: white;
 }
 .bg-blue{
-  background-color: #5c96ec;
+  background-color: #E63939;
 }
 
 .bg-red{

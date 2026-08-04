@@ -24,7 +24,7 @@
 </wxs>
 
 <view class='fade my'>
-	<!-- <noticebar wx:if="{{fn.isEffClerk(user.isEff,user.roles,app_name)}}" backgroundcolor='white' color='#5c96ec' icon="deliver_fill" url="{{joinE8}}" closable>尚未认证成为独立物流承运商，
+	<!-- <noticebar wx:if="{{fn.isEffClerk(user.isEff,user.roles,app_name)}}" backgroundcolor='white' color='#E63939' icon="deliver_fill" url="{{joinE8}}" closable>尚未认证成为独立物流承运商，
 		<text class='text-red'>点击申请 ></text>
 	</noticebar> -->
 	<view class='my-bg'>

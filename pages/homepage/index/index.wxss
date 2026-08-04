@@ -195,6 +195,6 @@ radio.query_router .wx-radio-input.wx-radio-input-checked {
 /* 选中后的 对勾样式 */
 
 radio.query_router .wx-radio-input.wx-radio-input-checked::before {
-    color: #5c96ec;
+    color: #E63939;
     zoom: 2;
 }

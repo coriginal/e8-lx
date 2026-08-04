@@ -34,7 +34,7 @@
             <icon color='#333' type="i-{{fn.icon(item.icon)[0]}}" />
         </badge>
         <badge dot="{{item.name == '运营中心' && showDot}}" slot="icon-off">
-            <icon color='#5c96ec' type="i-{{fn.icon(item.icon)[1]}}" />
+            <icon color='#E63939' type="i-{{fn.icon(item.icon)[1]}}" />
         </badge>
     </tabbar-item>
 </tabbar>

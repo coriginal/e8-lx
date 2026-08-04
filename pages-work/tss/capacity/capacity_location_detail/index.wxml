@@ -27,7 +27,7 @@
                     </view>
                     <view class="check" hidden="{{!showCheck}}">
                         <!-- <text>{{order.status}}</text> -->
-                        <checkbox color="#5c96ec" class="radio" checked="{{order.selected}}" value="{{item.title}}" catchtap="switchChange" data-id="{{order.id}}"></checkbox>
+                        <checkbox color="#E63939" class="radio" checked="{{order.selected}}" value="{{item.title}}" catchtap="switchChange" data-id="{{order.id}}"></checkbox>
                     </view>
                 </view>
                 <view class="addr_info">

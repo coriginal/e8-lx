@@ -3,7 +3,7 @@
 
   <view class="top" >
     <view class="station">
-      <icon type="i-people" color="#5c96ec" size="40" bindtap="openCustomerList"></icon>
+      <icon type="i-people" color="#E63939" size="40" bindtap="openCustomerList"></icon>
       <input name="customer" placeholder="客户" class="stop" data-name="customer" value="{{select.customer}}" disabled="true" bindtap="openCustomerList"></input>
     </view>
     <view class="total">共<b> {{ scanList.length||0 }}</b> 单</view>
@@ -11,7 +11,7 @@
 
   <view class="scan">
     <input name="handcode" placeholder="输入或批量复制单号（空格隔开）" confirm-type="done" bindconfirm="handAdd" value="{{handcode}}" maxlength="-1"></input>
-    <icon color="#5c96ec" type="i-scan" size="50" style="margin:5px 0 0 10px;" bindtap="scanCode" ></icon>
+    <icon color="#E63939" type="i-scan" size="50" style="margin:5px 0 0 10px;" bindtap="scanCode" ></icon>
   </view>
 
   <view class="scan_list">
@@ -31,7 +31,7 @@
     <checkbox-group bindchange="checkboxChange" class="checkbox">
       <checkbox checked="{{ifFrezen}}" />批量冻结
     </checkbox-group>
-    <button class="bottom-btn" type='primary' formType='submit' style="background:#5c96ec;"> 保 存 </button>
+    <button class="bottom-btn" type='primary' formType='submit' style="background:#E63939;"> 保 存 </button>
   </view>
 
 </form>

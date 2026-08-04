@@ -104,14 +104,14 @@
     <view class='content-menu'>
       <view wx:key wx:for="{{contentMenu}}" class="{{index==1?'solid-left solid-right':''}}">
         <button class="btn trans" id="{{item.code}}" bindtap="menuClick">
-          <icon color='#5c96ec' type='{{item.icon}}' size='32' />{{item.title}}
+          <icon color='#E63939' type='{{item.icon}}' size='32' />{{item.title}}
         </button>
       </view>
     </view>
     <view class='content-menu' style="border-top: 1rpx solid whitesmoke;padding: 10rpx 10rpx 20rpx;" wx:if="{{otherMenu.length}}">
       <view wx:key wx:for="{{otherMenu}}" class="{{index==1?'solid-left solid-right':''}}">
         <button class="btn trans" id="{{item.code}}" bindtap="otherClick">
-          <icon color='#5c96ec' type='{{item.icon}}' size='32' />{{item.title}}
+          <icon color='#E63939' type='{{item.icon}}' size='32' />{{item.title}}
         </button>
       </view>
     </view>
@@ -168,7 +168,7 @@
 					</view> -->
           <!-- <radio-group name='settle_type' class="flex flex-1 radio-group" bindchange="settleTypeChoose">
 						<view wx:for="{{orderInfo.settleTypeList}}" wx:key>
-							<radio color="#5c96ec" checked="{{item.checked}}" value="{{item.title}}" />{{item.title}}
+							<radio color="#E63939" checked="{{item.checked}}" value="{{item.title}}" />{{item.title}}
 						</view>
 					</radio-group> -->
           <view class="flex flex-1">

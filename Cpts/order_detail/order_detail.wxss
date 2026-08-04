@@ -1,3 +1,12 @@
+.watermark{
+  position: absolute;
+  top: 38px;
+  z-index: 99;
+  width: 40vw;
+  left: calc(50% - 20vw);
+  opacity: .4;
+}
+
 .man-msg {
     /* margin: 20rpx 0; */
     padding: 20rpx;
