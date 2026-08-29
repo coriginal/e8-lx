@@ -1,5 +1,7 @@
 <dialog id="wux-dialog" />
 
+<view class="order-detail-root {{chooseType == 'detail' ? 'with-save-foot' : ''}}">
+
 <view class="page">
     <view class='flex'>
         <view style='width:100%'>
@@ -34,6 +36,14 @@
         </view>
     </swiper-item>
 </swiper>
+
+</view>
+
+<!-- 保存为图片 -->
+<view class="save-foot" wx:if="{{chooseType == 'detail'}}">
+    <button class="btn bg-blue" bindtap="saveAsImage">保存为图片</button>
+</view>
+<canvas type="2d" id="saveCanvas" class="save-canvas"></canvas>
 <!-- <view class="foot">
   <button class="btn bg-ered">取消发货</button>
   <button class="btn bg-blue">打印</button>
