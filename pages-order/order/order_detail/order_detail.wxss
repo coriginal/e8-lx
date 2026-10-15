@@ -66,9 +66,10 @@ swiper {
   height: calc(100vh - 64rpx - 110rpx);
 }
 
-/* 组件自身的底部操作栏上移避让 */
+/* 组件底部操作栏：swiper 内 transform 会使 fixed 相对 swiper 定位，
+   swiper 高度已预留 110rpx，bottom:0 即紧贴「保存为图片」栏上方，无需额外抬升 */
 .with-save-foot .bottom-btn {
-  bottom: 110rpx;
+  bottom: 0;
 }
 
 .save-foot {

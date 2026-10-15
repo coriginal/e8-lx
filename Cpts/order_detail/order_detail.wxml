@@ -45,7 +45,28 @@
         </view>
         </col>
     </row>
-
+    <row wx:if="{{order.rcode}}">
+        <col span="12" class="solid-bottom">
+        <view class="placeorder">
+            <view class="placeorder-flex">
+                <text class="opcity">回单号：</text>
+                <view class="flex-1 t-right t-fw">{{order.rcode||''}} </view>
+                <icon wux-class="i-copy" type="i-copy" size="28" data-code="{{order.rcode}}" bindtap="copyCode"></icon>
+            </view>
+        </view>
+        </col>
+    </row>
+    <row wx:if="{{showTcode && order.tcode}}">
+        <col span="12" class="solid-bottom">
+        <view class="placeorder">
+            <view class="placeorder-flex">
+                <text class="opcity">承运单号：</text>
+                <view class="flex-1 t-right t-fw">{{order.tcode||''}} </view>
+                <icon wux-class="i-copy" type="i-copy" size="28" data-code="{{order.tcode}}" bindtap="copyCode"></icon>
+            </view>
+        </view>
+        </col>
+    </row>
     <row wx:if="{{!user.isCustomer}}">
         <col span="12" class="solid-bottom">
         <view class="placeorder">
@@ -258,16 +279,16 @@
         <col span="6" class="solid-bottom">
         <view class="placeorder">
             <view class="placeorder-flex">
-                <text class="opcity">货物名称：</text>
-                <view class="flex-1 t-right">{{order.cargo||''}}</view>
+                <text class="opcity">计费重量：</text>
+                <view class="flex-1 t-right">{{order.charged_weight||''}} {{weight_unit}}</view>
             </view>
         </view>
         </col>
         <col span="6" class="solid-bottom">
         <view class="placeorder">
             <view class="placeorder-flex">
-                <text class="opcity">结算方式：</text>
-                <view class="flex-1 t-right">{{order.settle_type||''}}</view>
+                <text class="opcity">货物名称：</text>
+                <view class="flex-1 t-right">{{order.cargo||''}}</view>
             </view>
         </view>
         </col>
@@ -277,12 +298,23 @@
         <col span="6" class="solid-bottom">
         <view class="placeorder">
             <view class="placeorder-flex">
+                <text class="opcity">结算方式：</text>
+                <view class="flex-1 t-right">{{order.settle_type||''}}</view>
+            </view>
+        </view>
+        </col>
+        <col span="6" class="solid-bottom">
+        <view class="placeorder">
+            <view class="placeorder-flex">
                 <text class="opcity">派送方式：</text>
                 <view class="flex-1 t-right">{{order.service_mode||''}}</view>
             </view>
         </view>
         </col>
-        <col span="6" class="solid-bottom">
+    </row>
+
+    <row>
+        <col span="12" class="solid-bottom">
         <view class="placeorder">
             <view class="placeorder-flex">
                 <text class="opcity">保价额：</text>

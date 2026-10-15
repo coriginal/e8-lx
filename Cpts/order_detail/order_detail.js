@@ -56,6 +56,7 @@ Component({
         src: "https://e8.boudata.com/tss/wx/api/acode2?appId=wx1f18a0c7e9272b40&page=pages/homepage/homepage/homepage&onlyQparam=true&qparam=1,2,3,os,EF190601001",
         weight_unit: "",
         hideDelBtn: false,
+        showTcode: false,
         //
         cargoImages: [],
         hasCargoImages: false,
@@ -82,7 +83,8 @@ Component({
         ready() {
             console.log(user, _App)
             this.setData({
-                weight_unit: getApp().globalData.DomainConfig.weight_unit ? getApp().globalData.DomainConfig.weight_unit.content : "kg"
+                weight_unit: getApp().globalData.DomainConfig.weight_unit ? getApp().globalData.DomainConfig.weight_unit.content : "kg",
+                showTcode: this.getShowTcode()
             })
             // 初始化订单详情
             if (this.data.orderId) {
@@ -107,6 +109,11 @@ Component({
      * 组件的方法列表
      */
     methods: {
+        // 承运单号是否显示：非客户账号直接显示；客户账号按 customerInfo.show_lc 判断（1 显示，0/2/null 均不显示）
+        getShowTcode() {
+            if (!(_App.user && _App.user.isCustomer)) return true
+            return !!(_App.customerInfo && _App.customerInfo.show_lc == 1)
+        },
         onLoad(options) {
             cosole.log(options, this.data)
             checkCargoImage()
